@@ -1,0 +1,28 @@
+name: 定时任务
+
+on:
+  schedule:
+    # 每天 UTC 时间 00:00 执行（北京时间 08:00）
+    # cron 格式：分钟 小时 日 月 星期
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  scheduled-job:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: 执行定时任务
+        run: python script.py
+      
+      - name: 输出结果
+        run: echo "任务执行完成！"
+
