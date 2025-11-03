@@ -14,17 +14,31 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: 检出代码
+      - name: 📦 检出代码
         uses: actions/checkout@v4
       
-      - name: 设置 Python
+      - name: 🐍 设置 Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
       
-      - name: 执行定时任务
+      - name: 📅 显示执行信息
+        run: |
+          echo "=========================================="
+          echo "🚀 工作流开始执行"
+          echo "=========================================="
+          echo "触发方式: ${{ github.event_name }}"
+          echo "分支: ${{ github.ref }}"
+          echo "提交: ${{ github.sha }}"
+          echo "执行者: ${{ github.actor }}"
+          echo "=========================================="
+      
+      - name: ⚙️ 执行定时任务
         run: python script.py
       
-      - name: 输出结果
-        run: echo "任务执行完成！"
+      - name: ✅ 任务完成
+        run: |
+          echo "=========================================="
+          echo "✨ 任务执行完成！"
+          echo "=========================================="
 
