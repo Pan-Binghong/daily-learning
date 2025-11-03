@@ -1,0 +1,8 @@
+# Go 代码片段
+# 生成时间: 2025-11-03 09:01:49
+
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, World!")
+}
