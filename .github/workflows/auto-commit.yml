@@ -1,0 +1,56 @@
+name: 自动提交代码
+
+on:
+  schedule:
+    # 每天 UTC 时间 01:00 执行（北京时间 09:00）
+    # 可以根据需要修改时间
+    - cron: '0 1 * * *'
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    
+    # 需要写权限来推送代码
+    permissions:
+      contents: write
+    
+    steps:
+      - name: 📦 检出代码
+        uses: actions/checkout@v4
+        with:
+          # 必须设置 token 才能推送代码
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # 获取完整历史记录
+          fetch-depth: 0
+      
+      - name: 🐍 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: 📅 显示执行信息
+        run: |
+          echo "=========================================="
+          echo "🚀 开始自动提交随机代码"
+          echo "=========================================="
+          echo "触发方式: ${{ github.event_name }}"
+          echo "分支: ${{ github.ref }}"
+          echo "执行者: ${{ github.actor }}"
+          echo "=========================================="
+      
+      - name: ⚙️ 执行自动提交脚本
+        run: python auto-commit.py
+        env:
+          # 配置 git 用户信息（用于提交记录）
+          GIT_AUTHOR_NAME: 'GitHub Actions Bot'
+          GIT_AUTHOR_EMAIL: 'action@github.com'
+          GIT_COMMITTER_NAME: 'GitHub Actions Bot'
+          GIT_COMMITTER_EMAIL: 'action@github.com'
+      
+      - name: ✅ 任务完成
+        run: |
+          echo "=========================================="
+          echo "✨ 自动提交任务完成！"
+          echo "=========================================="
+
