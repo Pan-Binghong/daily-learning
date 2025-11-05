@@ -1,0 +1,38 @@
+---
+title: 基于Huggingface镜像网站下载大模型及数据集
+date: '2024-10-29T01:52:00.000Z'
+lastmod: '2025-03-20T00:51:00.000Z'
+draft: false
+标签:
+- LLMs
+- HuggingFace
+categories:
+- AI
+---
+
+使用镜像网站下载大模型及数据集, 以及配置下载参数(本地路径等)
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/dc82f140-d63c-44e4-bc53-0bc220caf11f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XOVILV5V%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095838Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDnJG77nqZVdNeEmkmBNvdyr3QNrLWrKwPaCcsKL%2FwIqAIgYsnqsdQT6psm7WH8mmwUUZnTCS29uznMf3aMKFXUO2EqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDI5u%2BptLIFjciDYTVCrcA5ZsyN0YqVPrsDwI9oy0RZ7UsxiaGRzDsCAqSFi9k1Cb%2F44QuQ7j2%2FQ30%2F94xXqohomHeL82BD4Ni7RebyjEU8JtGfHCsIj1ZMFbmCI9zliW08QvHSVteIA8imU%2FRameG3IkOT1vlEATuRslVKpD5EUVpp2hhE5g%2B5guESLV6Skiv%2BJ0s4ReBo5rAszko6dw1Bfd4e7XXk4I5Sfi5h4G3jb3cb34bUZXWq7PVjQM80X3SIs2%2Fbs7y27y1Mf%2BWGFHq8Vdy%2FruDhA%2FFCc5lAY03qWMBHdOzZl7hQ4EM1RIwaKAKu293Dbplc%2FQewkIioCwC0GedfNJmbplJ%2BkCWVip3MUvdTtb1PEnf91nPBlkirRHop455lTI%2Be%2BozIcB3XjInsBvSkH9x5sNGBus7tFd6dP0KcjW%2BtVKnFvMv79PhI2zdUBJahxbkp9xKwyOPBmPg6vDrovyPVBPTNHmqqNIg7cmXPLsb9g1%2BfPwYF3H5IxmvEUxoGtvSsNqtref0sqvuDNQyJU2P%2FD6vlPtO3sFizf8cWMIjO0HxxiAyLr29L1CGQYS%2FQuxH5s2%2BzzImJYNSQA8iKEFeN2wqQM8Y3gW92vWXXY2NMevOoMgq81BREw7OcRLUFggjc9PiiTmMICjrMgGOqUBuvYG4r4qQVt%2BtrwHf4EJPFtW5%2FiAEfo5ZnPvLsRAfMf0XcrbMciIcY8jREVvb6Lt6F8U08pccfHiQ6xi8x2jF8Tk4LCckDFZWRQd2euBL1juuMnXXawOSXgCQA0sGRo9P5W4cFVfK4rThJEy2U8e9EOlKwdBaiMfNXYg6w6EFmU1gqA3szSdt6oeFCj5zgaRiKiqU%2FDjgb4Gz5V8gHyS0eDHr%2Bmf&X-Amz-Signature=72ede6dac2cfcbe5e659c571843100663cf9125178967202b07e0b8563930955&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 基于HF镜像网站下载大模型&数据集
+
+### 命令行下载
+
+- 安装Huggingface依赖库
+- 下载大模型命令
+- 下载数据集命令
+---
+
+### 代码下载
+
+- 首先获取Huggingface的Access Tokens
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/22b8dae9-3302-4380-a23f-5402b524f0a9/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XOVILV5V%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095838Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDnJG77nqZVdNeEmkmBNvdyr3QNrLWrKwPaCcsKL%2FwIqAIgYsnqsdQT6psm7WH8mmwUUZnTCS29uznMf3aMKFXUO2EqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDI5u%2BptLIFjciDYTVCrcA5ZsyN0YqVPrsDwI9oy0RZ7UsxiaGRzDsCAqSFi9k1Cb%2F44QuQ7j2%2FQ30%2F94xXqohomHeL82BD4Ni7RebyjEU8JtGfHCsIj1ZMFbmCI9zliW08QvHSVteIA8imU%2FRameG3IkOT1vlEATuRslVKpD5EUVpp2hhE5g%2B5guESLV6Skiv%2BJ0s4ReBo5rAszko6dw1Bfd4e7XXk4I5Sfi5h4G3jb3cb34bUZXWq7PVjQM80X3SIs2%2Fbs7y27y1Mf%2BWGFHq8Vdy%2FruDhA%2FFCc5lAY03qWMBHdOzZl7hQ4EM1RIwaKAKu293Dbplc%2FQewkIioCwC0GedfNJmbplJ%2BkCWVip3MUvdTtb1PEnf91nPBlkirRHop455lTI%2Be%2BozIcB3XjInsBvSkH9x5sNGBus7tFd6dP0KcjW%2BtVKnFvMv79PhI2zdUBJahxbkp9xKwyOPBmPg6vDrovyPVBPTNHmqqNIg7cmXPLsb9g1%2BfPwYF3H5IxmvEUxoGtvSsNqtref0sqvuDNQyJU2P%2FD6vlPtO3sFizf8cWMIjO0HxxiAyLr29L1CGQYS%2FQuxH5s2%2BzzImJYNSQA8iKEFeN2wqQM8Y3gW92vWXXY2NMevOoMgq81BREw7OcRLUFggjc9PiiTmMICjrMgGOqUBuvYG4r4qQVt%2BtrwHf4EJPFtW5%2FiAEfo5ZnPvLsRAfMf0XcrbMciIcY8jREVvb6Lt6F8U08pccfHiQ6xi8x2jF8Tk4LCckDFZWRQd2euBL1juuMnXXawOSXgCQA0sGRo9P5W4cFVfK4rThJEy2U8e9EOlKwdBaiMfNXYg6w6EFmU1gqA3szSdt6oeFCj5zgaRiKiqU%2FDjgb4Gz5V8gHyS0eDHr%2Bmf&X-Amz-Signature=2c7e4ff6399ea8272e4a8de78e942008e6ba1aba16969a7cab8de0e55622b6a0&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+- 下载代码如下:
+- 下载数据集代码
+---
+
+> References
+
+
+

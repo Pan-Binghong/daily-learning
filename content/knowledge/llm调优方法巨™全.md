@@ -1,0 +1,334 @@
+---
+title: LLM调优方法|巨™全
+date: '2024-11-16T13:01:00.000Z'
+lastmod: '2024-11-20T03:23:00.000Z'
+draft: false
+标签:
+- Knowledge
+categories:
+- 知识
+---
+
+> 💡 大语言模型调优方案, 涉及计算效能调优, 推理效果调优, 模型结构调优。
+
+## 算效调优
+
+硬件层面各个部件对大模型的优化策略
+
+### 1. GPU加速
+
+### 1.1 为什么GPU可以对大模型有加速效果?
+
+GPU的核心优势在于其并行处理能力，可以同时执行成千上万的计算任务。对于深度学习模型而言，这意味着可以并行处理大量的矩阵乘法和向量运算，这些是模型训练的核心。GPU的计算能力通常以TFLOPS（每秒万亿次浮点运算）来衡量。高TFLOPS值意味着GPU能够在较短的时间内完成更多的计算任务，从而加快模型的训练速度。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/1f817137-5537-4e3f-a5ad-88385208183c/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095903Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=5b1703f7abe93a69fbbf1a8343635f652d5bef4adf7651baaaa42bad5efc39e6&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+选择GPU而非CPU进行大模型训练的主要原因是因为GPU在并行处理能力、高吞吐量和针对机器学习任务的优化方面的优势。这使得GPU成为训练复杂和大规模机器学习模型的首选。
+
+- 并行处理能力：
+- 高吞吐量：
+- 大规模计算：
+- 优化的库和框架：
+- 成本：
+### 1.2 GPU里有什么,?
+
+Tensor Cores和CUDA Cores都是NVIDIA GPU架构中的关键组成部分，但它们的设计目标和服务的对象有所不同。下面详细介绍这两种核心的区别：
+
+### CUDA Cores
+
+CUDA Cores是NVIDIA GPU中的基础计算单元，类似于CPU中的核心，但专门为并行计算而优化。CUDA Cores能够执行各种类型的数学运算，包括整数运算、单精度浮点运算以及双精度浮点运算。CUDA Cores的数量决定了GPU的并行计算能力，更多的CUDA Cores意味着更强的并行处理能力。
+
+CUDA Cores被设计为一种通用的计算资源，可以用于执行广泛的任务，从简单的图形渲染到复杂的科学计算，甚至是深度学习模型的训练。CUDA Cores支持通过CUDA编程接口直接访问，使得开发人员能够编写高效的并行计算代码。
+
+### Tensor Cores
+
+Tensor Cores是NVIDIA为加速深度学习任务而专门设计的一种新型计算单元。它们最早出现在2017年的Volta架构中，并随后在Turing、Ampere等架构中得到了发展和完善。Tensor Cores的主要特点是它们特别适合执行深度学习所需的矩阵运算，如矩阵乘法和累积运算。
+
+Tensor Cores的一个重要特性是它们支持混合精度计算，即能够在FP16（半精度浮点数）和TF32（Tensor Float-32）之间进行切换，从而提供更高的计算效率和能效比。此外，Tensor Cores还能在每个时钟周期内执行多项操作，相比之下，传统的CUDA Cores在每个时钟周期只能执行单一操作。
+
+### CUDA Cores&Tensor Cores区别
+
+1. 应用场景：CUDA Cores是通用的并行计算单元，可以处理各种计算任务；而Tensor Cores则专门针对深度学习中的矩阵运算进行了优化。
+1. 计算精度：CUDA Cores支持更广泛的精度计算，包括FP64、FP32和INT32等；Tensor Cores则专注于半精度浮点数（FP16）和混合精度计算（如TF32）。
+1. 性能：在处理深度学习相关的矩阵运算时，Tensor Cores相比CUDA Cores能够提供更高的性能和能效比。
+CUDA Cores提供了广泛的计算灵活性，而Tensor Cores则是在特定任务上（如深度学习）实现了性能的飞跃。这两种核心的组合使得现代GPU既能满足传统计算需求，也能适应日益增长的人工智能计算需求。
+
+### 1.3 主流GPU性能对比
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/a8cc3e56-2481-4af0-a732-a8a0d0ea3be5/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095903Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=73539fddec93df7339e2e01a1091d32aee88cfbe6bd3ba311591494114b9acaa&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 1.4 训练/推理最佳配置
+
+训练最优配置
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/cf3c59f0-3606-42b7-984c-27d0284524a9/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095903Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=e566ff3dc0055aff758a8a8f9b55a3eeffed2ccb546bccd994e8ecb4d5ff7b8d&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+推理最优配置
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/039953db-cdb8-4998-823b-f4135b2d58b2/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095903Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=14600e65b37cc13d488af814b61b9bf2443ba7337ab82b6a86278c4a60d2ea28&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 2. TPU/FPGA
+
+TPU（Tensor Processing Unit）和FPGA（Field-Programmable Gate Array）都是为加速机器学习任务而设计的专用硬件。
+
+### TPU
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/314d0bea-1218-4b1d-bdef-522519ea6c39/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095903Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=7af9e365e1b7d12b9e9b4198455eef3d2b47b68969101938049a35b4c47f9609&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+TPU是由Google开发的一种ASIC（Application-Specific Integrated Circuit），专门针对TensorFlow框架进行了优化。TPU的设计目标是在处理矩阵运算时提供更高的效率，这对于深度学习模型来说是非常关键的，因为它们通常包含大量的矩阵乘法操作。利用TPU可以实现以下优化：
+
+- 高效计算：TPU能够提供比传统CPU或GPU更高的浮点运算性能，在处理大规模神经网络时尤其有效。
+- 低精度支持：TPU支持8位整数运算，这减少了数据传输量，加快了计算速度，同时降低了功耗。
+- 分布式训练：通过构建TPU Pod，可以实现多个TPU之间的高效通信，从而支持更大规模的数据并行训练。
+- 自动优化：TPU编译器可以自动将TensorFlow图转化为高效的TPU指令序列，减少了手动优化的需要。
+### FPGA
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/d09b5a5a-14cb-4b82-bc3e-8d3879691154/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095903Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=a10f63c6e260a22f7c35bfda7303a9900b3f8fe5c43f078106196ca4004e298b&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+FPGA是一种可编程逻辑器件，可以在硬件级别上根据特定的任务重新配置。这种灵活性使得FPGA非常适合于那些需要定制化处理流程的任务。对于大模型的优化，FPGA提供了如下优势：
+
+- 定制化：FPGA可以根据特定算法的需求进行编程，这意味着它可以针对特定的模型架构进行优化，达到最佳的性能。
+- 低延迟：FPGA可以实现低延迟的数据处理，这对于实时应用非常重要。
+- 能效比：相比于GPU，FPGA在某些任务上可以提供更好的能效比，尤其是在需要高并发且低功耗的场景下。
+- 灵活性：FPGA可以在部署后进行重新配置，以适应新的算法或模型变化。
+### 3. 内存带宽
+
+提高内存带宽对于优化大模型的性能至关重要。大模型，特别是深度学习模型，通常包含数百万甚至数十亿的参数，这些参数在训练过程中需要频繁地被访问和更新。随着模型规模的增长，内存带宽成为了限制性能的一个重要因素，因为它直接影响到数据的加载和传输速度。
+
+### 3.1 内存带宽的重要性
+
+内存带宽是指单位时间内可以从内存读取或写入的最大数据量。对于大模型而言，更高的内存带宽意味着模型可以更快地加载数据进行处理，进而提高计算效率。在大模型的训练过程中，内存带宽的不足会导致数据传输成为瓶颈，从而减慢训练速度。例如，在模型推理过程中，较大的内存缓存可以提高推理速度，但同时也减少了可用的上下文长度，需要在速度和上下文长度之间进行权衡。
+
+### 3.2 高速内存技术
+
+AMD Fiji首款使用高带宽内存技术的图形处理器
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2e46ca9a-e9d5-43be-8245-7b4661e8858d/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095903Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=b8cf158393ac93a72407a228520801af34141bb517938c289058618112cc057c&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+高速内存技术，如HBM（High Bandwidth Memory）和GDDR6。HBM通过垂直堆叠DRAM芯片来提供更高的带宽，而GDDR6则专为高性能图形处理单元（GPU）设计，能够提供比传统DDR内存更高的带宽。这些技术特别适用于处理大型数据集和复杂的神经网络模型，因为它们能更有效地支持大量数据的快速读取和写入。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/eff0cf08-2bb1-4f72-a258-a3a76887b0d1/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095903Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=5e4189c9b56c2589addbc8b4e626f8de95227c1b464da71d6c6435621b997773&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/0e014e95-dd34-493a-bb6a-69a1ddef79de/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095903Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=01c7624f55d4acc21c01361011162994cef74bebdbc8243c2f04e6f4df45cf80&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 3.3 分布式设置中的网络连接
+
+在分布式训练环境中，除了本地内存带宽之外，网络连接的质量也至关重要。快速的网络连接（如InfiniBand或RDMA over Converged Ethernet, RoCE）能够确保数据在多个计算节点间快速、高效地流动。例如，InfiniBand网络提供的带宽相较于其他网络技术有明显的优势，为解决AI大模型对服务器集群中每个GPU之间的高速、无缝通信的需求提供了支持。这对于跨多个节点同步模型参数和梯度更新尤为重要。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/6ca8b8f3-5d57-4487-8a28-3311eba87280/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095903Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=b0293f04b1fc45dbaf38d95e4af222a5d15ee378330c7dbbbe21d0f1c0411851&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+提高内存带宽对于优化大模型的性能有着不可忽视的作用。通过采用高速内存技术和高效的网络连接方案，并结合合理的硬件选择和软件优化策略，可以有效克服内存带宽带来的瓶颈，从而加速大模型的训练和推理过程。
+
+### 4. 存储
+
+### 4.1 传统存储方案
+
+- HDD(机械硬盘)
+- SSD(固态硬盘)
+### 4.2 高速存储方案
+
+- NVMe SSD(Non-Volatile Memory Express)
+NVMe SSD通过PCIe总线直接与CPU通信，利用闪存技术存储数据。NVMe协议旨在充分利用高速存储介质的特点，如低延迟和高I/O并行性。NVMe SSD提供了极高的带宽，因为PCIe接口比SATA或SAS接口提供了更高的带宽，使得数据传输速度更快。同时，由于减少了中间环节，NVMe SSD实现了更低的访问延迟。此外，NVMe支持多队列和多线程，允许多个读写操作同时进行，极大地提高了I/O性能。然而，NVMe SSD的成本较高，尤其是在高端产品中，并且需要特定的硬件支持，可能存在兼容性问题。
+### 4.3 存储系统与大模型
+
+对于大模型的训练和推理来说，存储系统的性能至关重要。HDD虽然在容量和成本上有优势，但由于其机械结构导致的访问速度慢和可靠性问题，已逐渐被SSD所取代。SSD提供了更快的读写速度和更高的可靠性，但在面对更高要求的应用场景时，如深度学习训练，NVMe SSD凭借其极高的带宽和低延迟特性成为了优选方案。尽管NVMe SSD的成本较高，但对于追求极致性能的应用来说，它是不可或缺的选择。在选择存储方案时，应根据实际需求权衡成本与性能之间的关系，以达到最优的效果。
+
+### 5. 冷却系统
+
+### 5.1 风冷
+
+风冷是最常见的数据中心冷却方法之一，它通过强制空气流动来带走设备产生的热量。这种方法相对简单且成本较低，适用于大多数常规服务器和硬件配置。风冷系统的核心组成部分包括风扇、过滤器和合理的气流管理。对于大模型的优化而言，风冷系统在训练初期阶段能够提供足够的冷却能力；然而，在处理更大、更复杂的模型时，风冷系统的局限性开始显现，尤其是在高密度部署的环境下，可能无法有效应对局部热点问题，导致硬件过热，影响计算效率和稳定性。
+
+### 5.2 液冷
+
+液冷技术因其高效散热能力和更低的噪音水平而变得越来越受欢迎，主要分为直接接触液冷和间接液冷两种形式。直接接触液冷特别适用于高性能计算和深度学习训练，能够提供更高密度的冷却效果，帮助维持GPU和CPU等关键部件在一个稳定的温度范围内工作，从而确保训练过程的连续性和计算资源的有效利用。液冷还能减少因过热导致的硬件损坏风险，延长硬件寿命，对大模型的优化具有显著优势。
+
+### 5.3 热通道/冷通道分离
+
+热通道/冷通道分离通过物理手段将机房内的气流分为冷通道和热通道两部分，前者专门为服务器提供冷空气，后者则收集热空气并将其引导至冷却设备或空调系统进行处理。这种设计可以显著减少混合冷热空气的情况，提高冷却系统的效能，减少能源消耗，并延长硬件使用寿命。对于大模型而言，热通道/冷通道分离有助于保持计算节点的温度稳定，确保训练过程中不会因为过热而导致性能下降或硬件故障，特别适合于分布式训练环境。
+
+### 6. 其他
+
+### 6.1 高效电源供应设备
+
+高效的电源供应设备对于优化大模型训练至关重要。80 Plus白金或钛金认证的电源供应器能够在不同负载条件下提供至少80%以上的效率，最高可达94%，显著减少能量转换过程中的损耗。数字电源管理技术通过实时调整电源输出，确保在各种负载条件下保持高效运作，从而实现更精细的能量管理，减少能源浪费。
+
+### 6.2 动态功耗管理技术
+
+动态功耗管理技术如动态电压和频率调整（DVFS）可以根据实际负载动态调整CPU和GPU的电压和频率。在低负载时降低电压和频率可以大幅减少功耗，而在高负载时则可以迅速恢复性能。此外，智能休眠模式可以在无活动或低负载时将部分硬件单元暂时置于休眠状态，进一步节省能源，确保大模型训练过程中能源使用的高效性。
+
+### 6.3 不间断电源 (UPS) 和冗余设计
+
+不间断电源（UPS）系统可以在电网供电中断时立即提供备用电源，确保系统不会因突然断电而停止运行，这对于长时间运行的大模型训练任务至关重要。冗余电源设计通过在关键硬件中部署冗余电源，确保即使其中一个电源故障，系统仍能继续运行，提高系统的可靠性和可用性。
+
+### 6.4 能源监测与管理
+
+智能监控系统可以实时监测电源的使用情况，识别异常情况，并及时采取措施，例如调整负载分配以优化能源使用。自动化管理系统可以根据实际需求动态调整电源配置，在非高峰时段减少某些硬件的供电，在高峰期增加供电，确保能源使用的最大化效率，从而提高数据中心的整体能效比。
+
+---
+
+## 输出效果调优
+
+### 1. 优化数据
+
+### 1.1 数据的重要性
+
+大规模语言模型的开发依赖于广泛而多元的数据资源。研究文献详细阐述了人类在训练GPT-3模型时主要利用的数据源，这包括经筛选的CommonCrawl数据集、WebText2、Books1、Books2以及英文版Wikipedia等。例如，CommonCrawl的初始数据量高达45TB，筛选后仅剩570GB。通过分词技术处理上述资料，大约产生了5000亿个词元。为了确保模型能够利用高品质数据进行学习，GPT-3的训练过程中根据数据来源的差异调整了采样权重。在完成3000亿词元的训练量时，英文版Wikipedia的数据平均被循环利用了3.4次，而CommonCrawl和Books2的数据循环使用率分别仅为0.44次和0.43次。鉴于CommonCrawl数据集的筛选工作极为复杂，Meta公司的研究团队在训练OP模型时采纳了结合RoBERTa、Pile[68]以及PushShift.io Reddit数据的策略。考虑到这些数据集主要以英文为主，OPT模型也从CommonCrawl中提取了一部分非英文数据以丰富训练语料。大型语言模型所需的数据资源大致可分为通用数据和专业数据两类。通用数据涵盖了网页内容、图书、新闻报道、对话文本等，以其庞大的规模、多样性和易于获取的特点，为大型语言模型提供了基础的语言建模和泛化能力。而专业数据则包括多语言资料、科学文献、编程代码以及特定领域的专有信息等，这些在预训练阶段的引入，能够显著增强大型语言模型解决特定任务的能力。
+
+典型大语言模型所使用数量类型的分布
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/c8d9a4d5-259e-4156-985a-3c53c36ac6cd/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=8e965b1edbe20b992816c21c41e3c3ffca63c173be72f3a90584fd0e90be97ac&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 1.2 数据回流方案
+
+数据回流是指将模型生成的数据或预测结果重新引入到训练流程中，以此来更新模型。这种方法可以用于增强模型的学习能力，尤其是在面对那些随着时间变化而变化的数据集时。通过持续地将新产生的数据反馈给模型，可以让模型适应新的模式或纠正之前的偏差，从而提高其泛化能力和预测准确性。
+
+### 2. 调整超参数
+
+调整超参数是指在训练模型之前选择一组最佳的参数值的过程，这些参数不是直接通过学习过程获得的。超参数包括学习率、批次大小、正则化系数等。合理的超参数设置对于模型的表现至关重要。通常，人们会采用网格搜索、随机搜索或贝叶斯优化等方法来进行超参数的优化，以找到能够最大化模型性能的一组超参数组合。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/019acd31-7415-4c83-af39-778aabf9d03b/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667KD5WYD7%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCHswDNMWuf7Tw%2FnBIzjWQ338Kr3efW%2BZxFXBFG7kHEVQIhAJYO4H7KNgt7K7aNaWZoT44TyOSUJJqPlyYlyL6hTKlXKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzB1kTu20SFs1FDxJAq3AMQiRtkinvAC66NLt0dTaDlzFFGPiArCU%2BnkaMMiAs4eYltPCdgnJekrrXry77zfQ0RdtgPxfEQaa23IS7X4BxZqALGk4UbwbMm0eBOpU9L1ANCSWIDXdYQg7fF4uY5g%2FDnioWy50kQ%2Fhypc60%2BuHLu9c6harrTPAcvB2Zvl7PhKSFZId%2BzpybFo%2F2UWS4tU9%2FnTeVVQXjdtoaxyKNWrWM5PznOfEh%2FLAzSnN7YyWcNxq%2BzAAOUiXah%2BfQRHsLNvHI3rvX%2BvCzvvFy1CWLPLi3gzDfxuAGdhJwUBrkcZzj4SqYwumb2%2BKbFOIYTEVCvBDYt2dB2vbLjEH0omRKxHXFZPy0DIQ9xGiKCtpJ3CQMbYMqLQpQ4AEMDCtv1J5bmwGW3V1MIBcVBNAcV0S730sIwcsvrqFVyldtvoRnTlhPzOsp0yctzwRmGPy75wyHFyzjzJrR%2B3ywKOGcLwMeSfAKPT2aNKpEy%2B4j001NTCDbDlmmSjeNRMJYzzNYZxEDV%2Fhul7fdXdJ9We7%2FaY0JnigYP5XLpFGJtRoCZ77JdElBPRJh7%2FiAWimF68akRQ%2B2zv26In81kC0Stb%2FMYaJokYJcVWH3K50WzqyXZChPeW6EFlgzRr8lcUG7uQPnCnzDDoqzIBjqkAbg9bf9JVAQybIuxK%2FZ3Lq3i1Bj18ibwYHNHYGXBfH7wOMg%2Bm4Qr0%2BCU5oPcYIyKZhU3Vs4nZ6x9rLuwWKo8EHZm%2F%2BPq9wlaReVfLpdBaVpzPft6SCYUkHeFUrQHtjbiqNN0DOiLMQ%2B5LlfeP8uG9nhSvQtZQ5EN4%2BAtTivQxRBfy74pR%2BbZKH22osxZ%2BME%2BqPDtdiEMWWEGy08zoOs%2FfxJb2MCQ&X-Amz-Signature=48f5d7586f9a1a7713281fb9c7ccd2c89814d2950c2f2e7653df74eecf4fb976&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 3. 提示词工程 (Prompt Engineering)
+
+提示词工程是指精心设计输入给模型的提示词，以便引导模型产生更符合期望的输出。这种技术特别适用于那些基于自然语言处理的大规模预训练模型。通过调整提示词的内容、结构以及语气，可以显著影响模型生成的结果。例如，在某些场景下，使用更正式的语言或提供更多的上下文信息可以促使模型生成更为准确和连贯的回答。提示词工程还可以用来控制生成内容的风格、语气甚至创造力水平。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/792da3ef-3da1-4135-87c7-49330fd2c438/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=9c9556240304e0926394dd677132399afda9906408c68452d87d7905da968866&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 4. 检索增强生成(Retrieval-Augmented Generation, RAG)
+
+检索增强生成是一种结合了检索技术和生成模型的方法，它允许模型在生成答案或内容时参考一个外部的知识库。这样做的好处是可以利用大量静态或动态的信息来增强生成的质量，特别是在处理那些需要精确信息或最新数据的任务时。RAG可以提升生成内容的相关性和准确性，尤其是在对话系统、问答系统或文本摘要等领域。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/a68e13a0-8b00-48a2-8cdc-d3fa07143d40/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=7fc5495c3956e93fdf84a082caf8634d2cf9d7ee9aec2473482d2f52acdeed66&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 5. 微调预训练模型
+
+微调预训练模型是指在一个已经预先训练好的模型基础上，针对特定任务进一步训练模型的过程。预训练模型通常是在大规模数据上训练得到的，拥有良好的通用特征提取能力。通过在特定任务的小数据集上继续训练，可以使得模型更加专注于解决该任务，从而提升模型在特定领域或任务上的表现。
+
+微调各种尺寸大模型的硬件要求
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/ae097008-5a4f-4721-820a-9c54193ad647/LLM-tuning-17.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=74c09f8e32d4ee4c109f86fa32977e3e79656df5c7e7e69e9f5b47a8661307ff&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 5.1 有监督微调(SFT)
+
+在自然语言处理（NLP）领域，Supervised Finetuning（SFT）是一种至关重要的技术手段，用来提升大模型在某一特定领域的表现。通过精细的策划和实施，SFT 能够指导模型的学习过程，确保其学习成果与既定目标高度吻合。
+
+SFT 指的是，用户提供一份标注好的数据集，即，包含输入的 prompt 和预期输出的 response。然后，在已有的某个基座模型上继续调整参数，来达到和下游任务对齐的目的。
+
+### 5.1.1 什么时候需要用到SFT ?
+
+1. 通过提示词工程无法解决或提示词中描述过于复杂时。
+1. 对大模型输出内容有格式要求时，而模型仍有部分条件不符合要求。
+1. 期望通过 SFT 来减少 prompt 中的内容，加速线上推理的耗时。
+### 5.1.2 SFT数据格式
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/ee102fa2-438d-41e7-908c-4a827b1d73cb/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=d5200dea8e02cf23643a027850d3bebe681883d394935661c04cc7b4831e63a7&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+每行一条JSON格式的数据：
+
+- messages (list, required): 描述一个对话列表。
+- role (str, required): 角色，system、user、assistant中的一个。
+- content (str, required): 对话内容文本。
+- loss_weight (float, optional): 对于内容的loss训练权重。当role=system/user，loss_weight默认值为0.0且不可修改；当role=assistant，loss_weight默认值为1.0。通过loss_weight字段，可以在训练数据中修改默认值。
+### 5.1.3 SFT微调所需数据量级
+
+模型中 SFT 的过程中，会学习 prompt 到 response 到映射关系，如果我们 SFT 的数据存在噪声（如错别字、错误格式、不符合预期输出的样本等），那么会对模型的训练过程造成比较严重的影响。因此，不可以一味去堆叠 SFT 的样本数量，样本的质量比数量更重要。
+
+针对不同场景下，数据量级的建议：
+
+- 文案生成，剧本创作，小说续写等生成类任务：2～3k。
+- 参考问答：2k ~ 1w。
+- 文本分类：1～3k，和类别数量以及任务难易度强相关，类别较多/任务较难的场景可能需要1w条以上。
+### 5.2 LoRA微调
+
+### 5.2.1 什么是LoRA ?
+
+LoRA（Low-Rank Adaptation of Large Language Models），直译为大语言模型的低阶自适应。LoRA 的基本原理是冻结预训练好的模型权重参数，在冻结原模型参数的情况下，通过往模型中加入额外的网络层，并只训练这些新增的网络层参数。由于这些新增参数数量较少，这样不仅 finetune 的成本显著下降，还能获得和全模型参数参与微调类似的效果。
+
+随着大语言模型的发展，模型的参数量越来越大，比如 GPT-3 参数量已经高达 1750 亿，因此，微调所有模型参数变得不可行。LoRA 微调方法由微软提出，通过只微调新增参数的方式，大大减少了下游任务的可训练参数数量。
+
+### 5.2.2 LoRA微调方法的基本原理
+
+神经网络的每一层都包含矩阵的乘法。这些层中的权重矩阵通常具有满秩。当适应特定任务时，预训练语言模型具有低的 “内在维度”，将它们随机投影到更小的子空间时，它们仍然可以有效地学习。
+
+在大语言模型微调的过程中，LoRA 冻结了预先训练好的模型权重，并将可训练的秩的分解矩阵注入到 Transformer 体系结构的每一层。例如，对于预训练的权重矩阵W0，可以让其更新受到用低秩分解表示后者的约束：
+
+- 跟踪权重的变化而不是直接更新它们。
+- 将大型权重矩阵分解为包含“可训练参数”的较小矩阵。
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/9457c0bc-fb67-4e56-9ff6-89cae4b4842d/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=2a7f465bfe85a9b5c05e81550737b11ad9cbd7f61f68731e2f9e7a3fe88ce6bb&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 5.2.3 LoRA微调的优势
+
+1. 可训练参数显着减少，从而实现更快、更高效的微调。
+1. 保留原始的预训练权重，允许针对不同任务使用多个轻量级模型。
+1. 与其他参数高效方法兼容，可实现进一步优化。
+1. 在许多情况下，其性能可与完全微调的模型相媲美。
+1. 没有额外的推理延迟，因为适配器权重可以与基本模型合并。
+### 5.2.4 QLoRA微调
+
+QLoRa 通过量化可训练参数，用更少的位数表示它们，使 LORA 更进一步。这进一步减小了模型大小，有可能实现在内存和计算资源有限的设备上的部署。
+
+### 5.3 Freeze微调
+
+Freeze 方法，即参数冻结，对原始模型部分参数进行冻结操作，仅训练部分参数，以达到在单卡或不进行 TP 或 PP 操作，就可以对大模型进行训练。在语言模型模型微调中，Freeze 微调方法仅微调 Transformer 后几层的全连接层参数，而冻结其它所有参数。
+
+### 5.4 GaLore微调
+
+GaLore 是一种允许全参数学习的训练策略，但比常见的低秩自适应方法（例如 LoRA）更节省内存。GaLore 关键思想是利用权重矩阵 W 的梯度缓慢变化的低秩结构，而不是试图将权重矩阵直接近似为低秩形式。使得在消费级GPU上训练大型语言模型成为可能。这一策略为未来的大模型训练提供了重要的技术支持，具有广泛的应用前景。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/5c06916a-5e41-46e1-872e-79b0665630dd/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=dab6f011af6fdd4787a19272cf7ea9b74eed08a88b70f0dafe71481377a7a33d&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 6. 代理(Agent)
+
+增加辅助代理是指在主要模型之外引入其他小模型或组件，这些辅助代理可以帮助主模型更好地完成任务。辅助代理可能负责不同的子任务，如噪声过滤、特征增强、错误检测等，它们的工作成果可以作为额外的信息提供给主模型，从而帮助主模型做出更准确的决策。这种方法可以提高系统的鲁棒性和灵活性，使其在复杂环境中表现出色。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/8bfc6fd2-b9fe-4d7a-9311-f02a2cebba1c/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=14fe5aee08c29d58966d72a5fdf6d47084866dd79deb8a290506ebec46bae169&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+---
+
+## 模型结构
+
+### 1. 模型深度与宽度的平衡
+
+在语言模型中，增加模型的深度可以使其捕获更复杂的语言结构，而增加宽度则可以提供更多的表达能力。然而，深度和宽度的增加都会带来更高的计算成本和潜在的过拟合风险。可以通过实验来确定最优的层数和每层的隐藏单元数，找到一个既能提高模型性能又不会过度增加训练时间的平衡点。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/ed2f2dc3-741b-4f07-97d1-1758617b0cb0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=6a4f3f0f0212f9df12c0f59324157eb313685b7d3f79ed5899a7e2542246e326&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 2. 残差连接
+
+在语言模型中引入残差连接可以帮助模型更好地学习长期依赖关系，并减轻梯度消失的问题。通过让信息流绕过一层或多层，模型可以更容易地学习到输入与输出之间的映射关系。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/1f095e25-7883-460a-827b-a3a6ef251c3d/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=b91a403f313ba2fe5f27b1bc2415a1fda41a56db84a55c1c8c02d28ad8aaeb80&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 3. 注意力机制
+
+在语言模型中使用自注意力机制，可以让模型学习到输入序列中不同位置之间的相关性。这种机制尤其适合处理变长的输入序列，因为它能够动态地为不同位置的词分配不同的权重。
+
+### 4. 多头注意力
+
+通过将注意力机制分成多个头，每个头可以独立地关注输入的不同方面。这种方式能够增强模型对输入的多样性和复杂性的理解，从而提升整体性能。
+
+### 5. Transformer架构
+
+即便不采用卷积，也可以使用基于注意力机制的Transformer架构来构建语言模型。这种架构通过完全依赖自注意力机制来处理序列数据，避免了传统RNN中顺序依赖的问题，并且能够并行化训练过程，加快训练速度。即便不采用卷积，也可以使用基于注意力机制的Transformer架构来构建语言模型。这种架构通过完全依赖自注意力机制来处理序列数据，避免了传统RNN中顺序依赖的问题，并且能够并行化训练过程，加快训练速度。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/d5fde343-eabb-4fa7-a68a-fa2b444c8815/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=b34080ad77dd1db24310671e9599b9420b5a2590d2a371428e8f639c78b277f5&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 6. 正则化技术
+
+为了防止过拟合，可以在模型中加入正则化技术，比如Dropout，它通过在训练过程中随机关闭一部分神经元来提高模型的鲁棒性。此外，还可以使用权重衰减等其他形式的正则化来约束模型复杂度。
+
+应用于标准神经网络的Dropout
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/fc551d39-65de-4266-bbeb-b0dd3000d660/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=cd622744ffbfe833da9888bbc8b3ae433828cb1c0983bd8ea36545c4bf2ad1fd&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 7 混合专家(Mixture of Experts, MoE)
+
+在语言模型中，MoE架构允许模型根据输入选择不同的专家来处理，从而在不增加太多参数的情况下提高模型的容量和表现力。这种方式特别适用于需要处理多种类型数据的语言任务。
+
+MoE架构的核心组件
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/ba4c20e8-eca9-4863-9a9b-f19d237576aa/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4667CLDG6QK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE%2BYVmoi7w4QMUkxc0MpEu3Rq8igv1V3teUdwwXJrGdTAiBjglS6t058BJkc6PaLM8Ar0g%2BrHUt%2FOsYgOZFE45PPZiqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMGs3y%2Fa25lRgVdRcgKtwDdsScftfyzYH4d%2ByZ9WA1AokbmMwvyA9W7FkpeaCh5RBtGRcRWH7PTdOMR%2FAxVoYY5YoKtWyqnbj%2BSRi%2FlAGnnVE%2FCKdW6gZShL1cSuieoWnOqhlv4Iw9bMaDbZsW2XPvw0tjEfiaUjVTxWSEuYsBekNk3%2B9C%2Beh013stn9ljhDkjlh5uSR6Aqv3NVnQ65TXUy9AlEGYJf%2FfSZjGIjSRR90v3MNK9ivYyT%2B2XKEy%2Bg2QtsqM93esPcjXWJU9cfOyaCpZ53WYK5lckXTlEhBdmK56B04%2FMQvzpmL3%2F54Ndxj4LRFpHvOT7ArcOta395ToPMaLpLbcjcd%2FV1zbvJnB9ORgVOF%2F0c7RxDyXuejVjHk7qgMqi8HG1YTpyupmlpS%2BVXFxjD91kyxUrHzfFZKxEVxdD%2FDqMT7uTbeJ8kP6m0gY9NEE03KC2OFe6s7jndbdwym4gbI79fNiHyzX9Kls6D2QyUO9OulmjOK94mgF7sTO2q%2B9yIzyZYdKY98PxjnDDvj55oUy7C%2Bkr%2FgMWcsNaYC0kpwW3Ga2lirdDyvM8U6NTvHR45dmhha793IeqFbfC3BkQvboEROFc%2FeGSq97rk811QY17b%2F3LKrNPpRf61zTBUV3EsGfEUc7rD9swuqOsyAY6pgFd9ATo%2B0BZ1ZEmoRpzRbE9F11i9ytXjuZYEFDTdWkfL0G6tyh2lVE%2FYP90s8u75qELq2D41aBT2w7M2NedorqtqFqPXRTf%2FkzagmMkMhx5exf6Stc5dedHHXsxeKe413ZusRCMNUyM2iw288IBsZnnXrCA%2FUEUW5%2BmMVM5oKDTGOsalimrHFC%2BBw%2BHycLQlBzBT9oi6Mi6jqTwSfApWz5RTuIakHmY&X-Amz-Signature=5ff28b2751373f504e82e7d34012d0627ed12eb4f74ecf932c08b6b30f0dffab&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+---
+

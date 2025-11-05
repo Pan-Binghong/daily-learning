@@ -1,0 +1,61 @@
+---
+title: 论文复现_CliBench
+date: '2024-11-13T02:07:00.000Z'
+lastmod: '2024-11-27T13:46:00.000Z'
+draft: false
+标签:
+- LLMs
+- Paper
+categories:
+- AI
+---
+
+> 💡 对大型语言模型在诊断、手术、实验室测试订单和处方等临床决策中的多方面评估。
+
+## 文章介绍
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/0e35fb09-3f6a-41ca-81d8-654a4d034f3e/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QHCWEOSQ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095844Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIA1UiYntuqlsNGB5AXbUD4%2FkO4iP%2BvmFrI3h3VpaujsiAiEA2Az1Ng09I9w1r8e4fCdAKpnCyN4iArSk7J46euMq0tgqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDPmKomY%2BHxiXso0rbyrcA7MG40BMY%2B5M2iHWfPPk9wbjck%2FH7mb8Q3Gxdj%2FGD%2BwUzXjvQPfLIqdASGPD69Rn3wFh0oyAMKuPkhprAgkFuLbgDnGfynPfQ16yfBKI75CgcI2STacneluE%2BfFiX%2BN%2BSeD%2B7X1lfeQnyStI286eDdnvdOlUj0ORmR6uGRHCmbDrA%2Fqs95OUbfBbkrUIqxkZJ%2F1rKc2URpKRCf2u6ltr49yaeGAa2xP2LGUQEguPuoRMBPcizFUBR8QDC6BMC5Ey4WSc5xXzdgjIlRLp65LoBJBQC4TZGqSdVLlcG1Pr7YvslfjPXzOI4E0p01qwX3CLs0HeBKTbd%2BxnbaSe0xVTFo8athUQm%2F6XRghAXkgHm6WlEW8vM2wrYZ99gSFkJ5tqvQK4C4TeZiObLowMVaz49ec88OFbF9yPtHiFJ0iwnJGwBOknNKWgWQuT6PSFSx%2BREY0jNfngBPdf0ELemFHvs1nOuaYIrWo0%2BsYIyu%2F4Bfxmx4%2FVyEqBAsvMLb3p%2BtA%2BDE93V9Lvfxcvd%2BgVXvozrV03mp%2BtGPWM6PxQNAhaETFGaJVD%2B%2BOoNmRhcGtmZQoNP71BvuQBv7%2BSV7xFXqZ74FIT7zaHuoBAX9T3njl6oNH%2BaiZJuGoxdrYdIIemMOSirMgGOqUBkqtd5ckwX2pEWaagUFppqdSmB9txymLNDLZzX71DA19%2FmjeK70y67ayFJ1%2BZHKZlNlnRXfpjkij8fQV80W5ZiHRqV53mczZqx2FQszszLwwpwwx1ZfGeBRhBg3stCcLhsI9xYUQ%2B5nnWI37qPRWZISfUfJIrt7TWKs1gkRIISZRZOUTS14mUm0AxWdM3tWZkcr824CYBWuhgEkVNRMyZ%2FtihPsk0&X-Amz-Signature=e2d6f1ac7ab3e7f95c89a5d60f12d94dca7cb62cc165011996ffa66e803870f4&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+### 论文简介
+
+将人工智能（AI），特别是大型语言模型（ LLMs ）集成到临床诊断过程中，为提高医疗保健的效率和可及性提供了巨大的潜力。虽然LLMs在医学领域显示出了一些前景，但它们在临床诊断中的应用仍未得到充分探索，特别是在现实世界的临床实践中，需要做出高度复杂的、针对患者的决策。目前该领域LLMs的评估范围往往较窄，侧重于特定疾病或专业并采用简化的诊断任务。为了弥补这一差距，我们引入了 CliBench，这是一种根据 MIMIC IV 数据集开发的新型基准，可以对LLMs的临床诊断能力进行全面而现实的评估。该基准不仅涵盖各个专业的各种医疗案例的诊断，还包含具有临床意义的任务：治疗程序识别、实验室测试安排和药物处方。在结构化输出本体的支持下，CliBench 能够进行精确的多粒度评估，让您深入了解LLM在所需粒度的各种临床任务上的能力。我们对领先的LLMs进行零样本评估，以评估他们在临床决策方面的熟练程度。我们的初步结果揭示了当前LLMs在临床环境中的潜力和局限性，为LLM驱动的医疗保健的未来进步提供了宝贵的见解。
+
+### 核心目的
+
+本论文旨在探讨如何将大型语言模型（LLMs）应用于临床诊断过程中，以提高医疗保健的效率和可访问性。然而，目前在真实临床实践中，LLMs在临床诊断中的应用仍未得到充分探索。
+
+### 实验思路
+
+本论文提出了一个名为CliBench的基准测试，它涵盖了来自不同专业的各种医疗病例的诊断，并包括治疗程序识别、实验室测试订购和药物处方等具有临床意义的任务。通过结构化输出本体支持，CliBench可以进行精确的多粒度评估，从而深入了解LLMs在不同临床任务上的能力。
+
+### 实验结果
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/5dfd9515-7800-4530-878e-f83eb1330acc/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QHCWEOSQ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251105T095844Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIA1UiYntuqlsNGB5AXbUD4%2FkO4iP%2BvmFrI3h3VpaujsiAiEA2Az1Ng09I9w1r8e4fCdAKpnCyN4iArSk7J46euMq0tgqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDPmKomY%2BHxiXso0rbyrcA7MG40BMY%2B5M2iHWfPPk9wbjck%2FH7mb8Q3Gxdj%2FGD%2BwUzXjvQPfLIqdASGPD69Rn3wFh0oyAMKuPkhprAgkFuLbgDnGfynPfQ16yfBKI75CgcI2STacneluE%2BfFiX%2BN%2BSeD%2B7X1lfeQnyStI286eDdnvdOlUj0ORmR6uGRHCmbDrA%2Fqs95OUbfBbkrUIqxkZJ%2F1rKc2URpKRCf2u6ltr49yaeGAa2xP2LGUQEguPuoRMBPcizFUBR8QDC6BMC5Ey4WSc5xXzdgjIlRLp65LoBJBQC4TZGqSdVLlcG1Pr7YvslfjPXzOI4E0p01qwX3CLs0HeBKTbd%2BxnbaSe0xVTFo8athUQm%2F6XRghAXkgHm6WlEW8vM2wrYZ99gSFkJ5tqvQK4C4TeZiObLowMVaz49ec88OFbF9yPtHiFJ0iwnJGwBOknNKWgWQuT6PSFSx%2BREY0jNfngBPdf0ELemFHvs1nOuaYIrWo0%2BsYIyu%2F4Bfxmx4%2FVyEqBAsvMLb3p%2BtA%2BDE93V9Lvfxcvd%2BgVXvozrV03mp%2BtGPWM6PxQNAhaETFGaJVD%2B%2BOoNmRhcGtmZQoNP71BvuQBv7%2BSV7xFXqZ74FIT7zaHuoBAX9T3njl6oNH%2BaiZJuGoxdrYdIIemMOSirMgGOqUBkqtd5ckwX2pEWaagUFppqdSmB9txymLNDLZzX71DA19%2FmjeK70y67ayFJ1%2BZHKZlNlnRXfpjkij8fQV80W5ZiHRqV53mczZqx2FQszszLwwpwwx1ZfGeBRhBg3stCcLhsI9xYUQ%2B5nnWI37qPRWZISfUfJIrt7TWKs1gkRIISZRZOUTS14mUm0AxWdM3tWZkcr824CYBWuhgEkVNRMyZ%2FtihPsk0&X-Amz-Signature=3e9f41f6a8fc3737ed986b210fa67d37ff0118942fb29d89b8cd571b571cdc65&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+## 复现流程
+
+### 下载数据
+
+- 数据申请
+- 下载 NDC 代码元数据并将ndc_metadata.json放在code_sys/NDC目录下。
+### 安装环境依赖
+
+### 运行实验
+
+- 数据处理
+- 生成输出
+- 计算分数
+
+
+---
+
+### References
+
+> https://github.com/CliBench/CliBench
+
+
+
+
+
+
+
