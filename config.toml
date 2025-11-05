@@ -9,11 +9,18 @@ theme = "PaperMod"  # 替换为你选择的主题
 contentDir = "content"
 publishDir = "public"
 
-# 分页
-paginate = 10
+# 分页配置（Hugo v0.128.0+ 新语法）
+[pagination]
+  pagerSize = 10
 
-# 语法高亮
+# 忽略警告日志
+ignoreLogs = ['warning-goldmark-raw-html']
+
+# Markdown 渲染配置
 [markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # 允许渲染原始 HTML
   [markup.highlight]
     style = "monokai"
     lineNos = true
