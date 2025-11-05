@@ -1,0 +1,1413 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Devops on 我的博客</title><link>https://Pan-Binghong.github.io/devops/</link><description>Recent content in Devops on 我的博客</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Mon, 03 Nov 2025 06:15:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Jira本地Docker部署并破解</title><link>https://Pan-Binghong.github.io/devops/jira%E6%9C%AC%E5%9C%B0docker%E9%83%A8%E7%BD%B2%E5%B9%B6%E7%A0%B4%E8%A7%A3/</link><pubDate>Mon, 03 Nov 2025 06:15:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/jira%E6%9C%AC%E5%9C%B0docker%E9%83%A8%E7%BD%B2%E5%B9%B6%E7%A0%B4%E8%A7%A3/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 &lt;a href="https://www.gofarlic.com/techArticleDetail?noticeId=347390&amp;amp;k=Jira&amp;amp;s=null"&gt;https://www.gofarlic.com/techArticleDetail?noticeId=347390&amp;amp;k=Jira&amp;amp;s=null&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>MiniO安装 &amp; MiniO Console常用命令</title><link>https://Pan-Binghong.github.io/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 30 Oct 2025 01:44:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 MinIO Client (mc) 是一个强大的命令行工具，用于访问 MinIO 服务器以及其他兼容 S3 API 的存储系统。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="一minio社区版docker安装"&gt;一、MiniO社区版Docker安装&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;拉取源码&lt;/li&gt;
+&lt;li&gt;启动容器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="二minio-client安装"&gt;二、MiniO Client安装&lt;/h2&gt;
+&lt;h3 id="21-linux安装"&gt;2.1 Linux安装&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget https://dl.min.io/client/mc/release/linux-amd64/mc&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;chmod +x mc&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;cp mc /usr/local/bin/&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="22-windows安装"&gt;2.2 Windows安装&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -o %USERPROFILE%&lt;span style="color:#ae81ff"&gt;\b&lt;/span&gt;in&lt;span style="color:#ae81ff"&gt;\m&lt;/span&gt;c.exe https://dl.min.io/client/mc/release/windows-amd64/mc.exe&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# 添加到系统环境变量中&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# C:\Users\Administrator\mc.exe&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="23-验证"&gt;2.3 验证&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mc --version&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="三minio-console常用命令"&gt;三、MiniO Console常用命令&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;添加MiniO服务器&lt;/li&gt;
+&lt;li&gt;列出bucket内容&lt;/li&gt;
+&lt;li&gt;查找文件并批量下载&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>SQL Server常用语句</title><link>https://Pan-Binghong.github.io/devops/sql-server%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/</link><pubDate>Thu, 25 Sep 2025 02:02:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/sql-server%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>配置子域名并绑定数字证书</title><link>https://Pan-Binghong.github.io/devops/%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%B9%B6%E7%BB%91%E5%AE%9A%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/</link><pubDate>Thu, 10 Jul 2025 01:38:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%B9%B6%E7%BB%91%E5%AE%9A%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="1-新增子域名"&gt;1. 新增子域名&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;域名控制台 &lt;span style="color:#f92672"&gt;-&lt;/span&gt; 域名列表 &lt;span style="color:#f92672"&gt;-&lt;/span&gt; 找到域名(xxx) &lt;span style="color:#f92672"&gt;-&lt;/span&gt; 域名解析 &lt;span style="color:#f92672"&gt;-&lt;/span&gt; 添加记录
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/d53e1cf2-57f9-4949-8c28-befc13f93203/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QJJ7IX6I%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100340Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE7ESsIjGxNdFx3qNieJMfcDr0D1iD57S9CzTy04na5lAiB4Aj2yB4idWWxyQQzOfssOl3xwGwu5u5gR9bb5T8CSryqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMdGXmulo9UttqfFEEKtwDnXgE51OBEwaJStjnXGsRPDfnUfcIzRptMp6ZvXUmZ0ZXgTDbl44V4I5qPHOTvaV%2BvYiJrqWH6nhbgjWwDPEkp6iT57XjQt%2Fdlc8hgtWjDhNtP39JiK79BJ3PJBoXN5BcnJ%2BUe2P4rUGhrJr8PEi6lM4sslKxl3Og9nIy3tDdkp7aSg54g3mNFlenxEuR3OngfX13MiMv5UnKLyItr2JU4UUohYThA4fqnK0hcvo%2Bo9l4%2BsTUhf52qZCE67JmMgN4zuPnO2FiCWRdA4o3ucQrLN%2F2itUtHKh5SU3tsPuwvVYHks8xUpvmn26%2BbRL7Y%2FG16BR%2Fo%2BmWovIX9P0tSN1jNfhCGhIoJGO%2Bcb82CjHCDdBTuTdp9AwBrY%2Bi7Z7dSIniafLUlhrF8P3RjdS6I0WoR%2BN84oXGX4UEq%2F9ym%2Bnn6fGCtbIUtS9KLIzn3GHz7jlR5OAABRn%2FXQS9vllkg4EQSl%2F5M%2FwOQRKocAoaLl4DD0Hx%2FjHN%2FUuTQBCe623xhIS1%2FHguUbGCCNowDq%2B3%2B5%2BsJjRFapAoUAqCVTdToba%2F4oU7sAsylPZoMqSn92%2BlSDgklCptrjWeVFFGs6vpmHWBBVPP6eUg8CpKAztL8d9yRl%2F6A6r70PcqGRqjWQ0ww6KsyAY6pgFglSvImTPFCwGlhKwzMagg7LaqltZxT%2FSUBaoGjwK8Xrh%2BiHavrHmdcViSRMhKloazHfTZwRdMnPXNVNjDUm3SCZKU%2FZX9h14lINwwpQKY5IKX%2BOQ4pQXJYu5lH7k6FzLiIweFb%2FQO5TByuaqo0LH04HvsXTiRcYXUU0%2FDHCbVqtdmdtz0rF7onCIFRUrllQCr7%2BcyjZ0UgnAav3Ll3Z84ysJBBs6C&amp;X-Amz-Signature=16317fe8f27ca453d881bed9ab99d37826fa52bf3dd0dcb0338dbd1731018c01&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="2-数字证书管理服务"&gt;2. 数字证书管理服务&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;证书管理 &lt;span style="color:#f92672"&gt;-&lt;/span&gt; SSL证书管理 &lt;span style="color:#f92672"&gt;-&lt;/span&gt; 个人测试证书(原免费证书) &lt;span style="color:#f92672"&gt;-&lt;/span&gt; 创建证书
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/e1520a28-fbab-4de2-92b8-70367c718ba5/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QJJ7IX6I%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100340Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE7ESsIjGxNdFx3qNieJMfcDr0D1iD57S9CzTy04na5lAiB4Aj2yB4idWWxyQQzOfssOl3xwGwu5u5gR9bb5T8CSryqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMdGXmulo9UttqfFEEKtwDnXgE51OBEwaJStjnXGsRPDfnUfcIzRptMp6ZvXUmZ0ZXgTDbl44V4I5qPHOTvaV%2BvYiJrqWH6nhbgjWwDPEkp6iT57XjQt%2Fdlc8hgtWjDhNtP39JiK79BJ3PJBoXN5BcnJ%2BUe2P4rUGhrJr8PEi6lM4sslKxl3Og9nIy3tDdkp7aSg54g3mNFlenxEuR3OngfX13MiMv5UnKLyItr2JU4UUohYThA4fqnK0hcvo%2Bo9l4%2BsTUhf52qZCE67JmMgN4zuPnO2FiCWRdA4o3ucQrLN%2F2itUtHKh5SU3tsPuwvVYHks8xUpvmn26%2BbRL7Y%2FG16BR%2Fo%2BmWovIX9P0tSN1jNfhCGhIoJGO%2Bcb82CjHCDdBTuTdp9AwBrY%2Bi7Z7dSIniafLUlhrF8P3RjdS6I0WoR%2BN84oXGX4UEq%2F9ym%2Bnn6fGCtbIUtS9KLIzn3GHz7jlR5OAABRn%2FXQS9vllkg4EQSl%2F5M%2FwOQRKocAoaLl4DD0Hx%2FjHN%2FUuTQBCe623xhIS1%2FHguUbGCCNowDq%2B3%2B5%2BsJjRFapAoUAqCVTdToba%2F4oU7sAsylPZoMqSn92%2BlSDgklCptrjWeVFFGs6vpmHWBBVPP6eUg8CpKAztL8d9yRl%2F6A6r70PcqGRqjWQ0ww6KsyAY6pgFglSvImTPFCwGlhKwzMagg7LaqltZxT%2FSUBaoGjwK8Xrh%2BiHavrHmdcViSRMhKloazHfTZwRdMnPXNVNjDUm3SCZKU%2FZX9h14lINwwpQKY5IKX%2BOQ4pQXJYu5lH7k6FzLiIweFb%2FQO5TByuaqo0LH04HvsXTiRcYXUU0%2FDHCbVqtdmdtz0rF7onCIFRUrllQCr7%2BcyjZ0UgnAav3Ll3Z84ysJBBs6C&amp;X-Amz-Signature=da98369d6ea75891991c4430f85e1ec4b332537122246c053bf7090ed32ccf2d&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="3-下载证书"&gt;3. 下载证书&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;数字证书管理服务 &lt;span style="color:#f92672"&gt;-&lt;/span&gt; 证书管理 &lt;span style="color:#f92672"&gt;-&lt;/span&gt; SLL证书管理 &lt;span style="color:#f92672"&gt;-&lt;/span&gt; xxx(刚才申请的证书) &lt;span style="color:#f92672"&gt;-&lt;/span&gt; 下载 &lt;span style="color:#f92672"&gt;-&lt;/span&gt; Nginx &lt;span style="color:#f92672"&gt;-&lt;/span&gt; 下载
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/90ae2530-2256-4686-83de-6e41b7d2c171/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QJJ7IX6I%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100340Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIE7ESsIjGxNdFx3qNieJMfcDr0D1iD57S9CzTy04na5lAiB4Aj2yB4idWWxyQQzOfssOl3xwGwu5u5gR9bb5T8CSryqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMdGXmulo9UttqfFEEKtwDnXgE51OBEwaJStjnXGsRPDfnUfcIzRptMp6ZvXUmZ0ZXgTDbl44V4I5qPHOTvaV%2BvYiJrqWH6nhbgjWwDPEkp6iT57XjQt%2Fdlc8hgtWjDhNtP39JiK79BJ3PJBoXN5BcnJ%2BUe2P4rUGhrJr8PEi6lM4sslKxl3Og9nIy3tDdkp7aSg54g3mNFlenxEuR3OngfX13MiMv5UnKLyItr2JU4UUohYThA4fqnK0hcvo%2Bo9l4%2BsTUhf52qZCE67JmMgN4zuPnO2FiCWRdA4o3ucQrLN%2F2itUtHKh5SU3tsPuwvVYHks8xUpvmn26%2BbRL7Y%2FG16BR%2Fo%2BmWovIX9P0tSN1jNfhCGhIoJGO%2Bcb82CjHCDdBTuTdp9AwBrY%2Bi7Z7dSIniafLUlhrF8P3RjdS6I0WoR%2BN84oXGX4UEq%2F9ym%2Bnn6fGCtbIUtS9KLIzn3GHz7jlR5OAABRn%2FXQS9vllkg4EQSl%2F5M%2FwOQRKocAoaLl4DD0Hx%2FjHN%2FUuTQBCe623xhIS1%2FHguUbGCCNowDq%2B3%2B5%2BsJjRFapAoUAqCVTdToba%2F4oU7sAsylPZoMqSn92%2BlSDgklCptrjWeVFFGs6vpmHWBBVPP6eUg8CpKAztL8d9yRl%2F6A6r70PcqGRqjWQ0ww6KsyAY6pgFglSvImTPFCwGlhKwzMagg7LaqltZxT%2FSUBaoGjwK8Xrh%2BiHavrHmdcViSRMhKloazHfTZwRdMnPXNVNjDUm3SCZKU%2FZX9h14lINwwpQKY5IKX%2BOQ4pQXJYu5lH7k6FzLiIweFb%2FQO5TByuaqo0LH04HvsXTiRcYXUU0%2FDHCbVqtdmdtz0rF7onCIFRUrllQCr7%2BcyjZ0UgnAav3Ll3Z84ysJBBs6C&amp;X-Amz-Signature=a63df20c2d3d7885b16d3768ab4800b16e7f1d299e421d9b035bc210ee4c547e&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="4-宿主机内配置"&gt;4. 宿主机内配置&lt;/h2&gt;
+&lt;h3 id="41-配置docker-composeyaml"&gt;4.1 配置Docker-compose.yaml&lt;/h3&gt;
+&lt;h3 id="42-配置"&gt;4.2 配置&lt;/h3&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Nvidia重装驱动</title><link>https://Pan-Binghong.github.io/devops/nvidia%E9%87%8D%E8%A3%85%E9%A9%B1%E5%8A%A8/</link><pubDate>Fri, 04 Jul 2025 04:47:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/nvidia%E9%87%8D%E8%A3%85%E9%A9%B1%E5%8A%A8/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 安装过低版本的驱动,想要更新,记录.需要提前准备好离线的驱动run安装包和cuda安装包.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="1-卸载"&gt;1. 卸载&lt;/h2&gt;
+&lt;h3 id="11-卸载驱动"&gt;1.1 卸载驱动&lt;/h3&gt;
+&lt;p&gt;如果用xxx.run文件安装的驱动,用以下命令进行卸载&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/bin/nvidia-uninstall
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="12-卸载cuda"&gt;1.2 卸载CUDA&lt;/h3&gt;
+&lt;p&gt;如果用xxx.run文件安装的驱动,用以下命令进行卸载&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/local/cuda-12.4/bin/cuda-uninstaller
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="2-安装"&gt;2. 安装&lt;/h2&gt;
+&lt;h3 id="21-安装驱动"&gt;2.1 安装驱动&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# 安装
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./NVIDIA-Linux-x86_64-570.169.run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;重启 reboot&lt;/p&gt;
+&lt;h3 id="22-安装cuda"&gt;2.2 安装CUDA&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;./&lt;/span&gt;cuda_12&lt;span style="color:#ae81ff"&gt;.9.1_575.57.08&lt;/span&gt;_linux&lt;span style="color:#f92672"&gt;.&lt;/span&gt;run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;取消勾选安装驱动!!!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 3
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 4
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 5
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 6
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 7
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 8
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 9
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 配置环境变量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vi &lt;span style="color:#f92672"&gt;~/.&lt;/span&gt;bashrc
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 最后添加三行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export CUDA_HOME&lt;span style="color:#f92672"&gt;=/&lt;/span&gt;usr&lt;span style="color:#f92672"&gt;/&lt;/span&gt;local&lt;span style="color:#f92672"&gt;/&lt;/span&gt;cuda&lt;span style="color:#f92672"&gt;-&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;12.9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export PATH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;$&lt;/span&gt;CUDA_HOME&lt;span style="color:#f92672"&gt;/&lt;/span&gt;bin:&lt;span style="color:#960050;background-color:#1e0010"&gt;$&lt;/span&gt;PATH
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export LD_LIBRARY_PATH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;$&lt;/span&gt;CU&lt;span style="color:#960050;background-color:#1e0010"&gt;·&lt;/span&gt;DA_HOME&lt;span style="color:#f92672"&gt;/&lt;/span&gt;lib64:&lt;span style="color:#960050;background-color:#1e0010"&gt;$&lt;/span&gt;LD_LIBRARY_PATH
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 保存配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;source &lt;span style="color:#f92672"&gt;~/.&lt;/span&gt;bashrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="23-安装驱动管理"&gt;2.3 安装驱动管理&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt install nvidia-fabricmanager-570
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl enable nvidia-fabricmanager
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl start nvidia-fabricmanager
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl status nvidia-fabricmanager
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="3-测试验证"&gt;3. 测试验证&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; torch
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(torch&lt;span style="color:#f92672"&gt;.&lt;/span&gt;cuda&lt;span style="color:#f92672"&gt;.&lt;/span&gt;is_available())
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="4-解决报错"&gt;4. 解决报错&lt;/h2&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/51b10173-0dab-4609-b924-ab711d4dee62/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB46662TYUXGD%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100339Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCU2HRGE9SuZm5WDIVB0jsfft6Y0n8TLfp5s7LsXoDuCwIhANlOb%2FaDFW9Pv4aUhO7ww2U7jsYwa%2BA4E7bfaFSKFiFOKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1Igx7rTx1exRTgGAoGnkq3AO1Wwgk82bwpeoXpsic%2BQdIvADgaCLUqzDgw2rXUJo9q8miVtGo1o50%2FIswZ1I352ybZUyg1IzRnqKHqUGBjCM8L1RW6r2t922oW%2BwqMQ56FBIYcpKKNjj9Klz64AONOz%2FWqApeHv%2B3x8kUghqNtKOmq5VVrB8SMl0epIj6%2BBzc4zbN0k31BPD7pgDIjSnKjbA96RLIVenTzSgRKvWcvCbQ1P5pIjHsZxVdrK5xYr5lf8Owl7fiYG8wIwwgan4R%2FjMYUPz2KW8OiRv%2FR4wMM%2Bpc7HD%2BQYppBOej5KRy09RJHmjkJ34XgH2koFkB2cqlRh7o6aI%2FzsESJ4GpdDYTVjtGg%2FN39t2PCxPIXRqRm3Igl4a6t8N%2FprVpMGoxdDW3w3zPFf3%2FXTaBMJkppTuT6hmmRD25UTCkU%2BWj0tQ1jsNaOwxmlznRSiNysS6Lyx%2BYinswhMQwG4XUEkXbztfbqHdZtcNoOSWXU4skcgXsyZw9dlowiyN0G5PG8tw%2BW%2FYH0c4Q9lyNokENQFk7ujnI8yDoeJ2g9L%2B5WcnzgeBC1%2FOhXZt3NyNj6SpoWIsGcjCBxBsF5eDq4gM9slKatkgf7pLeauKAkNFnMvif8crY0EE8WvXmc8xXNYRXIIvCszDaoqzIBjqkAe8rIxXloeVpEnIEVMQcYaTx6TgFnFXca19BDhxhbBWgyvFh%2BoEMbg7djo8x0drXAzOB33qX7dLdg4K2IiXKxRTTndIGyAZv0AD%2BhH3EnDHmcvdvI2pXUixZmEja63JS1PNY%2FSqyVMUJ1UVcaVUmA2lgT%2FJcQKW60m2QAmdcz6%2FKQGS60mlElkAsWbV42oEkN9xNNYzC0uHz5xe57%2F4Z9%2BGFfbU9&amp;X-Amz-Signature=290cc85fb3728f08e5557f424effe6ab29c96a038bc73a468368c5999e9e4559&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;</description></item><item><title>使用 LVM 管理多个 NVMe 磁盘</title><link>https://Pan-Binghong.github.io/devops/%E4%BD%BF%E7%94%A8-lvm-%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA-nvme-%E7%A3%81%E7%9B%98/</link><pubDate>Thu, 03 Apr 2025 02:37:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E4%BD%BF%E7%94%A8-lvm-%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA-nvme-%E7%A3%81%E7%9B%98/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 本文档将指导您如何使用逻辑卷管理器 (LVM) 将多个 NVMe 磁盘合并为一个逻辑卷，并将其挂载到 /data 目录。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="1-安装-lvm-工具"&gt;1. 安装 LVM 工具&lt;/h2&gt;
+&lt;p&gt;如果您的系统尚未安装 LVM，请根据您的发行版执行相应的命令：&lt;/p&gt;
+&lt;p&gt;Ubuntu/Debian:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get install lvm2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;CentOS/RedHat:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo yum install lvm2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Fedora:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo dnf install lvm2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="2-创建物理卷-physical-volume-pv"&gt;2. 创建物理卷 (Physical Volume, PV)&lt;/h2&gt;
+&lt;p&gt;为每个 NVMe 设备创建一个物理卷。假设您的 NVMe 设备分别为 /dev/nvme0n1, /dev/nvme1n1, /dev/nvme2n1, 和 /dev/nvme3n1。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pvcreate /dev/nvme0n1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pvcreate /dev/nvme1n1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pvcreate /dev/nvme2n1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pvcreate /dev/nvme3n1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="3-创建卷组-volume-group-vg"&gt;3. 创建卷组 (Volume Group, VG)&lt;/h2&gt;
+&lt;p&gt;将创建的物理卷添加到一个卷组中。在本例中，我们将卷组命名为 vg_nvme。&lt;/p&gt;</description></item><item><title>uv Common Commands|Install</title><link>https://Pan-Binghong.github.io/devops/uv-common-commandsinstall/</link><pubDate>Tue, 25 Mar 2025 07:19:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/uv-common-commandsinstall/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 Anaconda对员工超过200人的组织，需要为使用其默认包仓库的每位用户获取商业许可。总之就是变天了。现在大家都准备用uv来替代anconda。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h1 id="安装uv"&gt;安装uv&lt;/h1&gt;
+&lt;h2 id="windows安装"&gt;Windows安装|&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;用管理员身份打开powershell&lt;/li&gt;
+&lt;li&gt;运行安装命令&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="更新"&gt;更新&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果使用pip或者别的安装方法，需要使用pip install &amp;ndash;upgrade uv 进行更新。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uv self update
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/792413cd-74e7-4497-8bc9-a54b5dcd1fe8/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SALPVTHQ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100338Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDLzFxl5vxjYFAUGAwMAlsK7T4fULeaoL1D9LNg28%2FscwIhAN4zuRZ%2FzXsKCuSmyG8PEq7t%2BAb3H%2BMkFVVEFTJcwWFVKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwLax4tk2nv0GyyJWQq3APjKWB6MguG6Q2h91%2FjVu2eMPtj0DI%2Bu1kD3X2yzrNpEFgVVKDZhF%2BNPDfGKD5XXB9EAV8bIaxKhlGMvXAmpKOIZTrH%2F0s3jiIn4hESZA%2FgolqZSULZTAgdSuVvTns4tJ7y1nQ%2BYq14s7hWLxVLnRgjD%2B8OeShZiMtudGUCCbk%2Fal6F0uIavf%2FkoOk9QCi2iRvXF1soLAAHz99J8huBGUHpqIwsLjMgJsJr6ozkn40rtQUTOD2TI9OWKrdNmnin8422mLLx%2FCcTQLypFTWDtfZhvQMHSJkzSufSLc8Dd0gV24W%2Flog6hDGkyhbnvJatuzDXSYhvjcwc5CVud0QhDQGM51Bjl%2BCpEcdb7GHq%2BJGWoE3p1%2FJCt%2BLQO2l3C%2Bi5X7KyOFDwSCGOm2qI2NKl46BVOyjS8jhv5ro8WB8FCz8DYq2Qp3cRK3oXQXi%2B76L1coB2dMyn%2BmcWFFYIUYxVHvB1309dEcbv8hSeFcLFqu8GZRr1VrsVG%2B1UY9gNmDZ9c9Ces0Re1r43zHy09U7dH3TVUZ3dPF7fOh8OvajPSX%2BZHN984JYGLsiIlZVfmcoL9nUkO0h8QJXs8SfBigapoMVkPx9ZJ6ePnSzJ0bItjW2FaEV%2FNMQekXdlExytCDD%2BoqzIBjqkASNRB9v7L2w8PByTctlO0dl6nmjRMNdU3Y2CorYALxdMnGCfjStRx4i%2BQ4%2F7q1ONsYvcToeKhEEoHbl82F9kw9Dnc%2FiNabKQRdogP79n0lG18NIWBevzN9%2BXK2tQVzYLukEtQxdjU9c4y%2FWu3aOtpFPodXRWi7w7RDyy1CSCZJFHPrlLVjp%2B4vKveDpFfXKtt5BvjW2e%2FsgGi87KnwHDEsLbvJME&amp;X-Amz-Signature=6a6bef76573ea35f1ea4c09ac4dacf763b49a871fe83d570ec961b6072dbc96c&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="卸载"&gt;卸载&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;清理缓存&lt;/li&gt;
+&lt;li&gt;删除uv和二进制文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="安装linux"&gt;安装|Linux&lt;/h2&gt;
+&lt;p&gt;官方建议使用以下两种方法均可，但是我都下载不动。。。最终采用pip的方法进行安装的。&lt;/p&gt;
+&lt;p&gt;pip install uv -i &lt;a href="https://pypi.tuna.tsinghua.edu.cn/simple"&gt;https://pypi.tuna.tsinghua.edu.cn/simple&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/362c823c-ff0f-4a1f-8401-871a82af32c0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SALPVTHQ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100338Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDLzFxl5vxjYFAUGAwMAlsK7T4fULeaoL1D9LNg28%2FscwIhAN4zuRZ%2FzXsKCuSmyG8PEq7t%2BAb3H%2BMkFVVEFTJcwWFVKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwLax4tk2nv0GyyJWQq3APjKWB6MguG6Q2h91%2FjVu2eMPtj0DI%2Bu1kD3X2yzrNpEFgVVKDZhF%2BNPDfGKD5XXB9EAV8bIaxKhlGMvXAmpKOIZTrH%2F0s3jiIn4hESZA%2FgolqZSULZTAgdSuVvTns4tJ7y1nQ%2BYq14s7hWLxVLnRgjD%2B8OeShZiMtudGUCCbk%2Fal6F0uIavf%2FkoOk9QCi2iRvXF1soLAAHz99J8huBGUHpqIwsLjMgJsJr6ozkn40rtQUTOD2TI9OWKrdNmnin8422mLLx%2FCcTQLypFTWDtfZhvQMHSJkzSufSLc8Dd0gV24W%2Flog6hDGkyhbnvJatuzDXSYhvjcwc5CVud0QhDQGM51Bjl%2BCpEcdb7GHq%2BJGWoE3p1%2FJCt%2BLQO2l3C%2Bi5X7KyOFDwSCGOm2qI2NKl46BVOyjS8jhv5ro8WB8FCz8DYq2Qp3cRK3oXQXi%2B76L1coB2dMyn%2BmcWFFYIUYxVHvB1309dEcbv8hSeFcLFqu8GZRr1VrsVG%2B1UY9gNmDZ9c9Ces0Re1r43zHy09U7dH3TVUZ3dPF7fOh8OvajPSX%2BZHN984JYGLsiIlZVfmcoL9nUkO0h8QJXs8SfBigapoMVkPx9ZJ6ePnSzJ0bItjW2FaEV%2FNMQekXdlExytCDD%2BoqzIBjqkASNRB9v7L2w8PByTctlO0dl6nmjRMNdU3Y2CorYALxdMnGCfjStRx4i%2BQ4%2F7q1ONsYvcToeKhEEoHbl82F9kw9Dnc%2FiNabKQRdogP79n0lG18NIWBevzN9%2BXK2tQVzYLukEtQxdjU9c4y%2FWu3aOtpFPodXRWi7w7RDyy1CSCZJFHPrlLVjp%2B4vKveDpFfXKtt5BvjW2e%2FsgGi87KnwHDEsLbvJME&amp;X-Amz-Signature=48ebb19a8b1e3bea728a8113162f87d8cf38074ba5f873e949fbbfa0ba56b837&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id="检查"&gt;检查&lt;/h1&gt;
+&lt;p&gt;安装完毕后，在终端直接运行uv ，查看是否出现以下内容。&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/d2350aa7-bbba-455d-860d-34eee2ae196e/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SALPVTHQ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100338Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDLzFxl5vxjYFAUGAwMAlsK7T4fULeaoL1D9LNg28%2FscwIhAN4zuRZ%2FzXsKCuSmyG8PEq7t%2BAb3H%2BMkFVVEFTJcwWFVKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwLax4tk2nv0GyyJWQq3APjKWB6MguG6Q2h91%2FjVu2eMPtj0DI%2Bu1kD3X2yzrNpEFgVVKDZhF%2BNPDfGKD5XXB9EAV8bIaxKhlGMvXAmpKOIZTrH%2F0s3jiIn4hESZA%2FgolqZSULZTAgdSuVvTns4tJ7y1nQ%2BYq14s7hWLxVLnRgjD%2B8OeShZiMtudGUCCbk%2Fal6F0uIavf%2FkoOk9QCi2iRvXF1soLAAHz99J8huBGUHpqIwsLjMgJsJr6ozkn40rtQUTOD2TI9OWKrdNmnin8422mLLx%2FCcTQLypFTWDtfZhvQMHSJkzSufSLc8Dd0gV24W%2Flog6hDGkyhbnvJatuzDXSYhvjcwc5CVud0QhDQGM51Bjl%2BCpEcdb7GHq%2BJGWoE3p1%2FJCt%2BLQO2l3C%2Bi5X7KyOFDwSCGOm2qI2NKl46BVOyjS8jhv5ro8WB8FCz8DYq2Qp3cRK3oXQXi%2B76L1coB2dMyn%2BmcWFFYIUYxVHvB1309dEcbv8hSeFcLFqu8GZRr1VrsVG%2B1UY9gNmDZ9c9Ces0Re1r43zHy09U7dH3TVUZ3dPF7fOh8OvajPSX%2BZHN984JYGLsiIlZVfmcoL9nUkO0h8QJXs8SfBigapoMVkPx9ZJ6ePnSzJ0bItjW2FaEV%2FNMQekXdlExytCDD%2BoqzIBjqkASNRB9v7L2w8PByTctlO0dl6nmjRMNdU3Y2CorYALxdMnGCfjStRx4i%2BQ4%2F7q1ONsYvcToeKhEEoHbl82F9kw9Dnc%2FiNabKQRdogP79n0lG18NIWBevzN9%2BXK2tQVzYLukEtQxdjU9c4y%2FWu3aOtpFPodXRWi7w7RDyy1CSCZJFHPrlLVjp%2B4vKveDpFfXKtt5BvjW2e%2FsgGi87KnwHDEsLbvJME&amp;X-Amz-Signature=7fc89010f6384be4e905c610316aa7aa0d55f3aad43dab12d98f19937e9d9c9b&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id="python"&gt;Python&lt;/h1&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;创建项目&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;管理依赖&lt;/li&gt;
+&lt;li&gt;修改源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="坑"&gt;坑&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;警告如下:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Windows专线直连服务器</title><link>https://Pan-Binghong.github.io/devops/windows%E4%B8%93%E7%BA%BF%E7%9B%B4%E8%BF%9E%E6%9C%8D%E5%8A%A1%E5%99%A8/</link><pubDate>Fri, 14 Mar 2025 08:07:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/windows%E4%B8%93%E7%BA%BF%E7%9B%B4%E8%BF%9E%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 记录一下如何解决的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="前置条件"&gt;前置条件&lt;/h2&gt;
+&lt;p&gt;需已知服务器的静态IP和子网掩码，自己配置也行。&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;Windows电脑和服务器网线连接&lt;/li&gt;
+&lt;li&gt;打开网络和共享中心-进入适配器设置&lt;/li&gt;
+&lt;li&gt;找到对应的网络连接，右键属性，双击internet协议版本4（TCP4/IP)
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/863c402f-4ab1-45e1-a148-3d37932cc3bf/9c5d35113aa3fbe01deeff992970e27.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466TSWFR5VJ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100338Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIEdzjH6juCuzrALoTFw5xEsF2eX4wsdJygO2f54WRFsuAiBxx6wO6YRRzmwl%2BBPH3YYGDvLs9klUgN%2FYZGJj7%2BuJvSqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMuS35Up3kDTkA1i54KtwDxlM3N5FOxm%2FkgfXOZKpf75Cr05grDxldEdjz9Boj5YPvsbdCSWcWY2h0rUZZDpK0Ba3ZBy5pEbpGogEjStnb4De5utaRKTBT%2BvlNait0OVxOOoYtrQza8eAhSyJRqavAomtsWeiZCcyHBec5VNFq6XOMf4x8SVpklZTByylp0Bx6rK5NKGEcYeWx%2BRfr9OXGnNKKJmZVjbXKsjtyHmMXXvB88yj8Qx1mGedr8yGJqTZ%2FaabKm5GkmPwCW8vfoSnc7lZScwR19%2Fmkmy5d6ZM3i2Vucjbq4TyY6gvqkCkGQ5dPzPpBVl1nMkm1WH4zZQ%2BLBY8pWhwtuGRkAXomzIFEArVUw266TQ72lwnxb96TJsJ8%2FrS5dnpEUUUlqenXw6k%2B1JO%2BNVEQCVXFaL%2Bb2U4QtWs50YEYHGwivXGNxrOdxIx2aVo6VGD3VOYBI0dQy%2BDYfvjFmYdoUa1Fjyvcbcj3ukN5mGkxifzINPWNVIaK5Id3k8irx9M8qFhDWFYDi0Yc7HLkgQRHBya%2Fe3PhaNGq9M%2FrBZPdvs1SZdtuxHdZCPBbD8qKi9cFNZukYHlbH1x8NmQLH0TUNZ2vwblsDQ3yzhpHdSU5nWt5GkyFtLbfgLuJPuz2Btq5KM5HMWww5KKsyAY6pgFO7LdwFPfJAf6rW2Zg1kgowi0emjBziVA9oylsUKcD%2BUh%2BP6Vr4maztamSEBIylYhHkftoRTmfu0ClaTf4hgOslXbP1Gn771sWn4hdnlK2DL2hOHvbRkqXifoPRcHARw7w2UOjtTZAuIEA5o6iTBvUZ0VetMhANllRLq4laIqZOVgVyL%2BSZMl8UpSUCcbFvQnbHJkaYcISf9wO9LkK2cOAy4erbVwq&amp;X-Amz-Signature=4e5ef5e67b31e6767458cf7c4352230b45ceeeb30d32b0a6d54489c71b303dd4&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;</description></item><item><title>Iptables Common commands</title><link>https://Pan-Binghong.github.io/devops/iptables-common-commands/</link><pubDate>Wed, 12 Mar 2025 05:46:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/iptables-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 iptables 全称为：netfilter/iptables 是一个IP数据包过滤系统。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="iptables工作流程"&gt;iptables工作流程&lt;/h2&gt;
+&lt;p&gt;采用数据包过滤机制工作的，所以它会对请求的数据包的包头进行分析，并根据我们预先设定的规则进行匹配来决定是否可以进入主机。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;防火墙是一层一层过滤的。实际是按照配置规则的顺序从上到下，从前到后进行filter。&lt;/li&gt;
+&lt;li&gt;如果匹配上规则，表明阻止还是通过，此时数据包就不再向下匹配新规则。&lt;/li&gt;
+&lt;li&gt;如果规则中，没有表明阻止还是通过，即等同于没有匹配上规则，按照默认策略处理。&lt;/li&gt;
+&lt;li&gt;防火墙的默认规则是对应的链的所有规则执行完成后才会执行。
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/5da2e1eb-c9ee-47d7-8b26-5710b6c7fa13/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4665S5TALXN%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100337Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIDww6H%2B8FCyLnp%2FuEnkveaTykSk1aJqPK4Y3oTsvoDfmAiAwy3xZrJ9ddrDQHLz1F1CnkO6S8bNu9EisiuEW5WMjHCqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMD5l6XGGIweExqhYpKtwDD1dWA%2Fj%2FLwlmq0No8KiLF%2FSAKAQJiCfR%2B1BaQvXG9vAeS%2BfFsJzWzNrHjhdVigSfqDx8Y2tFWfgBaG1nFSNX9dBVJYw%2FQf5tyjW6z7SGfxJSWiKPZTdXoWHLMJPz4S18mC7mG2aPXpKRnTnQ%2Bg44lG%2B4HVQ6x%2B3bpSb8qAOxJsmPKATKrCl8%2FMwW2iWHNUlyDDWTlN9LZTym71JXApalK6TB6Zh4MfUpBosrdbRKZ7fQRrOrx3YQgZ908GtdTW7FWv763VFgi4m%2FfDAdBlnmRf0m9Bwkze6SbN5X4kjQRfhfBlxy96caK8g%2BXo1ZtcplRf0JDYysvJmIX8YUI5JEbNGk9wcdoYCbGsrkY72wZYOLgknHMC4p7120Z7NuNuvndNf5ygJGH7mzR1t9dSnpYnu4JmFTfgAeT%2BYBko6Qox6MsprafhoQnWpbU89WpLM7FYwdzt6XHg0byK2%2BpeVOV5sTMA87cAgV%2FL6GjU6CKju1sb4uiLWw3kk%2B0UN1PfLuBA%2FelA%2FnU1LxaqGiP6LJmjMLvLhi2ztY0HKVvP5cKhhJAMdegIfhNWvhChoJxPofLxiaEAjm3fl9aTZ7rKeEJTEyxEiAz%2BB0p4kXSwT8a2QX2SxMgLOG0IlxWrww4aKsyAY6pgHTjVjDg8eD%2BNQWxitvxt4r2JVfrck09hknsqlFGvzwp%2FIP1u%2BALEN2fqAGmwBOTkhm%2Bn8L26DCddWT9pKID%2FjXeZxslC%2BERSakyWSM0gHQhtQFZyCLJKymZRnfL2HkqcapBEBrT9uXqy8VumSic9ugfPiTKF9lcgxR0qniXgYQqSh1tPtoFzMzLDcUEoyPrQVFUD8bami9qy5pQsY5k3g%2B6Z6XEfNw&amp;X-Amz-Signature=8497d8726e86a7282ffd9edc94d692e4076ddc507b0e25f49e79b7faa858e683&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;details&gt;&lt;summary&gt;数据包基本结构&lt;/summary&gt;
+&lt;/details&gt;
+&lt;hr&gt;
+&lt;h2 id="四表五链"&gt;四表五链&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;链就是位置：共有5个，进路由（PREROUTING)、进系统（INPUT）、转发（FORWARD)、出系统（OUTPUT）、出路由（POSTROUTING)。&lt;/li&gt;
+&lt;li&gt;表就是存储的规则：数据包到了该链处，会去对应表中查询设置的规则，然后决定是否放行、丢弃、转发还是修改等操作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="四表"&gt;四表&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;filter表：过滤数据包。&lt;/li&gt;
+&lt;li&gt;nat表：用于网络地址转化（IP、端口）。&lt;/li&gt;
+&lt;li&gt;mangle表：修改数据包的服务类型、TTL、并且可以配置路由实现QOS。&lt;/li&gt;
+&lt;li&gt;raw表：主要用来决定是否对数据包进行状态跟踪。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="五链"&gt;五链&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;INPUT链——进来的数据包应用此规则链中的策略&lt;/li&gt;
+&lt;li&gt;OUTPUT链——外出的数据包应用此规则链中的策略&lt;/li&gt;
+&lt;li&gt;FORWARD链——转发数据包时应用此规则链中的策略&lt;/li&gt;
+&lt;li&gt;PREROUTING链——对数据包作路由选择前应用此链中的规则（所有的数据包进来的时侯都先由这个链处理）&lt;/li&gt;
+&lt;li&gt;POSTROUTING链——对数据包作路由选择后应用此链中的规则（所有的数据包出来的时侯都先由这个链处理）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="iptables常用选项与参数"&gt;iptables常用选项与参数&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-t 表名&lt;span style="color:#f92672"&gt;]&lt;/span&gt; 管理选项 &lt;span style="color:#f92672"&gt;[&lt;/span&gt;链名&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;匹配条件&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-j 控制类型&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;表名、链名：指定iptables命令所操作的表和链，未指定表名时将默认使用filter表；&lt;/li&gt;
+&lt;li&gt;管理选项：表示iptables规则的操作方式，比如：插入、增加、删除、查看等；&lt;/li&gt;
+&lt;li&gt;匹配条件：指定要处理的数据包的特征，不符合指定条件的数据包不处理；&lt;/li&gt;
+&lt;li&gt;控制类型：指数据包的处理方式，比如：允许accept、拒绝reject、丢弃drop、日志LOG等；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;details&gt;&lt;summary&gt;管理选项&lt;/summary&gt;
+&lt;/details&gt;
+&lt;details&gt;&lt;summary&gt;完整版本&lt;/summary&gt;
+&lt;/details&gt;
+&lt;hr&gt;
+&lt;h3 id="常用命令"&gt;常用命令&lt;/h3&gt;
+&lt;p&gt;更多详细的命令见：https://www.cnblogs.com/zhujingzhi/p/9706664.html&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="实际案例"&gt;实际案例&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 3
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 4
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 5
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 6
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 7
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 8
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 9
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;10
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;11
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 添加新的DNAT规则&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A PREROUTING -p tcp --dport &lt;span style="color:#ae81ff"&gt;18083&lt;/span&gt; -j DNAT --to-destination 192.168.0.89:8003
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 添加新的MASQUERADE规则，保证数据包能正确返回&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.89 --dport &lt;span style="color:#ae81ff"&gt;8003&lt;/span&gt; -j MASQUERADE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 删除规则&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -D PREROUTING &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -D POSTROUTING &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 查看&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -L -n -v
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;</description></item><item><title>Tmux操作一览</title><link>https://Pan-Binghong.github.io/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</link><pubDate>Tue, 25 Feb 2025 01:49:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 Tmux 是一个非常强大的终端复用工具，它可以帮助你在一个窗口中管理多个会话，非常适合长时间运行任务或多任务处理。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="安装"&gt;安装&lt;/h2&gt;
+&lt;hr&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt install tmux
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="基本操作"&gt;基本操作&lt;/h2&gt;
+&lt;h3 id="会话管理"&gt;会话管理&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;新建会话&lt;/li&gt;
+&lt;li&gt;分离会话&lt;/li&gt;
+&lt;li&gt;列出会话&lt;/li&gt;
+&lt;li&gt;关闭会话&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="窗口操作"&gt;窗口操作&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;新建窗口&lt;/li&gt;
+&lt;li&gt;切换窗口&lt;/li&gt;
+&lt;li&gt;重命名窗口&lt;/li&gt;
+&lt;li&gt;关闭窗口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="窗格操作"&gt;窗格操作&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;水平分割&lt;/li&gt;
+&lt;li&gt;垂直分割&lt;/li&gt;
+&lt;li&gt;切换窗格&lt;/li&gt;
+&lt;li&gt;关闭&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="使用示例"&gt;使用示例&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;查看当前服务器内，有无tmux会话，输入命令进入。&lt;/li&gt;
+&lt;li&gt;进入会话后，开启2个窗格。Ctrl + b ，%&lt;/li&gt;
+&lt;li&gt;在model 会话内，新建窗口，并修改名称。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Shell学习</title><link>https://Pan-Binghong.github.io/devops/shell%E5%AD%A6%E4%B9%A0/</link><pubDate>Wed, 08 Jan 2025 02:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/shell%E5%AD%A6%E4%B9%A0/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 随便记录一下Shell编程中的语法以及常用操作等…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="基础"&gt;基础&lt;/h2&gt;
+&lt;h3 id="变量"&gt;变量&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;变量名称要规范, 别用一些很抽象的符号, 单词, 空格等。&lt;/li&gt;
+&lt;li&gt;使用变量用$, 最好配合{} 使用。&lt;/li&gt;
+&lt;li&gt;字符串相关的操作&lt;/li&gt;
+&lt;li&gt;数组&lt;/li&gt;
+&lt;li&gt;注释, 单行注释用# ,多行注释: ‘&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="传参"&gt;传参&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id="运算"&gt;运算&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://www.runoob.com/linux/linux-shell-basic-operators.html"&gt;https://www.runoob.com/linux/linux-shell-basic-operators.html&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="echoprintf"&gt;Echo\Printf&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2 id="进阶"&gt;进阶&lt;/h2&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Nvidia排查算力卡状态常用命令</title><link>https://Pan-Binghong.github.io/devops/nvidia%E6%8E%92%E6%9F%A5%E7%AE%97%E5%8A%9B%E5%8D%A1%E7%8A%B6%E6%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Mon, 06 Jan 2025 01:59:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/nvidia%E6%8E%92%E6%9F%A5%E7%AE%97%E5%8A%9B%E5%8D%A1%E7%8A%B6%E6%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 记录英伟达算力卡相关的常用命令。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id="常用基本命令"&gt;常用基本命令&lt;/h3&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;h3 id="运行深度学习框架测试"&gt;运行深度学习框架测试&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id="导出nvidia驱动的运行日志"&gt;导出NVIDIA驱动的运行日志&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo nvidia-bug-report.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id="运行gpu基准测试"&gt;运行GPU基准测试&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Vim Common Commands</title><link>https://Pan-Binghong.github.io/devops/vim-common-commands/</link><pubDate>Fri, 27 Dec 2024 08:05:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/vim-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 记录在使用vim过程中，除了使用上下左右编辑之外的，更方便快捷的操作&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://www.runoob.com/wp-content/uploads/2015/10/vi-vim-cheat-sheet-sch1.gif"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;h2 id="组合常用命令"&gt;组合常用命令&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;全选ggVG&lt;/li&gt;
+&lt;li&gt;复制粘贴yyp&lt;/li&gt;
+&lt;li&gt;分割窗口并切换:sp,ctrl+w w&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="实际解决问题"&gt;实际解决问题&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;vim打开文件出现乱码问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>910B环境部署测试_文字纯享版</title><link>https://Pan-Binghong.github.io/devops/910b%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95_%E6%96%87%E5%AD%97%E7%BA%AF%E4%BA%AB%E7%89%88/</link><pubDate>Tue, 24 Dec 2024 03:36:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/910b%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95_%E6%96%87%E5%AD%97%E7%BA%AF%E4%BA%AB%E7%89%88/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 记录910B集群，单机基准测试全流程。从安装系统至运行Llama7b模型。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="inode登录"&gt;inode登录&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id="通过外网ip连接服务器并修改为指定的内网ip"&gt;通过外网IP连接服务器，并修改为指定的内网IP&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id="拷贝关键文件"&gt;拷贝关键文件&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id="配置内网网卡信息"&gt;配置内网网卡信息&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id="依次运行命令即可--重要"&gt;依次运行命令即可 | 重要&lt;/h3&gt;
+&lt;h3 id="检查安装是否成功--可跳过"&gt;检查安装是否成功 | 可跳过&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id="模型训练"&gt;模型训练&lt;/h3&gt;</description></item><item><title>开启gpedit.msc</title><link>https://Pan-Binghong.github.io/devops/%E5%BC%80%E5%90%AFgpedit.msc/</link><pubDate>Thu, 19 Dec 2024 01:11:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E5%BC%80%E5%90%AFgpedit.msc/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 Windows为家庭版或者教育版，打开win+r输入gpedit.msc会显示找不到。记录修改过程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="设置步骤"&gt;设置步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;新建一个txt文件&lt;/li&gt;
+&lt;li&gt;写入代码&lt;/li&gt;
+&lt;li&gt;保存，将txt修改为bat&lt;/li&gt;
+&lt;li&gt;双击运行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="验证结果"&gt;验证结果&lt;/h2&gt;
+&lt;p&gt;win + R 输入gpedit.msc&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/b211b15a-1374-48d3-935b-8a75ed2bb52f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466RATM6WTE%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100334Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDeUWVaW0X4Zyq1%2F0t2ouDcad%2FUBbobKsKvS910y4JnxQIhAOvX558QtTKHgngfWBytZJ2PS5GJS88ImfBruqhtc6W4KogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgznN9gMVbqD2mISsA4q3APJldfxQ%2BdcgmUk93VoJP2qW%2BUyOdq4a33jsciA8Tr%2BkKf3N5f5Pgze0cp0ljIypG5tymeF8Ch%2F8lLFnBKi4iC6qkpHFbuc0tvjDiJ1EdLnIM1ibW6j%2F5ghAsj1NMMs6hNNSLoTEVMBWeB%2BqbkBQApbpNN51MzzyUzsjmckUH30W6S21GpoL9O81zOp%2BdbXEM8hJLBt8q5ygLVRZPThRzz1ZFB45FFiY5WGp3DwXKx1Z502uT7pSe8Qz9Gk3v%2BmUgzFU3rYlDQMiaYdfUkW%2F7Uq5i13yqLT29qknG7hfdqO%2FwKoBqB71yPh%2BAbWy4H2afZ%2FEqm59QqDJ0g6184sigTxPbzmHJ1R%2FrvFHWkg923Kg4rVUCnBXtLfEaIIme0XJRiKrn16rMJUUMCeIVTn%2F%2Fn63QtCEySnavGGgwqGD2YY5gcu53C5BfKlpaL6nSXt9DlRhf%2B%2BUFCv64m%2FXCeLWimfa0bEaK2LlEHHhDt%2FD0qj%2BK2OpKHZ2A1QjTwAr9s0J%2BLAXOGFT5rDEJQ1qulcYQUpYcsW5DDMQIauEO3N12sbu4ynduPbPT7y%2FsF0jwKphPhn7tDgaSBxi3S6lSQoPJHiNdfqEfY3mqENIQ8I42cxhFAUFn7EZZhbLWGmgDDEn6zIBjqkAeAUFY7ca4CsdBOCWGC4hrd%2FR3he3Qnv8T2bELTSjk9tlcqPJg0eYGIvKKCq9bbt%2B%2F0nnrQIehuiEbhlMhPsZzPdFrDrzik150k09cH9FscVvwxUr6liuupE6WhstlAh8irNzZHI5T8h8b8w9izzpwUY4x20MEif7eRu3fC0t5%2BCUpzPyQNwmMvxvGU1fJpDtBUNyItFrkvz7gkwBd08v7Tl1Y7f&amp;X-Amz-Signature=d6d2d0a3ac6e8092f2d99ddca009b229c7c2d12dc537b1847d013e82c070db9a&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="懒人版本"&gt;懒人版本&lt;/h2&gt;
+&lt;p&gt;下载，运行即可&lt;/p&gt;</description></item><item><title>VSCode常用快捷键</title><link>https://Pan-Binghong.github.io/devops/vscode%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</link><pubDate>Sun, 01 Dec 2024 08:26:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/vscode%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>主机基准测试</title><link>https://Pan-Binghong.github.io/devops/%E4%B8%BB%E6%9C%BA%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</link><pubDate>Fri, 29 Nov 2024 01:53:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E4%B8%BB%E6%9C%BA%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡
+本文介绍了在 Linux 环境下进行基准测试的全过程，涵盖了安装 CUDA 和 NCCL 以及执行各类性能测试的详细步骤。包括了 p2pBandwidthLatency 和 all_reduce_perf 测试，帮助用户快速搭建并运行测试环境。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id="所需文件下载链接"&gt;所需文件下载链接&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;CUDA 12.2 点击下载&lt;/li&gt;
+&lt;li&gt;NCCL 2.21.5 点击下载&lt;/li&gt;
+&lt;li&gt;CUDA Sample 源代码 点击访问 GitHub&lt;/li&gt;
+&lt;li&gt;NCCL Test 源代码 点击访问 GitHub&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="cuda-安装步骤"&gt;CUDA 安装步骤&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;下载 CUDA 安装包&lt;/li&gt;
+&lt;li&gt;赋予安装包执行&lt;/li&gt;
+&lt;li&gt;执行安装&lt;/li&gt;
+&lt;li&gt;配置环境变量&lt;/li&gt;
+&lt;li&gt;更新环境变量&lt;/li&gt;
+&lt;li&gt;验证安装是否成功&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="cuda-sample-p2pbandwidthlatency-测试"&gt;CUDA Sample: p2pBandwidthLatency 测试&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;进入 Sample 文件夹&lt;/li&gt;
+&lt;li&gt;编译测试程序&lt;/li&gt;
+&lt;li&gt;执行测试并保存结果&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="nccl-安装"&gt;NCCL 安装&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;添加 NCCL 安装源&lt;/li&gt;
+&lt;li&gt;安装 NCCL 及其依赖&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="nccl-test-all_reduce_perf-测试nccl-测试all_reduce_perf-测试"&gt;NCCL Test: all_reduce_perf 测试NCCL 测试：all_reduce_perf 测试&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;进入 NCCL 测试文件夹&lt;/li&gt;
+&lt;li&gt;执行编译测试并保存结果&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>获取Nvidia驱动日志</title><link>https://Pan-Binghong.github.io/devops/%E8%8E%B7%E5%8F%96nvidia%E9%A9%B1%E5%8A%A8%E6%97%A5%E5%BF%97/</link><pubDate>Fri, 29 Nov 2024 01:09:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E8%8E%B7%E5%8F%96nvidia%E9%A9%B1%E5%8A%A8%E6%97%A5%E5%BF%97/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 记录一下，怎么获得Nvidia驱动的日志。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;登录master节点&lt;/li&gt;
+&lt;li&gt;收集有关 NVIDIA 显卡驱动程序问题的诊断信息的脚本&lt;/li&gt;
+&lt;li&gt;运行脚本&lt;/li&gt;
+&lt;li&gt;将刚才生成的日志文件，重命名&lt;/li&gt;
+&lt;li&gt;新建文件夹命名为：日期 - log&lt;/li&gt;
+&lt;li&gt;复制刚才生成的所有文件到文件夹内&lt;/li&gt;
+&lt;li&gt;压缩文件夹&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>配置服务器免密</title><link>https://Pan-Binghong.github.io/devops/%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%8D%E5%AF%86/</link><pubDate>Fri, 29 Nov 2024 01:08:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%8D%E5%AF%86/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 本文档是服务器免密配置的第二版，旨在帮助用户通过生成SSH密钥对和配置免密登录，简化远程服务器的管理。本文也将介绍如何验证免密配置是否成功。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="两机"&gt;两机&lt;/h2&gt;
+&lt;p&gt;A机器输入：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ssh-keygen -t rsa -b &lt;span style="color:#ae81ff"&gt;2048&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ssh-copy-id 你的用户名@你的IP
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;B机器输入：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vim /etc/ssh/sshd_config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PubkeyAuthentication yes
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;AuthorizedKeysFile .ssh/authorized_keys
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl restart sshd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="多机"&gt;多机&lt;/h2&gt;
+&lt;h3 id="1-准备ip文件"&gt;1. 准备IP文件&lt;/h3&gt;
+&lt;p&gt;首先，创建一个存储目标服务器IP地址的文件 ip.txt。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vim ip.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在 ip.txt 文件中，写入需要配置免密登录的目标机器IP地址，每行一个IP。例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;192.168.1.10
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;192.168.1.20
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;192.168.1.32. 创建并运行配置脚本
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;创建一个脚本文件 set_key.sh，用于生成SSH密钥对并将公钥复制到目标机器。&lt;/p&gt;</description></item><item><title>多机批量配置Hostname&amp;Hosts</title><link>https://Pan-Binghong.github.io/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E9%85%8D%E7%BD%AEhostnamehosts/</link><pubDate>Fri, 29 Nov 2024 00:37:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E9%85%8D%E7%BD%AEhostnamehosts/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 批量修改 hosts 及 hostname, 使用脚本，并同步到多台服务器内.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;前置条件为：机器hostname设置为h800-01, h800-xx格式。准备service.txt 文件，里面每行保存机器IP或者hostname。&lt;/li&gt;
+&lt;li&gt;脚本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;</description></item><item><title>多机批量挂载外部存储卷</title><link>https://Pan-Binghong.github.io/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E6%8C%82%E8%BD%BD%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%8D%B7/</link><pubDate>Thu, 28 Nov 2024 14:43:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E6%8C%82%E8%BD%BD%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%8D%B7/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 多服务器之间共享文件，需要挂载外部存储卷。从保存数据的服务器上，将共享目录挂载到其他服务器上。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="发送key"&gt;发送Key&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;前置条件为：机器hostname设置为h800-01, h800-xx格式。准备service.txt 文件，里面每行保存机器IP或者hostname。&lt;/li&gt;
+&lt;li&gt;单机执行命令&lt;/li&gt;
+&lt;li&gt;多机执行命令&lt;/li&gt;
+&lt;li&gt;升级Key权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="挂载"&gt;挂载&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;单机命令&lt;/li&gt;
+&lt;li&gt;多机命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>多机批量加载Docker镜像&amp;镜像重命名</title><link>https://Pan-Binghong.github.io/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%8A%A0%E8%BD%BDdocker%E9%95%9C%E5%83%8F%E9%95%9C%E5%83%8F%E9%87%8D%E5%91%BD%E5%90%8D/</link><pubDate>Thu, 28 Nov 2024 14:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%8A%A0%E8%BD%BDdocker%E9%95%9C%E5%83%8F%E9%95%9C%E5%83%8F%E9%87%8D%E5%91%BD%E5%90%8D/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 多台服务器同时批量加载 docker 镜像 + 重命名，并创建容器。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="加载镜像"&gt;加载镜像&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;前置条件为：机器hostname设置为h800-01, h800-xx格式。准备service.txt 文件，里面每行保存机器IP或者hostname。&lt;/li&gt;
+&lt;li&gt;单机执行命令&lt;/li&gt;
+&lt;li&gt;多机执行命令&lt;/li&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="重命名镜像"&gt;重命名镜像&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;多机批量重命名命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="创建容器"&gt;创建容器&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;单机执行命令&lt;/li&gt;
+&lt;li&gt;多机执行命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;</description></item><item><title>多机批量安装Nvidia-Docker</title><link>https://Pan-Binghong.github.io/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%AE%89%E8%A3%85nvidia-docker/</link><pubDate>Thu, 28 Nov 2024 14:23:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%AE%89%E8%A3%85nvidia-docker/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 多台服务器同时安装 Nvidia-docker&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="单机安装"&gt;单机安装&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;单机安装全部命令&lt;/li&gt;
+&lt;li&gt;将以上内容保存为一个文件，命名为：installNGC&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="批量安装脚本"&gt;批量安装脚本&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;脚本&lt;/li&gt;
+&lt;li&gt;脚本解释&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;</description></item><item><title>PowerShell Common Commands</title><link>https://Pan-Binghong.github.io/devops/powershell-common-commands/</link><pubDate>Thu, 28 Nov 2024 00:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/powershell-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 记录常用的PowerShell命令，以及说明PowerShell和CMD区别。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="基本概念"&gt;基本概念&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h2 id="常用命令"&gt;常用命令&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;PowerShell 是 Windows 的命令行终端增强工具，其设计理念之一就是向下兼容旧的 CMD 工具。因此，PowerShell 能够直接调用 CMD 的内部命令和外部工具。以下内容为CMD基础命令，同时也可以在PowerShell内执行。&lt;/li&gt;
+&lt;li&gt;PowerShell特有的常用命令&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Jupyter Notebook快捷命令</title><link>https://Pan-Binghong.github.io/devops/jupyter-notebook%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/</link><pubDate>Wed, 27 Nov 2024 15:12:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/jupyter-notebook%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 以下是 Jupyter Notebook 的一些常用快捷操作&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;p&gt;以上仅是一些常用的快捷键，你也可以在 Jupyter Notebook 的 Help -&amp;gt; Keyboard Shortcuts 中看到完整的快捷键列表，你也可以自定义快捷键的方式来使得自己更舒适使用。&lt;/p&gt;</description></item><item><title>Docker Common Commands</title><link>https://Pan-Binghong.github.io/devops/docker-common-commands/</link><pubDate>Wed, 27 Nov 2024 15:00:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/docker-common-commands/</guid><description>&lt;hr&gt;
+&lt;h2 id="常用就完事"&gt;常用就完事&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h2 id="解决问题"&gt;解决问题&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;问题：permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get &amp;ldquo;&lt;a href="http://%2Fvar%2Frun%2Fdocker.sock/v1.47/containers/json%22"&gt;http://%2Fvar%2Frun%2Fdocker.sock/v1.47/containers/json&amp;quot;&lt;/a&gt;: dial unix /var/run/docker.sock: connect: permission denied&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;问题: 修改docker源&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Kubernetes Common commands</title><link>https://Pan-Binghong.github.io/devops/kubernetes-common-commands/</link><pubDate>Wed, 27 Nov 2024 14:14:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/kubernetes-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 本人工作中使用 k8s，记录一下常用的命令。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="常用"&gt;常用&lt;/h2&gt;</description></item><item><title>离线安装Docker&amp;Nvidia-Docker</title><link>https://Pan-Binghong.github.io/devops/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</link><pubDate>Wed, 27 Nov 2024 13:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 录离线安装 Nvidia-Docker 流程手册，2023 年 8 月 5 日 20:48:35.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/8690192b-5740-4be7-a8d3-109dd45cd1b0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466XPJLIVLO%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100331Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIEdm%2BhpOeb9ZwkkUWM2RdnblCJmatD9GCFnko%2BK6JpENAiEA9tImXwghHMVquYOrl73UQPacw4AuQuvrLhCdL8ZVdeAqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDBrXhU7yD1MJuPaDLCrcAyrjTeDK%2BT%2B3os0ZlVAV9xPa47YXfa%2F%2BbjamUwcrMz3VX4tvVNRS7mOKNsM%2FcEBoFGLQrVLr9YeIHwmgaiqsMorjAff6FKbQjRpchcAFVjwCAczyiHLr1C7NrvtDSIe7G0i0vdWAzS3YYsCGYifdjs3Xu8g8p0TK99rjgriMqVpFM7MNX5e%2BaU0LdqODIoiuzC3mo%2FEmc4uUvYaN%2FPVduIQ%2BcC49g0oWh3wEL1PXNAmET%2FPBUNew8OyMLnN%2FxNRhAXhq2nfeonp5xzNv46uvAjPvvvkllPsz3nEEoGpPLug7vkicGvqIVn0QfRTP42lcuOfSSaUBzEmzZKJOcvGK5YimB8s%2FvX3mjjyUutBUovhs7%2BshCMiQ5q6TDHJK28aPJxxpsi7eO%2BEOAdSNKQekpc2s%2Bwg3dL4tqvvtqBZQmkASvC1tRQCZ%2BZkAY4%2FHj08orpelpyIiNmymlnfwQR8SqkVjsQW5A6HAaFyyBrZt44Tm9Wxa0G5zLK%2FwNuXghboOexx%2FG8vI5MhzDrufKQI8R%2Bmwyb%2FqDea6zWf3Yd%2F9i%2FxgiWaVhOScXIdpFrnhziIG5Yc7QuRsJjAoeyYJFeXU475lH4fkyfBtgr0gLpS%2BZiz4bK%2BmipxBAuPDtjkWMK%2BirMgGOqUB%2FVzas270PEVibGzTMkfcI1qQCqEacbOKTl1iTOAltStReJdCQ6c6TnBi49f2m%2FwTo%2BzPfoGbc27FdlQP9ZIFIgOzQNABEAhosGRQYmN8%2BPWoAD5lkKgtJIDOve%2Bl3E3lpvT%2B42Tnqaz8LK3ek8u90DD6AGx9OEmPqizNKTtPVEYyUNOn7D9eTTTcyobZV1aoRjDqDePs41qLfb%2FfLuyvWGXNyJiz&amp;X-Amz-Signature=ecdbacc0c7ae39584b5e7db0214ee3e16bc45b44f7a856064e79d138b2caee9e&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id="docker离线安装"&gt;Docker离线安装&lt;/h1&gt;
+&lt;p&gt;Emmm离线安装确实有点麻烦，有需要可以直接联系我~ 参考这份博客也行，写的也很详细。https://blog.csdn.net/chexlong/article/details/127932711&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id="docker-docker离线安装"&gt;Docker-Docker离线安装&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;下载docker执行文件&lt;/li&gt;
+&lt;li&gt;下载离线安装脚本&lt;/li&gt;
+&lt;li&gt;运行docker&lt;/li&gt;
+&lt;li&gt;设置开机自动启动&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>在线安装Docker&amp;Nvidia-Docker</title><link>https://Pan-Binghong.github.io/devops/%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</link><pubDate>Wed, 27 Nov 2024 13:10:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 记录单机在线安装 docker 及英伟达 docker 的操作，只保留操作命令。选择自适应的操作系统，逐行执行即可。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>OBS Common commands</title><link>https://Pan-Binghong.github.io/devops/obs-common-commands/</link><pubDate>Tue, 26 Nov 2024 05:53:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/obs-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 工作中使用Obs用到的几个命令。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="下载obsutil工具"&gt;下载obsutil工具&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;根据自身操作系统下载所对应的版本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="初始化配置"&gt;初始化配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;访问密钥&lt;/li&gt;
+&lt;li&gt;永久绑定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="常用命令"&gt;常用命令&lt;/h2&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Npm/Cnpm Common Commands</title><link>https://Pan-Binghong.github.io/devops/npmcnpm-common-commands/</link><pubDate>Mon, 25 Nov 2024 02:13:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/npmcnpm-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 npm（全称 Node Package Manager，即“node包管理器”）是Node.js默认的、用JavaScript编写的软件包管理系统。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="基本命令"&gt;基本命令&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h2 id="最常用命令"&gt;最常用命令&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;运行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="国内镜像版本cnpm"&gt;国内镜像版本Cnpm&lt;/h2&gt;
+&lt;p&gt;cnpm 是一个 npm 的中国镜像版本，旨在解决中国大陆用户在使用 npm 时遇到的网络速度慢、下载失败等问题。由于 npm 的官方注册表（registry）位于国外，导致在中国访问时可能会因为网络限制而导致安装速度慢或连接不稳定。为了解决这个问题，淘宝团队（现为 阿里云）推出了 cnpm，它使用了一个国内的 npm 镜像，可以加速依赖包的下载和安装。&lt;/p&gt;
+&lt;h3 id="安装"&gt;安装&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install -g cnpm --registry&lt;span style="color:#f92672"&gt;=&lt;/span&gt;https://registry.npmmirror.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用命令与npm一致&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cnpm install
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cnpm init
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Pip Common Commands</title><link>https://Pan-Binghong.github.io/devops/pip-common-commands/</link><pubDate>Sun, 24 Nov 2024 15:32:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/pip-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡
+Pip是 Python 的包管理工具，全称为 &amp;ldquo;Pip Installs Packages&amp;rdquo;，也可以理解为 &amp;ldquo;Pip Installs Python&amp;rdquo;。它用于安装和管理 Python 的第三方库和模块，类似于其他语言中的包管理工具，比如 JavaScript 的 npm 或 Ruby 的 gem。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/8bc065e1-68e7-4cf9-a457-d7594617e98d/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466RWTFJDTM%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100329Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFSSedS%2BoHNQqSnio3ISWv2ALofscL4JeUoy%2BTZHHVn%2BAiEA2%2BCqNy6OxzNuJYU3%2BcAcKWoJ%2FI6nqfhFhAykIb5dCfQqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDGQha2iW3qckAvSs1SrcA8pxIJRPZfVp5%2BsnUXCstqQMFjeyeyNz6XpJ3wHG6Dl2rBsUNXJa%2BqcabfBlCSQ0kp%2BZA1lmuVdu49K%2Bl9%2BzLtEa0nKayj8etMpfvJMbMIJhcRU75JY8NukmwgqAauuvT%2FVikv%2BvSadq%2BzSHQo89K69Gel%2F9C2yMgvNI2HVihLf2Fnx8gBYn%2Bj0QuFHOBbwMuQlwnygjX7mhClf5cIbGEYnqVPOM4A5hUIPZVovVlEpWJnnGI17vWFogizyEYU6uEDeKv8buuZOluyEhZWlOxIegutCBjDHU%2FQbbkpMUVwO1HFej0FtlNFLMANrWWjfbqRPU91cDIkGQosymrVQLrf3OzwartzPUbz2I4Uoo%2Bu9fCrS5aSg38jIjdugeQp%2BzB6IRLbkxhirO%2F2BLt4KpiXflm8KOG%2F2eSqcsLdCUoFo%2BIoCRm2JMO9NL4fBVdHquzchom%2BY4NqOXe0nTlXr8adWN%2BIny9UrJr8XbXyAkxLIDoweBf2B1H%2Fs9KTUtBXSUYpGf1XwFiSTSJ4UnIdzAfFlfscGVuB3agjN%2BfzxcVoDOPyv%2ByArldKSBS8k7fCdTI955nUofeFe3w4NL3ZLM3%2BZQ6RklXtFmrCIlrXydsPK8T%2F8U%2FqmUfzpUDZHhMLGjrMgGOqUB3gVoKLfNMYh057WsVRrw5wx6%2BDBej3zRWLqEGTbjBKZPpwQAeAZ1qR8GUAv8pRKFavkIpPXrU38CVnYemxy5o2OzKDSxLU45F%2BhTsAG2CfBEb99YhJOA9USL8me9PW2VGip%2BIZxDxs7Jm52lpL4mOUvKA4xUEa%2BNs9SoJ19hsIyUqUojlxxkvlizuxnIk5OSkP8s3jj6PlJ99hH7nrbvONmS0jFN&amp;X-Amz-Signature=6eafb77bd893b75e3824550ce557a3dc6cc5c1d6bdffc5b4d245c3a79fbe1fda&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="最常用"&gt;最常用&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h2 id="偶尔会用"&gt;偶尔会用&lt;/h2&gt;
+&lt;h2 id="帮我解决过问题"&gt;帮我解决过问题&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;缓存空间不足或者节约缓存可以使用&lt;/li&gt;
+&lt;li&gt;清理Pip缓存空间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Git Common commands</title><link>https://Pan-Binghong.github.io/devops/git-common-commands/</link><pubDate>Wed, 20 Nov 2024 01:22:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/git-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 Git代码管理规范说明，以及常用命令。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/957b9d02-7d7c-45ab-bcf8-38731684567f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SDBNJMOZ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100343Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDkk1CO9IRLwtJ6Awk10zSIofoJKk57MBXY4w4L8FVwQAIgSKyiernJQ3bVwawuec79fnPk3mCes%2B4%2F0969Tuq195gqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDE3mYQyHFLLkTxmn2SrcA6vJG4IXBmjYbwbHKHCYzApCAyq4y2%2FrKc%2Be45q4sChEJ9usSBBE64ydraFtIySqVw7UtWo5twFYKrPOERb6iN0xEXo9l947dax5wDnfXcDDgFaCwFa6YdVyoRKRd%2FibaeOBrTpqJHo0%2FzwGEckm%2Ft8mGpr19JRyvolUELvwlmu399Qu9wgbrNnvAWnjybORD%2FJao6knxM3qwrDFiP81w%2BiyjgNQ90GKSxfXN%2B%2FcgeXXEh%2BcqQQv1dCm%2FWxB8YPjiLNVzCm%2F18HNAV8PBrPrCZvJpDzd5EnyL6fcR3wymk403GhqTMCJYbIgUXV68AHmSPqLUlRLTdEINSRWbF9J3j40bTfmwpNPmhVaCikgaqraNRikWZb2BgBeolK21epxHOrDm%2Bjph29YToYibd5clcWqNUUw6WySKAHsukWUoHcm7OgZLHktjlPErY5FeXqTBA4cKpYfDju94wZWQJR60rQOeV8fvuHE%2F2TPk9JmWLoKL%2BCS4DsDhwgFENz%2FsN%2BM%2FF1Ee1EBC%2FtHEE5w%2BzeFYMtLebop%2FlaGRPd3roo6IPdDGBdeLyigSHkGuYwx3aIRmfCQ8jaCLactglRH7W3i7%2F29vuO1wa%2BqhxkaAqZ03ZR%2B3Xst%2Bv6njecTtfCJMLmirMgGOqUBSsHXkeQ6xn5HteOths8Wg8ia%2BdCwHhH6AzGaJ07mI05JV8hgYlDmxSXt31oa8l8syAvijq8oyuOMhMk1aUEnfLLmVbyNaAKlFYGCYXo58vFAm4lCfrufSuaBaCCgZHvOE0VbCJRsmsO4wkHLX81C%2F4u2TvkwFnvumY6e9wsYZnhK6c4LOsfDjTrHlPCB1S%2FMMNEXbzjqnCRx%2F986qJp4R2KH5FeM&amp;X-Amz-Signature=e379b443805fec5bdc454861f112cabfa5108d5f7db722878473df17ed0cc0f9&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="分支说明"&gt;分支说明&lt;/h2&gt;
+&lt;p&gt;最常见的三种类型分支，名称与解释。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;main&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;develop&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;test
+开发人员经常创建的两种临时分支。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;featrue（功能）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;bugfix（Bug修复）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="工作环境常用命令"&gt;工作环境常用命令&lt;/h2&gt;
+&lt;h3 id="git基础常用命令"&gt;Git基础常用命令&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 想多看就继续看吧。以下主要涉及：上传并提交，合并，标签等操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;添加到暂存区&lt;/li&gt;
+&lt;li&gt;提交到HEAD&lt;/li&gt;
+&lt;li&gt;提交到服务器内的仓库中&lt;/li&gt;
+&lt;li&gt;分支操作&lt;/li&gt;
+&lt;li&gt;拉取以及合并&lt;/li&gt;
+&lt;li&gt;标签&lt;/li&gt;
+&lt;li&gt;替换本地改动&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="git常用配置"&gt;Git常用配置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;解决win和linux换行符格式问题&lt;/li&gt;
+&lt;li&gt;解决旧版本初始化分支名称为master问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="实战经历"&gt;实战经历&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 3
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 4
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 5
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 6
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 7
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 8
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 9
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;10
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;11
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;12
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;13
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 初始化本地仓库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git init
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 创建并切换到 main 分支&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git checkout -b main
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 添加文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 初始提交&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git commit -m &lt;span style="color:#e6db74"&gt;&amp;#34;Initial commit&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 推送代码到远程仓库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git push -u origin main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;</description></item><item><title>服务器永久修改DNS</title><link>https://Pan-Binghong.github.io/devops/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B0%B8%E4%B9%85%E4%BF%AE%E6%94%B9dns/</link><pubDate>Tue, 19 Nov 2024 08:46:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B0%B8%E4%B9%85%E4%BF%AE%E6%94%B9dns/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 说了永久就是永久。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;打开DNS解析配置文件&lt;/li&gt;
+&lt;li&gt;写入以下内容&lt;/li&gt;
+&lt;li&gt;重启DNS服务器&lt;/li&gt;
+&lt;li&gt;备份&lt;/li&gt;
+&lt;li&gt;创建软链接&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="完整流程"&gt;完整流程&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 3
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 4
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 5
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 6
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 7
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 8
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 9
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;10
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;11
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;12
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;13
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;14
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;15
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;16
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;17
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;18
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;19
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. 编辑 systemd-resolved 的配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo vi /etc/systemd/resolved.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 在文件中写入以下内容（根据需要调整）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;DNS&lt;span style="color:#f92672"&gt;=&lt;/span&gt;114.114.114.114 8.8.8.8 8.8.4.4
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;FallbackDNs&lt;span style="color:#f92672"&gt;=&lt;/span&gt;8.8.8.8
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Domains=domain.com # 根据需要启用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. 重启 systemd-resolved 服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl restart systemd-resolved
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3. 备份原有的 resolv.conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mv /etc/resolv.conf /etc/resolv.conf_bak
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 4. 创建软链接指向 systemd-resolved 的配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 5. 验证 DNS 配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemd-resolve --status
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nslookup www.google.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item><item><title>VNC安装 | 配置</title><link>https://Pan-Binghong.github.io/devops/vnc%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE/</link><pubDate>Tue, 19 Nov 2024 08:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/vnc%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 使用两台 windows 电脑进行远程控制，配置 VNC 的详细教程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;VNC（Virtual Network Computing），为一种使用 RFB 协议的屏幕画面分享及远程操作软件。此软件借由网络，可发送键盘与鼠标的动作及即时的屏幕画面。&lt;/p&gt;
+&lt;p&gt;VNC 与操作系统无关，因此可跨平台使用，例如可用 Windows 连线到某 Linux 的电脑，反之亦同。甚至在没有安装客户端程序的电脑中，只要有支持 JAVA 的浏览器，也可使用。&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/e5533731-6b04-4ab5-baeb-4a6dcb57f177/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SBWPDM4E%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100329Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDnciHWnY0irQNs8niUAr5swLOvlD9YlI3Wic1i8EtdIQIgIfp4x56NMLl40k60c8037YDV%2BYC%2Fhj3tVYsIfRr5re4qiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDD7T8kTmOqS9TjopESrcA4ynGobX5OIyt%2BvfT6OZL%2FOraMAYo%2BthzcbJt1gpalT2YR5mwr%2BCfq4ZYzbZjfiz8MLmmDf%2FsPedDZkVP5VaJxOkkeG%2F6cIPSPMYtnDCcYrIrObJUHW%2FWIwssQbsjIH3zlyZloNFULromfCASsqTj2BPgak7Shu1SmVPisRmwtjQz7%2FHjhsnmLwodmQORXUErRAPek%2BQEvCjQu%2BjrqM8UpLOSdqs4i571DFn2nVVhB62TmcybhtO%2Bl%2FPXSEkowBiRPjXprYNCBFSA0pL3q%2F2TuAqZW7zC%2FOwX0BGr%2FS0%2FL5UwZv%2BGipcxIEiDLvUxH15y2TB4%2BFjtFvzXP4j%2BZk%2F2Yy5WInD1b1l0JH0hllKWw1QgzkXqMu%2FiTlW5bmBbdND67i9cb%2B21ziFbrgeqYnvoZNS087uvROYGDeeOLpeYo%2F6gPRgRrY7XukFK99tG%2FLh%2BJy%2FbGWusspS69nj15fNhUgARtUhUzWsyKUiKw5eG9bwzWS9nySVATZoUoGnqb%2Ff9ms5W1JdqXsVcxsNwAwK%2BsT1Nqyf2iwZIMN4s6PFPHfZgRFxCFsMZiKoZw9qr8qHIPZpTIQ2%2BS7CXEjMmqaXQHI9kZKsacXOwGvBKe5vdXxIiIanlbhMn1naERJEMNmirMgGOqUBP6lHYdnle%2FTrKCkuYtJbyG%2F%2FI4ct%2FoGmsLDz4PlVgkZUY5dR3DF7iAsNyq1PCeY9llU3anyViGVwkxTxPH1dF1xkQ9igamNlHzrY4ptyyeroboh%2BkoLifw9zqFXG7qu0Ee4%2BjGlaefcMMum08ecoUpiHKv5uDRBNcjNPkx5Axb4dcbvi%2Baz0Sk1hoWnFr0m56ioJhQAwu0cFlEFB4B7nq2zk5V79&amp;X-Amz-Signature=b8878560c42a3246eb7a2b55343e51859a5b1153e9c42c1a498d5f5ae41d5106&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="两台windows-电脑内下载并安装"&gt;两台 Windows 电脑内下载并安装&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;TightVNC官网地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="tightvnc服务端被连接端-配置"&gt;TightVNC 服务端 (被连接端) 配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;启动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="tightvnc客户端连接端-配置"&gt;TightVNC 客户端 (连接端) 配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;打开客户端
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/501a68f3-43c8-4924-9dc5-0e6e1bb6fe39/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SBWPDM4E%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100329Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDnciHWnY0irQNs8niUAr5swLOvlD9YlI3Wic1i8EtdIQIgIfp4x56NMLl40k60c8037YDV%2BYC%2Fhj3tVYsIfRr5re4qiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDD7T8kTmOqS9TjopESrcA4ynGobX5OIyt%2BvfT6OZL%2FOraMAYo%2BthzcbJt1gpalT2YR5mwr%2BCfq4ZYzbZjfiz8MLmmDf%2FsPedDZkVP5VaJxOkkeG%2F6cIPSPMYtnDCcYrIrObJUHW%2FWIwssQbsjIH3zlyZloNFULromfCASsqTj2BPgak7Shu1SmVPisRmwtjQz7%2FHjhsnmLwodmQORXUErRAPek%2BQEvCjQu%2BjrqM8UpLOSdqs4i571DFn2nVVhB62TmcybhtO%2Bl%2FPXSEkowBiRPjXprYNCBFSA0pL3q%2F2TuAqZW7zC%2FOwX0BGr%2FS0%2FL5UwZv%2BGipcxIEiDLvUxH15y2TB4%2BFjtFvzXP4j%2BZk%2F2Yy5WInD1b1l0JH0hllKWw1QgzkXqMu%2FiTlW5bmBbdND67i9cb%2B21ziFbrgeqYnvoZNS087uvROYGDeeOLpeYo%2F6gPRgRrY7XukFK99tG%2FLh%2BJy%2FbGWusspS69nj15fNhUgARtUhUzWsyKUiKw5eG9bwzWS9nySVATZoUoGnqb%2Ff9ms5W1JdqXsVcxsNwAwK%2BsT1Nqyf2iwZIMN4s6PFPHfZgRFxCFsMZiKoZw9qr8qHIPZpTIQ2%2BS7CXEjMmqaXQHI9kZKsacXOwGvBKe5vdXxIiIanlbhMn1naERJEMNmirMgGOqUBP6lHYdnle%2FTrKCkuYtJbyG%2F%2FI4ct%2FoGmsLDz4PlVgkZUY5dR3DF7iAsNyq1PCeY9llU3anyViGVwkxTxPH1dF1xkQ9igamNlHzrY4ptyyeroboh%2BkoLifw9zqFXG7qu0Ee4%2BjGlaefcMMum08ecoUpiHKv5uDRBNcjNPkx5Axb4dcbvi%2Baz0Sk1hoWnFr0m56ioJhQAwu0cFlEFB4B7nq2zk5V79&amp;X-Amz-Signature=4d2b0399ea6edade88d60abb3d22da0f158fc5cafa7cb95f1fd400571bad052e&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;输入IP端口点击“Connect”连接即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Proxychains安装|配置</title><link>https://Pan-Binghong.github.io/devops/proxychains%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 18 Nov 2024 08:51:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/proxychains%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 Proxychains 是一款基于 Linux 系统的网络代理工具，在服务器内安装 proxychains，并配置 socks5 代理。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;解压源码 tar zxvf proxychains-ng-x.xx.tar.gz&lt;/li&gt;
+&lt;li&gt;进入解压后的目录，执行 ./configure&lt;/li&gt;
+&lt;li&gt;安装软件执行 make,make intsall&lt;/li&gt;
+&lt;li&gt;配置代理服务器地址&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>mstsc.exe端口修改</title><link>https://Pan-Binghong.github.io/devops/mstsc.exe%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9/</link><pubDate>Mon, 18 Nov 2024 08:36:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/mstsc.exe%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 mstsc 是 Microsoft Terminal Services Client 的缩写，是用于远程桌面连接的工具。通过它，你可以使用 Windows 自带的远程桌面协议（RDP）连接到其他 Windows 设备的桌面环境。通过 Win + R，然后输入 mstsc，打开远程桌面连接界面。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;打开注册表&lt;/li&gt;
+&lt;li&gt;修改端口号
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp PortNumber 为 xxxx&lt;/li&gt;
+&lt;li&gt;防火墙设置&lt;/li&gt;
+&lt;li&gt;启动服务&lt;/li&gt;
+&lt;li&gt;勾选设置&lt;/li&gt;
+&lt;li&gt;重启电脑&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Anaconda安装 | 基础命令</title><link>https://Pan-Binghong.github.io/devops/anaconda%E5%AE%89%E8%A3%85-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/anaconda%E5%AE%89%E8%A3%85-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 记录Anaconda相关操作，主要涉及：下载，操作，配置清华源等。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="安装anconda"&gt;安装Anconda&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;下载安装包&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;wget&lt;/span&gt; &lt;span style="color:#960050;background-color:#1e0010"&gt;https:&lt;/span&gt;&lt;span style="color:#75715e"&gt;//repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;安装&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;bash&lt;/span&gt; &lt;span style="color:#960050;background-color:#1e0010"&gt;Anaconda&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;-2024.10&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;-1&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;-Linux-x&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;86&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;_&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;64&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;.sh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;配置环境变量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;export&lt;/span&gt; &lt;span style="color:#960050;background-color:#1e0010"&gt;PATH=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;$HOME/anaconda3/bin:$PATH&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id="常用命令"&gt;常用命令&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id="配置conda清华源"&gt;配置conda清华源&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;查看 conda 配置文件的位置：whereis conda&lt;/li&gt;
+&lt;li&gt;编辑配置文件：vim /root/.condarc&lt;/li&gt;
+&lt;li&gt;将配置文件中的内容替换为：&lt;/li&gt;
+&lt;li&gt;运行 conda clean -i 清除索引缓存&lt;/li&gt;
+&lt;li&gt;创建新环境conda create -n myenv python==3.10验证 conda 源是否配置成功&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>CMD Common commands</title><link>https://Pan-Binghong.github.io/devops/cmd-common-commands/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/cmd-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 在Windows操作系统内，使用终端进行的常用操作命令。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/574982fa-f0a8-4734-99fc-4bcec0b9d96c/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466VZ3HMDRG%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100313Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDJMKf97Gi0SGqfSenmQXpoqG6BeX5llBUG8nx46nMXnQIgDtpWqq%2Fc5JAJyWo8%2BFO%2FjUazG4tFzaEc1ZT2so45TY4qiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDJE5e4K4rLO763TlEyrcAzh3ifIb84sMsxCbjlMuBkLQRM5To2NuF6ntavgiplhr18qqY2QGaJjXbeiaZU0m0LGJt6rE3%2FEy3eggp8mCHVoZiqZyATkR9O8Wf38GcPVawKYH%2FhtABoNniSMv8Ag%2FrMReeIeTsslgMfTwy5eDpgrJyhQzfU5WGEd%2F%2F%2FOSOuTT5P8Yxb%2FRTIpyrZV%2Be%2B%2FDWE6r7yiu4En2iEoDgOih%2FbnKtmVRPGkFhYKlC0yI8Hxyth%2BfSrdd%2BqA5m0Tkc6IqAMtg3j3HksRky9Ew8Kmw8FNtIWyEqxqejLl%2FduFb7AQFs1ASeTxxLM47hVo5Y%2Bv1uwN4ZXTyPGQFM44kcHF51HYyNHYDn6zFEs0lRCzTrtcem9uurmBc8esNXp6E9Gpg3a1WPTjqxg72uWNE043ToYpnAr%2BmshhCsQnKMZAdsmacbDUk7sLHxGRT4S7qAFpl2siI6YVR4X3%2FAI1wV9dxUjLYlLM3AipLypT%2F4y6j6q%2F8uxQeKwW4OBQX8wjRLlhNkJXrdrBPSWYCdDmOHBF79vYAoe%2BsVs6ZdGrhWVbW7uVjnXBBqcaPPy9h6a2pNrQ%2FRX6hisJ5ktecrlrKYRsOB0plSZakkUYT4z7WBqxqV1zqx52H%2Fn42na%2B%2F5pwgMP%2BirMgGOqUBPPyfRhdYqCOSFKHLkwpZX0wzODkA6MJVy9Djv7E1lQ02ok5KREHDYK2JtIJWTmWVTNYow2BUVncGRBty87f7YBZgP%2Bw%2FKT81W5i%2Bkn7zj5fC7VHRDjo3VHpq3aEpOOVs%2B%2F6P51kwGi%2FvU1ucqmTYcgJ2%2Bdiniok6auptU66NwFeQgtuKqNCPGuR8A4mUhXv1yftE74%2BJcelq5h%2FPfH1R2ML62TB0&amp;X-Amz-Signature=0c04198b73a0747b825bab43a75cad81c175ab7d159bad26ad9dfe539f1d3bf7&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;h2 id="系统信息与管理"&gt;系统信息与管理&lt;/h2&gt;</description></item><item><title>Linux Common commands</title><link>https://Pan-Binghong.github.io/devops/linux-common-commands/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/linux-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文从基础, 中级, 高级介绍自己常用的Linux命令。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="基础命令"&gt;基础命令&lt;/h2&gt;
+&lt;h2 id="中阶操作"&gt;中阶操作&lt;/h2&gt;
+&lt;h2 id="高阶操作"&gt;高阶操作&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h2 id="高级技巧"&gt;高级技巧&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h2 id="额外补充"&gt;额外补充&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reference&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Linux系统配置环境变量</title><link>https://Pan-Binghong.github.io/devops/linux%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/linux%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</guid><description>&lt;p&gt;要将一个目录添加到 $PATH 环境变量中，以便在任何位置都能调用该目录下的可执行文件，你可以按照以下步骤操作：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export PATH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$PATH:/your/directory/path
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;如
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export PATH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$PATH:/usr/local/bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用export命令只是临时设置环境变量。这个设置只在当前终端会话中有效，当你关闭终端或者注销登录时，设置的环境变量会消失。
+如果你希望环境变量在每次登录时都自动设置，你需要修改相应的配置文件。不同的Shell有不同的配置文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于bash shell（大多数Linux发行版默认的shell），你可以修改~/.bashrc或~/.bash_profile文件。对于系统级别的环境变量，可以修改/etc/profile或/etc/environment。&lt;/li&gt;
+&lt;li&gt;如：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#39;export PATH=$PATH:/your/directory/path&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; ~/.bashrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然后，为了让修改立即生效，你可以运行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;source ~/.bashrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item><item><title>Nginx安装 | Nginx详解</title><link>https://Pan-Binghong.github.io/devops/nginx%E5%AE%89%E8%A3%85-nginx%E8%AF%A6%E8%A7%A3/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/nginx%E5%AE%89%E8%A3%85-nginx%E8%AF%A6%E8%A7%A3/</guid><description>&lt;h2 id="什么是nginx"&gt;什么是Nginx&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 Nginx (pronounced &amp;ldquo;engine x&amp;rdquo;) 是一个高性能的HTTP和反向代理服务器，也是一个MAP/POP3/SMTP邮件代理服务器。主要目的是处理静态内容（如 HTML、CSS、JavaScript、图像等），也可以作为负载均衡器和反向代理服务器来处理动态内容。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="nginx背景科普"&gt;Nginx背景科普&lt;/h2&gt;
+&lt;h2 id="应用场景"&gt;应用场景&lt;/h2&gt;
+&lt;p&gt;假如说我们公司产品刚上线的时候并发量特别小, 访问的用户的话比较少, 一个jar包就完全够用了, 然后内部tomcat返回内容给用户, 那客户端来访问, 我们Tomcat给它返回出去。那压力不大的情况下还是比较快的。&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/f8a7bd3f-5cae-45ea-b64b-f2fe864dd020/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466RGGDNKRJ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100316Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCTOhe0L%2BQYHKHc8r3gCfbCxobsxgRaZpO4AwKqQGBQBQIgUXsLIynxuL6Q9LaJ7OaAol1hgvihkko1Do00p5IzgxsqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDJWaMSdj%2FAPeJTjkyCrcA3QF9dcHkwWgeQE8hcPr%2F1%2BDwDRADwSOVZG7BepF0HTYE%2FuYGLWuWSPfqwsR53ME2LPTVydsTR7S9YSde3rPFo0rOCp%2BMYXlxaCAdCQNo8vY4HQui3Qf9OA0GZig2ZOgQqEyCl93gHzxu%2BS1Pg%2F%2FJouAvn2wXCe2ShX8fGP3xzPhtWfgtE10UomJ6fPWGlxRXz77azERyzO2qTmAKvNS4sexS%2BB3ZGVYVFAJX7KsLpCaxn3iC9Sfex5vTUR5P0Aqm%2FEPk89K%2FqWfFwvdyQFKZ%2FpPySbl45sW%2BVuyt5v53lb3AgK%2FSxtyJSv%2FsxaGLhIfGni4rfqyo5foZUXNVvu0oIq84GMFZIoB1v%2BBd32Z%2FVZYi0Fkm9kSdj%2Blm9rDFE4KBxaCigagolKyQ9N0QZ52vCZdjfkgym2qmmsXpmUwqxJcDqGrWdHyfcyyzuwFLcO3Kj%2BxaLlUTBjRMTm9a%2FXdSqx93cgBL1E5LqassEbnnnPZ1a7p28%2BS4sh5AIVQu7GBZpU5LWaXkb9d56TU6STWMoEOXSJ9uoz7gQ0dODAuVf%2B%2FslW2qmHCWXfYEgz9wS3qAllmHh%2Fnobp6OX7zBaWGy9ei3wvjnt%2BYHNXZ5k%2FsGXJd2fY0Du0EHej3H85OMP%2BirMgGOqUBVaB09fTj2dr0tjhYRitLpCH5QcqH0lxHax1gSi0sMP6DwR7gGZ2fuzkx4LkTAFvqr2v8tItsNStsVDZ2%2FdzYkN357aRy0%2BRQRGpz2ZE8iVfcsN4VOtot5KRdyF7TtQf5cKaHOdr0h40b5EMaC%2Btt58pmAOGwQfppsXZ76H9mA%2F9LE%2BxluyMciM3UiDSHhWav8IdIeNWcvzwSBCv0oBRfuS0AF5xy&amp;X-Amz-Signature=4b1c52a5cf1e6d2015b1f7202518649d7ed7df675b128fc3007493c9c14585ef&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;p&gt;但是随着我们的项目逐渐成熟用的人也越来越多，并发量慢慢增大了，这时候一台服务器满足不了我们的需求了，如果还坚持用Tomcat的方法就会导致我们的服务器超出承载范围导致服务器崩溃，会给公司造成一定的经济损失。&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/e18d0097-d421-45d6-9b57-fa533675b872/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466RGGDNKRJ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100316Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCTOhe0L%2BQYHKHc8r3gCfbCxobsxgRaZpO4AwKqQGBQBQIgUXsLIynxuL6Q9LaJ7OaAol1hgvihkko1Do00p5IzgxsqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDJWaMSdj%2FAPeJTjkyCrcA3QF9dcHkwWgeQE8hcPr%2F1%2BDwDRADwSOVZG7BepF0HTYE%2FuYGLWuWSPfqwsR53ME2LPTVydsTR7S9YSde3rPFo0rOCp%2BMYXlxaCAdCQNo8vY4HQui3Qf9OA0GZig2ZOgQqEyCl93gHzxu%2BS1Pg%2F%2FJouAvn2wXCe2ShX8fGP3xzPhtWfgtE10UomJ6fPWGlxRXz77azERyzO2qTmAKvNS4sexS%2BB3ZGVYVFAJX7KsLpCaxn3iC9Sfex5vTUR5P0Aqm%2FEPk89K%2FqWfFwvdyQFKZ%2FpPySbl45sW%2BVuyt5v53lb3AgK%2FSxtyJSv%2FsxaGLhIfGni4rfqyo5foZUXNVvu0oIq84GMFZIoB1v%2BBd32Z%2FVZYi0Fkm9kSdj%2Blm9rDFE4KBxaCigagolKyQ9N0QZ52vCZdjfkgym2qmmsXpmUwqxJcDqGrWdHyfcyyzuwFLcO3Kj%2BxaLlUTBjRMTm9a%2FXdSqx93cgBL1E5LqassEbnnnPZ1a7p28%2BS4sh5AIVQu7GBZpU5LWaXkb9d56TU6STWMoEOXSJ9uoz7gQ0dODAuVf%2B%2FslW2qmHCWXfYEgz9wS3qAllmHh%2Fnobp6OX7zBaWGy9ei3wvjnt%2BYHNXZ5k%2FsGXJd2fY0Du0EHej3H85OMP%2BirMgGOqUBVaB09fTj2dr0tjhYRitLpCH5QcqH0lxHax1gSi0sMP6DwR7gGZ2fuzkx4LkTAFvqr2v8tItsNStsVDZ2%2FdzYkN357aRy0%2BRQRGpz2ZE8iVfcsN4VOtot5KRdyF7TtQf5cKaHOdr0h40b5EMaC%2Btt58pmAOGwQfppsXZ76H9mA%2F9LE%2BxluyMciM3UiDSHhWav8IdIeNWcvzwSBCv0oBRfuS0AF5xy&amp;X-Amz-Signature=571b46be99e2cc9d4cead27aa85d2b8aad036d97832a81ea613a3f8ff3af6ad8&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;p&gt;如果遇到这种问题最笨的方法是直接去横向扩展服务器就好了，比如说我们加了一台, 加了两台, 加了三台。那加了三台服务器之后呢, 我们的Tomcat就跑到了多台服务器上，但是跑在多个服务器上，我们的用户访问方式是一个一个去访问的，那肯定就乱套了，因为Session的话, 它是不共享的，这个时候几个项目启动在不同的服务器上，用户要访问，就需要增加一个代理服务器了，通过代理服务器来帮我们转发和处理请求，我们希望这个代理服务器可以帮助我们接收用户的请求，然后将用户的请求按照规则帮我们转发到不同的服务器节点之上。这个过程用户是无感知的，用户并不知道是哪个服务器返回的结果，我们还希望他可以按照服务器的性能提供不同的权重选择。保证最佳体验！所以我们使用了Nginx！&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/ecd4eda1-0259-405a-b4b8-0ee8d108dbb5/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466RGGDNKRJ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100316Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCTOhe0L%2BQYHKHc8r3gCfbCxobsxgRaZpO4AwKqQGBQBQIgUXsLIynxuL6Q9LaJ7OaAol1hgvihkko1Do00p5IzgxsqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDJWaMSdj%2FAPeJTjkyCrcA3QF9dcHkwWgeQE8hcPr%2F1%2BDwDRADwSOVZG7BepF0HTYE%2FuYGLWuWSPfqwsR53ME2LPTVydsTR7S9YSde3rPFo0rOCp%2BMYXlxaCAdCQNo8vY4HQui3Qf9OA0GZig2ZOgQqEyCl93gHzxu%2BS1Pg%2F%2FJouAvn2wXCe2ShX8fGP3xzPhtWfgtE10UomJ6fPWGlxRXz77azERyzO2qTmAKvNS4sexS%2BB3ZGVYVFAJX7KsLpCaxn3iC9Sfex5vTUR5P0Aqm%2FEPk89K%2FqWfFwvdyQFKZ%2FpPySbl45sW%2BVuyt5v53lb3AgK%2FSxtyJSv%2FsxaGLhIfGni4rfqyo5foZUXNVvu0oIq84GMFZIoB1v%2BBd32Z%2FVZYi0Fkm9kSdj%2Blm9rDFE4KBxaCigagolKyQ9N0QZ52vCZdjfkgym2qmmsXpmUwqxJcDqGrWdHyfcyyzuwFLcO3Kj%2BxaLlUTBjRMTm9a%2FXdSqx93cgBL1E5LqassEbnnnPZ1a7p28%2BS4sh5AIVQu7GBZpU5LWaXkb9d56TU6STWMoEOXSJ9uoz7gQ0dODAuVf%2B%2FslW2qmHCWXfYEgz9wS3qAllmHh%2Fnobp6OX7zBaWGy9ei3wvjnt%2BYHNXZ5k%2FsGXJd2fY0Du0EHej3H85OMP%2BirMgGOqUBVaB09fTj2dr0tjhYRitLpCH5QcqH0lxHax1gSi0sMP6DwR7gGZ2fuzkx4LkTAFvqr2v8tItsNStsVDZ2%2FdzYkN357aRy0%2BRQRGpz2ZE8iVfcsN4VOtot5KRdyF7TtQf5cKaHOdr0h40b5EMaC%2Btt58pmAOGwQfppsXZ76H9mA%2F9LE%2BxluyMciM3UiDSHhWav8IdIeNWcvzwSBCv0oBRfuS0AF5xy&amp;X-Amz-Signature=584931afd131c6c72349464dc4373203ee9695eb60f2b65324feb580be00a5a0&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id="nginx主要实现的三个功能"&gt;Nginx主要实现的三个功能&lt;/h1&gt;
+&lt;h3 id="反向代理"&gt;反向代理&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;正向代理是代理我们的客户端的，而反向代理是代理我们的服务器端的，让客户无感知的游览我们一些服务器资源。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="负载均衡"&gt;负载均衡&lt;/h3&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/4c052bfc-ce0a-47ca-adc7-4939f2ac9280/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466RGGDNKRJ%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100316Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCTOhe0L%2BQYHKHc8r3gCfbCxobsxgRaZpO4AwKqQGBQBQIgUXsLIynxuL6Q9LaJ7OaAol1hgvihkko1Do00p5IzgxsqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDJWaMSdj%2FAPeJTjkyCrcA3QF9dcHkwWgeQE8hcPr%2F1%2BDwDRADwSOVZG7BepF0HTYE%2FuYGLWuWSPfqwsR53ME2LPTVydsTR7S9YSde3rPFo0rOCp%2BMYXlxaCAdCQNo8vY4HQui3Qf9OA0GZig2ZOgQqEyCl93gHzxu%2BS1Pg%2F%2FJouAvn2wXCe2ShX8fGP3xzPhtWfgtE10UomJ6fPWGlxRXz77azERyzO2qTmAKvNS4sexS%2BB3ZGVYVFAJX7KsLpCaxn3iC9Sfex5vTUR5P0Aqm%2FEPk89K%2FqWfFwvdyQFKZ%2FpPySbl45sW%2BVuyt5v53lb3AgK%2FSxtyJSv%2FsxaGLhIfGni4rfqyo5foZUXNVvu0oIq84GMFZIoB1v%2BBd32Z%2FVZYi0Fkm9kSdj%2Blm9rDFE4KBxaCigagolKyQ9N0QZ52vCZdjfkgym2qmmsXpmUwqxJcDqGrWdHyfcyyzuwFLcO3Kj%2BxaLlUTBjRMTm9a%2FXdSqx93cgBL1E5LqassEbnnnPZ1a7p28%2BS4sh5AIVQu7GBZpU5LWaXkb9d56TU6STWMoEOXSJ9uoz7gQ0dODAuVf%2B%2FslW2qmHCWXfYEgz9wS3qAllmHh%2Fnobp6OX7zBaWGy9ei3wvjnt%2BYHNXZ5k%2FsGXJd2fY0Du0EHej3H85OMP%2BirMgGOqUBVaB09fTj2dr0tjhYRitLpCH5QcqH0lxHax1gSi0sMP6DwR7gGZ2fuzkx4LkTAFvqr2v8tItsNStsVDZ2%2FdzYkN357aRy0%2BRQRGpz2ZE8iVfcsN4VOtot5KRdyF7TtQf5cKaHOdr0h40b5EMaC%2Btt58pmAOGwQfppsXZ76H9mA%2F9LE%2BxluyMciM3UiDSHhWav8IdIeNWcvzwSBCv0oBRfuS0AF5xy&amp;X-Amz-Signature=eca1a8ffdbbd947b48a49bd63cffbe41781c1b9f3154abbb4c6695496fec7be9&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;p&gt;比如说我们这个地方有64G, 16G, 8G的服务器, 我们希望更多的请求能够达到咱们64G的服务器，更少的请求达到16G和8G的服务器, 那Nginx也具备咱们负载均衡的功能, 它有一些类似的策略, 比如说轮循跟加强轮重, 比如说我们这个64G的服务器比较牛, 所以说它的权重就更高。那如果有很多请求达进来的话, 那大量的请求都会走到64G的服务器里, 那可能只有一部分请求能进入咱们一些权重比较小的服务器, 这样的话来保证我们服务器的性能最大化, 哪怕我们有台很小的服务器也可以上线去使用, 可以节约成本。&lt;/p&gt;
+&lt;h3 id="动静分离"&gt;动静分离&lt;/h3&gt;
+&lt;p&gt;动静分离，在我们的软件开发中，有些请求是需要后台处理的，有些请求是不需要经过后台处理的（如：css、html、jpg、js等等文件），这些不需要经过后台处理的文件称为静态文件。让动态网站里的动态网页根据一定规则把不变的资源和经常变的资源区分开来，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作。提高资源响应的速度&lt;/p&gt;
+&lt;p&gt;那这就是咱们Nginx三个主要的功能的一个介绍。第一个是咱们的反向代理。第二个是一个负载均衡。第三个是一个静态分离。在我们正常的工作开发中, 这些三个请求是经常可以使用到的&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="nginx安装"&gt;Nginx安装&lt;/h2&gt;
+&lt;h3 id="windows上安装nginx"&gt;windows上安装Nginx&lt;/h3&gt;
+&lt;p&gt;进入黑窗口后输入nginx.exe&lt;/p&gt;
+&lt;p&gt;它是没输出日志的，那怎么样子判断它启动成功了呢？&lt;/p&gt;
+&lt;p&gt;我们可以在游览器上来访问一下咱们本地的localhost80端口&lt;/p&gt;
+&lt;p&gt;只要出现Welcome to nginx!就说明安装成功了&lt;/p&gt;
+&lt;p&gt;这是就是一个windows安装的教程&lt;/p&gt;
+&lt;h3 id="linux上安装nginx"&gt;Linux上安装Nginx&lt;/h3&gt;
+&lt;h3 id="坑"&gt;坑&lt;/h3&gt;
+&lt;h2 id="nginx常用命令"&gt;Nginx常用命令&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;4
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;5
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;1.&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`cd /usr/local/nginx/sbin/`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;2.&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`./nginx 启动`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;3.&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`./nginx -s stop 停止`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;4.&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`./nginx -s quit 安全退出`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;5.&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`./nginx -s reload 重新加载配置文件`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;6.&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`ps aux|grep nginx 查看nginx进程`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Reference&lt;/p&gt;</description></item><item><title>Ngrok安装 | 运行方法</title><link>https://Pan-Binghong.github.io/devops/ngrok%E5%AE%89%E8%A3%85-%E8%BF%90%E8%A1%8C%E6%96%B9%E6%B3%95/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/ngrok%E5%AE%89%E8%A3%85-%E8%BF%90%E8%A1%8C%E6%96%B9%E6%B3%95/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 前几天帮人微调模型的时候，使用的LlamaFactory的WebUI，由于服务部署到他的内网环境内，做了内网穿透使得可以让多人访问。刚好想着了解一下，在此背景下，撰写了本文章。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="内网穿透"&gt;内网穿透&lt;/h2&gt;
+&lt;h3 id="原理"&gt;原理&lt;/h3&gt;
+&lt;p&gt;又称为NAT穿透。NAT穿透技术是让NAT背后的设备，先访问指定的外网服务器，由指定的外网服务器搭建桥梁，打通内、外网设备的访问通道，最终实现外网设备访问到内网设备。&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2c26f5ed-10b0-42bb-a8d5-ab7b8cebba88/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UDMDLIPW%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100319Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQD9n2begaxvmj13G4qasIMteKhvMo0Mb5AtdIeFRB2h4AIgcvpvmRQHCaQLiHUSddalSgddE%2BgAqGyORp1We7ZL6zQqiAQIiv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDBssCQ1W61DM%2FOwlYSrcAxQ1JhDOAHPPvzqMZl%2FLoHL0s7ngDqwd7OxL9DvQSF%2BretPHUVyR5%2FRx6UWlrQ4AAGgHrlpsOCeZ8L6W8F%2F1H7Zi8oolIvqjBGv%2FYx%2BgoKa%2FrYS%2FSW%2BR0R9N3WPNk3zooh1VlfLkmeGGD1xfGSJBakObHmzgjSOfqmMfqjDOPqDJNZyJvk3uuFfPYH1Le%2BcxRsdnDvvDWfHN80132%2FB30Fp%2F9L4uIvQatRZ5BT3Vu%2B5nUYVQwFlKbXERe9aDH2T0mEddst6jKtil2321jPHvP7nzdDvFvAsZFCqNwZN04zkcSvPaj6sS24zWa2hZW5QfMOD8sZ8egMLt1QICqvYZLTnzhxgJTTNvc1PIy7Egn%2FYaxmMWBsOs%2BZf7YtkuxSu8%2BLAYsgR54tEFY3%2BBHuZ5bOZ47NtCDBJXdxtlYfFmeBzDcIvC2%2FQeI%2BhiW4XRA8DnaelMLQbjqhJDr%2Bb7zIEU59n56aTECqflCzP%2Fyu9TvFP1sFEffD4oyrNRoKa0lf7W9DCSyZswKiBxEfmPjSkMVAMpjECYQgWy1H56TayBSaantcOpEM%2FMjYdam9dJuE%2B21MTtUBBER9VUmKWnlW16YTlYkaIHYqNlPXd%2BhFRE4U9MZ4m%2BAV5kk9ANAIKtMMSirMgGOqUBvhTfW4wmWOHKgBXb%2FKc7PPpDTc7BxNv5OhG%2FmZ44Pa91V9xAfsLgWKj7NpZu0l0HdqtfpUaOq0Ob9Bnb%2F4fDawJnSBRkpLsgV5K9XYSLIdoNFYzUfeymB3Ez5Ugc4qK3US5zLCcfCrmOhQRjY%2Fw8IPVUUm2z9JuzPdJVQrQAPoPUSu%2Bn4sn88Xr%2BdCiZ%2BfQ4RPFBk3tphg68rsXe991uGhUIHE1m&amp;X-Amz-Signature=b3f7cedc42a5233fef99d319a0b7eac242c73f11e7c6f864c41e6b049697ec14&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;h3 id="常用工具"&gt;常用工具&lt;/h3&gt;
+&lt;p&gt;参考各大论坛关于内网穿透工具的评论区。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ngrok&lt;/li&gt;
+&lt;li&gt;frp&lt;/li&gt;
+&lt;li&gt;花生壳&lt;/li&gt;
+&lt;li&gt;ZEROTIER&lt;/li&gt;
+&lt;li&gt;樱花FRP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="ngrok"&gt;Ngrok&lt;/h2&gt;
+&lt;p&gt;ngrok的极其简单，官网写的很清楚，下面是官方的安装教程。为了加深记忆，我就复制一下吧。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://dashboard.ngrok.com/get-started/setup/windows"&gt;https://dashboard.ngrok.com/get-started/setup/windows&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="安装"&gt;安装&lt;/h3&gt;
+&lt;p&gt;安装前需要在该网站进行账号的注册，用于登陆。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;根据自身情况，选择合适的安装方式。&lt;/li&gt;
+&lt;li&gt;假设选择是在Windows内安装，打开终端，输入：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="使用"&gt;使用&lt;/h3&gt;
+&lt;p&gt;在终端输入：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;ngrok&lt;/span&gt; &lt;span style="color:#960050;background-color:#1e0010"&gt;http&lt;/span&gt; &lt;span style="color:#960050;background-color:#1e0010"&gt;http:&lt;/span&gt;&lt;span style="color:#75715e"&gt;//localhost:80
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;表示将本地的80端口映射到ngrok的服务器内。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reference&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Ubuntu安装监控系统可视化模块</title><link>https://Pan-Binghong.github.io/devops/ubuntu%E5%AE%89%E8%A3%85%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%9D%97/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/ubuntu%E5%AE%89%E8%A3%85%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%9D%97/</guid><description>&lt;p&gt;Prometheus是一个开放性的监控解决方案，用户可以非常方便的安装和使用Prometheus并且能够非常方便的对其进行扩展。为了能够更加直观的了解Prometheus Server，接下来我们将在本地部署并运行一个Prometheus Server实例，通过Node Exporter采集当前主机的系统资源使用情况。 并通过Grafana创建一个简单的可视化仪表盘。&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/daebfb90-2a3b-47c1-95ce-3e1e8b208b83/%E7%9B%91%E6%8E%A7-1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4665KCJCOKK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100314Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHOOE3mdFPoojtVMIUaC4KGxjIIUOzyKKJ5HtWhFG6RgAiB%2F%2BrG9sqRMc%2BSkMooSpH4E3UG9GHgeKVpfbS9jXRP8pyqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMitzt%2Frxaal5c%2BUMYKtwDcml620p6dLdsNnVmvXpeOhBuMD8fKocTS16GWj1qEnajOgBNwZ6lkQlvwU5MbU08DB1T5voU7DHXdImS%2FDZ71Hu8dNxJFHeRBFHxKztFQvTxDrZcoNwZ03QBnCmv0kucV5AYpe9V2cP2er9ZcKdRL3B%2FVJZ9ZCZykspVWl3ykd5qXKi372cRdMQjPhxQSU6IMxadpCT1R%2FIYbORIt7jHLnKEi%2Fq03faIR9j8JE%2BEmjz%2BQY9KPZ4C2zCU%2F4039WSUFLVmtAyD6z%2BWNTWWGl3oboPsPXhBNurq2wYikqidEvKn5dg2es7DvBIMHcuaHIAyj50Dfdec771s0oBPpCGadKdKV7hDz4xBEM%2BlQmlQMztP%2BSfOayyK8d%2BVG%2FpXmJDuhT9yToiltmjMlcztS1YOXMXTU1sVr72nhdic7%2FoNqQNGo4KfGQPVP7R%2Fht2iZE%2FvY6eYX3dnfahEmKj%2BAunHdHRsJjUNsIYxe4xYbwEjn1WkJS52Gm4tOqGUc0j7fQJlS1aFCya9yi1%2F%2FWnscuipVmWBeSGg18t%2B25E0iu%2FDNQZ9spKYORsdBdj307JQGJWr9uyYKnRa9x5Eqgjvo%2Fi6b9vGhTdaMram1F8BVcrUg9u5mrZZC%2FhoIS0VE6Ewz6KsyAY6pgG9tuliGneXUx9basoz58FlhEY%2FkSR%2FjZjiokcbLrAaZf3DXhJg9ZKkYPkiuyBjbw4CWAQ3P5HJWgxm5sPrHs4yn64ZmOROVbV%2B8udo0w0exqXsEI%2BvCDVrDrRVrCOHlI7OtmFhOH7Rf3VdvQxnEl7E%2FcOfkIeEePW%2BxzdqsSK8G0L8UGNmudCmpaCbsp481K5PCqvkm7p%2BOPXUrltvchALfzvVvJ2n&amp;X-Amz-Signature=d185bfa812de47cb06bc7ac44e4fe5afe1a7284c40acf83767a52d40ff421e7b&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Prometheus是什么？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="下载prometheus"&gt;下载Prometheus&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;下载链接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="安装prometheus"&gt;安装Prometheus&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;解压&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="修改prometheus配置"&gt;修改Prometheus配置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;进入文件目标, 并修改配置&lt;/li&gt;
+&lt;li&gt;将以下内容放置在配置文件内&lt;/li&gt;
+&lt;li&gt;启动服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="在web浏览器查看"&gt;在web浏览器查看&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;localhost:9090&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Monitoring Linux host metrics with the Node Exporter&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="下载node-exporter"&gt;下载Node Exporter&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;下载地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="安装--run"&gt;安装 &amp;amp; RUN&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvfz node_exporter-*.*-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd node_exporter-*.*-amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./node_exporter
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="在web浏览器查看-1"&gt;在web浏览器查看&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;http://localhost:9100/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is Grafana&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="安装grafana"&gt;安装Grafana&lt;/h3&gt;
+&lt;h3 id="ubuntu安装流程"&gt;Ubuntu安装流程&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 更新apt-getsudo apt-get install -y adduser libfontconfig1 musl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 下载软件wget https://dl.grafana.com/enterprise/release/grafana-enterprise_10.0.0_amd64.deb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装sudo dpkg -i grafana-enterprise_10.0.0_amd64.deb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;操作系统不是Ubuntu则查看上面的链接, 根据自身系统进行安装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="run-grafana"&gt;RUN Grafana&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;运行Grafana可视化服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo /bin/systemctl start grafana-server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="在web浏览器查看-2"&gt;在web浏览器查看&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;http://localhost:3000/&lt;/li&gt;
+&lt;li&gt;设置流程如下:
+step-1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/19c196f7-552f-4d8d-b491-6ceeee1bb2a7/%E7%9B%91%E6%8E%A7-2.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4665KCJCOKK%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100314Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHOOE3mdFPoojtVMIUaC4KGxjIIUOzyKKJ5HtWhFG6RgAiB%2F%2BrG9sqRMc%2BSkMooSpH4E3UG9GHgeKVpfbS9jXRP8pyqIBAiK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMitzt%2Frxaal5c%2BUMYKtwDcml620p6dLdsNnVmvXpeOhBuMD8fKocTS16GWj1qEnajOgBNwZ6lkQlvwU5MbU08DB1T5voU7DHXdImS%2FDZ71Hu8dNxJFHeRBFHxKztFQvTxDrZcoNwZ03QBnCmv0kucV5AYpe9V2cP2er9ZcKdRL3B%2FVJZ9ZCZykspVWl3ykd5qXKi372cRdMQjPhxQSU6IMxadpCT1R%2FIYbORIt7jHLnKEi%2Fq03faIR9j8JE%2BEmjz%2BQY9KPZ4C2zCU%2F4039WSUFLVmtAyD6z%2BWNTWWGl3oboPsPXhBNurq2wYikqidEvKn5dg2es7DvBIMHcuaHIAyj50Dfdec771s0oBPpCGadKdKV7hDz4xBEM%2BlQmlQMztP%2BSfOayyK8d%2BVG%2FpXmJDuhT9yToiltmjMlcztS1YOXMXTU1sVr72nhdic7%2FoNqQNGo4KfGQPVP7R%2Fht2iZE%2FvY6eYX3dnfahEmKj%2BAunHdHRsJjUNsIYxe4xYbwEjn1WkJS52Gm4tOqGUc0j7fQJlS1aFCya9yi1%2F%2FWnscuipVmWBeSGg18t%2B25E0iu%2FDNQZ9spKYORsdBdj307JQGJWr9uyYKnRa9x5Eqgjvo%2Fi6b9vGhTdaMram1F8BVcrUg9u5mrZZC%2FhoIS0VE6Ewz6KsyAY6pgG9tuliGneXUx9basoz58FlhEY%2FkSR%2FjZjiokcbLrAaZf3DXhJg9ZKkYPkiuyBjbw4CWAQ3P5HJWgxm5sPrHs4yn64ZmOROVbV%2B8udo0w0exqXsEI%2BvCDVrDrRVrCOHlI7OtmFhOH7Rf3VdvQxnEl7E%2FcOfkIeEePW%2BxzdqsSK8G0L8UGNmudCmpaCbsp481K5PCqvkm7p%2BOPXUrltvchALfzvVvJ2n&amp;X-Amz-Signature=ede614eaa1f554861267e4352a5b9bc6442e6c04ceb4076097bbe6236eaa64be&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;</description></item><item><title>Win+R Common commands</title><link>https://Pan-Binghong.github.io/devops/win+r-common-commands/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/devops/win+r-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 记录Windows操作系统内，使用Win+R键，常用的一些快捷命令。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/4b9666c2-1827-47e3-9979-ab2a14fad8ea/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466XAOAKLUU%2F20251105%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251105T100313Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCTnLjzkWcySpPg0ROUJnJk9bPvYs5pF7IyaU%2FJD7MTbQIhAKxEuRFMPfCoYvOjjAbyu%2F9N4bCh1f5q2zFJNVQ56rfOKogECIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzHYfwol3%2Fmshyu0z4q3APyOw2ermeSBU137WURwsxhFVM4JLtxhWZTiYncrr7DIcgaWZw46rpnZBH3J%2F0a3heq29RY3JU8KGQWcf2yY3Zwxn1sHC%2F8UFaLWP%2BoZ1Knn8WX5JMof05AryJTQvKSgZeOQQkorjVrHzXYLLo1WPBtN53jw2dhVUjaMPx1PmfBlf%2BeQA8AxcVcNhrvz%2F1LQ2LBL6UODuyZHSqRL%2FieNj0Uahrs1P6Irxhp2DX%2FnvlQHRPdLeNRFz%2FsCa0k1MlvopN1C7bl9ba6hnwEAwUf4XNC9y8dh7mttDQyxAlMwfnLcvcFWUzwtOSJugDSda8Jus5tYz2K7a%2FKeZSWeO%2B8OrD5%2Bpn5C%2FHviMqfUf%2Bq5M5RZGWD3UQ%2FJKGYEWQs0lbuw9C1ihVukjRAAga3XpqKrYujC0n3N%2B6gn4RJQ06YYS6oidvXCF9LQRLBai5E%2FdUkvMO%2FaZ0qBC4LADSjmmap3CGchnWjZAG5yJjbR80IarQ94czOoWXjukMF6y5BMzXjBNNwaAWJ3iEcpF0NcYo4nK2KGor3DTb0owbOyRG8fTh%2BiCzqpSIDsBI92anWMELnMotlxkXHk0RH3MffmzrONN1IqHZLP2okTqP7RuOzRig0af2wJzI%2Fz92XKLEk3zCqoKzIBjqkATooe%2FlIQa8%2BktjLE6nVo%2BiotuElagn%2Bdb%2BfZ7h83qNJ9kwVWPazU880yjpQVtTzx3fhzXEH4W5%2Fu1X2UUGG4UKw5S%2B2IQQRtlZMgAt5WBuIwYpCj8wfs3XeQWEJweFXXxJx7pfb2xTKTcAtiBk2AcXeNlgkYtHm8m7KMkyg9%2BRRmS2XH51Ahl2gq%2FciROixL08jDYs%2Bwn1uwAIxhJwSOFwDa05Z&amp;X-Amz-Signature=eede653aab9defa94f48c72b278de3faa43c8cbea477b383f50df4d167d53977&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="常用命令"&gt;常用命令&lt;/h3&gt;</description></item></channel></rss>
