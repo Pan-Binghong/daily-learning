@@ -1,0 +1,65 @@
+# Notion to Hugo 同步配置文件
+
+# Hugo 内容目录
+hugo_content_dir: content
+
+# Notion 数据库配置
+# 每个数据库对应一个类型的笔记
+databases:
+  # AI 相关笔记
+  - name: AI
+    database_id: 12e57052b4908178a1fcc2957b644d44
+    section: ai
+    category: AI
+
+  # 通用知识库
+  - name: Knowledge
+    database_id: 12e57052b49081869730e11b5d1d0711
+    section: knowledge
+    category: 知识
+
+  # 后端开发
+  - name: BackEnd
+    database_id: 12e57052b49080f7b180d8dce1e6f395
+    section: backend
+    category: 后端
+
+  # DevOps 运维
+  - name: DevOps
+    database_id: 12e57052b49081bbba54c2d78910ae37
+    section: devops
+    category: DevOps
+
+  # 其他笔记
+  - name: Other
+    database_id: 4428d2572e404c5886da83b971e85f98
+    section: other
+    category: 其他
+
+# 配置说明：
+#
+# 1. database_id: Notion 数据库的 ID
+#    - 打开数据库页面，URL 中 https://notion.so/xxxxx?v=yyyyy
+#    - xxxxx 部分就是数据库 ID（32位字符，包含字母和数字）
+#
+# 2. section: Hugo 中的内容目录
+#    - 文章会保存到 content/{section}/ 目录
+#    - 例如：posts -> content/posts/
+#
+# 3. category: 文章分类
+#    - 会添加到文章的 front matter 中
+#
+# 4. filter: 可选的过滤条件
+#    - 用于只同步特定状态的文章
+#    - 例如：只同步 Status = Published 的文章
+#    - 更多过滤条件请参考 Notion API 文档
+#
+# 获取数据库 ID 的步骤：
+# 1. 打开 Notion 数据库页面
+# 2. 查看浏览器地址栏 URL
+# 3. 格式：https://www.notion.so/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx?v=yyyyy
+# 4. 复制 xxxxxxxxxxxxxxxxxxxxxxxxxxxxx 部分（32位字符）
+# 5. 如果 URL 中有短横线，去掉短横线，只保留字母和数字
+#
+# 示例 URL: https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=xxx
+# 数据库 ID: a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4

@@ -1,0 +1,62 @@
+# Hugo 配置文件
+
+baseURL = "https://Pan-Binghong.github.io/"  # 替换为你的 GitHub Pages URL
+languageCode = "zh-CN"
+title = "我的博客"
+theme = "PaperMod"  # 替换为你选择的主题
+
+# 内容目录
+contentDir = "content"
+publishDir = "public"
+
+# 分页
+paginate = 10
+
+# 语法高亮
+[markup]
+  [markup.highlight]
+    style = "monokai"
+    lineNos = true
+    lineNumbersInTable = true
+
+# 导航菜单
+[menu]
+  [[menu.main]]
+    name = "首页"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "AI"
+    url = "/ai/"
+    weight = 2
+
+  [[menu.main]]
+    name = "知识库"
+    url = "/knowledge/"
+    weight = 3
+
+  [[menu.main]]
+    name = "后端"
+    url = "/backend/"
+    weight = 4
+
+  [[menu.main]]
+    name = "DevOps"
+    url = "/devops/"
+    weight = 5
+
+  [[menu.main]]
+    name = "其他"
+    url = "/other/"
+    weight = 6
+
+# 作者信息
+[params]
+  author = "Pan Binghong"
+  description = "个人学习笔记博客"
+
+# 社交链接
+[params.social]
+  github = "Pan-Binghong"
+  email = "19909442097@163.com"

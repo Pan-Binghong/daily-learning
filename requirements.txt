@@ -1,0 +1,7 @@
+# Notion to Hugo 博客系统依赖
+
+# Notion API
+requests>=2.31.0
+
+# YAML 配置文件解析
+PyYAML>=6.0.1

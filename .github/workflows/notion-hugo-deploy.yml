@@ -1,0 +1,90 @@
+name: Notion 同步与 Hugo 部署
+
+on:
+  schedule:
+    # 每天北京时间 9:00 执行（UTC 01:00）
+    - cron: '0 1 * * *'
+  workflow_dispatch: # 允许手动触发
+  push:
+    branches: [ master, main ]
+    paths:
+      - 'notion-config.yml'
+      - 'notion-sync.py'
+      - 'config.toml'
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+
+    # 需要写权限来推送代码
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: 📦 检出代码
+        uses: actions/checkout@v4
+        with:
+          submodules: true  # 如果使用 Hugo 主题子模块
+          fetch-depth: 0    # 获取完整历史
+
+      - name: 🐍 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: 📚 安装 Python 依赖
+        run: |
+          pip install -r requirements.txt
+
+      - name: 📥 从 Notion 同步内容
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          python notion-sync.py
+
+      - name: 📝 提交同步的内容
+        run: |
+          git config --global user.name 'Notion Sync Bot'
+          git config --global user.email 'action@github.com'
+
+          # 检查是否有变更
+          if [ -n "$(git status --porcelain content/)" ]; then
+            echo "📝 检测到内容更新，准备提交..."
+            git add content/
+            git commit -m "🔄 自动同步 Notion 内容 - $(date +'%Y-%m-%d %H:%M:%S')"
+            git push origin ${{ github.ref_name }}
+            echo "✅ 内容已提交并推送"
+          else
+            echo "ℹ️  没有内容更新"
+          fi
+
+      - name: 🏗️ 设置 Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true  # 使用 Hugo Extended 版本（支持 SCSS）
+
+      - name: 🔨 构建 Hugo 站点
+        run: hugo --minify
+
+      - name: 📤 部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          cname: your-domain.com  # 如果有自定义域名，取消注释并修改
+
+      - name: ✅ 部署完成
+        run: |
+          echo "=========================================="
+          echo "✨ Notion 同步和 Hugo 部署完成！"
+          echo "=========================================="
+          echo "📊 统计信息："
+          echo "  - Hugo 版本: $(hugo version)"
+          echo "  - 构建时间: $(date)"
+          echo "=========================================="
