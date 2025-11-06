@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Qwen2 on 我的博客</title><link>https://Pan-Binghong.github.io/daily-learning/tags/qwen2/</link><description>Recent content in Qwen2 on 我的博客</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Wed, 27 Nov 2024 13:46:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/qwen2/index.xml" rel="self" type="application/rss+xml"/><item><title>基于Swift微调Qwen2-VL-7b</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Eswift%E5%BE%AE%E8%B0%83qwen2-vl-7b/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Eswift%E5%BE%AE%E8%B0%83qwen2-vl-7b/</guid><description>&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/61738260-a046-466d-bc92-f06a9c8d582b/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4665USS4YIG%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T013048Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDchWscZifd0Tg3VVwyS819SOBvOWA7bC4M4ZpokZTMqgIgLGiLZRMQhDK%2BX%2FjhaLzWa7HWSWAGZj7aSdPaG3g4uBMqiAQImv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDOmn5WXetsDiAPAJDyrcA8eGLQRb73MqeQ5Po4gYh0lg%2FkG2wOrqNFFmAUvOIZIrer2YcwecefP3QZ%2Fxc71uqU3IpGo97HNPEMBGXFbkCLTMm15w4ra6Vv98u5d4wq2rJndKjChJr27oJrx7ODdpH89KFh3gNT9sgb3M0o8DE9Uhj9RMM9XlKQeb9nH0gNqnz7zkwIw68J%2BOjUUZFFKCi%2BAUvEyRLLX%2BtayvoxY9nigqp92DsnH%2Br5TdDRujoh8lPeGEQP1dc0tEdmhKwlD5VhD8AmyiXs7gVgZrpA6AE8ewrYf7Ehhr0DEB%2FX5kH4u4thFVnMnmevn64G%2BAZ7D2Y5leaEzf4Oy%2BVJdk%2BBilK47uHuVJoyfqmsAVD8SiipQbzRSSe93%2FFKwEPOCMgQZniPtjUu%2F6JCbibA9buo98dT0ID5q4LEuAQQQImjqe99dwrd77MuurIKc%2F8ZqiEeZ3OX9xwXtw2ZtS2mOfyuFNL9QgElSTuUgoW%2Bu%2Ff75qx0E1YFxaq2MEqXQu%2Fc75FgAaLNwkIclT5ocmVhggtG4oV8KloOtEax%2FAe%2FtZB%2FWJUpiei3SpPRNrPE1HoAZDK0uWtlSI6LGgagrRCoDltSaD6uKxbQ6RjnQfUmK3tEb9d5PQ953LOqVDikstFcvoMPDxr8gGOqUB2whiDKwOciVXjARzUNP43By%2BJphNNXBFEB6qSdiiKFIsxbk2As8EavDxHwwVWT3awuozvWdOmqLIUl92pH3jUFkLxDD4%2Bx603LcTUL0dkh4sObnXr6TftFHrDwowXMPtXX%2Ff9eBgtogBgPwqX%2B53YzoUb8CSFocKm%2Fyb0TahKOEBnLjrpVVGf%2Bkep8iWH2oo0kWF3FujDnvelYjaIRWmdY6UWNPk&amp;X-Amz-Signature=e496163d3f46bbcbd175cebbc8319d30abebaf2c47957d5827fdf7af8009155f&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;h2 id="傻瓜式训推步骤"&gt;傻瓜式训推步骤&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 基于Swift框架使用界面, 进行模型的训练/推理.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;安装环境&lt;/li&gt;
+&lt;li&gt;在终端运行&lt;/li&gt;
+&lt;li&gt;显示界面如下&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="模型"&gt;模型&lt;/h2&gt;
+&lt;h2 id="数据"&gt;数据&lt;/h2&gt;
+&lt;h2 id="训练"&gt;训练&lt;/h2&gt;
+&lt;h2 id="reference"&gt;Reference&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://swift.readthedocs.io/zh-cn/latest/"&gt;https://swift.readthedocs.io/zh-cn/latest/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item></channel></rss>

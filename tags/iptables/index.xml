@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Iptables on 我的博客</title><link>https://Pan-Binghong.github.io/daily-learning/tags/iptables/</link><description>Recent content in Iptables on 我的博客</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Tue, 20 May 2025 01:41:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/iptables/index.xml" rel="self" type="application/rss+xml"/><item><title>Iptables Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/iptables-common-commands/</link><pubDate>Wed, 12 Mar 2025 05:46:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/iptables-common-commands/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 iptables 全称为：netfilter/iptables 是一个IP数据包过滤系统。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="iptables工作流程"&gt;iptables工作流程&lt;/h2&gt;
+&lt;p&gt;采用数据包过滤机制工作的，所以它会对请求的数据包的包头进行分析，并根据我们预先设定的规则进行匹配来决定是否可以进入主机。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;防火墙是一层一层过滤的。实际是按照配置规则的顺序从上到下，从前到后进行filter。&lt;/li&gt;
+&lt;li&gt;如果匹配上规则，表明阻止还是通过，此时数据包就不再向下匹配新规则。&lt;/li&gt;
+&lt;li&gt;如果规则中，没有表明阻止还是通过，即等同于没有匹配上规则，按照默认策略处理。&lt;/li&gt;
+&lt;li&gt;防火墙的默认规则是对应的链的所有规则执行完成后才会执行。
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/5da2e1eb-c9ee-47d7-8b26-5710b6c7fa13/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4664KBECDCV%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T013228Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDKXC5nJBqVwAY%2BDbxYDX0DA4AjGCMQ1yxQENLDxHF6jAIgc7RiDZBm1%2B1VCAj2V4PZprtPqgz%2Bg5IFPxSsN7Tm9eoqiAQImv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDCU1yU%2BdDMOFOL6%2FWyrcA6uHeo2BFZpNNFP773tZ0Jb%2B04ZH%2Faf0Sacivp0aNLufcae7de4tgP4kdy%2BlPltwLtl%2BIRLlgDydSWSIB%2BNLK6SQxDoF7D%2BdSXRceLYT2iO43W%2B6uF7Oy7PRgzbswDU0XAys9kaqRL1MK7PYK%2Bx7qx0QDlPXzqGQkiKrgz4EOqHdHxgVZVbguaucAx1%2F97FkolaxQKJR53jokCatpA8bh7dTvP9ho58IXfFfQyuVvahTQeyQ020XUhnR1G%2FdW2PiB3llrQuSs5ofFo6rLHEMQG31Zi1jwrZK69mqNtpAzq%2FFbpoji%2FodU1fuTgRG2DrSSON5zJ2kwqVfGLekCsDxLwx5D%2BvoynQD3TrZrVX8MdOFxdwJ5yPqW0voKED7heNphTpZg%2Fope4x4DV9rfDOIL3n88OaECKboW%2Bfqqw3UzFzAggNImATURyqqMAkrAeYnafq56w3PgF35Bo1G7fWDk8k4y%2FzIkNWYSm9frholClji%2F5QAq%2B2Wo4Pox2rgwKTN7PVOpBA6a3MIewXvcOMsX6t8RxmzaIUf%2FnWgOh4lVz39ziu9wVOhgpea8cd%2BpdnECuXpCVqeSAPnyokOJC2I0u0z65NWjLBTArvdUu%2BJGmXHksu0SmC3mWUZHT1RMLrwr8gGOqUBxbIzejABWJe%2FGKVQ8XS0bTOW484nYcPA8eiP7nLNoQVFXhXdpTvxJkTv22PLrfs6Gnu3lddHGsHTGQUKYyzZ7hUjy927cXPqEDBc5y4Z85hO5D6vyhH%2F7xONn78qeua14OLEcYWi0nRwYVBKAIuT6JtIhBA9Y%2BYlO91QylDtuKsODpf3XLOIu0isZ%2Bp8pQIXiC3ADg8OZhObNDZuGCOjKn1vZliw&amp;X-Amz-Signature=5a3feec52ada7d14727bb1279d5912e6bc00082a5e8baf8a97ad38784a53c999&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;details&gt;&lt;summary&gt;数据包基本结构&lt;/summary&gt;
+&lt;/details&gt;
+&lt;hr&gt;
+&lt;h2 id="四表五链"&gt;四表五链&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;链就是位置：共有5个，进路由（PREROUTING)、进系统（INPUT）、转发（FORWARD)、出系统（OUTPUT）、出路由（POSTROUTING)。&lt;/li&gt;
+&lt;li&gt;表就是存储的规则：数据包到了该链处，会去对应表中查询设置的规则，然后决定是否放行、丢弃、转发还是修改等操作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="四表"&gt;四表&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;filter表：过滤数据包。&lt;/li&gt;
+&lt;li&gt;nat表：用于网络地址转化（IP、端口）。&lt;/li&gt;
+&lt;li&gt;mangle表：修改数据包的服务类型、TTL、并且可以配置路由实现QOS。&lt;/li&gt;
+&lt;li&gt;raw表：主要用来决定是否对数据包进行状态跟踪。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="五链"&gt;五链&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;INPUT链——进来的数据包应用此规则链中的策略&lt;/li&gt;
+&lt;li&gt;OUTPUT链——外出的数据包应用此规则链中的策略&lt;/li&gt;
+&lt;li&gt;FORWARD链——转发数据包时应用此规则链中的策略&lt;/li&gt;
+&lt;li&gt;PREROUTING链——对数据包作路由选择前应用此链中的规则（所有的数据包进来的时侯都先由这个链处理）&lt;/li&gt;
+&lt;li&gt;POSTROUTING链——对数据包作路由选择后应用此链中的规则（所有的数据包出来的时侯都先由这个链处理）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="iptables常用选项与参数"&gt;iptables常用选项与参数&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-t 表名&lt;span style="color:#f92672"&gt;]&lt;/span&gt; 管理选项 &lt;span style="color:#f92672"&gt;[&lt;/span&gt;链名&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;匹配条件&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-j 控制类型&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;表名、链名：指定iptables命令所操作的表和链，未指定表名时将默认使用filter表；&lt;/li&gt;
+&lt;li&gt;管理选项：表示iptables规则的操作方式，比如：插入、增加、删除、查看等；&lt;/li&gt;
+&lt;li&gt;匹配条件：指定要处理的数据包的特征，不符合指定条件的数据包不处理；&lt;/li&gt;
+&lt;li&gt;控制类型：指数据包的处理方式，比如：允许accept、拒绝reject、丢弃drop、日志LOG等；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;details&gt;&lt;summary&gt;管理选项&lt;/summary&gt;
+&lt;/details&gt;
+&lt;details&gt;&lt;summary&gt;完整版本&lt;/summary&gt;
+&lt;/details&gt;
+&lt;hr&gt;
+&lt;h3 id="常用命令"&gt;常用命令&lt;/h3&gt;
+&lt;p&gt;更多详细的命令见：https://www.cnblogs.com/zhujingzhi/p/9706664.html&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="实际案例"&gt;实际案例&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 3
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 4
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 5
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 6
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 7
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 8
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 9
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;10
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;11
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 添加新的DNAT规则&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A PREROUTING -p tcp --dport &lt;span style="color:#ae81ff"&gt;18083&lt;/span&gt; -j DNAT --to-destination 192.168.0.89:8003
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 添加新的MASQUERADE规则，保证数据包能正确返回&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.89 --dport &lt;span style="color:#ae81ff"&gt;8003&lt;/span&gt; -j MASQUERADE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 删除规则&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -D PREROUTING &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -D POSTROUTING &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 查看&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -L -n -v
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Eval on 我的博客</title><link>https://Pan-Binghong.github.io/daily-learning/tags/eval/</link><description>Recent content in Eval on 我的博客</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Mon, 21 Apr 2025 02:58:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/eval/index.xml" rel="self" type="application/rss+xml"/><item><title>EvalScope大模型验评框架</title><link>https://Pan-Binghong.github.io/daily-learning/ai/evalscope%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%84%E6%A1%86%E6%9E%B6/</link><pubDate>Fri, 28 Mar 2025 01:13:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/evalscope%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%84%E6%A1%86%E6%9E%B6/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 之前都是使用vllm或者sglang官方提供的benchmark脚本，现在尝试更换为EvalScope框架。记录使用该框架对速度进行基准测试全流程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/29bda199-ba22-458e-b9f7-79b94cd6c8c4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4666OYNYSAG%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T013102Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDY%2BwLmZ44PeCKkJxbCkVNtbk6x%2FT0adJpzYTxPAl98ngIhAKZVf0ACVrHEdlHx%2BGAEB6OHz2dAAD4NavBcu8wFNMikKogECJr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgypvREcIyQg4UIhcwAq3APltAE%2F4G4aonYTu1GIygIfsF5miI6TzTIhk1TC6%2Fl96Z64xUo7Anz%2BpBDqbBzMVaaOVpq%2FzIulOLkmIAjOjheh5YzyZCkUHmPYfPUQCQKrDAljv9uVMX87qX8aN5qGetC4vKjFVq4jju14v0w2x%2BnK0a9Oi%2BGMW%2FpEVhkHm%2BaPputfGGnfUfHTxi1pkqjPCERKekp10Ktpk2WOG2hJ4JCa4sZdNrscmrfSy2Mm%2BXqYjfHIYxVEr9Q93Z9MjDCqfC3%2Fi4DVPclgR9KXiF%2FOMk%2B%2BKRw1LcHNMnil8zcwVBBCAPGssBWcuka3%2BC2kvvpPd0acMO%2FJCPm1Nyzy60IJDyeu%2BO5oSKnMM91d65w3IK9An%2ByerCk0Y6GmIVijN%2BI8GI%2BAZskxbty3ZBIWzEyFEw7ycn%2B0tAcZo3Wbt37lYJVa8ufXSyS%2FwTE1phR2Pdv5wDqSnDCDpABihscK70gs%2BmGZdoFEJMntVj2gIzp4Bmv27qIv7NHBnIty%2BNmGa279%2BvKCVnJffzAjfRpHJLqAsWH8dudWaH5dUsMS1Uy7b5HsCgfmmVe2dVRaeZNSIcIhrjYkxs65iTDxTlst6zvuBOaQK1vb2U0upjNRI26Yc2vLfHeAV8Cy%2BbMlmvfkOzCz8q%2FIBjqkAVl0xVT51CI2jQcK4BcPiKsWgrD50q%2FWMgyGRNcBqQdn142q579vFJXLN1C9w9F6KsOKi6zaecsl6Dfkw3S6vh%2F7tZF4F24zp%2BP5Bqtm2oD814xmE%2BqEbUv0ju%2Fkp6oUFwN6LlZai2iHxZnzN%2FpSA3IsCw9cdfGAVMZxIjvc7gRdjfGk7PeA%2BrlWOiZe7mXE2QLAnIxGLMvBT7MtEFLT0sBWlv2T&amp;X-Amz-Signature=79bf35fb74fac42deb902720c0050ffa2a05d0114a8cb5dd8e611c8910b87674&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id="1-安装"&gt;1. 安装&lt;/h1&gt;
+&lt;p&gt;官方提供3种安装方式，1.pip/2.source code/3.docker。&lt;/p&gt;
+&lt;h2 id="pip安装"&gt;Pip安装&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;更新pip&lt;/li&gt;
+&lt;li&gt;pip安装&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="源码安装--推荐"&gt;源码安装 | 推荐&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;下载代码&lt;/li&gt;
+&lt;li&gt;编译&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="docker安装"&gt;Docker安装&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://modelscope.cn/docs/intro/environment-setup#%E6%9C%80%E6%96%B0%E9%95%9C%E5%83%8F"&gt;https://modelscope.cn/docs/intro/environment-setup#%E6%9C%80%E6%96%B0%E9%95%9C%E5%83%8F&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;拉取镜像&lt;/li&gt;
+&lt;li&gt;创建容器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h1 id="2-运行模型推理性能压测"&gt;2. 运行模型推理性能压测&lt;/h1&gt;
+&lt;p&gt;参数详细说明：https://evalscope.readthedocs.io/zh-cn/latest/user_guides/stress_test/parameters.html&lt;/p&gt;
+&lt;p&gt;推理性能测试有2种策略，第一种为标准的并发压力测试，第二种为单并发下的速度测试。在该框架下，特别说明了如果需要使用速度测试，则url需要设置为/v1/completions。https://evalscope.readthedocs.io/zh-cn/latest/user_guides/stress_test/speed_benchmark.html&lt;/p&gt;
+&lt;h2 id="命令行方式启动"&gt;命令行方式启动&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 3
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 4
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 5
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 6
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 7
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 8
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 9
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;10
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;11
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;12
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;13
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;14
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;15
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;16
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;17
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;18
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# eval.sh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;CUDA_VISIBLE_DEVICES&lt;span style="color:#f92672"&gt;=&lt;/span&gt;0,1,2,3 &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;evalscope perf &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--parallel &lt;span style="color:#ae81ff"&gt;20&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--model /data/DeepSeek-R1-Distill-Llama-70B &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--url http://127.0.0.1:8000/v1/chat/completions &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--port &lt;span style="color:#ae81ff"&gt;8000&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--api local_vllm &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--dataset random &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--max-tokens &lt;span style="color:#ae81ff"&gt;640&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--prefix-length &lt;span style="color:#ae81ff"&gt;64&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--min-prompt-length &lt;span style="color:#ae81ff"&gt;32&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--max-prompt-length &lt;span style="color:#ae81ff"&gt;64&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--number &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--tokenizer-path /data/DeepSeek-R1-Distill-Llama-70B &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--stream &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 为了截图，暂先取消设置该参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#--debug &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;details&gt;&lt;summary&gt;测试长截图&lt;/summary&gt;
+&lt;/details&gt;
+&lt;hr&gt;
+&lt;h1 id="3-可视化"&gt;3. 可视化&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;安装wandb依赖包&lt;/li&gt;
+&lt;li&gt;注册 + 获取密钥&lt;/li&gt;
+&lt;li&gt;运行命令后追加&lt;/li&gt;
+&lt;li&gt;结果展示&lt;/li&gt;
+&lt;/ol&gt;
+&lt;details&gt;&lt;summary&gt;截图&lt;/summary&gt;
+&lt;/details&gt;
+&lt;hr&gt;
+&lt;h1 id="4-测评模型能力"&gt;4. 测评模型能力&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;首先将模型启动，使用vllm框架进行启动：vllm serve /data/DeepSeek-R1-Distill-Qwen-7B &amp;ndash;tensor-parallel-size 2&lt;/li&gt;
+&lt;li&gt;运行以上命令后，会在当前目录下输出一个output文件夹，其中保存着日志文件。可以将日志路径保存。&lt;/li&gt;
+&lt;li&gt;终端输入：&lt;/li&gt;
+&lt;li&gt;访问本地的7860端口：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;References&lt;/p&gt;</description></item></channel></rss>
