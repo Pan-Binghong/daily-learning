@@ -3,7 +3,7 @@ title: 论文精度_HyDE
 date: '2024-11-28T07:59:00.000Z'
 lastmod: '2024-11-28T08:01:00.000Z'
 draft: false
-标签:
+tags:
 - Knowledge
 categories:
 - 知识

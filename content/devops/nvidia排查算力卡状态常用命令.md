@@ -3,7 +3,7 @@ title: Nvidia排查算力卡状态常用命令
 date: '2025-01-06T01:59:00.000Z'
 lastmod: '2025-03-14T03:13:00.000Z'
 draft: false
-标签:
+tags:
 - Nvidia
 categories:
 - DevOps

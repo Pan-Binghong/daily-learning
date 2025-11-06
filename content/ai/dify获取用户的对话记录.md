@@ -3,7 +3,7 @@ title: Dify获取用户的对话记录
 date: '2025-09-02T08:58:00.000Z'
 lastmod: '2025-09-02T09:21:00.000Z'
 draft: false
-标签:
+tags:
 - LLMs
 - Dify
 categories:

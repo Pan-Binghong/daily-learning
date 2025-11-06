@@ -3,7 +3,7 @@ title: 服务器永久修改DNS
 date: '2024-11-19T08:46:00.000Z'
 lastmod: '2024-11-27T14:36:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 categories:
 - DevOps

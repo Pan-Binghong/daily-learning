@@ -3,7 +3,7 @@ title: 17岁高中生的Thinking Claude
 date: '2024-11-28T05:24:00.000Z'
 lastmod: '2024-11-29T03:25:00.000Z'
 draft: false
-标签:
+tags:
 - Prompt
 categories:
 - 其他

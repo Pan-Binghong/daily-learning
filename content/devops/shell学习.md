@@ -3,7 +3,7 @@ title: Shell学习
 date: '2025-01-08T02:34:00.000Z'
 lastmod: '2025-01-08T08:55:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 - Shell
 categories:

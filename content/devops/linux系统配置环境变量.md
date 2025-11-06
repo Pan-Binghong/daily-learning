@@ -3,7 +3,7 @@ title: Linux系统配置环境变量
 date: '2024-10-29T01:52:00.000Z'
 lastmod: '2024-11-20T03:10:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 categories:
 - DevOps

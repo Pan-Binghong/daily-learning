@@ -3,7 +3,7 @@ title: Python_typing
 date: '2024-11-18T07:43:00.000Z'
 lastmod: '2024-11-20T03:24:00.000Z'
 draft: false
-标签:
+tags:
 - Python
 categories:
 - 后端

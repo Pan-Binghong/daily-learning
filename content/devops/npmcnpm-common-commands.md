@@ -3,7 +3,7 @@ title: Npm/Cnpm Common Commands
 date: '2024-11-25T02:13:00.000Z'
 lastmod: '2025-04-03T07:41:00.000Z'
 draft: false
-标签:
+tags:
 - Node
 - Npm
 categories:

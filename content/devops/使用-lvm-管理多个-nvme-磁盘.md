@@ -3,7 +3,7 @@ title: 使用 LVM 管理多个 NVMe 磁盘
 date: '2025-04-03T02:37:00.000Z'
 lastmod: '2025-04-03T02:38:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 categories:
 - DevOps

@@ -3,7 +3,7 @@ title: 论文精度_Query2doc
 date: '2024-11-28T07:58:00.000Z'
 lastmod: '2024-12-02T11:51:00.000Z'
 draft: false
-标签:
+tags:
 - Paper
 categories:
 - 知识

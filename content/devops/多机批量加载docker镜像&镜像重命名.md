@@ -3,7 +3,7 @@ title: 多机批量加载Docker镜像&镜像重命名
 date: '2024-11-28T14:28:00.000Z'
 lastmod: '2025-02-11T02:19:00.000Z'
 draft: false
-标签:
+tags:
 - Docker
 categories:
 - DevOps

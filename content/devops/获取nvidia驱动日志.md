@@ -3,7 +3,7 @@ title: 获取Nvidia驱动日志
 date: '2024-11-29T01:09:00.000Z'
 lastmod: '2024-11-29T02:01:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 - Nvidia
 categories:

@@ -3,7 +3,7 @@ title: OBS Common commands
 date: '2024-11-26T05:53:00.000Z'
 lastmod: '2025-04-03T07:41:00.000Z'
 draft: false
-标签:
+tags:
 - ModelArts
 categories:
 - DevOps

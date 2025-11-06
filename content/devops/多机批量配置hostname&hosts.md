@@ -3,7 +3,7 @@ title: 多机批量配置Hostname&Hosts
 date: '2024-11-29T00:37:00.000Z'
 lastmod: '2024-11-29T01:08:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 categories:
 - DevOps

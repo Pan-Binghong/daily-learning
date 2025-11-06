@@ -3,7 +3,7 @@ title: 基于MCP构建论文搜索服务
 date: '2025-03-25T06:23:00.000Z'
 lastmod: '2025-03-26T07:53:00.000Z'
 draft: false
-标签:
+tags:
 - LLMs
 categories:
 - AI

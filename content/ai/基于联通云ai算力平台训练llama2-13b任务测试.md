@@ -3,7 +3,7 @@ title: 基于联通云AI算力平台训练Llama2-13B任务测试
 date: '2024-11-26T07:43:00.000Z'
 lastmod: '2025-05-15T06:39:00.000Z'
 draft: false
-标签:
+tags:
 - LLMs
 categories:
 - AI

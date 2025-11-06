@@ -3,7 +3,7 @@ title: Tmux操作一览
 date: '2025-02-25T01:49:00.000Z'
 lastmod: '2025-02-25T08:18:00.000Z'
 draft: false
-标签:
+tags:
 - Tmux
 categories:
 - DevOps

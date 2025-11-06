@@ -3,7 +3,7 @@ title: Windows设置定时任务
 date: '2025-11-05T04:40:00.000Z'
 lastmod: '2025-11-05T05:17:00.000Z'
 draft: false
-标签:
+tags:
 - Windows
 categories:
 - 其他

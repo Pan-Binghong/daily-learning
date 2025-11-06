@@ -3,7 +3,7 @@ title: Anaconda安装 | 基础命令
 date: '2024-10-29T01:52:00.000Z'
 lastmod: '2024-11-29T11:42:00.000Z'
 draft: false
-标签:
+tags:
 - Conda
 categories:
 - DevOps

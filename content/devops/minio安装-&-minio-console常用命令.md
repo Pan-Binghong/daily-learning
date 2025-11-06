@@ -3,7 +3,7 @@ title: MiniO安装 & MiniO Console常用命令
 date: '2025-10-30T01:44:00.000Z'
 lastmod: '2025-11-03T06:08:00.000Z'
 draft: false
-标签:
+tags:
 - MiniO
 - Ubuntu
 categories:

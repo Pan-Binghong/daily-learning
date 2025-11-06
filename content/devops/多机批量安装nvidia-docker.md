@@ -3,7 +3,7 @@ title: 多机批量安装Nvidia-Docker
 date: '2024-11-28T14:23:00.000Z'
 lastmod: '2024-11-28T14:28:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 - Docker
 categories:

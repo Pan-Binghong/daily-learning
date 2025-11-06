@@ -3,7 +3,7 @@ title: Jupyter Notebook快捷命令
 date: '2024-11-27T15:12:00.000Z'
 lastmod: '2024-11-27T15:16:00.000Z'
 draft: false
-标签:
+tags:
 - Jupyter
 categories:
 - DevOps

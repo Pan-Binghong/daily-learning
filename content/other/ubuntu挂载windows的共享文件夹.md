@@ -3,7 +3,7 @@ title: Ubuntu挂载Windows的共享文件夹
 date: '2025-10-31T08:28:00.000Z'
 lastmod: '2025-10-31T10:21:00.000Z'
 draft: false
-标签:
+tags:
 - Ubuntu
 - Windows
 categories:

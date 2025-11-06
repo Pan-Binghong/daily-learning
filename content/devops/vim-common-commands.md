@@ -3,7 +3,7 @@ title: Vim Common Commands
 date: '2024-12-27T08:05:00.000Z'
 lastmod: '2025-08-12T07:58:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 categories:
 - DevOps

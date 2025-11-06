@@ -3,7 +3,7 @@ title: Win11安装WSL2
 date: '2024-11-30T07:00:00.000Z'
 lastmod: '2024-12-01T08:12:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 categories:
 - 其他

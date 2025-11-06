@@ -3,7 +3,7 @@ title: Proxychains安装|配置
 date: '2024-11-18T08:51:00.000Z'
 lastmod: '2024-12-02T00:51:00.000Z'
 draft: false
-标签:
+tags:
 - Proxy
 categories:
 - DevOps

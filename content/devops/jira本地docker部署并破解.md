@@ -3,7 +3,7 @@ title: Jira本地Docker部署并破解
 date: '2025-11-03T06:15:00.000Z'
 lastmod: '2025-11-03T06:15:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 - Jira
 categories:

@@ -3,7 +3,7 @@ title: Linux Common commands
 date: '2024-10-29T01:52:00.000Z'
 lastmod: '2025-04-03T07:41:00.000Z'
 draft: false
-标签:
+tags:
 - Linux
 categories:
 - DevOps

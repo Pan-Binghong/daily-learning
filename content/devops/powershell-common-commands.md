@@ -3,7 +3,7 @@ title: PowerShell Common Commands
 date: '2024-11-28T00:34:00.000Z'
 lastmod: '2025-04-03T07:41:00.000Z'
 draft: false
-标签:
+tags:
 - Windows
 categories:
 - DevOps

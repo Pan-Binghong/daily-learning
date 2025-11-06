@@ -3,7 +3,7 @@ title: 使用自己的数据集微调Llama3-8b
 date: '2024-11-15T01:49:00.000Z'
 lastmod: '2024-11-27T13:46:00.000Z'
 draft: false
-标签:
+tags:
 - LLMs
 categories:
 - AI

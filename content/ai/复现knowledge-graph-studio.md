@@ -3,7 +3,7 @@ title: 复现Knowledge-graph-studio
 date: '2024-12-13T14:56:00.000Z'
 lastmod: '2024-12-13T14:59:00.000Z'
 draft: false
-标签:
+tags:
 - LLMs
 categories:
 - AI

@@ -3,7 +3,7 @@ title: 基于ModelArts部署AI服务_文字纯享版
 date: '2024-11-26T02:41:00.000Z'
 lastmod: '2024-11-27T13:46:00.000Z'
 draft: false
-标签:
+tags:
 - LLMs
 - ModelArts
 categories:
