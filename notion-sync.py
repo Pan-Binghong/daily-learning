@@ -220,6 +220,18 @@ class NotionToHugo:
         """创建 Hugo front matter"""
         properties = page.get('properties', {})
 
+        # 属性名映射：Notion属性名 -> Hugo字段名
+        property_mapping = {
+            '标签': 'tags',
+            'Tags': 'tags',
+            'tags': 'tags',
+            '分类': 'categories',
+            'Categories': 'categories',
+            'categories': 'categories',
+            'Status': 'status',
+            'status': 'status',
+        }
+
         # 提取标题
         title = ""
         for prop_name, prop_data in properties.items():
@@ -238,18 +250,36 @@ class NotionToHugo:
         # 添加自定义属性
         for prop_name, prop_data in properties.items():
             prop_type = prop_data.get('type')
+
+            # 跳过 title 类型（已处理）
+            if prop_type == 'title':
+                continue
+
             if prop_type in ['select', 'multi_select']:
                 value = self.get_property_value(prop_data)
                 if value:
-                    key = prop_name.lower().replace(' ', '_')
+                    # 使用映射表或转换为小写下划线
+                    key = property_mapping.get(prop_name, prop_name.lower().replace(' ', '_'))
+
+                    # 如果是 tags 但值不是列表，转换为列表
+                    if key == 'tags' and not isinstance(value, list):
+                        value = [value]
+
                     frontmatter[key] = value
 
         # 添加分类（从数据库配置）
         if 'category' in db_config:
-            frontmatter['categories'] = [db_config['category']]
+            if 'categories' not in frontmatter:
+                frontmatter['categories'] = []
+            elif not isinstance(frontmatter['categories'], list):
+                frontmatter['categories'] = [frontmatter['categories']]
+
+            # 添加数据库分类（如果不存在）
+            if db_config['category'] not in frontmatter['categories']:
+                frontmatter['categories'].append(db_config['category'])
 
         # 生成 YAML front matter
-        yaml_str = yaml.dump(frontmatter, allow_unicode=True, sort_keys=False)
+        yaml_str = yaml.dump(frontmatter, allow_unicode=True, sort_keys=False, default_flow_style=False)
         return f"---\n{yaml_str}---\n\n"
 
     def sanitize_filename(self, title: str) -> str:

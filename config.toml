@@ -1,6 +1,6 @@
 # Hugo 配置文件
 
-baseURL = "https://Pan-Binghong.github.io/"  # 替换为你的 GitHub Pages URL
+baseURL = "https://Pan-Binghong.github.io/daily-learning/"  # GitHub Pages URL
 languageCode = "zh-CN"
 title = "我的博客"
 theme = "PaperMod"  # 替换为你选择的主题
