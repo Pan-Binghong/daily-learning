@@ -1,0 +1,52 @@
+{{- /* 扩展 head 区域 - 添加自定义脚本和样式 */ -}}
+
+<!-- GitHub 贡献日历热图样式 -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"
+/>
+
+<!-- 阅读进度条 -->
+<style>
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), #00d4ff);
+  z-index: 9999;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+</style>
+
+<!-- 访问统计（可选：可以集成 Google Analytics 或其他统计服务） -->
+{{- if .Site.Params.googleAnalytics -}}
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ .Site.Params.googleAnalytics }}');
+</script>
+{{- end -}}
+
+<!-- 平滑滚动到锚点 -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 平滑滚动到锚点
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+});
+</script>

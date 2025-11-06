@@ -88,17 +88,28 @@ ignoreLogs = ['warning-goldmark-raw-html']
     url = "/archives/"
     weight = 9
 
+  [[menu.main]]
+    name = "👤 关于"
+    url = "/about/"
+    weight = 10
+
 # PaperMod 主题参数
 [params]
   env = "production"
   description = "记录技术成长的每一步 - AI、后端、DevOps 学习笔记"
   author = "Pan Binghong"
 
+  # 主页模式 - 使用 profile 模式展示个人信息
+  mainSections = ["ai", "backend", "devops", "knowledge", "other"]
+
   # 默认主题（light/dark/auto）
   defaultTheme = "auto"
 
   # 显示阅读时间
   ShowReadingTime = true
+
+  # 显示文章字数
+  ShowWordCount = true
 
   # 显示分享按钮
   ShowShareButtons = true
@@ -119,20 +130,34 @@ ignoreLogs = ['warning-goldmark-raw-html']
   # 显示编辑建议按钮
   ShowRssButtonInSectionTermList = true
 
-  # 评论系统（可选）
-  comments = false
+  # 启用 Giscus 评论系统（基于 GitHub Discussions）
+  comments = true
 
-  # 首页信息
-  [params.homeInfoParams]
-    Title = "👋 欢迎来到我的技术博客"
-    Content = """
-    这里记录了我在 **AI**、**后端开发**、**DevOps** 等领域的学习笔记和实践经验。
+  # Profile 模式配置（专业首页）
+  [params.profileMode]
+    enabled = true
+    title = "Pan Binghong"
+    subtitle = "全栈开发者 | AI 爱好者 | 终身学习者"
+    imageUrl = "https://avatars.githubusercontent.com/Pan-Binghong"
+    imageWidth = 150
+    imageHeight = 150
+    imageTitle = "Pan Binghong"
 
-    - 🤖 深入探索人工智能技术
-    - ⚙️ 后端开发最佳实践
-    - 🔧 DevOps 工具与实战
-    - 📚 持续学习，不断进步
-    """
+    [[params.profileMode.buttons]]
+      name = "📚 浏览文章"
+      url = "/archives/"
+
+    [[params.profileMode.buttons]]
+      name = "🏷️ 查看标签"
+      url = "/tags/"
+
+    [[params.profileMode.buttons]]
+      name = "⭐ GitHub"
+      url = "https://github.com/Pan-Binghong"
+
+    [[params.profileMode.buttons]]
+      name = "💬 留言讨论"
+      url = "https://github.com/Pan-Binghong/daily-learning/discussions"
 
   # 社交链接图标
   [[params.socialIcons]]
@@ -146,6 +171,20 @@ ignoreLogs = ['warning-goldmark-raw-html']
   [[params.socialIcons]]
     name = "rss"
     url = "/index.xml"
+
+  # Giscus 评论系统配置（基于 GitHub Discussions）
+  [params.giscus]
+    repo = "Pan-Binghong/daily-learning"
+    repoID = "R_kgDONYfgVw"  # 需要从 giscus.app 获取
+    category = "Announcements"
+    categoryID = "DIC_kwDONYfgV84CkvE7"  # 需要从 giscus.app 获取
+    mapping = "pathname"
+    reactionsEnabled = "1"
+    emitMetadata = "0"
+    inputPosition = "bottom"
+    theme = "preferred_color_scheme"
+    lang = "zh-CN"
+    loading = "lazy"
 
   # 搜索配置
   [params.fuseOpts]
