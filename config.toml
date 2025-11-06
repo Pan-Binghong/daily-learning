@@ -1,13 +1,19 @@
 # Hugo 配置文件
 
-baseURL = "https://Pan-Binghong.github.io/daily-learning/"  # GitHub Pages URL
+baseURL = "https://Pan-Binghong.github.io/daily-learning/"
 languageCode = "zh-CN"
-title = "我的博客"
-theme = "PaperMod"  # 替换为你选择的主题
+title = "Pan Binghong's Tech Blog"
+theme = "PaperMod"
 
 # 内容目录
 contentDir = "content"
 publishDir = "public"
+
+# 启用 Emoji
+enableEmoji = true
+
+# 启用 Git 信息
+enableGitInfo = true
 
 # 分页配置（Hugo v0.128.0+ 新语法）
 [pagination]
@@ -25,45 +31,139 @@ ignoreLogs = ['warning-goldmark-raw-html']
     style = "monokai"
     lineNos = true
     lineNumbersInTable = true
+    noClasses = false
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2
+
+# 输出格式
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
 # 导航菜单
 [menu]
   [[menu.main]]
-    name = "首页"
+    name = "🏠 首页"
     url = "/"
     weight = 1
 
   [[menu.main]]
-    name = "AI"
+    name = "🤖 AI"
     url = "/ai/"
     weight = 2
 
   [[menu.main]]
-    name = "知识库"
+    name = "📚 知识库"
     url = "/knowledge/"
     weight = 3
 
   [[menu.main]]
-    name = "后端"
+    name = "⚙️ 后端"
     url = "/backend/"
     weight = 4
 
   [[menu.main]]
-    name = "DevOps"
+    name = "🔧 DevOps"
     url = "/devops/"
     weight = 5
 
   [[menu.main]]
-    name = "其他"
+    name = "📝 其他"
     url = "/other/"
     weight = 6
 
-# 作者信息
-[params]
-  author = "Pan Binghong"
-  description = "个人学习笔记博客"
+  [[menu.main]]
+    name = "🔍 搜索"
+    url = "/search/"
+    weight = 7
 
-# 社交链接
-[params.social]
-  github = "Pan-Binghong"
-  email = "19909442097@163.com"
+  [[menu.main]]
+    name = "🏷️ 标签"
+    url = "/tags/"
+    weight = 8
+
+  [[menu.main]]
+    name = "📂 归档"
+    url = "/archives/"
+    weight = 9
+
+# PaperMod 主题参数
+[params]
+  env = "production"
+  description = "记录技术成长的每一步 - AI、后端、DevOps 学习笔记"
+  author = "Pan Binghong"
+
+  # 默认主题（light/dark/auto）
+  defaultTheme = "auto"
+
+  # 显示阅读时间
+  ShowReadingTime = true
+
+  # 显示分享按钮
+  ShowShareButtons = true
+
+  # 显示文章导航（上一篇/下一篇）
+  ShowPostNavLinks = true
+
+  # 显示面包屑导航
+  ShowBreadCrumbs = true
+
+  # 显示代码复制按钮
+  ShowCodeCopyButtons = true
+
+  # 显示目录
+  ShowToc = true
+  TocOpen = false
+
+  # 显示编辑建议按钮
+  ShowRssButtonInSectionTermList = true
+
+  # 评论系统（可选）
+  comments = false
+
+  # 首页信息
+  [params.homeInfoParams]
+    Title = "👋 欢迎来到我的技术博客"
+    Content = """
+    这里记录了我在 **AI**、**后端开发**、**DevOps** 等领域的学习笔记和实践经验。
+
+    - 🤖 深入探索人工智能技术
+    - ⚙️ 后端开发最佳实践
+    - 🔧 DevOps 工具与实战
+    - 📚 持续学习，不断进步
+    """
+
+  # 社交链接图标
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/Pan-Binghong"
+
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:19909442097@163.com"
+
+  [[params.socialIcons]]
+    name = "rss"
+    url = "/index.xml"
+
+  # 搜索配置
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
+
+# 隐私设置
+[privacy]
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+    disable = false
+    respectDoNotTrack = true
+  [privacy.twitter]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true

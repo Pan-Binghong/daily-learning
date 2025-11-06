@@ -1,0 +1,193 @@
+/* 自定义样式 - PaperMod 扩展 */
+
+/* 优化首页卡片样式 */
+.post-entry {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-entry:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 优化代码块样式 */
+.highlight {
+    border-radius: 8px;
+    margin: 1.5em 0;
+}
+
+code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* 优化引用块样式 */
+blockquote {
+    border-left: 4px solid var(--primary);
+    padding-left: 1em;
+    margin: 1.5em 0;
+    font-style: italic;
+    background: var(--code-bg);
+    padding: 1em 1em 1em 1.5em;
+    border-radius: 4px;
+}
+
+/* 优化标签样式 */
+.post-tags a {
+    transition: all 0.2s ease;
+}
+
+.post-tags a:hover {
+    transform: scale(1.05);
+    background: var(--primary);
+    color: var(--theme);
+}
+
+/* 优化目录样式 */
+.toc {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1em;
+    background: var(--code-bg);
+}
+
+/* 优化表格样式 */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table thead {
+    background: var(--primary);
+    color: var(--theme);
+}
+
+table th,
+table td {
+    padding: 0.75em 1em;
+    border: 1px solid var(--border);
+}
+
+table tr:hover {
+    background: var(--code-bg);
+}
+
+/* 优化按钮样式 */
+button,
+.button {
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+button:hover,
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 优化首页欢迎卡片 */
+.first-entry {
+    background: linear-gradient(135deg, var(--entry) 0%, var(--code-bg) 100%);
+    border: 2px solid var(--border);
+}
+
+/* 添加平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 优化图片样式 */
+.post-content img {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 1.5em auto;
+    display: block;
+}
+
+/* 优化链接样式 */
+.post-content a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.2s ease;
+}
+
+.post-content a:hover {
+    border-bottom: 1px solid var(--primary);
+}
+
+/* 优化面包屑导航 */
+.breadcrumbs {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* 优化分享按钮 */
+.share-buttons {
+    display: flex;
+    gap: 0.5em;
+    margin: 1.5em 0;
+}
+
+/* 添加代码行高亮效果 */
+.highlight .hl {
+    background-color: rgba(255, 255, 0, 0.1);
+    display: block;
+}
+
+/* 优化搜索框样式 */
+#searchInput {
+    border-radius: 8px;
+    padding: 0.75em 1em;
+    border: 2px solid var(--border);
+    transition: border-color 0.2s ease;
+}
+
+#searchInput:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+/* 优化标签云 */
+.terms-tags a {
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.terms-tags a:hover {
+    transform: scale(1.05);
+}
+
+/* 添加阅读进度条（可选） */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--primary);
+    z-index: 9999;
+    transition: width 0.1s ease;
+}
+
+/* 优化移动端体验 */
+@media (max-width: 768px) {
+    .post-entry:hover {
+        transform: none;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+}
+
+/* 深色模式优化 */
+.dark .post-entry:hover {
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.05);
+}
+
+.dark .post-content img {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
