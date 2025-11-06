@@ -1,0 +1,8 @@
+# C++ 代码片段
+# 生成时间: 2025-11-06 02:28:21
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
