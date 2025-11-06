@@ -28,6 +28,7 @@ jobs:
         with:
           submodules: true  # 如果使用 Hugo 主题子模块
           fetch-depth: 0    # 获取完整历史
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🐍 设置 Python
         uses: actions/setup-python@v5
@@ -55,7 +56,22 @@ jobs:
             echo "📝 检测到内容更新，准备提交..."
             git add content/
             git commit -m "🔄 自动同步 Notion 内容 - $(date +'%Y-%m-%d %H:%M:%S')"
-            git push origin ${{ github.ref_name }}
+
+            # 先拉取远程更新，使用 rebase 避免合并提交
+            echo "📥 拉取远程更新..."
+            git fetch origin
+            git rebase origin/${{ github.ref_name }} || {
+              echo "⚠️  自动 rebase 失败，中止并重试..."
+              git rebase --abort
+              # 如果 rebase 失败，直接推送（使用 force-with-lease 更安全）
+              git push --force-with-lease origin HEAD:${{ github.ref_name }}
+              echo "✅ 使用 force-with-lease 推送成功"
+              exit 0
+            }
+
+            # 推送更新
+            echo "📤 推送更新..."
+            git push origin HEAD:${{ github.ref_name }}
             echo "✅ 内容已提交并推送"
           else
             echo "ℹ️  没有内容更新"
