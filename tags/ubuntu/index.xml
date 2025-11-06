@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ubuntu on 我的博客</title><link>https://Pan-Binghong.github.io/daily-learning/tags/ubuntu/</link><description>Recent content in Ubuntu on 我的博客</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Mon, 03 Nov 2025 06:08:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/ubuntu/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu挂载Windows的共享文件夹</title><link>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</link><pubDate>Fri, 31 Oct 2025 08:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</guid><description>&lt;ol&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ubuntu on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/ubuntu/</link><description>Recent content in Ubuntu on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Mon, 03 Nov 2025 06:08:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/ubuntu/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu挂载Windows的共享文件夹</title><link>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</link><pubDate>Fri, 31 Oct 2025 08:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</guid><description>&lt;ol&gt;
 &lt;li&gt;创建凭据文件，将windows的账号、密码写入配置文件.smbcredentials 中&lt;/li&gt;
 &lt;li&gt;挂载&lt;/li&gt;
 &lt;/ol&gt;</description></item><item><title>MiniO安装 &amp; MiniO Console常用命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 30 Oct 2025 01:44:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
@@ -13,40 +13,40 @@
 &lt;hr&gt;
 &lt;h2 id="二minio-client安装"&gt;二、MiniO Client安装&lt;/h2&gt;
 &lt;h3 id="21-linux安装"&gt;2.1 Linux安装&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget https://dl.min.io/client/mc/release/linux-amd64/mc&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;chmod +x mc&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;cp mc /usr/local/bin/&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wget https://dl.min.io/client/mc/release/linux-amd64/mc&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;chmod +x mc&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;cp mc /usr/local/bin/&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="22-windows安装"&gt;2.2 Windows安装&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;4
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -o %USERPROFILE%&lt;span style="color:#ae81ff"&gt;\b&lt;/span&gt;in&lt;span style="color:#ae81ff"&gt;\m&lt;/span&gt;c.exe https://dl.min.io/client/mc/release/windows-amd64/mc.exe&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# 添加到系统环境变量中&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# C:\Users\Administrator\mc.exe&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -o %USERPROFILE%&lt;span class="se"&gt;\b&lt;/span&gt;in&lt;span class="se"&gt;\m&lt;/span&gt;c.exe https://dl.min.io/client/mc/release/windows-amd64/mc.exe&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="c"&gt;# 添加到系统环境变量中&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="c"&gt;# C:\Users\Administrator\mc.exe&lt;/span&gt;&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="23-验证"&gt;2.3 验证&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mc --version&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mc --version&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;
@@ -56,7 +56,7 @@
 &lt;li&gt;列出bucket内容&lt;/li&gt;
 &lt;li&gt;查找文件并批量下载&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Ubuntu安装监控系统可视化模块</title><link>https://Pan-Binghong.github.io/daily-learning/devops/ubuntu%E5%AE%89%E8%A3%85%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%9D%97/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/ubuntu%E5%AE%89%E8%A3%85%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%9D%97/</guid><description>&lt;p&gt;Prometheus是一个开放性的监控解决方案，用户可以非常方便的安装和使用Prometheus并且能够非常方便的对其进行扩展。为了能够更加直观的了解Prometheus Server，接下来我们将在本地部署并运行一个Prometheus Server实例，通过Node Exporter采集当前主机的系统资源使用情况。 并通过Grafana创建一个简单的可视化仪表盘。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/daebfb90-2a3b-47c1-95ce-3e1e8b208b83/%E7%9B%91%E6%8E%A7-1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466YSLMRVRJ%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T014345Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFW3CpyiF%2FjYiZObYwcLxIQc84zTybWa29jpwworLpduAiA9Y5cg4jM70wP0srJ%2BvjAcLP7ZVmRH4rpLUxe9Ar59fCqIBAia%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMOlQSLbZvU085r4jpKtwDUja6ued7tRdQKa0edsv2l92i%2B2it9sbm7oSUeTbUXgeNuuQ0%2Byd94xPBM8H8ZHzJ2PstSDOFXu%2FGEhxe0fU6ZEq2jOnfzc2LuddskVoqWYuzyI9bCV0a53xIYMIjiW5TKnDLj2D2SFgM2BK8K%2F2LIiUIyrQgmflAFhKZPakgjlz6Weo7%2Ff1awUHy3z2T0xyAHVVoITGGnE%2FPOF2SKWt5oZZJ7D4tp5AmPaGyE1aSLIB6F5WdloX9LbYVXpRq%2B7fwrGTqdxCWM3U2orkKoc5JYYCEmWLsF4cAqrsVNMSnBPP58Jk6tX7GfBIFdAipmp8Kd0cNMwbupQrG3cx1IcZPPpw4ThFuPzrF2Sz3%2Fs5CkysUQCYZofd2dWhgpHFCp7sYBAYwQ8mqPh4VVdwf5biO5I0r6mmG57V0fKrBQ3r9Mq6vxhnz7zLTmErTVx5SFxah7BgaCf15UzLdSj%2BITXdEAFipbhidja9z8V4sYG4ci6Vdpe5rpx0KZFF89OYEiajqGFHE5Fz1HvOo0Us%2FjO3f%2FIl7kbbVcxknQeEGTTZQFEpXdAn29nAyFWff84%2F6LBFw%2BPpWqjBNSYtCgANraEFalqGHfBHAyFRaeqOOyoeLudZZFomGa8cLdT7t4%2BgwyvGvyAY6pgESF9HnfFlQQXT7ajaTYI4Iyg6sJyX%2BxU29ru%2By8HZE2ExRBc5c1W6HfEdwCE72IHWkRX7i8ruecto8%2Fan6uvXoldTyA5fG459ck7vIBTte7Jm47mO7uWh4vV08msNSsHuiZDGENnc13%2FFhehaKa05DTiHU%2BGzmxuKzGFPTxlgoLlbAkOt5DhzqkPYvzGXIEcnwtJtjCRpDF0%2BbuWEcUuAd9%2B1Bu2Qq&amp;X-Amz-Signature=6a2bf4ae2b336337ae32d5ed0d883f5a96d918d71d44e512ced22d6a9b6ca4c3&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/daebfb90-2a3b-47c1-95ce-3e1e8b208b83/%E7%9B%91%E6%8E%A7-1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466TJ6XJVJD%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T015057Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIB9QQgTDndiK%2BSyfD%2FDe75CL90dXfYTPBpVBG%2F3IrQhJAiAqY6v%2BVhfpze3i3pTTKa0Is4l5RcKIgbRUJ2vprS4wgCqIBAib%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMFLRnSLS6Mh4ZP5%2FWKtwDBEJbM%2FeEsvwsswJEdfPA0%2FxiJRmPQz6BKMrh%2FxsF0mK4wtPJnKHOM9CNtzjd8mQqFdOmnf8VtZuyUm%2FynxUtbR7FeIRqvfKbzrqaTIFTFIu%2BzLhDUuZULMVB3JbcDoep6YqOyesVKRNOUnyliNUAW%2Fj62VpnNXW3tPisLouEm%2B%2BtFGwVAsDQ0qCQBAMOJA%2FVaKNCFwjn5Trot8lZO6CXc7DJC%2Fv%2FG4nUposCimRjzdjJsjAWCWQhbEFmEEinAuM2pRpnUfwZRH4vjdfDFZ9h0525VEG%2BFqvCkxxusMbD7K63QTSYsX6dO7whUu91M8IqxZ4rf7HV3KhNQ5h1CLPB5GA9ulWHLznFGL3inTukhWVFFC%2BX0m%2F7IWg749Q5Lm0UtZIPrzsKwAW4cVS76tBfyrUajeXe9eS4b8cjVSmpjP2saTXV0V6Xs78mBac%2Fb5opu7nRpR3g1gvEoj%2Bhhwyll4XcB9r3pcQlCx6WaW6p6Uvh8%2BSPo%2FXwTWxuEBYYrnpERR6C9GBgLYIErQpO2ROnu6i%2BgoB42%2F7mHnByEsT3XcLq04bbEVIDR8R6RkAFzBsjV%2BfQgorqfIPw6Wbp9S%2BoCX23LJRHqwrX1Jda87N8vFbnpESkH9pKz1XxlyEwofKvyAY6pgHue3sS6egEGFMuIcF8z9z7pxAPk%2BRTUhBASIHbktJI9GV10rVzMRan2o7KH3LFTw54IC52FNjyaRpsxcM1aOBjSY7Dz7BwtR9v7E6UyKX3GDzasB9mNKBTH7bL33XfJDbbDa%2BX5KGbfKPPXuIHE7z1tvMHRF7OsgRQhAEt%2BStK4nQdMp76WGM6ksvn%2BZ9XHQGb%2FX4Ceo6cgCT%2B%2BV915m%2F%2FOkzPFefp&amp;X-Amz-Signature=00c5fabaf2474d476a515fa66ef76690c91861979837c1489975590d9bc51e24&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Prometheus是什么？&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -87,16 +87,16 @@
 &lt;li&gt;下载地址&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="安装--run"&gt;安装 &amp;amp; RUN&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvfz node_exporter-*.*-amd64.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd node_exporter-*.*-amd64
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./node_exporter
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tar xvfz node_exporter-*.*-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; node_exporter-*.*-amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./node_exporter
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="在web浏览器查看-1"&gt;在web浏览器查看&lt;/h3&gt;
@@ -109,16 +109,16 @@
 &lt;/blockquote&gt;
 &lt;h3 id="安装grafana"&gt;安装Grafana&lt;/h3&gt;
 &lt;h3 id="ubuntu安装流程"&gt;Ubuntu安装流程&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 更新apt-getsudo apt-get install -y adduser libfontconfig1 musl&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 下载软件wget https://dl.grafana.com/enterprise/release/grafana-enterprise_10.0.0_amd64.deb&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 安装sudo dpkg -i grafana-enterprise_10.0.0_amd64.deb&lt;/span&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 更新apt-getsudo apt-get install -y adduser libfontconfig1 musl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 下载软件wget https://dl.grafana.com/enterprise/release/grafana-enterprise_10.0.0_amd64.deb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安装sudo dpkg -i grafana-enterprise_10.0.0_amd64.deb&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ul&gt;
@@ -128,12 +128,12 @@
 &lt;ul&gt;
 &lt;li&gt;运行Grafana可视化服务&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo /bin/systemctl start grafana-server
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo /bin/systemctl start grafana-server
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="在web浏览器查看-2"&gt;在web浏览器查看&lt;/h3&gt;
@@ -142,4 +142,4 @@
 &lt;li&gt;设置流程如下:
 step-1&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/19c196f7-552f-4d8d-b491-6ceeee1bb2a7/%E7%9B%91%E6%8E%A7-2.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466YSLMRVRJ%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T014345Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFW3CpyiF%2FjYiZObYwcLxIQc84zTybWa29jpwworLpduAiA9Y5cg4jM70wP0srJ%2BvjAcLP7ZVmRH4rpLUxe9Ar59fCqIBAia%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMOlQSLbZvU085r4jpKtwDUja6ued7tRdQKa0edsv2l92i%2B2it9sbm7oSUeTbUXgeNuuQ0%2Byd94xPBM8H8ZHzJ2PstSDOFXu%2FGEhxe0fU6ZEq2jOnfzc2LuddskVoqWYuzyI9bCV0a53xIYMIjiW5TKnDLj2D2SFgM2BK8K%2F2LIiUIyrQgmflAFhKZPakgjlz6Weo7%2Ff1awUHy3z2T0xyAHVVoITGGnE%2FPOF2SKWt5oZZJ7D4tp5AmPaGyE1aSLIB6F5WdloX9LbYVXpRq%2B7fwrGTqdxCWM3U2orkKoc5JYYCEmWLsF4cAqrsVNMSnBPP58Jk6tX7GfBIFdAipmp8Kd0cNMwbupQrG3cx1IcZPPpw4ThFuPzrF2Sz3%2Fs5CkysUQCYZofd2dWhgpHFCp7sYBAYwQ8mqPh4VVdwf5biO5I0r6mmG57V0fKrBQ3r9Mq6vxhnz7zLTmErTVx5SFxah7BgaCf15UzLdSj%2BITXdEAFipbhidja9z8V4sYG4ci6Vdpe5rpx0KZFF89OYEiajqGFHE5Fz1HvOo0Us%2FjO3f%2FIl7kbbVcxknQeEGTTZQFEpXdAn29nAyFWff84%2F6LBFw%2BPpWqjBNSYtCgANraEFalqGHfBHAyFRaeqOOyoeLudZZFomGa8cLdT7t4%2BgwyvGvyAY6pgESF9HnfFlQQXT7ajaTYI4Iyg6sJyX%2BxU29ru%2By8HZE2ExRBc5c1W6HfEdwCE72IHWkRX7i8ruecto8%2Fan6uvXoldTyA5fG459ck7vIBTte7Jm47mO7uWh4vV08msNSsHuiZDGENnc13%2FFhehaKa05DTiHU%2BGzmxuKzGFPTxlgoLlbAkOt5DhzqkPYvzGXIEcnwtJtjCRpDF0%2BbuWEcUuAd9%2B1Bu2Qq&amp;X-Amz-Signature=86c19a5aa3de3a08355de80193c6f8b6b17e004fb8064cafeb81c42ef49af33a&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/19c196f7-552f-4d8d-b491-6ceeee1bb2a7/%E7%9B%91%E6%8E%A7-2.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466TJ6XJVJD%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T015057Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIB9QQgTDndiK%2BSyfD%2FDe75CL90dXfYTPBpVBG%2F3IrQhJAiAqY6v%2BVhfpze3i3pTTKa0Is4l5RcKIgbRUJ2vprS4wgCqIBAib%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMFLRnSLS6Mh4ZP5%2FWKtwDBEJbM%2FeEsvwsswJEdfPA0%2FxiJRmPQz6BKMrh%2FxsF0mK4wtPJnKHOM9CNtzjd8mQqFdOmnf8VtZuyUm%2FynxUtbR7FeIRqvfKbzrqaTIFTFIu%2BzLhDUuZULMVB3JbcDoep6YqOyesVKRNOUnyliNUAW%2Fj62VpnNXW3tPisLouEm%2B%2BtFGwVAsDQ0qCQBAMOJA%2FVaKNCFwjn5Trot8lZO6CXc7DJC%2Fv%2FG4nUposCimRjzdjJsjAWCWQhbEFmEEinAuM2pRpnUfwZRH4vjdfDFZ9h0525VEG%2BFqvCkxxusMbD7K63QTSYsX6dO7whUu91M8IqxZ4rf7HV3KhNQ5h1CLPB5GA9ulWHLznFGL3inTukhWVFFC%2BX0m%2F7IWg749Q5Lm0UtZIPrzsKwAW4cVS76tBfyrUajeXe9eS4b8cjVSmpjP2saTXV0V6Xs78mBac%2Fb5opu7nRpR3g1gvEoj%2Bhhwyll4XcB9r3pcQlCx6WaW6p6Uvh8%2BSPo%2FXwTWxuEBYYrnpERR6C9GBgLYIErQpO2ROnu6i%2BgoB42%2F7mHnByEsT3XcLq04bbEVIDR8R6RkAFzBsjV%2BfQgorqfIPw6Wbp9S%2BoCX23LJRHqwrX1Jda87N8vFbnpESkH9pKz1XxlyEwofKvyAY6pgHue3sS6egEGFMuIcF8z9z7pxAPk%2BRTUhBASIHbktJI9GV10rVzMRan2o7KH3LFTw54IC52FNjyaRpsxcM1aOBjSY7Dz7BwtR9v7E6UyKX3GDzasB9mNKBTH7bL33XfJDbbDa%2BX5KGbfKPPXuIHE7z1tvMHRF7OsgRQhAEt%2BStK4nQdMp76WGM6ksvn%2BZ9XHQGb%2FX4Ceo6cgCT%2B%2BV915m%2F%2FOkzPFefp&amp;X-Amz-Signature=9f705b397b5bec183a2f33000c72770070770b2bf9e98aca0434dda101c368fe&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;</description></item></channel></rss>

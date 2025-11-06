@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Node on 我的博客</title><link>https://Pan-Binghong.github.io/daily-learning/tags/node/</link><description>Recent content in Node on 我的博客</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Thu, 03 Apr 2025 07:41:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/node/index.xml" rel="self" type="application/rss+xml"/><item><title>Npm/Cnpm Common Commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/npmcnpm-common-commands/</link><pubDate>Mon, 25 Nov 2024 02:13:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/npmcnpm-common-commands/</guid><description>&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Node on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/node/</link><description>Recent content in Node on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Thu, 06 Nov 2025 01:32:55 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/node/index.xml" rel="self" type="application/rss+xml"/><item><title>Npm/Cnpm Common Commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/npmcnpm-common-commands/</link><pubDate>Mon, 25 Nov 2024 02:13:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/npmcnpm-common-commands/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;💡 npm（全称 Node Package Manager，即“node包管理器”）是Node.js默认的、用JavaScript编写的软件包管理系统。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
@@ -12,23 +12,23 @@
 &lt;h2 id="国内镜像版本cnpm"&gt;国内镜像版本Cnpm&lt;/h2&gt;
 &lt;p&gt;cnpm 是一个 npm 的中国镜像版本，旨在解决中国大陆用户在使用 npm 时遇到的网络速度慢、下载失败等问题。由于 npm 的官方注册表（registry）位于国外，导致在中国访问时可能会因为网络限制而导致安装速度慢或连接不稳定。为了解决这个问题，淘宝团队（现为 阿里云）推出了 cnpm，它使用了一个国内的 npm 镜像，可以加速依赖包的下载和安装。&lt;/p&gt;
 &lt;h3 id="安装"&gt;安装&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install -g cnpm --registry&lt;span style="color:#f92672"&gt;=&lt;/span&gt;https://registry.npmmirror.com
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g cnpm --registry&lt;span class="o"&gt;=&lt;/span&gt;https://registry.npmmirror.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;使用命令与npm一致&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cnpm install
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cnpm init
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cnpm install
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cnpm init
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;

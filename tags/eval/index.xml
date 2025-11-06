@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Eval on 我的博客</title><link>https://Pan-Binghong.github.io/daily-learning/tags/eval/</link><description>Recent content in Eval on 我的博客</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Mon, 21 Apr 2025 02:58:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/eval/index.xml" rel="self" type="application/rss+xml"/><item><title>EvalScope大模型验评框架</title><link>https://Pan-Binghong.github.io/daily-learning/ai/evalscope%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%84%E6%A1%86%E6%9E%B6/</link><pubDate>Fri, 28 Mar 2025 01:13:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/evalscope%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%84%E6%A1%86%E6%9E%B6/</guid><description>&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Eval on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/eval/</link><description>Recent content in Eval on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Mon, 21 Apr 2025 02:58:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/eval/index.xml" rel="self" type="application/rss+xml"/><item><title>EvalScope大模型验评框架</title><link>https://Pan-Binghong.github.io/daily-learning/ai/evalscope%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%84%E6%A1%86%E6%9E%B6/</link><pubDate>Fri, 28 Mar 2025 01:13:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/evalscope%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%84%E6%A1%86%E6%9E%B6/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;💡 之前都是使用vllm或者sglang官方提供的benchmark脚本，现在尝试更换为EvalScope框架。记录使用该框架对速度进行基准测试全流程。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/29bda199-ba22-458e-b9f7-79b94cd6c8c4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466W5JYL45B%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T014300Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAsk2J2njyePu57S%2F9pkk%2FuFiU1zrDm3wbuCuGfF5SdQAiEAkr506KNM7z5FqSomdS7RWUiua78%2Bb2iXYLLuIl0DSmcqiAQImv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDMl30DbuKsv8YldqeyrcAxFW2x4NAko2I6qZlbGVH%2F30u%2F4jOpipLiDezzMU%2B8J6rdjUOMNujlr7gpb025tmQbKzfzhQiIK5hqEeoKplIJzH0IwMJdHl1QEjRlaP9G9QO8YAy4tIgDK8CsOOtj7mtu0OXDbg%2BSJ%2F06BI18pmJTvRMKc5YnLWePEeflPcNZi5uMqCru8keRvocFBd3JX1dv5kGXBMGtXrIqqpJCT%2BcQRVz7nq1cGuzjosXfv%2BJUGboQ%2BdB1FrHbcqt%2Fj7XvkBZUMbhkYNHWq2Uly%2Bpb7pc3%2F7VUBU36b2MBqkd0rnpB2T4%2BO68ocS95WI0F%2FJceBZXQxhnlcKjKumXiRStb4%2BTKUR8pyFdwCztZGSQNKl%2BoyQiYHrYOgKAidHDgHkBDiAqui1u0u6aLCj6DfUYFGvl6BIx2tMbpiJytAfm%2FIcOtH0lnCu4LnyOBzl3qxamBFQWvvTikudRWU8jkyRNwOqOADGnHing8T%2BjPEZrl5Mi35zSXwtnRoC9gbQwbYs8Q2o0n1f0rBvs8U4UmVNQBZxZhmdisPmsxapNSrq6QyBaLNr%2BkiG2LhuaPb1ri8%2BmHKb09YGoq5EcOqnmWlX4gNNs0GFw27HhmRajkdzyfCjG6Rn6T%2BZeAWLuagR3YX9MPTwr8gGOqUBLcNospCIHbfemqfUNc%2BKWu64cb3T9Ygnjt4PDXZcqCBFD1vu1lKngW7sRUOA8lixbBRDbjdZa7mL1XpjbKlXDktH6uzTO3kVRxgLncMuBnrNGIqdb%2Fb8BTYdFG4Jkie3GjUhuc43MWi0MTkY5uib63j8D1ZAHAEeBfoOmcuHelWsMmuQAuK%2BNT3WkGJ8N%2F7PNvKw1jN59NbGMywHrflru0%2B26S3J&amp;X-Amz-Signature=0a568cfa2dad143914bc0983d01fa3a14128819bb7c7fcaafb42856ec5b03d30&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/29bda199-ba22-458e-b9f7-79b94cd6c8c4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QN5VITE3%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T015024Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCgxx6l2V4ylNxegM9HkkKIrNggr2eC8CINzWiIUL2cQAIgd%2FD0tZrPxH%2BXEIr8PjDMUQ08wGgtnyNfjLyoNtNeV44qiAQImv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDCYefShLO5pQM%2F3KHircA1tyfRoRJ1scD5q%2BZsHh%2BLupLbhgLRWjxmnal%2B%2B8KayvtbwcHTuEeDQYF7ZhVfVgScMgYf%2FeY9PXHBnco0TnAJOuhLO9H5yeDBDxK84pGlKlRQd1bYmOjwtnuFGqd3GZAVDWo01ht78jj9ly9Ilt1U7MnoIv%2FIxiHtLuM25zqnOSFTr5swT9cfVszzdsBoFSN5JjH58i7caI2GGk8OyxfiH%2FE5ttg2S6OI4iYxlFueUzMt2C9xJzrzvPLt%2F3%2Bqgct6Hdb%2BbLV9PaIwlXlIfpNOb30CH2Fww8829HppMgNVlyHB4CdBszN3SkXChKrJrAdUZaaI%2BxCOTnKjQjLRtRwsYUA%2BmeNayLfpqs0AY5RmfNprJ9uota70OxN1KwTxhJ5%2B8g0gfFbyxV9c8gq%2B3OVd%2Bpc0CWUY738feQJSdtJ%2B1XMqGDdsswIbiHtai3%2BnEIULPxafQfU7AM%2FNsV3yG%2BTLKETaertye%2FG0dHICxk5%2F5xOor%2BixT1ubA0Uv%2BllgsozD7%2FFvda4bPnxDzZNLUdvHs8k4c3l9CBsyoHWmLD9EATEQjRJHUHfjdbe%2Bt6WgPYNQCQ78gvdzqseo3wC6fmAF5HgBLB0CeEj25%2BVSxEJYPcQfJpdAy3DY0dRVppMPDxr8gGOqUB4geiPO%2BMMka%2F64%2FGVX6ERVqZHBQwR1pIr4bilzbd3uLuSrvrv2AgP6m1FZ5NG1%2FeSG0GdErHWnMPLpUJmP3VR%2F1gKt7waZjOsCnYK1p4id8apJNtJU%2BIiejibeeFacHwJJ5YSEgCUnqH7ajF4t5rsSSI0%2BZk0jUu7XjoLme0DgQGWuzkZ7SB5nuUAd0jKHNmNtd%2FkOSa5W2qQuPwmqTnXe7FObSE&amp;X-Amz-Signature=f04f4606da49d6ba8fa4ef4ebca1dd9a0bb687a66eb897bc7abe6a7816fc8c90&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1 id="1-安装"&gt;1. 安装&lt;/h1&gt;
 &lt;p&gt;官方提供3种安装方式，1.pip/2.source code/3.docker。&lt;/p&gt;
@@ -28,48 +28,48 @@
 &lt;p&gt;参数详细说明：https://evalscope.readthedocs.io/zh-cn/latest/user_guides/stress_test/parameters.html&lt;/p&gt;
 &lt;p&gt;推理性能测试有2种策略，第一种为标准的并发压力测试，第二种为单并发下的速度测试。在该框架下，特别说明了如果需要使用速度测试，则url需要设置为/v1/completions。https://evalscope.readthedocs.io/zh-cn/latest/user_guides/stress_test/speed_benchmark.html&lt;/p&gt;
 &lt;h2 id="命令行方式启动"&gt;命令行方式启动&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 2
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 3
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 4
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 5
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 6
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 7
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 8
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 9
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;10
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;11
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;12
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;13
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;14
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;15
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;16
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;17
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;18
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;19
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# eval.sh&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;CUDA_VISIBLE_DEVICES&lt;span style="color:#f92672"&gt;=&lt;/span&gt;0,1,2,3 &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;evalscope perf &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--parallel &lt;span style="color:#ae81ff"&gt;20&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--model /data/DeepSeek-R1-Distill-Llama-70B &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--url http://127.0.0.1:8000/v1/chat/completions &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--port &lt;span style="color:#ae81ff"&gt;8000&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--api local_vllm &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--dataset random &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--max-tokens &lt;span style="color:#ae81ff"&gt;640&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--prefix-length &lt;span style="color:#ae81ff"&gt;64&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--min-prompt-length &lt;span style="color:#ae81ff"&gt;32&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--max-prompt-length &lt;span style="color:#ae81ff"&gt;64&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--number &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--tokenizer-path /data/DeepSeek-R1-Distill-Llama-70B &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;--stream &lt;span style="color:#ae81ff"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 为了截图，暂先取消设置该参数&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#--debug &lt;/span&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# eval.sh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;CUDA_VISIBLE_DEVICES&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0,1,2,3 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;evalscope perf &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--parallel &lt;span class="m"&gt;20&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--model /data/DeepSeek-R1-Distill-Llama-70B &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--url http://127.0.0.1:8000/v1/chat/completions &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--port &lt;span class="m"&gt;8000&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--api local_vllm &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--dataset random &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--max-tokens &lt;span class="m"&gt;640&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--prefix-length &lt;span class="m"&gt;64&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--min-prompt-length &lt;span class="m"&gt;32&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--max-prompt-length &lt;span class="m"&gt;64&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--number &lt;span class="m"&gt;100&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--tokenizer-path /data/DeepSeek-R1-Distill-Llama-70B &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;--stream &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 为了截图，暂先取消设置该参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#--debug &lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;details&gt;&lt;summary&gt;测试长截图&lt;/summary&gt;

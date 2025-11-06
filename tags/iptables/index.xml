@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Iptables on 我的博客</title><link>https://Pan-Binghong.github.io/daily-learning/tags/iptables/</link><description>Recent content in Iptables on 我的博客</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Tue, 20 May 2025 01:41:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/iptables/index.xml" rel="self" type="application/rss+xml"/><item><title>Iptables Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/iptables-common-commands/</link><pubDate>Wed, 12 Mar 2025 05:46:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/iptables-common-commands/</guid><description>&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Iptables on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/iptables/</link><description>Recent content in Iptables on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Thu, 06 Nov 2025 01:51:29 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/iptables/index.xml" rel="self" type="application/rss+xml"/><item><title>Iptables Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/iptables-common-commands/</link><pubDate>Wed, 12 Mar 2025 05:46:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/iptables-common-commands/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;💡 iptables 全称为：netfilter/iptables 是一个IP数据包过滤系统。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
@@ -9,7 +9,7 @@
 &lt;li&gt;如果匹配上规则，表明阻止还是通过，此时数据包就不再向下匹配新规则。&lt;/li&gt;
 &lt;li&gt;如果规则中，没有表明阻止还是通过，即等同于没有匹配上规则，按照默认策略处理。&lt;/li&gt;
 &lt;li&gt;防火墙的默认规则是对应的链的所有规则执行完成后才会执行。
-&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/5da2e1eb-c9ee-47d7-8b26-5710b6c7fa13/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466XVQW5DHX%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T014356Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCfSRHzbvpvUxc6QiaLDdW5FYD74GbZ%2B6MopzhrtiLL3gIhAOB2u3LM6aW4uUyaft6%2FFWKXs5dE6bbpHl%2FhhYceU%2BDpKogECJr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwvvrDGWOUqLdXxxzYq3AO7zK2aKn4I9mD8Z9HZdV0jzbI5%2FHbG8Q2K9xHmk21y%2B38ptW5zJ0NccEQok%2B1IkQj6LK8CQFktcFa59NquwdFU%2FdSM2l6LMisYiLKWfY1M0s1FD%2FHUP4ngzSmRB64IlAvzvkLj%2FWaV5WbI0jFdqy5gaPl3%2B0H86fU45V2msfSU4YepCRiDHCo22Hf0XnwZmxR3V50HcFdhBwa0SVQXzehXTWWWpBQUZ7sM0yDC2vXHRToX3%2BgnCZrAGq9VQ8QeeJWFM6nqq7ODwUieHxWlev%2FGPIWAFoFk7gyRI%2Bot0tFjO1IicLBQNkJJNiIGeK1GSxfvyK5PzF23aMyAHxwkww51A9BPXdJjBKroNfoUNONmzlGf8yTk7uDFA29x5wLfmdIbhhdwKmPSIz32GNvfBhgCfd%2FrI%2B1XToi90P6opa%2BR89PVVoldlrkDuYXIQ7JXcbvvMpDTIvQJ79D9%2F%2FFHLcYfYDwaWyqbnlKQJVreg6ks9koW9XOvARrBxpNbP0DATvaP6jJMSfLGJmvH4t942g0DmcnUWOor1NiKTxGpEBW7Wz0J38qH5tny4Fzl5IZsS2TWNeaSuvB4MyWTWZjIrYVi2Dyxw%2FzkcN5YGBS6tMsc982PBoH8IAA6GNEnLzDL8a%2FIBjqkAa8P4wBaCIOXIpF6N4Q8Req%2B%2BAWhaVb%2FFM1AqIHoyOs7uPqSoofPS7bhu0e3xDkSdoSjSfJhkhuI3STV5xLhn5P2ueku0MlfEx%2BEI%2F1rHVW1N8dc7X%2BpLuu56KhDHFgONwXw7zA3TnKC57ZKhPH3uXHvFotX4H3jNTf1hghsClxDPLIFlD4ruKvG1rxWOLw1FhKPdzpXoJbx537PhlVKJrRRVenv&amp;X-Amz-Signature=aeaeb9f14a944e7ab9110ee114f010ebd844c5ebb713b4f99ac05f82c5ce2b18&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/li&gt;
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/5da2e1eb-c9ee-47d7-8b26-5710b6c7fa13/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SVP5OPHQ%2F20251106%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20251106T015110Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDmZw5X0%2BantrYHNr6nHq7%2FqOd8K1vxa7aOTxpEvDSxCwIhALrA5PSac5d5MupleCH%2FFB%2F0U2s4cBxZPWdwpYHwgPy%2BKogECJv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzHPdyFXKjlX9RD2DMq3AMSxp%2FmlHwTKbcRgMUVxP8HJitnwwds3H%2FcDLnKLKb3Vdnuo%2BkOAtyM%2FvEALzBXnP2XH6Qm1tVeHHEsxUQXzhhZ%2FUQvI7eqHHIAGnveIqvMYJ00hsqWrHYsGhYpWWdraF1So%2BiB4Xww9WjhRT%2F9iJ%2B%2BubTYCs9dYDmjr463qJqFXqneXvnCXsxQNhoCLtfwb0eFhRg1oQvishgKhO5LOM6kNj7ty06illdsYM9d490pbPDEPDvtLSNMp6JKkpsy6RuiUF8vv29NXSd507axoKwDDCjiqTkQ7qL9xs%2F6XYbvj51BhHHnCvrb8ugL7bT%2Bz3gjHAEZqxtIHzLL6whvZo6mzb1t0lVb21Z2iHTSeDxDOy8qsw4MOKYDQIkB7vj%2F%2B2cwia%2B6EHxg7K3T2umi7Lq18eoWbPvlCQWrdOK95BcNGqtAGiEBonvzqWuk7TfHZbEj2sTrq51XzzyWQPViIz1QLmSPnzEIxvxEv2QTQE9NS0QgOIvY0mUnpV43eqJU14b%2Fw%2FdTf2lF%2Fu7YMcns8Hr3Ul9BFTnuxO%2BQnC95SDd2BgaehY1cHmFfgOc8i3T%2FCDFSw53dI3%2FMxFcbL9txUH31ILx3iUWIX1HCEaeZGIAxeDi73uhiDmTRTz8CpzCB8q%2FIBjqkAdSsjaHKBUGA2U1qPXr7nHLzup1E9%2BdOQc%2Br5NyZ5OBhvf3VPXCx0W2uuaeCTGy8WdWtx8M3B9X7dMeHPzV30XkCQgxWPaMqEU1eyTuNNsHFPQRJukhgv2Wpx9MXSBCiHmLOYHwj0c7ONvQ4%2F54uV7lDFqiivdSFkqYiaFR3342fQmmThlC4oUfhCP6WpnXVDWMNVkSFLWVUGMExomcj63iZp%2F%2BK&amp;X-Amz-Signature=29e7c97d91ecf8b9240cdebea042f88029c843e4c3513c43f314c67c407a8160&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;details&gt;&lt;summary&gt;数据包基本结构&lt;/summary&gt;
 &lt;/details&gt;
@@ -38,12 +38,12 @@
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h2 id="iptables常用选项与参数"&gt;iptables常用选项与参数&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-t 表名&lt;span style="color:#f92672"&gt;]&lt;/span&gt; 管理选项 &lt;span style="color:#f92672"&gt;[&lt;/span&gt;链名&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;匹配条件&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-j 控制类型&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables &lt;span class="o"&gt;[&lt;/span&gt;-t 表名&lt;span class="o"&gt;]&lt;/span&gt; 管理选项 &lt;span class="o"&gt;[&lt;/span&gt;链名&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;匹配条件&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;-j 控制类型&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ul&gt;
@@ -61,34 +61,34 @@
 &lt;p&gt;更多详细的命令见：https://www.cnblogs.com/zhujingzhi/p/9706664.html&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="实际案例"&gt;实际案例&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 2
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 3
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 4
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 5
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 6
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 7
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 8
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 9
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;10
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;11
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;12
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 添加新的DNAT规则&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A PREROUTING -p tcp --dport &lt;span style="color:#ae81ff"&gt;18083&lt;/span&gt; -j DNAT --to-destination 192.168.0.89:8003
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 添加新的MASQUERADE规则，保证数据包能正确返回&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.89 --dport &lt;span style="color:#ae81ff"&gt;8003&lt;/span&gt; -j MASQUERADE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 删除规则&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -D PREROUTING &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -D POSTROUTING &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 查看&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -L -n -v
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 添加新的DNAT规则&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -A PREROUTING -p tcp --dport &lt;span class="m"&gt;18083&lt;/span&gt; -j DNAT --to-destination 192.168.0.89:8003
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 添加新的MASQUERADE规则，保证数据包能正确返回&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.89 --dport &lt;span class="m"&gt;8003&lt;/span&gt; -j MASQUERADE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 删除规则&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -D PREROUTING &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -D POSTROUTING &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -L -n -v
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;

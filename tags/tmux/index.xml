@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tmux on 我的博客</title><link>https://Pan-Binghong.github.io/daily-learning/tags/tmux/</link><description>Recent content in Tmux on 我的博客</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Feb 2025 08:18:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/tmux/index.xml" rel="self" type="application/rss+xml"/><item><title>Tmux操作一览</title><link>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</link><pubDate>Tue, 25 Feb 2025 01:49:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</guid><description>&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tmux on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/tmux/</link><description>Recent content in Tmux on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Feb 2025 08:18:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/tmux/index.xml" rel="self" type="application/rss+xml"/><item><title>Tmux操作一览</title><link>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</link><pubDate>Tue, 25 Feb 2025 01:49:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;💡 Tmux 是一个非常强大的终端复用工具，它可以帮助你在一个窗口中管理多个会话，非常适合长时间运行任务或多任务处理。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id="安装"&gt;安装&lt;/h2&gt;
 &lt;hr&gt;
-&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt update
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt install tmux
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install tmux
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id="基本操作"&gt;基本操作&lt;/h2&gt;
