@@ -1,0 +1,6 @@
+# Go 代码片段
+# 生成时间: 2025-11-07 02:26:14
+
+function calculateSum(a, b) {
+    return a + b;
+}
