@@ -1,7 +1,7 @@
 ---
 title: 使用Vllm-Ascend推理Qwen3
 date: '2025-11-13T06:10:00.000Z'
-lastmod: '2025-11-13T06:27:00.000Z'
+lastmod: '2025-11-17T07:52:00.000Z'
 draft: false
 tags:
 - LLMs
@@ -74,7 +74,7 @@ unset TASK_QUEUE_ENABLE
 ### 4. 启动服务
 
 ```powershell
-vllm serve Qwen/Qwen3-32B --tensor-parallel-size 8 --async-scheduling --chat-template ./qwen3_nonthinking.jinja
+vllm serve Qwen/Qwen3-32B --tensor-parallel-size 4 --async-scheduling --chat-template ./qwen3_nonthinking.jinja
 ```
 
 ---
