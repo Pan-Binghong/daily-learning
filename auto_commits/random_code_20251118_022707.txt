@@ -1,0 +1,6 @@
+# JavaScript 代码片段
+# 生成时间: 2025-11-18 02:27:07
+
+fn main() {
+    println!("Hello, World!");
+}
