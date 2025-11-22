@@ -1,0 +1,6 @@
+# Python 代码片段
+# 生成时间: 2025-11-22 02:21:02
+
+def hello_world():
+    print("Hello, World!")
+    return True
