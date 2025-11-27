@@ -1,0 +1,6 @@
+# C++ 代码片段
+# 生成时间: 2025-11-27 02:26:20
+
+function calculateSum(a, b) {
+    return a + b;
+}
