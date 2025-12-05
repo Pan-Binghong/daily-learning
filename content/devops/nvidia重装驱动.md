@@ -1,7 +1,7 @@
 ---
 title: Nvidia重装驱动
 date: '2025-07-04T04:47:00.000Z'
-lastmod: '2025-07-04T06:01:00.000Z'
+lastmod: '2025-12-04T09:08:00.000Z'
 draft: false
 tags:
 - Linux
@@ -91,13 +91,13 @@ print(torch.cuda.is_available())
 
 ## 4. 解决报错
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/51b10173-0dab-4609-b924-ab711d4dee62/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466SOFTYNON%2F20251204%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251204T025058Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHIaCXVzLXdlc3QtMiJHMEUCIDozQIlfMpV12XmK%2FE7sxmh%2BCFtJ9vp3JUL0pRlx1AILAiEA9Lw5pNdfsPURVZhHZ32gJeIaL5kjUPEkoj%2FKMDb3CRIq%2FwMIOxAAGgw2Mzc0MjMxODM4MDUiDIWy2vrP5NHa0BKbuCrcAxQdslSEKmZCWnyDJX5MTKgFU83p8K7bygoj5dEUK7fMOeOVLlCldySsnkyHD0dlHjo3K4MU3Axrd3FDgxUDvAivhHYWjBCDC8VMs%2FrJ8lyZ8%2F5d8UDXC42cxsnrPIjeuKuZ5rzah%2FEudBkNYWT8KPfrbsoLWb1AuunWnySOiGLM3x4OhZ%2FFgf6mUc6ic0%2FMIQcBT8f49lAxjhGrvq6hKSrwD4QUiDtY1n9RhkPrXquSnw%2BjgQ51%2B84urbATwdHcuLuVUr0hjHPb7g9VoUkr3Gbo3mqOuVpcktlOI7V3%2BD4fv30Uav%2F%2BXk6%2BSeAMLrk%2BI6LyutHLqTwHxWsgoSddEG5x%2BPNXssbUA8aYgGDEOfIMbl3KfolZR6EfBhl0pF0QxI6%2FD2PHI0M2jBF%2FdcpPkQ%2BHWSzv1z4eemwaxOnDRZFhCl1APkmCWms16mi5riYH4MwUcPxr75roucBUJ8f%2F%2BWpjYa%2FHBdqmLhlLfBgzthY8PqS3KERVE0pbU6EELQZ0RlWCVM3qf6oPwpP%2BIXUIAsykP%2BHX6Z2WIbhUgRxnJUSmwuvnNIvCpaROySmCgUrtS%2F66CbdnK6%2Fh2fcp6cxu6wjkqEgByBWxV9h4K4lovep%2BB5O8Jzpj7WXOXio%2FMO7Uw8kGOqUBv2f278vXON9IGf2OkkyVRVZ%2BnS0sD9Yrnjp4x%2FkDUzkpS45yn4HD8wBA8mNzb8bNvJlWubKJoQMJ7V2rd%2B1bv3ISVYd3PltGTl6VL6Z5u4m92Dkrvfy2LEV2rv3J7E3QRaNSCCP%2FjZSQGUZbfEcLJjug21%2BQsBu2aeOehJzdbdYbQr%2BaiWNo1JtzEbV8ZEm%2FE4ioOL7%2FFjsQL%2FrA6SMxKzfBpK%2B3&X-Amz-Signature=9e1e946948db2858d0ed7b89d8f5a367b58e541aed0741db183cb839a7a74f2e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/51b10173-0dab-4609-b924-ab711d4dee62/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4662EVCXIHI%2F20251205%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251205T025115Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIHEgOsAASYxUg8WXXat8Z5pw35SBAy57wFdnFRlb0AtLAiEA2Ta80rVfd3D8aeACEClPKCPcqZ%2B%2BiQuW%2BUHHVIXx8Toq%2FwMITxAAGgw2Mzc0MjMxODM4MDUiDLZkGJ7MlBTmoqeZ4SrcAxWkilV78GLR2AwZpEWGDgM1LoJ3M0SVQnC1xvv4EeGbD0HiyDe7AjvXIuS56h5BB0PrqrQ6mpVch9nI7UFvxPP7gj91eZyEZ64eT8ziEQACqQ9%2BwwueXGjSvC1EPEf2Nh9fUI4%2BCZb6pex2H8c4YkpxorjjIhCI80UAFwObh6aQXSXlS5YoqGvhFVsdmd79klVQSxcxYVq167kFfWqqmqrPd8ahq1vjdYfHAtdyB1DrrXTCoMWeha2ucAG28JdNq%2FsRivKi6k6A7hl7S3xm8aqup4JjmMLORfzJY0FqdyptnnNEaTpBn%2FFd4P7mGWyR78Bbd9C4fhhBOrfscdGfyrxSIV9HwEoXsaqSvJ%2BZtZ%2F%2FAzk6MNsRFcOYQEEywc7f0a9yPt7UIpr4mUwYKkcBXa5rUEt5zW3IhMQwZzWZtVKSxE0HOjgLNpDZUyImAk3IzPNdM2cOfbOkysHxl1ucUPrSeYW7DQI2eiePTFnNFfKNWrVlCdifPtka4srpmvTHTXatnEzgUX%2F1tvgQi1Ln1JfW3kCV7XlgoCCh7RvegROmF5tUR3P6TRBjJY1XCZcwpNNUJLM1qN%2Fly2st33F%2BlHLGomWv4jRBhOxlmr1mCtl4Nd7n%2BuejDXw3pf7eMNSMyMkGOqUBt6AHZqDEIGzW6F93F5anYGooPWw4g7TTdFy1H5HOYP0M81OnPudPuddHdNl%2BzW8Y1keMc9i4wlJgbQFvJ%2BeOuJet5BBZehlTG0wC3ND8BTlP6kgMp7zNJIOnYnEb0Q5a%2BJdbsTTCqGK06mMRnQYXEvyO33WaEB4X1u4jus9KhJIvBqnn3DG8UbiAXqujnynfiQKFxz5s61AWPwWVGCTRs9e5FaJL&X-Amz-Signature=f0f4e30b5876880711a6e85d721098eb65e29df5d111df39c1d937e6689bb929&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 
 重新下载对应驱动, https://cn.download.nvidia.com/tesla/550.144.03/NVIDIA-Linux-x86_64-550.144.03.run 将这个链接中的驱动版本替换为报错中匹配的版本,下载即可.
 
+---
 
-
-
+> https://help.aliyun.com/zh/egs/support/a-gpu-becomes-unavailable-due-to-inconsistencey-between-the-nvidia-fabricmanager-version-and-the-tesla-driver-version?spm=a2c4g.11186623.help-menu-155040.d_5_2_6.753c282erKfv7j&scm=20140722.H_2847461._.OR_help-T_cn~zh-V_1
 
 
 

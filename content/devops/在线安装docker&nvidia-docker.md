@@ -1,7 +1,7 @@
 ---
 title: 在线安装Docker&Nvidia-Docker
 date: '2024-11-27T13:10:00.000Z'
-lastmod: '2025-10-09T08:43:00.000Z'
+lastmod: '2025-12-04T09:07:00.000Z'
 draft: false
 tags:
 - Linux
