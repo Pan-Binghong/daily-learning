@@ -1,0 +1,8 @@
+# Rust 代码片段
+# 生成时间: 2025-12-07 02:52:05
+
+#include <iostream>
+int main() {
+    std::cout << "Hello World" << std::endl;
+    return 0;
+}
