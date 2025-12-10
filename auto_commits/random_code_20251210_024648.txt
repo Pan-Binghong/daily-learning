@@ -1,0 +1,6 @@
+# JavaScript 代码片段
+# 生成时间: 2025-12-10 02:46:48
+
+function calculateSum(a, b) {
+    return a + b;
+}
