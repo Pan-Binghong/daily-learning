@@ -1,0 +1,6 @@
+# Rust 代码片段
+# 生成时间: 2025-12-15 02:53:28
+
+def hello_world():
+    print("Hello, World!")
+    return True
