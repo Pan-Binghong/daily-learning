@@ -293,29 +293,29 @@ sudo mount -t cifs \
 </span><span class=lnt>26
 </span><span class=lnt>27
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gh># 批量上传文件到MiniO
-</span></span></span><span class=line><span class=cl><span class=gh></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gu>## 一、将Windows的文件夹设置为共享文件夹（设置SMB共享）
-</span></span></span><span class=line><span class=cl><span class=gu></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gu>### 步骤一
-</span></span></span><span class=line><span class=cl><span class=gu></span><span class=k>1.</span> 打开「控制面板」→「网络和共享中心」→「更改高级共享设置」
+</span></span></span><span class=line><span class=cl><span class=k>1.</span> 打开「控制面板」→「网络和共享中心」→「更改高级共享设置」
 </span></span><span class=line><span class=cl><span class=k>2.</span> 启用：
 </span></span><span class=line><span class=cl>   <span class=k>-</span> 网络发现
 </span></span><span class=line><span class=cl>   <span class=k>-</span> 文件和打印机共享
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gu>### 步骤二
-</span></span></span><span class=line><span class=cl><span class=gu></span><span class=k>1.</span> 选择需要共享的目录
+</span></span></span><span class=line><span class=cl><span class=k>1.</span> 选择需要共享的目录
 </span></span><span class=line><span class=cl><span class=k>2.</span> 右键 → 属性 → 共享 → 高级共享 → 勾选“共享此文件夹” → 设置共享名
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gu>### 步骤三
-</span></span></span><span class=line><span class=cl><span class=gu></span>在ubuntu服务器中运行:
+</span></span></span><span class=line><span class=cl>在ubuntu服务器中运行:
 </span></span><span class=line><span class=cl>```bash
 </span></span><span class=line><span class=cl>sudo apt install -y cifs-utils
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gh># 创建挂载点
-</span></span></span><span class=line><span class=cl><span class=gh></span>sudo mkdir -p /mnt/TestWindowsShare
+</span></span></span><span class=line><span class=cl>sudo mkdir -p /mnt/TestWindowsShare
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gh># 临时手动挂载测试（替换 IP 和路径）
-</span></span></span><span class=line><span class=cl><span class=gh></span>sudo mount -t cifs \
+</span></span></span><span class=line><span class=cl>sudo mount -t cifs \
 </span></span><span class=line><span class=cl>  &#34;//10.36.67.49/qc_data&#34; \
 </span></span><span class=line><span class=cl>  /mnt/TestWindowsShare \
 </span></span><span class=line><span class=cl>  -o username=Administrator,password=123,dom=WORKGROUP,vers=2.0,iocharset=utf8

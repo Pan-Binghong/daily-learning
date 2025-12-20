@@ -255,7 +255,7 @@ done < ip.txt
 </span><span class=lnt>8
 </span><span class=lnt>9
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=cp>#!/bin/bash
-</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 生成SSH密钥对（如果不存在）</span>
 </span></span><span class=line><span class=cl><span class=o>[</span> ! -f ~/.ssh/id_rsa.pub <span class=o>]</span> <span class=o>&amp;&amp;</span> ssh-keygen -t rsa -N <span class=s2>&#34;&#34;</span> -f ~/.ssh/id_rsa
 </span></span><span class=line><span class=cl>
@@ -279,7 +279,7 @@ done < ip.txt
 </span><span class=lnt>10
 </span><span class=lnt>11
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=cp>#!/bin/bash
-</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 自动验证每台目标机器的免密登录是否成功</span>
 </span></span><span class=line><span class=cl><span class=k>while</span> <span class=nb>read</span> -r ip<span class=p>;</span> <span class=k>do</span>
 </span></span><span class=line><span class=cl>  ssh -o <span class=nv>BatchMode</span><span class=o>=</span>yes -o <span class=nv>ConnectTimeout</span><span class=o>=</span><span class=m>5</span> root@<span class=nv>$ip</span> <span class=s2>&#34;echo &#39;Connection successful&#39;&#34;</span> <span class=p>&amp;</span>&gt; /dev/null

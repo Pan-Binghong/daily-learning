@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>MiniO on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/minio/</link><description>Recent content in MiniO on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.152.2</generator><language>zh-CN</language><lastBuildDate>Mon, 03 Nov 2025 06:08:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/minio/index.xml" rel="self" type="application/rss+xml"/><item><title>MiniO安装 &amp; MiniO Console常用命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 30 Oct 2025 01:44:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>MiniO on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/minio/</link><description>Recent content in MiniO on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.153.0</generator><language>zh-CN</language><lastBuildDate>Mon, 03 Nov 2025 06:08:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/minio/index.xml" rel="self" type="application/rss+xml"/><item><title>MiniO安装 &amp; MiniO Console常用命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 30 Oct 2025 01:44:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;💡 MinIO Client (mc) 是一个强大的命令行工具，用于访问 MinIO 服务器以及其他兼容 S3 API 的存储系统。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
@@ -18,8 +18,8 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wget https://dl.min.io/client/mc/release/linux-amd64/mc&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;chmod +x mc&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;cp mc /usr/local/bin/&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;chmod +x mc&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cp mc /usr/local/bin/&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="22-windows安装"&gt;2.2 Windows安装&lt;/h3&gt;
@@ -33,8 +33,8 @@
 &lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -o %USERPROFILE%&lt;span class="se"&gt;\b&lt;/span&gt;in&lt;span class="se"&gt;\m&lt;/span&gt;c.exe https://dl.min.io/client/mc/release/windows-amd64/mc.exe&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="c"&gt;# 添加到系统环境变量中&lt;/span&gt;&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="c"&gt;# C:\Users\Administrator\mc.exe&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 添加到系统环境变量中&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# C:\Users\Administrator\mc.exe&lt;/span&gt;&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id="23-验证"&gt;2.3 验证&lt;/h3&gt;
