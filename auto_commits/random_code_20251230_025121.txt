@@ -1,0 +1,6 @@
+# Java 代码片段
+# 生成时间: 2025-12-30 02:51:21
+
+function calculateSum(a, b) {
+    return a + b;
+}
