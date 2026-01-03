@@ -1,0 +1,8 @@
+# JavaScript 代码片段
+# 生成时间: 2026-01-03 02:45:07
+
+#include <iostream>
+int main() {
+    std::cout << "Hello World" << std::endl;
+    return 0;
+}
