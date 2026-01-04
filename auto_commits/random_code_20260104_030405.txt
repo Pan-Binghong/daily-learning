@@ -1,0 +1,6 @@
+# Java 代码片段
+# 生成时间: 2026-01-04 03:04:05
+
+def hello_world():
+    print("Hello, World!")
+    return True
