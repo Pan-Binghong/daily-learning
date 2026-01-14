@@ -1,0 +1,8 @@
+# Rust 代码片段
+# 生成时间: 2026-01-14 02:59:21
+
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, World!")
+}
