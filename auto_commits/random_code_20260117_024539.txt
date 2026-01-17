@@ -1,0 +1,8 @@
+# JavaScript 代码片段
+# 生成时间: 2026-01-17 02:45:39
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
