@@ -1,0 +1,8 @@
+# C++ 代码片段
+# 生成时间: 2026-01-21 02:54:58
+
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, World!")
+}
