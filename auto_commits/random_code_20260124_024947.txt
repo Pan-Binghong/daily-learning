@@ -1,0 +1,8 @@
+# Go 代码片段
+# 生成时间: 2026-01-24 02:49:47
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
