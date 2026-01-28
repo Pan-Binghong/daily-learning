@@ -1,0 +1,8 @@
+# Rust 代码片段
+# 生成时间: 2026-01-28 02:58:04
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
