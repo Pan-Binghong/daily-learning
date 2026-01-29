@@ -1,0 +1,6 @@
+# Rust 代码片段
+# 生成时间: 2026-01-29 03:21:58
+
+fn main() {
+    println!("Hello, World!");
+}
