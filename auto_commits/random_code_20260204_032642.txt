@@ -1,0 +1,6 @@
+# Python 代码片段
+# 生成时间: 2026-02-04 03:26:42
+
+fn main() {
+    println!("Hello, World!");
+}
