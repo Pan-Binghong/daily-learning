@@ -1,0 +1,8 @@
+# JavaScript 代码片段
+# 生成时间: 2026-02-05 03:27:24
+
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, World!")
+}
