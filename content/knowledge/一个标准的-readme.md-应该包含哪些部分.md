@@ -1,7 +1,7 @@
 ---
 title: 一个标准的 README.md 应该包含哪些部分
 date: '2026-02-28T03:05:00.000Z'
-lastmod: '2026-02-28T03:09:00.000Z'
+lastmod: '2026-02-28T03:12:00.000Z'
 draft: false
 tags:
 - Knowledge
@@ -606,6 +606,79 @@ Made with ❤️ by [Your Name](https://github.com/your-username)
 [⬆ 回到顶部](#your-project-name)
 
 </div>
+```
+
+```bash
+# 📦 项目名称
+
+> 一句话描述你的项目是什么、做什么用的。
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+
+---
+
+## 📖 简介
+
+简单几句话介绍你的项目背景和目标。
+比如：这是一个用于 XXX 的工具，帮助开发者快速实现 XXX。
+
+## ✨ 功能
+
+- ✅ 功能一
+- ✅ 功能二
+- ✅ 功能三
+
+## 🚀 快速开始
+
+### 安装
+
+```bash
+npm install your-project
+```
+
+### 使用
+
+```javascript
+const tool = require('your-project');
+
+tool.doSomething();
+```
+
+## ⚙️ 配置
+
+| 参数      | 类型     | 默认值  | 说明         |
+| --------- | -------- | ------- | ------------ |
+| `port`    | `number` | `3000`  | 服务端口     |
+| `debug`   | `boolean`| `false` | 开启调试模式 |
+
+## 📂 项目结构
+
+```
+├── src/          # 源代码
+├── tests/        # 测试
+├── docs/         # 文档
+├── package.json
+└── README.md
+```
+
+## 🤝 参与贡献
+
+1. Fork 本仓库
+2. 创建分支 (`git checkout -b feature/xxx`)
+3. 提交代码 (`git commit -m 'feat: 添加xxx功能'`)
+4. 推送分支 (`git push origin feature/xxx`)
+5. 提交 Pull Request
+
+## 📄 许可证
+
+[MIT](./LICENSE)
+
+## 📮 联系
+
+- 作者：Your Name
+- 邮箱：your-email@example.com
+- GitHub：[@your-username](https://github.com/your-username)
 ```
 
 ## 使用方法
