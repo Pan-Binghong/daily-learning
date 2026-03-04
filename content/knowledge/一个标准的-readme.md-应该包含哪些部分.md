@@ -1,7 +1,7 @@
 ---
 title: 一个标准的 README.md 应该包含哪些部分
 date: '2026-02-28T03:05:00.000Z'
-lastmod: '2026-02-28T03:12:00.000Z'
+lastmod: '2026-03-04T02:28:00.000Z'
 draft: false
 tags:
 - Knowledge
