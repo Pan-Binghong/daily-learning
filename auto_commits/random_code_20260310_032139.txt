@@ -1,0 +1,8 @@
+# Java 代码片段
+# 生成时间: 2026-03-10 03:21:39
+
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, World!")
+}
