@@ -1,0 +1,8 @@
+# Go 代码片段
+# 生成时间: 2026-03-14 03:21:49
+
+#include <iostream>
+int main() {
+    std::cout << "Hello World" << std::endl;
+    return 0;
+}
