@@ -43,10 +43,10 @@ jobs:
         run: python auto-commit.py
         env:
           # 配置 git 用户信息（用于提交记录）
-          GIT_AUTHOR_NAME: 'GitHub Actions Bot'
-          GIT_AUTHOR_EMAIL: 'action@github.com'
-          GIT_COMMITTER_NAME: 'GitHub Actions Bot'
-          GIT_COMMITTER_EMAIL: 'action@github.com'
+          GIT_AUTHOR_NAME: 'Pan-Binghong'
+          GIT_AUTHOR_EMAIL: 'binghongpan0222@gmail.com'
+          GIT_COMMITTER_NAME: 'Pan-Binghong'
+          GIT_COMMITTER_EMAIL: 'binghongpan0222@gmail.com'
       
       - name: ✅ 任务完成
         run: |

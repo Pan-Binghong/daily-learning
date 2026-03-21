@@ -110,8 +110,11 @@ def commit_and_push():
         print(f"📝 代码语言: {language}")
         
         # 配置 git（如果还没有配置）
-        subprocess.run(['git', 'config', '--global', 'user.email', 'action@github.com'], check=False)
-        subprocess.run(['git', 'config', '--global', 'user.name', 'GitHub Actions'], check=False)
+        # 优先使用环境变量中的 git 信息，fallback 到账号真实邮箱
+        git_email = os.environ.get('GIT_AUTHOR_EMAIL', 'binghongpan0222@gmail.com')
+        git_name = os.environ.get('GIT_AUTHOR_NAME', 'Pan-Binghong')
+        subprocess.run(['git', 'config', '--global', 'user.email', git_email], check=False)
+        subprocess.run(['git', 'config', '--global', 'user.name', git_name], check=False)
         
         # 获取当前分支名
         branch_result = subprocess.run(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], 
