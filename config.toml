@@ -202,7 +202,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
     anonymizeIP = true
     disable = false
     respectDoNotTrack = true
-  [privacy.twitter]
+  [privacy.x]
     enableDNT = true
   [privacy.youtube]
     privacyEnhanced = true
