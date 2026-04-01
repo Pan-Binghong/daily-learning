@@ -1,4 +1,114 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Git on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/git/</link><description>Recent content in Git on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.1</generator><language>zh-CN</language><lastBuildDate>Tue, 31 Mar 2026 03:53:49 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Git在Windows中出现Line Endings警告提示</title><link>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</link><pubDate>Wed, 29 Oct 2025 03:19:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</guid><description>&lt;p&gt;这个警告的原因是 Git 在 Windows 系统上会自动将 LF（Linux/Mac 风格的换行符）转换为 CRLF（Windows 风格的换行符）。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Git on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/git/</link><description>Recent content in Git on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.1</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2026 04:16:02 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Git 分支合并完全指南：从功能分支到 Merge Request</title><link>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E4%BB%8E%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF%E5%88%B0-merge-request/</link><pubDate>Tue, 31 Mar 2026 14:30:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E4%BB%8E%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF%E5%88%B0-merge-request/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 本文以 moodoor-agent-tools 项目为实战案例，系统讲解 Git 分支合并的完整工作流，涵盖从功能分支创建、Merge Request 提交，到冲突解决的全过程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="一基本概念"&gt;一、基本概念&lt;/h1&gt;
+&lt;p&gt;在多人协作项目中，分支管理是日常开发的核心。以下是几个关键概念：&lt;/p&gt;
+&lt;p&gt;标准合并流程：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;feature/xxx → (MR) → dev → (MR) → main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://git-scm.com/book/en/v2/images/basic-merging-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;Git 分支工作流示意图&lt;/p&gt;
+&lt;h1 id="二日常开发流程从头到尾"&gt;二、日常开发流程（从头到尾）&lt;/h1&gt;
+&lt;h2 id="第一步从-dev-切出功能分支"&gt;第一步：从 dev 切出功能分支&lt;/h2&gt;
+&lt;p&gt;开始新功能开发前，先确保本地 dev 与远端同步，再切出专属功能分支：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout -b feature/htp-workflow
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="第二步开发提交代码"&gt;第二步：开发、提交代码&lt;/h2&gt;
+&lt;p&gt;在功能分支上自由开发，提交时建议遵循 Conventional Commits 规范（feat / fix / chore 等前缀）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &lt;span class="s2"&gt;&amp;#34;feat: 新增HTP房树人绘画测验(htp) workflow&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin feature/htp-workflow
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="第三步在-gitlab-创建-merge-request"&gt;第三步：在 GitLab 创建 Merge Request&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 GitLab 项目页面&lt;/li&gt;
+&lt;li&gt;左侧菜单 → Merge Requests → New merge request&lt;/li&gt;
+&lt;li&gt;Source branch 选 feature/htp-workflow，Target branch 选 dev&lt;/li&gt;
+&lt;li&gt;填写标题和描述（简要说明本次改动的目的和影响），点击 Create merge request
+&lt;img loading="lazy" src="https://git-scm.com/book/en/v2/images/basic-merging-1.png"&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;GitLab Merge Request 审查界面示意&lt;/p&gt;</description></item><item><title>Git 分支合并操作指南</title><link>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 31 Mar 2026 13:57:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;💡 本文以 moodoor-agent-tools 项目为背景，系统梳理 Git 分支合并的完整工作流，涵盖日常开发、冲突解决、受保护分支等核心场景，适合团队协作开发时参考。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="一基本概念"&gt;一、基本概念&lt;/h1&gt;
+&lt;p&gt;在 Git 多人协作开发中，分支管理是保证代码质量和发布稳定性的关键机制。以下是常见的分支角色与术语说明：&lt;/p&gt;
+&lt;p&gt;标准分支合并流程：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;feature/xxx → (MR) → dev → (MR) → main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h1 id="二日常开发流程从头到尾"&gt;二、日常开发流程（从头到尾）&lt;/h1&gt;
+&lt;h2 id="第一步从-dev-切出功能分支"&gt;第一步：从 dev 切出功能分支&lt;/h2&gt;
+&lt;p&gt;每次开发新功能前，先同步 dev 的最新代码，再切出独立的功能分支，避免与他人工作产生干扰。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 切换到 dev 并拉取最新代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建并切换到新功能分支&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout -b feature/htp-workflow
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="第二步开发并提交代码"&gt;第二步：开发并提交代码&lt;/h2&gt;
+&lt;p&gt;在功能分支上自由提交，遵循语义化提交信息规范（feat / fix / refactor / docs 等），方便后续代码审查和历史追溯。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 暂存所有修改并提交&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &lt;span class="s2"&gt;&amp;#34;feat: 新增HTP房树人绘画测验(htp) workflow&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 推送到远程仓库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin feature/htp-workflow
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="第三步在-gitlab-创建-merge-request"&gt;第三步：在 GitLab 创建 Merge Request&lt;/h2&gt;
+&lt;p&gt;功能开发完成后，通过 MR 流程申请将代码合入 dev，触发代码审查，确保代码质量。&lt;/p&gt;</description></item><item><title>Git在Windows中出现Line Endings警告提示</title><link>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</link><pubDate>Wed, 29 Oct 2025 03:19:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</guid><description>&lt;p&gt;这个警告的原因是 Git 在 Windows 系统上会自动将 LF（Linux/Mac 风格的换行符）转换为 CRLF（Windows 风格的换行符）。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
@@ -24,7 +134,7 @@
 &lt;/div&gt;</description></item><item><title>Git Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/git-common-commands/</link><pubDate>Wed, 20 Nov 2024 01:22:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/git-common-commands/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;💡 Git代码管理规范说明，以及常用命令。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/957b9d02-7d7c-45ab-bcf8-38731684567f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WTPISSTF%2F20260331%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260331T035332Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGsaCXVzLXdlc3QtMiJHMEUCIQDBHFbND6nxHyY8X0cKsiF4q4KqKTdQUXAE79W6%2B%2B%2FvMwIgYNFZ8xydogvDk89cxbxyy99H77ShVsq%2F0iayyYu7bzMq%2FwMINBAAGgw2Mzc0MjMxODM4MDUiDPg%2FXRBnKNta3szFxCrcA3Ghkl9xa7lcIjxMT4N4SRrTUDN0pHx5vgxt48sRtD2JdGZ0xnW%2BVV%2FHpjsrLfLB6EI5OhCE6KTpA%2FYEJERLTjYt8asiuHQbaUEtyGtJ45AKqv%2FFLv0ZyTzExxJwKgYigh%2B2Vcn1uqa21MQnNUs%2B6GPQvXUioyiEb4TZAjieCn2%2F0ZL2PECRetfHMNNj0l%2BgLUi7CAkzl%2FYXcTUjyiytYwUz3s1B5NKd5g%2F3qu6ik3BlIrNPrtop5ReTOHKxteAxozmxlUXqrL1AdNwk5R9ldrMMhidKqfwONCZy2wXS0PikbyL3BITRxtQzImuSeVJSc83Rcxnm0HTZljPoxYrcux39xsPBIny7akcmUHIj6%2Bfv1U07rhFrl%2Fdywrl%2FMgrpAA%2FWUK96QvyHcpp9lTcZDbbZCWJs9j%2FeoBLrn62kiaChXE01VcFvm3VO9qbrp4l1uQdCOsZlhD9NxyxwnZRDpfoulaAi1iEKf95bipyTEnYX0GERBdaTiCqScPYkGYcKTZtdA2amaZr8qCIgM84w5RiHYZajBdONKfI7Lg8KU7IhiI3xoc20%2BmR2LfAT8F06107VCAHAy4bTKDcqFqyRVc4oHw0aA9MCaMg2DLprSoGq1GpBM25k8KmQbZYcMKzwrM4GOqUBRaxq86qcQk5NlKh95f0M%2Bv3XxTSnmpB8pi8Gno6Yoy75LzP7d7qdhAliPd7oabfTLlYiNZnBtKl%2Bl830jZ5x7xHWQBcWqgdsouuerJZ5NADTihHEI4mg8Pqg%2F38aAtBvaAtOwuBtAR19sA%2B48DNfhdFHVbxSmw6k3hI4TtpdF5zjUqLDYUbcEY1ADprFpTqMaRDGcx5x8zaejKqRHjwEd%2Bme0Uux&amp;X-Amz-Signature=431ec0bfc4220954b2656878a48274b93225820dade3479a15b3a041daedde88&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/957b9d02-7d7c-45ab-bcf8-38731684567f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466XS7NCQPE%2F20260401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260401T041545Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCOuOFYgasn3W7DRjTYtCzoE%2FkcAmor%2Br7lzHpfoo3LvQIhAJ7eNTzRkzrkNKHO86JgN9BXr%2FDhaZQ5SCofcz%2FNaX%2BiKv8DCE0QABoMNjM3NDIzMTgzODA1IgwQgjKiUr3%2FnvWzUXMq3AOw88%2BhHmEl5stJc7kKGFH4zGMRbaF8EWc9mqPbgzmM6kO6igqpvkviAo4kvrBvHfpG%2B1wAWnNBBgmwyIOJHI71IcCfIYbGc%2BREoLRyrUm9ULHdYjd5mh3u52ybguZreT23LUX5MPBQTvIhaOcYvU%2Fm7rln6jQ8M0KrrvNglBsoIC%2BbrMyaUp7%2BW%2BiNkn2y92XGTMcXDB%2BinxOl7vWI%2FvAmupUuHrej5uuRZP13cdlAw%2FIhpLtgIdgd7k64fGZpVe8QyTdcaZT4jsMEkruWvwuRp%2Fv6iEvPTUfuTP7be0vSMGBQvShBtYb4Y3UHGQqPkeDydHx4OTQvmbwVri17satuCHr%2FwVNWkjCe14AsFsYPUafR5R4lF0Og9zAH7toPRMDcZ60TbUF9Wxl9zBiRSl50718szEX4gRXW7pNyV8%2F%2F%2F%2BrtaZMlJ8FEot6FBECtWZ8YaibpbbQLjYo9rGW2X4QR%2Bw%2ByVRqVPq%2FqrVjGHGMDUSswOUtJr8TBbM4BCtRSUnPvMznOAj9h91ekjuvg5f7coPejEVqHv81H%2Fz3t9blqp4EYTOsVAEFS4419sivRokKs9N2U4rolqmhAuxiuLgmBfRYUBQLPl71V1OIsV1lVcTZ8EIvgTSlC1KcbzzDroLLOBjqkARY%2BW78JBaHGBWk8ymKAWybcvGxV0KR%2BtRPKat9Ot2XESaYhM8HO18hodAVag0O7oNLZ2qJhe%2B47l2NtFcGQVvUqec3i0gLEvuAe7Je%2B81no4if%2BuXH3Q2ruQUJQUYg%2BT2gK7E2al7KHpndS1Htp1GFfb19XUGpE1bevkCLB1lU4lwLtFYsgmCqQJtRSozo22sv3qI9woliWl0WcM%2F32rU4%2B8YQ2&amp;X-Amz-Signature=744008f6addf9e5dd096ba4994055470755b570450e0b48d4e48c2a4d20d9f06&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="分支说明"&gt;分支说明&lt;/h2&gt;
 &lt;p&gt;最常见的三种类型分支，名称与解释。&lt;/p&gt;

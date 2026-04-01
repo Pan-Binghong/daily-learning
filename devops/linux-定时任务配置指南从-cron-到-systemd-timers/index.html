@@ -1,0 +1,283 @@
+<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Linux 定时任务配置指南：从 cron 到 systemd timers | Pan Binghong's Tech Blog</title><meta name=keywords content="Linux,Shell,Systemd"><meta name=description content='
+💡 本文介绍如何在 Linux 中使用 systemd timers 配置定时任务，作为 cron 的现代替代方案，并附带实用示例。
+
+一、为什么选择 systemd timers？
+传统上 Linux 使用 cron 来配置定时任务，但现代 Linux 发行版（Ubuntu、CentOS 7+、Debian 等）默认使用 systemd 来管理服务和进程。systemd timers 相比 cron 有以下优点：
+
+与 systemd 服务统一管理，日志通过 journalctl 查看
+支持依赖关系，可在某服务启动后再执行
+支持 monotonic 时钟（系统启动后 X 分钟执行）
+可通过 systemctl 随时启用、禁用、查看状态
+
+二、核心概念：.service + .timer
+systemd timer 由两个文件组成，放在 /etc/systemd/system/ 目录下：
+
+xxx.service —— 定义要执行的任务（做什么）
+xxx.timer  —— 定义触发时间（什么时候做）
+
+
+💡 两个文件名称前缀必须一致，例如 backup.service 对应 backup.timer。
+
+三、实战示例：每天凌晨 2 点执行备份脚本
+3.1 准备备份脚本
+
+
+1
+2
+3
+4
+5
+6
+
+
+#!/bin/bash
+# /usr/local/bin/backup.sh
+
+DATE=$(date +%Y%m%d)
+tar -czf /backup/data_${DATE}.tar.gz /var/data/
+echo "backup done: /backup/data_${DATE}.tar.gz"
+
+
+
+
+1
+2
+
+
+# 添加执行权限
+chmod +x /usr/local/bin/backup.sh
+
+
+3.2 创建 .service 文件
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+
+
+# /etc/systemd/system/backup.service
+[Unit]
+Description=Daily Backup Task
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/backup.sh
+User=root
+
+
+Type=oneshot 表示这是一次性任务，执行完即退出，非常适合定时脚本。'><meta name=author content="Pan Binghong"><link rel=canonical href=https://Pan-Binghong.github.io/daily-learning/devops/linux-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E4%BB%8E-cron-%E5%88%B0-systemd-timers/><link crossorigin=anonymous href=/daily-learning/assets/css/stylesheet.e83b074f85f644922efadfe7f1197fdb3372ea811147b7b594f95aa5072d84d2.css integrity="sha256-6DsHT4X2RJIu+t/n8Rl/2zNy6oERR7e1lPlapQcthNI=" rel="preload stylesheet" as=style><link rel=icon href=https://Pan-Binghong.github.io/daily-learning/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://Pan-Binghong.github.io/daily-learning/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://Pan-Binghong.github.io/daily-learning/favicon-32x32.png><link rel=apple-touch-icon href=https://Pan-Binghong.github.io/daily-learning/apple-touch-icon.png><link rel=mask-icon href=https://Pan-Binghong.github.io/daily-learning/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://Pan-Binghong.github.io/daily-learning/devops/linux-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E4%BB%8E-cron-%E5%88%B0-systemd-timers/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}@media(prefers-color-scheme:light){.list::-webkit-scrollbar-thumb{border-color:var(--code-bg)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><link rel=stylesheet href=https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css><style>.reading-progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--primary),#00d4ff);z-index:9999;transition:width .1s ease;box-shadow:0 0 10px rgba(0,212,255,.5)}</style><script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();const t=document.querySelector(this.getAttribute("href"));t&&t.scrollIntoView({behavior:"smooth",block:"start"})})})})</script><meta property="og:url" content="https://Pan-Binghong.github.io/daily-learning/devops/linux-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E4%BB%8E-cron-%E5%88%B0-systemd-timers/"><meta property="og:site_name" content="Pan Binghong's Tech Blog"><meta property="og:title" content="Linux 定时任务配置指南：从 cron 到 systemd timers"><meta property="og:description" content=' 💡 本文介绍如何在 Linux 中使用 systemd timers 配置定时任务，作为 cron 的现代替代方案，并附带实用示例。
+一、为什么选择 systemd timers？ 传统上 Linux 使用 cron 来配置定时任务，但现代 Linux 发行版（Ubuntu、CentOS 7+、Debian 等）默认使用 systemd 来管理服务和进程。systemd timers 相比 cron 有以下优点：
+与 systemd 服务统一管理，日志通过 journalctl 查看 支持依赖关系，可在某服务启动后再执行 支持 monotonic 时钟（系统启动后 X 分钟执行） 可通过 systemctl 随时启用、禁用、查看状态 二、核心概念：.service + .timer systemd timer 由两个文件组成，放在 /etc/systemd/system/ 目录下：
+xxx.service —— 定义要执行的任务（做什么） xxx.timer —— 定义触发时间（什么时候做） 💡 两个文件名称前缀必须一致，例如 backup.service 对应 backup.timer。
+三、实战示例：每天凌晨 2 点执行备份脚本 3.1 准备备份脚本 1 2 3 4 5 6 #!/bin/bash # /usr/local/bin/backup.sh DATE=$(date +%Y%m%d) tar -czf /backup/data_${DATE}.tar.gz /var/data/ echo "backup done: /backup/data_${DATE}.tar.gz" 1 2 # 添加执行权限 chmod +x /usr/local/bin/backup.sh 3.2 创建 .service 文件 1 2 3 4 5 6 7 8 # /etc/systemd/system/backup.service [Unit] Description=Daily Backup Task [Service] Type=oneshot ExecStart=/usr/local/bin/backup.sh User=root Type=oneshot 表示这是一次性任务，执行完即退出，非常适合定时脚本。'><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="devops"><meta property="article:published_time" content="2026-04-01T01:58:00+00:00"><meta property="article:modified_time" content="2026-04-01T01:58:00+00:00"><meta property="article:tag" content="Linux"><meta property="article:tag" content="Shell"><meta property="article:tag" content="Systemd"><meta name=twitter:card content="summary"><meta name=twitter:title content="Linux 定时任务配置指南：从 cron 到 systemd timers"><meta name=twitter:description content='
+💡 本文介绍如何在 Linux 中使用 systemd timers 配置定时任务，作为 cron 的现代替代方案，并附带实用示例。
+
+一、为什么选择 systemd timers？
+传统上 Linux 使用 cron 来配置定时任务，但现代 Linux 发行版（Ubuntu、CentOS 7+、Debian 等）默认使用 systemd 来管理服务和进程。systemd timers 相比 cron 有以下优点：
+
+与 systemd 服务统一管理，日志通过 journalctl 查看
+支持依赖关系，可在某服务启动后再执行
+支持 monotonic 时钟（系统启动后 X 分钟执行）
+可通过 systemctl 随时启用、禁用、查看状态
+
+二、核心概念：.service + .timer
+systemd timer 由两个文件组成，放在 /etc/systemd/system/ 目录下：
+
+xxx.service —— 定义要执行的任务（做什么）
+xxx.timer  —— 定义触发时间（什么时候做）
+
+
+💡 两个文件名称前缀必须一致，例如 backup.service 对应 backup.timer。
+
+三、实战示例：每天凌晨 2 点执行备份脚本
+3.1 准备备份脚本
+
+
+1
+2
+3
+4
+5
+6
+
+
+#!/bin/bash
+# /usr/local/bin/backup.sh
+
+DATE=$(date +%Y%m%d)
+tar -czf /backup/data_${DATE}.tar.gz /var/data/
+echo "backup done: /backup/data_${DATE}.tar.gz"
+
+
+
+
+1
+2
+
+
+# 添加执行权限
+chmod +x /usr/local/bin/backup.sh
+
+
+3.2 创建 .service 文件
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+
+
+# /etc/systemd/system/backup.service
+[Unit]
+Description=Daily Backup Task
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/backup.sh
+User=root
+
+
+Type=oneshot 表示这是一次性任务，执行完即退出，非常适合定时脚本。'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Devops","item":"https://Pan-Binghong.github.io/daily-learning/devops/"},{"@type":"ListItem","position":2,"name":"Linux 定时任务配置指南：从 cron 到 systemd timers","item":"https://Pan-Binghong.github.io/daily-learning/devops/linux-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E4%BB%8E-cron-%E5%88%B0-systemd-timers/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Linux 定时任务配置指南：从 cron 到 systemd timers","name":"Linux 定时任务配置指南：从 cron 到 systemd timers","description":" 💡 本文介绍如何在 Linux 中使用 systemd timers 配置定时任务，作为 cron 的现代替代方案，并附带实用示例。\n一、为什么选择 systemd timers？ 传统上 Linux 使用 cron 来配置定时任务，但现代 Linux 发行版（Ubuntu、CentOS 7+、Debian 等）默认使用 systemd 来管理服务和进程。systemd timers 相比 cron 有以下优点：\n与 systemd 服务统一管理，日志通过 journalctl 查看 支持依赖关系，可在某服务启动后再执行 支持 monotonic 时钟（系统启动后 X 分钟执行） 可通过 systemctl 随时启用、禁用、查看状态 二、核心概念：.service + .timer systemd timer 由两个文件组成，放在 /etc/systemd/system/ 目录下：\nxxx.service —— 定义要执行的任务（做什么） xxx.timer —— 定义触发时间（什么时候做） 💡 两个文件名称前缀必须一致，例如 backup.service 对应 backup.timer。\n三、实战示例：每天凌晨 2 点执行备份脚本 3.1 准备备份脚本 1 2 3 4 5 6 #!/bin/bash # /usr/local/bin/backup.sh DATE=$(date +%Y%m%d) tar -czf /backup/data_${DATE}.tar.gz /var/data/ echo \u0026#34;backup done: /backup/data_${DATE}.tar.gz\u0026#34; 1 2 # 添加执行权限 chmod +x /usr/local/bin/backup.sh 3.2 创建 .service 文件 1 2 3 4 5 6 7 8 # /etc/systemd/system/backup.service [Unit] Description=Daily Backup Task [Service] Type=oneshot ExecStart=/usr/local/bin/backup.sh User=root Type=oneshot 表示这是一次性任务，执行完即退出，非常适合定时脚本。\n","keywords":["Linux","Shell","Systemd"],"articleBody":" 💡 本文介绍如何在 Linux 中使用 systemd timers 配置定时任务，作为 cron 的现代替代方案，并附带实用示例。\n一、为什么选择 systemd timers？ 传统上 Linux 使用 cron 来配置定时任务，但现代 Linux 发行版（Ubuntu、CentOS 7+、Debian 等）默认使用 systemd 来管理服务和进程。systemd timers 相比 cron 有以下优点：\n与 systemd 服务统一管理，日志通过 journalctl 查看 支持依赖关系，可在某服务启动后再执行 支持 monotonic 时钟（系统启动后 X 分钟执行） 可通过 systemctl 随时启用、禁用、查看状态 二、核心概念：.service + .timer systemd timer 由两个文件组成，放在 /etc/systemd/system/ 目录下：\nxxx.service —— 定义要执行的任务（做什么） xxx.timer —— 定义触发时间（什么时候做） 💡 两个文件名称前缀必须一致，例如 backup.service 对应 backup.timer。\n三、实战示例：每天凌晨 2 点执行备份脚本 3.1 准备备份脚本 1 2 3 4 5 6 #!/bin/bash # /usr/local/bin/backup.sh DATE=$(date +%Y%m%d) tar -czf /backup/data_${DATE}.tar.gz /var/data/ echo \"backup done: /backup/data_${DATE}.tar.gz\" 1 2 # 添加执行权限 chmod +x /usr/local/bin/backup.sh 3.2 创建 .service 文件 1 2 3 4 5 6 7 8 # /etc/systemd/system/backup.service [Unit] Description=Daily Backup Task [Service] Type=oneshot ExecStart=/usr/local/bin/backup.sh User=root Type=oneshot 表示这是一次性任务，执行完即退出，非常适合定时脚本。\n3.3 创建 .timer 文件 1 2 3 4 5 6 7 8 9 10 # /etc/systemd/system/backup.timer [Unit] Description=Run backup every day at 2am [Timer] OnCalendar=*-*-* 02:00:00 Persistent=true [Install] WantedBy=timers.target 💡 Persistent=true：若系统关机期间错过了触发时间，开机后会立即补执行一次。\n3.4 启用并启动 timer 1 2 3 4 5 6 7 8 # 重新加载 systemd 配置 systemctl daemon-reload # 启用并立即启动 timer systemctl enable --now backup.timer # 查看 timer 状态 systemctl status backup.timer 四、常用管理命令速查 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # 查看所有 timer 及下次触发时间 systemctl list-timers --all # 查看 timer 状态 systemctl status backup.timer # 停止 timer systemctl stop backup.timer # 禁用 timer（取消开机自启） systemctl disable backup.timer # 手动立即触发一次任务 systemctl start backup.service # 查看任务执行日志 journalctl -u backup.service -f 五、OnCalendar 时间格式速查 1 2 3 4 5 6 7 OnCalendar=*-*-* 02:00:00 # 每天凌晨 2 点 OnCalendar=Mon *-*-* 09:00:00 # 每周一早上 9 点 OnCalendar=*-*-1 00:00:00 # 每月 1 号零点 OnCalendar=hourly # 每小时 OnCalendar=daily # 每天 00:00 OnCalendar=weekly # 每周一 00:00 OnCalendar=monthly # 每月 1 号 00:00 💡 验证时间格式：systemd-analyze calendar “--* 02:00:00” 可查看下次触发时间。\n六、Monotonic Timer（基于启动时间触发） 除了 OnCalendar，还可以使用 monotonic 方式，基于系统启动时间触发：\n1 2 3 4 5 [Timer] # 系统启动后 5 分钟执行一次 OnBootSec=5min # 之后每隔 1 小时再执行 OnUnitActiveSec=1h 七、总结 创建 xxx.service 文件，定义执行的命令 创建 xxx.timer 文件，定义触发时间（OnCalendar） 执行 systemctl daemon-reload \u0026\u0026 systemctl enable –now xxx.timer 💡 小提示：个人简单脚本用 crontab -e 也完全够用，不必强制使用 systemd timer。systemd timer 更适合系统级服务管理场景。\n参考文献 https://www.freedesktop.org/software/systemd/man/systemd.timer.html\nhttps://wiki.archlinux.org/title/Systemd/Timers\nhttps://www.freedesktop.org/software/systemd/man/systemd.time.html\n","wordCount":"333","inLanguage":"en","datePublished":"2026-04-01T01:58:00Z","dateModified":"2026-04-01T01:58:00Z","author":{"@type":"Person","name":"Pan Binghong"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://Pan-Binghong.github.io/daily-learning/devops/linux-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E4%BB%8E-cron-%E5%88%B0-systemd-timers/"},"publisher":{"@type":"Organization","name":"Pan Binghong's Tech Blog","logo":{"@type":"ImageObject","url":"https://Pan-Binghong.github.io/daily-learning/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=nav><div class=logo><a href=https://Pan-Binghong.github.io/daily-learning/ accesskey=h title="Pan Binghong's Tech Blog (Alt + H)">Pan Binghong's Tech Blog</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://Pan-Binghong.github.io/daily-learning/ title="🏠 首页"><span>🏠 首页</span></a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/ai/ title="🤖 AI"><span>🤖 AI</span></a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/knowledge/ title="📚 知识库"><span>📚 知识库</span></a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/backend/ title="⚙️ 后端"><span>⚙️ 后端</span></a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/devops/ title="🔧 DevOps"><span>🔧 DevOps</span></a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/other/ title="📝 其他"><span>📝 其他</span></a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/search/ title="🔍 搜索"><span>🔍 搜索</span></a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/tags/ title="🏷️ 标签"><span>🏷️ 标签</span></a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/archives/ title="📂 归档"><span>📂 归档</span></a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/about/ title="👤 关于"><span>👤 关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://Pan-Binghong.github.io/daily-learning/>Home</a>&nbsp;»&nbsp;<a href=https://Pan-Binghong.github.io/daily-learning/devops/>Devops</a></div><h1 class="post-title entry-hint-parent">Linux 定时任务配置指南：从 cron 到 systemd timers</h1><div class=post-meta><span title='2026-04-01 01:58:00 +0000 UTC'>April 1, 2026</span>&nbsp;·&nbsp;<span>2 min</span>&nbsp;·&nbsp;<span>333 words</span>&nbsp;·&nbsp;<span>Pan Binghong</span></div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#%e4%b8%80%e4%b8%ba%e4%bb%80%e4%b9%88%e9%80%89%e6%8b%a9-systemd-timers aria-label="一、为什么选择 systemd timers？">一、为什么选择 systemd timers？</a></li><li><a href=#%e4%ba%8c%e6%a0%b8%e5%bf%83%e6%a6%82%e5%bf%b5service--timer aria-label="二、核心概念：.service + .timer">二、核心概念：.service + .timer</a></li><li><a href=#%e4%b8%89%e5%ae%9e%e6%88%98%e7%a4%ba%e4%be%8b%e6%af%8f%e5%a4%a9%e5%87%8c%e6%99%a8-2-%e7%82%b9%e6%89%a7%e8%a1%8c%e5%a4%87%e4%bb%bd%e8%84%9a%e6%9c%ac aria-label="三、实战示例：每天凌晨 2 点执行备份脚本">三、实战示例：每天凌晨 2 点执行备份脚本</a><ul><li><a href=#31-%e5%87%86%e5%a4%87%e5%a4%87%e4%bb%bd%e8%84%9a%e6%9c%ac aria-label="3.1 准备备份脚本">3.1 准备备份脚本</a></li><li><a href=#32-%e5%88%9b%e5%bb%ba-service-%e6%96%87%e4%bb%b6 aria-label="3.2 创建 .service 文件">3.2 创建 .service 文件</a></li><li><a href=#33-%e5%88%9b%e5%bb%ba-timer-%e6%96%87%e4%bb%b6 aria-label="3.3 创建 .timer 文件">3.3 创建 .timer 文件</a></li><li><a href=#34-%e5%90%af%e7%94%a8%e5%b9%b6%e5%90%af%e5%8a%a8-timer aria-label="3.4 启用并启动 timer">3.4 启用并启动 timer</a></li></ul></li><li><a href=#%e5%9b%9b%e5%b8%b8%e7%94%a8%e7%ae%a1%e7%90%86%e5%91%bd%e4%bb%a4%e9%80%9f%e6%9f%a5 aria-label=四、常用管理命令速查>四、常用管理命令速查</a></li><li><a href=#%e4%ba%94oncalendar-%e6%97%b6%e9%97%b4%e6%a0%bc%e5%bc%8f%e9%80%9f%e6%9f%a5 aria-label="五、OnCalendar 时间格式速查">五、OnCalendar 时间格式速查</a></li><li><a href=#%e5%85%admonotonic-timer%e5%9f%ba%e4%ba%8e%e5%90%af%e5%8a%a8%e6%97%b6%e9%97%b4%e8%a7%a6%e5%8f%91 aria-label="六、Monotonic Timer（基于启动时间触发）">六、Monotonic Timer（基于启动时间触发）</a></li><li><a href=#%e4%b8%83%e6%80%bb%e7%bb%93 aria-label=七、总结>七、总结</a></li><li><a href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae aria-label=参考文献>参考文献</a></li></ul></div></details></div><div class=post-content><blockquote><p>💡 本文介绍如何在 Linux 中使用 systemd timers 配置定时任务，作为 cron 的现代替代方案，并附带实用示例。</p></blockquote><h1 id=一为什么选择-systemd-timers>一、为什么选择 systemd timers？<a hidden class=anchor aria-hidden=true href=#一为什么选择-systemd-timers>#</a></h1><p>传统上 Linux 使用 cron 来配置定时任务，但现代 Linux 发行版（Ubuntu、CentOS 7+、Debian 等）默认使用 systemd 来管理服务和进程。systemd timers 相比 cron 有以下优点：</p><ul><li>与 systemd 服务统一管理，日志通过 journalctl 查看</li><li>支持依赖关系，可在某服务启动后再执行</li><li>支持 monotonic 时钟（系统启动后 X 分钟执行）</li><li>可通过 systemctl 随时启用、禁用、查看状态</li></ul><h1 id=二核心概念service--timer>二、核心概念：.service + .timer<a hidden class=anchor aria-hidden=true href=#二核心概念service--timer>#</a></h1><p>systemd timer 由两个文件组成，放在 /etc/systemd/system/ 目录下：</p><ul><li>xxx.service —— 定义要执行的任务（做什么）</li><li>xxx.timer —— 定义触发时间（什么时候做）</li></ul><blockquote><p>💡 两个文件名称前缀必须一致，例如 backup.service 对应 backup.timer。</p></blockquote><h1 id=三实战示例每天凌晨-2-点执行备份脚本>三、实战示例：每天凌晨 2 点执行备份脚本<a hidden class=anchor aria-hidden=true href=#三实战示例每天凌晨-2-点执行备份脚本>#</a></h1><h2 id=31-准备备份脚本>3.1 准备备份脚本<a hidden class=anchor aria-hidden=true href=#31-准备备份脚本>#</a></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=c1># /usr/local/bin/backup.sh</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>DATE</span><span class=o>=</span><span class=k>$(</span>date +%Y%m%d<span class=k>)</span>
+</span></span><span class=line><span class=cl>tar -czf /backup/data_<span class=si>${</span><span class=nv>DATE</span><span class=si>}</span>.tar.gz /var/data/
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;backup done: /backup/data_</span><span class=si>${</span><span class=nv>DATE</span><span class=si>}</span><span class=s2>.tar.gz&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 添加执行权限</span>
+</span></span><span class=line><span class=cl>chmod +x /usr/local/bin/backup.sh
+</span></span></code></pre></td></tr></table></div></div><h2 id=32-创建-service-文件>3.2 创建 .service 文件<a hidden class=anchor aria-hidden=true href=#32-创建-service-文件>#</a></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># /etc/systemd/system/backup.service</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>Unit<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>Description</span><span class=o>=</span>Daily Backup Task
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>Service<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>Type</span><span class=o>=</span>oneshot
+</span></span><span class=line><span class=cl><span class=nv>ExecStart</span><span class=o>=</span>/usr/local/bin/backup.sh
+</span></span><span class=line><span class=cl><span class=nv>User</span><span class=o>=</span>root
+</span></span></code></pre></td></tr></table></div></div><p>Type=oneshot 表示这是一次性任务，执行完即退出，非常适合定时脚本。</p><h2 id=33-创建-timer-文件>3.3 创建 .timer 文件<a hidden class=anchor aria-hidden=true href=#33-创建-timer-文件>#</a></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># /etc/systemd/system/backup.timer</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>Unit<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>Description</span><span class=o>=</span>Run backup every day at 2am
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>Timer<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>OnCalendar</span><span class=o>=</span>*-*-* 02:00:00
+</span></span><span class=line><span class=cl><span class=nv>Persistent</span><span class=o>=</span><span class=nb>true</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>Install<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>WantedBy</span><span class=o>=</span>timers.target
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>💡 Persistent=true：若系统关机期间错过了触发时间，开机后会立即补执行一次。</p></blockquote><h2 id=34-启用并启动-timer>3.4 启用并启动 timer<a hidden class=anchor aria-hidden=true href=#34-启用并启动-timer>#</a></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 重新加载 systemd 配置</span>
+</span></span><span class=line><span class=cl>systemctl daemon-reload
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启用并立即启动 timer</span>
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> --now backup.timer
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看 timer 状态</span>
+</span></span><span class=line><span class=cl>systemctl status backup.timer
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=500&fit=crop&auto=format"></p><h1 id=四常用管理命令速查>四、常用管理命令速查<a hidden class=anchor aria-hidden=true href=#四常用管理命令速查>#</a></h1><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 查看所有 timer 及下次触发时间</span>
+</span></span><span class=line><span class=cl>systemctl list-timers --all
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看 timer 状态</span>
+</span></span><span class=line><span class=cl>systemctl status backup.timer
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 停止 timer</span>
+</span></span><span class=line><span class=cl>systemctl stop backup.timer
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 禁用 timer（取消开机自启）</span>
+</span></span><span class=line><span class=cl>systemctl disable backup.timer
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 手动立即触发一次任务</span>
+</span></span><span class=line><span class=cl>systemctl start backup.service
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看任务执行日志</span>
+</span></span><span class=line><span class=cl>journalctl -u backup.service -f
+</span></span></code></pre></td></tr></table></div></div><h1 id=五oncalendar-时间格式速查>五、OnCalendar 时间格式速查<a hidden class=anchor aria-hidden=true href=#五oncalendar-时间格式速查>#</a></h1><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>OnCalendar=*-*-* 02:00:00      # 每天凌晨 2 点
+</span></span><span class=line><span class=cl>OnCalendar=Mon *-*-* 09:00:00  # 每周一早上 9 点
+</span></span><span class=line><span class=cl>OnCalendar=*-*-1 00:00:00      # 每月 1 号零点
+</span></span><span class=line><span class=cl>OnCalendar=hourly              # 每小时
+</span></span><span class=line><span class=cl>OnCalendar=daily               # 每天 00:00
+</span></span><span class=line><span class=cl>OnCalendar=weekly              # 每周一 00:00
+</span></span><span class=line><span class=cl>OnCalendar=monthly             # 每月 1 号 00:00
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>💡 验证时间格式：systemd-analyze calendar &ldquo;<em>-</em>-* 02:00:00&rdquo; 可查看下次触发时间。</p></blockquote><h1 id=六monotonic-timer基于启动时间触发>六、Monotonic Timer（基于启动时间触发）<a hidden class=anchor aria-hidden=true href=#六monotonic-timer基于启动时间触发>#</a></h1><p>除了 OnCalendar，还可以使用 monotonic 方式，基于系统启动时间触发：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>Timer<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=c1># 系统启动后 5 分钟执行一次</span>
+</span></span><span class=line><span class=cl><span class=nv>OnBootSec</span><span class=o>=</span>5min
+</span></span><span class=line><span class=cl><span class=c1># 之后每隔 1 小时再执行</span>
+</span></span><span class=line><span class=cl><span class=nv>OnUnitActiveSec</span><span class=o>=</span>1h
+</span></span></code></pre></td></tr></table></div></div><h1 id=七总结>七、总结<a hidden class=anchor aria-hidden=true href=#七总结>#</a></h1><ul><li>创建 xxx.service 文件，定义执行的命令</li><li>创建 xxx.timer 文件，定义触发时间（OnCalendar）</li><li>执行 systemctl daemon-reload && systemctl enable &ndash;now xxx.timer</li></ul><blockquote><p>💡 小提示：个人简单脚本用 crontab -e 也完全够用，不必强制使用 systemd timer。systemd timer 更适合系统级服务管理场景。</p></blockquote><hr><h1 id=参考文献>参考文献<a hidden class=anchor aria-hidden=true href=#参考文献>#</a></h1><hr><p><a href=https://www.freedesktop.org/software/systemd/man/systemd.timer.html>https://www.freedesktop.org/software/systemd/man/systemd.timer.html</a></p><p><a href=https://wiki.archlinux.org/title/Systemd/Timers>https://wiki.archlinux.org/title/Systemd/Timers</a></p><p><a href=https://www.freedesktop.org/software/systemd/man/systemd.time.html>https://www.freedesktop.org/software/systemd/man/systemd.time.html</a></p></div><footer class=post-footer><ul class=post-tags><li><a href=https://Pan-Binghong.github.io/daily-learning/tags/linux/>Linux</a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/tags/shell/>Shell</a></li><li><a href=https://Pan-Binghong.github.io/daily-learning/tags/systemd/>Systemd</a></li></ul><nav class=paginav><a class=next href=https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E4%BB%8E%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF%E5%88%B0-merge-request/><span class=title>Next »</span><br><span>Git 分支合并完全指南：从功能分支到 Merge Request</span></a></nav><ul class=share-buttons><li><a target=_blank rel="noopener noreferrer" aria-label="share Linux 定时任务配置指南：从 cron 到 systemd timers on x" href="https://x.com/intent/tweet/?text=Linux%20%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%ef%bc%9a%e4%bb%8e%20cron%20%e5%88%b0%20systemd%20timers&amp;url=https%3a%2f%2fPan-Binghong.github.io%2fdaily-learning%2fdevops%2flinux-%25E5%25AE%259A%25E6%2597%25B6%25E4%25BB%25BB%25E5%258A%25A1%25E9%2585%258D%25E7%25BD%25AE%25E6%258C%2587%25E5%258D%2597%25E4%25BB%258E-cron-%25E5%2588%25B0-systemd-timers%2f&amp;hashtags=Linux%2cShell%2cSystemd"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446C483.971.0 512 28.03 512 62.554zM269.951 190.75 182.567 75.216H56L207.216 272.95 63.9 436.783h61.366L235.9 310.383l96.667 126.4H456L298.367 228.367l134-153.151H371.033zM127.633 110h36.468l219.38 290.065H349.5z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Linux 定时任务配置指南：从 cron 到 systemd timers on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fPan-Binghong.github.io%2fdaily-learning%2fdevops%2flinux-%25E5%25AE%259A%25E6%2597%25B6%25E4%25BB%25BB%25E5%258A%25A1%25E9%2585%258D%25E7%25BD%25AE%25E6%258C%2587%25E5%258D%2597%25E4%25BB%258E-cron-%25E5%2588%25B0-systemd-timers%2f&amp;title=Linux%20%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%ef%bc%9a%e4%bb%8e%20cron%20%e5%88%b0%20systemd%20timers&amp;summary=Linux%20%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%ef%bc%9a%e4%bb%8e%20cron%20%e5%88%b0%20systemd%20timers&amp;source=https%3a%2f%2fPan-Binghong.github.io%2fdaily-learning%2fdevops%2flinux-%25E5%25AE%259A%25E6%2597%25B6%25E4%25BB%25BB%25E5%258A%25A1%25E9%2585%258D%25E7%25BD%25AE%25E6%258C%2587%25E5%258D%2597%25E4%25BB%258E-cron-%25E5%2588%25B0-systemd-timers%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Linux 定时任务配置指南：从 cron 到 systemd timers on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fPan-Binghong.github.io%2fdaily-learning%2fdevops%2flinux-%25E5%25AE%259A%25E6%2597%25B6%25E4%25BB%25BB%25E5%258A%25A1%25E9%2585%258D%25E7%25BD%25AE%25E6%258C%2587%25E5%258D%2597%25E4%25BB%258E-cron-%25E5%2588%25B0-systemd-timers%2f&title=Linux%20%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%ef%bc%9a%e4%bb%8e%20cron%20%e5%88%b0%20systemd%20timers"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Linux 定时任务配置指南：从 cron 到 systemd timers on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fPan-Binghong.github.io%2fdaily-learning%2fdevops%2flinux-%25E5%25AE%259A%25E6%2597%25B6%25E4%25BB%25BB%25E5%258A%25A1%25E9%2585%258D%25E7%25BD%25AE%25E6%258C%2587%25E5%258D%2597%25E4%25BB%258E-cron-%25E5%2588%25B0-systemd-timers%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Linux 定时任务配置指南：从 cron 到 systemd timers on whatsapp" href="https://api.whatsapp.com/send?text=Linux%20%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%ef%bc%9a%e4%bb%8e%20cron%20%e5%88%b0%20systemd%20timers%20-%20https%3a%2f%2fPan-Binghong.github.io%2fdaily-learning%2fdevops%2flinux-%25E5%25AE%259A%25E6%2597%25B6%25E4%25BB%25BB%25E5%258A%25A1%25E9%2585%258D%25E7%25BD%25AE%25E6%258C%2587%25E5%258D%2597%25E4%25BB%258E-cron-%25E5%2588%25B0-systemd-timers%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Linux 定时任务配置指南：从 cron 到 systemd timers on telegram" href="https://telegram.me/share/url?text=Linux%20%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%ef%bc%9a%e4%bb%8e%20cron%20%e5%88%b0%20systemd%20timers&amp;url=https%3a%2f%2fPan-Binghong.github.io%2fdaily-learning%2fdevops%2flinux-%25E5%25AE%259A%25E6%2597%25B6%25E4%25BB%25BB%25E5%258A%25A1%25E9%2585%258D%25E7%25BD%25AE%25E6%258C%2587%25E5%258D%2597%25E4%25BB%258E-cron-%25E5%2588%25B0-systemd-timers%2f"><svg viewBox="2 2 28 28" height="30" width="30" fill="currentColor"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Linux 定时任务配置指南：从 cron 到 systemd timers on ycombinator" href="https://news.ycombinator.com/submitlink?t=Linux%20%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1%e9%85%8d%e7%bd%ae%e6%8c%87%e5%8d%97%ef%bc%9a%e4%bb%8e%20cron%20%e5%88%b0%20systemd%20timers&u=https%3a%2f%2fPan-Binghong.github.io%2fdaily-learning%2fdevops%2flinux-%25E5%25AE%259A%25E6%2597%25B6%25E4%25BB%25BB%25E5%258A%25A1%25E9%2585%258D%25E7%25BD%25AE%25E6%258C%2587%25E5%258D%2597%25E4%25BB%258E-cron-%25E5%2588%25B0-systemd-timers%2f"><svg width="30" height="30" viewBox="0 0 512 512" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446zM183.8767 87.9921h-62.034L230.6673 292.4508V424.0079h50.6655V292.4508L390.1575 87.9921H328.1233L256 238.2489z"/></svg></a></li></ul></footer><div class=comments-section><hr class=comments-divider><div class=giscus-comments><h3 class=comments-title>💬 评论讨论</h3><p class=comments-hint>使用 GitHub 账号登录即可参与讨论。评论将同步到
+<a href=https://github.com/Pan-Binghong/daily-learning/discussions target=_blank rel=noopener>GitHub Discussions</a></p><script src=https://giscus.app/client.js data-repo=Pan-Binghong/daily-learning data-repo-id=R_kgDONYfgVw data-category=Announcements data-category-id=DIC_kwDONYfgV84CkvE7 data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=zh-CN data-loading=lazy crossorigin=anonymous async></script></div></div><style>.comments-section{margin-top:3rem}.comments-divider{margin:2rem 0;border:none;border-top:2px solid var(--border)}.comments-title{font-size:1.5rem;margin-bottom:1rem;color:var(--primary)}.comments-hint{font-size:.9rem;color:var(--secondary);margin-bottom:1.5rem;padding:1rem;background:var(--code-bg);border-radius:8px;border-left:4px solid var(--primary)}.comments-hint a{color:var(--primary);text-decoration:underline}.giscus-comments{margin-top:2rem}</style></article></main><footer class=footer><span>&copy; 2026 <a href=https://Pan-Binghong.github.io/daily-learning/>Pan Binghong's Tech Blog</a></span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg></a><div class=reading-progress-bar id=reading-progress></div><script>window.addEventListener("scroll",function(){const e=document.getElementById("reading-progress");if(!e)return;const t=window.innerHeight,n=document.documentElement.scrollHeight-t,s=window.scrollY,o=s/n*100;e.style.width=o+"%"}),document.addEventListener("DOMContentLoaded",function(){const e=document.querySelectorAll(".copy-text");e.forEach(e=>{e.addEventListener("click",function(){this.textContent="✓ 已复制",setTimeout(()=>{this.textContent="复制"},2e3)})})}),document.addEventListener("DOMContentLoaded",function(){const e=document.querySelectorAll('a[href^="http"]');e.forEach(e=>{e.hostname!==window.location.hostname&&(e.setAttribute("target","_blank"),e.setAttribute("rel","noopener noreferrer"))})}),document.addEventListener("DOMContentLoaded",function(){const e=document.querySelectorAll(".post-content img");e.forEach(e=>{e.style.cursor="pointer",e.addEventListener("click",function(){window.open(this.src,"_blank")})})})</script><style>#top-link{transition:all .3s ease}#top-link:hover{transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,.2)}</style><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
