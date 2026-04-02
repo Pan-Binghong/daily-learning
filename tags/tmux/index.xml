@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tmux on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/tmux/</link><description>Recent content in Tmux on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.1</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Feb 2025 08:18:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/tmux/index.xml" rel="self" type="application/rss+xml"/><item><title>Tmux操作一览</title><link>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</link><pubDate>Tue, 25 Feb 2025 01:49:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</guid><description>&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tmux on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/tmux/</link><description>Recent content in Tmux on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2026 04:32:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/tmux/index.xml" rel="self" type="application/rss+xml"/><item><title>Tmux操作一览</title><link>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</link><pubDate>Tue, 25 Feb 2025 01:49:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;💡 Tmux 是一个非常强大的终端复用工具，它可以帮助你在一个窗口中管理多个会话，非常适合长时间运行任务或多任务处理。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
@@ -47,4 +47,23 @@
 &lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h1 id="核心概念server--session--window--pane"&gt;核心概念：Server / Session / Window / Pane&lt;/h1&gt;
+&lt;p&gt;tmux 的架构分为四层，从外到内依次是：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tmux server（后台进程，自动启动）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └── session（会话，可多个）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └── window（窗口，类似浏览器标签页）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └── pane（窗格，窗口内分割的终端）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="server服务进程"&gt;Server（服务进程）&lt;/h3&gt;
+&lt;p&gt;tmux 启动后会在后台运行一个 server 进程，管理所有会话。通常不需要手动操作，关闭所有 session 后 server 自动退出。&lt;/p&gt;</description></item></channel></rss>
