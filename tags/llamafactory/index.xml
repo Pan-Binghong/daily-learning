@@ -1,21 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>LLamaFactory on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/llamafactory/</link><description>Recent content in LLamaFactory on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Wed, 27 Nov 2024 13:46:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/llamafactory/index.xml" rel="self" type="application/rss+xml"/><item><title>基于LLaMA Factory训练+推理Qwen2.5-0.5B-Instruct</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Ellama-factory%E8%AE%AD%E7%BB%83+%E6%8E%A8%E7%90%86qwen2.5-0.5b-instruct/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Ellama-factory%E8%AE%AD%E7%BB%83+%E6%8E%A8%E7%90%86qwen2.5-0.5b-instruct/</guid><description>&lt;h2 id="llama-factory框架总述"&gt;LLaMA-Factory框架总述&lt;/h2&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/3de256cf-4100-4fd2-96f2-cc014c18015e/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SKXZZRL7%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034649Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIDH%2F0%2FyQ9gFNHy5bwf8SLEaFWL8vpQF%2BKktACJrAfDLpAiEA53uip0KMXu7dOmKl77Ai4bL0sGr70tE8eoAL%2F0sQUDkq%2FwMIfRAAGgw2Mzc0MjMxODM4MDUiDGRjnD99B0dr34USGCrcA8mPh%2FaKgbZBZMQqJrpsjQ8uDyk6eOoebYrZPqvSfaHdLR%2B34HVr05o4RuE0VLA4v6RHKz9GbvuZ70qLk9Ah0oi%2FXmeWnPbD9Xf%2FTUB5a0PJHyUkYufRcVasn2sPV4ZilDjzg7YJPjfWE9JKOn5lw89cFjiCB%2B2xEG02XJWHMHT5kt2%2Fjqfefglmx%2Fg%2FYHyJRH5klKWaI3Q64zefudI2qbWTxuk%2FWmQjkJUcHwFl8imISkdLRvEuXRtT3l8Alo2xgQ7JbGc5Yty6N4xvZzRXb7z4f%2BfUtLLBeIZKfAVyvtIczux0%2BRw6QYdrpuoA5Nd8w7i%2B7B7TyOjIlCGhq4W7DgBu3aN%2Bzqs5NPC%2Fsmy9R5DgTK3PdgqWPRDnSTPK4fteUj%2FiIXcuFFm940EhTo6aNwK2CW3ON6ujj25IWlWR2q7p8Ci1ww5UfQLZo7yBTFge64%2FsNx9EgRJ%2FkEQpb3xh7sha3uhdXKER4KAUD5bcq8zBRcYl4zQkadYUoz3gYmUCxyyXWhw6jesNy810ImdN6GwC67zrCOBPw%2F3zqnexkO4xgY01kXuziDoc1gtOfwXKP59lVbdNRpiHtNjJU0PCxe8Cv2hbSx8SV%2FoZcSAqGYnarmw6QyyEvTDTK9nrMP3rvM4GOqUBmgqjL5CfAUYn%2BqeP%2FEbNwdgipnXmuohaCxhliMRpCm7%2B%2FJmASn%2FSUDUoVyZyVWI6N2h1x8MTJQVdkq93%2F%2F2Lwe%2FJRpg%2FNgvtWTlsBx8Y3TzDSmPX2x1wTD78mM3rgZ%2FQPUPUg2stMS%2F084Vpox27MXxCKdmWlUgcxvGx7%2FP0m0C5DAmDly4FjLOM6z1LFWPyHpM%2BncHReN0b%2FpEzZY%2BQBqX4nhmN&amp;X-Amz-Signature=ca4c6801dd16db0821abf36d1ea033344b22b4c12467545a4f6371170feda01e&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;p&gt;前置条件: 环境，模型&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;模型路径 : /root/autodl-tmp/xinference/modelscope/hub/qwen/Qwen2___5-0___5B-Instruct&lt;/li&gt;
-&lt;li&gt;微调完成 : /root/saves/Qwen2-0.5B-Chat/lora/train_2024-10-10-19-48-53/checkpoint-62&lt;/li&gt;
-&lt;li&gt;融合完成 : /root/LLaMA-Factory/models/qwen2.5&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="数据"&gt;数据&lt;/h2&gt;
-&lt;h2 id="训练"&gt;训练&lt;/h2&gt;
-&lt;h2 id="推理"&gt;推理&lt;/h2&gt;
-&lt;h2 id="reference"&gt;Reference&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href="https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct"&gt;https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href="https://llamafactory.readthedocs.io/zh-cn/latest/index.html"&gt;https://llamafactory.readthedocs.io/zh-cn/latest/index.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href="https://inference.readthedocs.io/zh-cn/latest/"&gt;https://inference.readthedocs.io/zh-cn/latest/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>LLamaFactory on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/llamafactory/</link><description>Recent content in LLamaFactory on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Wed, 27 Nov 2024 13:46:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/llamafactory/index.xml" rel="self" type="application/rss+xml"/><item><title>基于LLaMA Factory训练+推理Qwen2.5-0.5B-Instruct</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Ellama-factory%E8%AE%AD%E7%BB%83+%E6%8E%A8%E7%90%86qwen2.5-0.5b-instruct/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Ellama-factory%E8%AE%AD%E7%BB%83+%E6%8E%A8%E7%90%86qwen2.5-0.5b-instruct/</guid><description>&lt;h2 id="llama-factory框架总述">LLaMA-Factory框架总述&lt;/h2>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/3de256cf-4100-4fd2-96f2-cc014c18015e/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WNYQM7SN%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063432Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCJ0TGLo%2Bcjqko0An%2BIM9KUQzThQBlAvRJUdgi7qserKgIgFQSxBZ6wjyLd%2BY8wtYbn3cd6AWj7GkghIaPIdwFqlD0q%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDNA%2FNBddLeQvECmbHircA%2FIr4zONkqi4aPP1hytCCG21hEiJz5BQjaCXy9tSSjB2aOlkdKcfFyrLdtqSQYFV6ypgldtukzk9R8D30xxkEIDBdV1jbVaORxkxnszrzSNWY8kpv8OWGxncEnyEPj6ccECx0H6%2ByqUhDSSxOt7SwhS%2FMSt2LsXqszxYc%2BNOWAYEYLZPja2CtAhrCE%2FNcGaL9HAbZjvUHyMvePcx084ifG7Cn71jt5PuZzBk5XOfJTYGMy9d9ZeEPZDQTc%2BqENjvlwAJIPL5dRwntoV4GMdj%2FKvJnkYQWL9b7HBxz4mKDYR9r8NybxVWBRrYnERWEtzn%2Bp%2B0CQf3oOSe1iP1GezEJUDyOc2iBpVJ%2FBD4rf%2BtC6hrAiSq32pEkWiQUDwqrQPYNzlL1TMtydB7ZR81xsAjFx2g5mxu4sAszAlNXsPORKHIcqoXZURfHAd6nmLd%2BWjNqRAarGkJ5RZDR9OKhFUVU%2FcdjZZlM1vFWTjCPZsalb5qbYnOO2ZCsFttFYJbwtXTAQCktPANBwWImDSQgBxH1Rk5flZBQwQM9cC1ILPUb7jPpjMkxVYXWBqfUrvtnP5s6XII%2BvSgqLK7ih4IdNdiu3hm5UVgzhnBX3h3wdHGVviiItojieHZ5u4ZmHENMJGuvc4GOqUBz53O0xl9K8TQVfxpCN50PH9Zd%2BGEaSM00GFCDO7R9IO6Y%2BCVKQo%2BG%2BdQ%2FtK5teHgY1m6vLYbWacuMSuBr1mWzO6%2BSI87CFE6%2FtVF2Gmb8wFyVBYADrBNqgtp09WoRBPwp110rb24KtTODXRSHHvElT6vX%2B46snXYYnXJXEq60U0yAlGiDVi2wX7mM6DNf%2B7eRsjVZiYQNTG9Usf1Bqu5%2FmmjN8xF&amp;X-Amz-Signature=fcfe49e6dace7df145f0f8d48bc9cfea1a4ecc9c3ac82c25baa11f30a2d580fd&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;p>前置条件: 环境，模型&lt;/p>
+&lt;ul>
+&lt;li>模型路径 : /root/autodl-tmp/xinference/modelscope/hub/qwen/Qwen2___5-0___5B-Instruct&lt;/li>
+&lt;li>微调完成 : /root/saves/Qwen2-0.5B-Chat/lora/train_2024-10-10-19-48-53/checkpoint-62&lt;/li>
+&lt;li>融合完成 : /root/LLaMA-Factory/models/qwen2.5&lt;/li>
+&lt;/ul>
+&lt;h2 id="数据">数据&lt;/h2>
+&lt;h2 id="训练">训练&lt;/h2>
+&lt;h2 id="推理">推理&lt;/h2>
+&lt;h2 id="reference">Reference&lt;/h2>
+&lt;blockquote>
+&lt;p>&lt;a href="https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct">https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;a href="https://llamafactory.readthedocs.io/zh-cn/latest/index.html">https://llamafactory.readthedocs.io/zh-cn/latest/index.html&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;a href="https://inference.readthedocs.io/zh-cn/latest/">https://inference.readthedocs.io/zh-cn/latest/&lt;/a>&lt;/p>&lt;/blockquote></description></item></channel></rss>

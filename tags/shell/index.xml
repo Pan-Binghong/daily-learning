@@ -1,99 +1,95 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Shell on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/shell/</link><description>Recent content in Shell on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2026 01:58:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux 定时任务配置指南：从 cron 到 systemd timers</title><link>https://Pan-Binghong.github.io/daily-learning/devops/linux-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E4%BB%8E-cron-%E5%88%B0-systemd-timers/</link><pubDate>Wed, 01 Apr 2026 01:58:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/linux-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E4%BB%8E-cron-%E5%88%B0-systemd-timers/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 本文介绍如何在 Linux 中使用 systemd timers 配置定时任务，作为 cron 的现代替代方案，并附带实用示例。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id="一为什么选择-systemd-timers"&gt;一、为什么选择 systemd timers？&lt;/h1&gt;
-&lt;p&gt;传统上 Linux 使用 cron 来配置定时任务，但现代 Linux 发行版（Ubuntu、CentOS 7+、Debian 等）默认使用 systemd 来管理服务和进程。systemd timers 相比 cron 有以下优点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;与 systemd 服务统一管理，日志通过 journalctl 查看&lt;/li&gt;
-&lt;li&gt;支持依赖关系，可在某服务启动后再执行&lt;/li&gt;
-&lt;li&gt;支持 monotonic 时钟（系统启动后 X 分钟执行）&lt;/li&gt;
-&lt;li&gt;可通过 systemctl 随时启用、禁用、查看状态&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id="二核心概念service--timer"&gt;二、核心概念：.service + .timer&lt;/h1&gt;
-&lt;p&gt;systemd timer 由两个文件组成，放在 /etc/systemd/system/ 目录下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;xxx.service —— 定义要执行的任务（做什么）&lt;/li&gt;
-&lt;li&gt;xxx.timer —— 定义触发时间（什么时候做）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;💡 两个文件名称前缀必须一致，例如 backup.service 对应 backup.timer。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id="三实战示例每天凌晨-2-点执行备份脚本"&gt;三、实战示例：每天凌晨 2 点执行备份脚本&lt;/h1&gt;
-&lt;h2 id="31-准备备份脚本"&gt;3.1 准备备份脚本&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#!/bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# /usr/local/bin/backup.sh&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;DATE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;date +%Y%m%d&lt;span class="k"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tar -czf /backup/data_&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DATE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.tar.gz /var/data/
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;backup done: /backup/data_&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DATE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.tar.gz&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 添加执行权限&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;chmod +x /usr/local/bin/backup.sh
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="32-创建-service-文件"&gt;3.2 创建 .service 文件&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;span class="lnt"&gt;8
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# /etc/systemd/system/backup.service&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;Unit&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Daily Backup Task
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;Service&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;oneshot
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/bin/backup.sh
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;User&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;root
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Type=oneshot 表示这是一次性任务，执行完即退出，非常适合定时脚本。&lt;/p&gt;</description></item><item><title>Shell学习</title><link>https://Pan-Binghong.github.io/daily-learning/devops/shell%E5%AD%A6%E4%B9%A0/</link><pubDate>Wed, 08 Jan 2025 02:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/shell%E5%AD%A6%E4%B9%A0/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 随便记录一下Shell编程中的语法以及常用操作等…&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="基础"&gt;基础&lt;/h2&gt;
-&lt;h3 id="变量"&gt;变量&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;变量名称要规范, 别用一些很抽象的符号, 单词, 空格等。&lt;/li&gt;
-&lt;li&gt;使用变量用$, 最好配合{} 使用。&lt;/li&gt;
-&lt;li&gt;字符串相关的操作&lt;/li&gt;
-&lt;li&gt;数组&lt;/li&gt;
-&lt;li&gt;注释, 单行注释用# ,多行注释: ‘&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id="传参"&gt;传参&lt;/h3&gt;
-&lt;hr&gt;
-&lt;h3 id="运算"&gt;运算&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://www.runoob.com/linux/linux-shell-basic-operators.html"&gt;https://www.runoob.com/linux/linux-shell-basic-operators.html&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="echoprintf"&gt;Echo\Printf&lt;/h3&gt;
-&lt;hr&gt;
-&lt;h2 id="进阶"&gt;进阶&lt;/h2&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Shell on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/shell/</link><description>Recent content in Shell on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2026 01:58:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux 定时任务配置指南：从 cron 到 systemd timers</title><link>https://Pan-Binghong.github.io/daily-learning/devops/linux-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E4%BB%8E-cron-%E5%88%B0-systemd-timers/</link><pubDate>Wed, 01 Apr 2026 01:58:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/linux-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E4%BB%8E-cron-%E5%88%B0-systemd-timers/</guid><description>&lt;blockquote>
+&lt;p>💡 本文介绍如何在 Linux 中使用 systemd timers 配置定时任务，作为 cron 的现代替代方案，并附带实用示例。&lt;/p>&lt;/blockquote>
+&lt;h1 id="一为什么选择-systemd-timers">一、为什么选择 systemd timers？&lt;/h1>
+&lt;p>传统上 Linux 使用 cron 来配置定时任务，但现代 Linux 发行版（Ubuntu、CentOS 7+、Debian 等）默认使用 systemd 来管理服务和进程。systemd timers 相比 cron 有以下优点：&lt;/p>
+&lt;ul>
+&lt;li>与 systemd 服务统一管理，日志通过 journalctl 查看&lt;/li>
+&lt;li>支持依赖关系，可在某服务启动后再执行&lt;/li>
+&lt;li>支持 monotonic 时钟（系统启动后 X 分钟执行）&lt;/li>
+&lt;li>可通过 systemctl 随时启用、禁用、查看状态&lt;/li>
+&lt;/ul>
+&lt;h1 id="二核心概念service--timer">二、核心概念：.service + .timer&lt;/h1>
+&lt;p>systemd timer 由两个文件组成，放在 /etc/systemd/system/ 目录下：&lt;/p>
+&lt;ul>
+&lt;li>xxx.service —— 定义要执行的任务（做什么）&lt;/li>
+&lt;li>xxx.timer —— 定义触发时间（什么时候做）&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>💡 两个文件名称前缀必须一致，例如 backup.service 对应 backup.timer。&lt;/p>&lt;/blockquote>
+&lt;h1 id="三实战示例每天凌晨-2-点执行备份脚本">三、实战示例：每天凌晨 2 点执行备份脚本&lt;/h1>
+&lt;h2 id="31-准备备份脚本">3.1 准备备份脚本&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="c1"># /usr/local/bin/backup.sh&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DATE&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>date +%Y%m%d&lt;span class="k">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tar -czf /backup/data_&lt;span class="si">${&lt;/span>&lt;span class="nv">DATE&lt;/span>&lt;span class="si">}&lt;/span>.tar.gz /var/data/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;backup done: /backup/data_&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">DATE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">.tar.gz&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加执行权限&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chmod +x /usr/local/bin/backup.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="32-创建-service-文件">3.2 创建 .service 文件&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># /etc/systemd/system/backup.service&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>Unit&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">Description&lt;/span>&lt;span class="o">=&lt;/span>Daily Backup Task
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>Service&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">Type&lt;/span>&lt;span class="o">=&lt;/span>oneshot
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">ExecStart&lt;/span>&lt;span class="o">=&lt;/span>/usr/local/bin/backup.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">User&lt;/span>&lt;span class="o">=&lt;/span>root
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Type=oneshot 表示这是一次性任务，执行完即退出，非常适合定时脚本。&lt;/p></description></item><item><title>Shell学习</title><link>https://Pan-Binghong.github.io/daily-learning/devops/shell%E5%AD%A6%E4%B9%A0/</link><pubDate>Wed, 08 Jan 2025 02:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/shell%E5%AD%A6%E4%B9%A0/</guid><description>&lt;blockquote>
+&lt;p>💡 随便记录一下Shell编程中的语法以及常用操作等…&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="基础">基础&lt;/h2>
+&lt;h3 id="变量">变量&lt;/h3>
+&lt;ul>
+&lt;li>变量名称要规范, 别用一些很抽象的符号, 单词, 空格等。&lt;/li>
+&lt;li>使用变量用$, 最好配合{} 使用。&lt;/li>
+&lt;li>字符串相关的操作&lt;/li>
+&lt;li>数组&lt;/li>
+&lt;li>注释, 单行注释用# ,多行注释: ‘&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="传参">传参&lt;/h3>
+&lt;hr>
+&lt;h3 id="运算">运算&lt;/h3>
+&lt;p>&lt;a href="https://www.runoob.com/linux/linux-shell-basic-operators.html">https://www.runoob.com/linux/linux-shell-basic-operators.html&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h3 id="echoprintf">Echo\Printf&lt;/h3>
+&lt;hr>
+&lt;h2 id="进阶">进阶&lt;/h2>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item></channel></rss>

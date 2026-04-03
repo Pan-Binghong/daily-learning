@@ -1,90 +1,108 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Docker on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/docker/</link><description>Recent content in Docker on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Thu, 26 Feb 2026 04:51:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>查看容器启动命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 26 Feb 2026 04:50:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 在使用 Docker 部署和启动容器时，我们常常会遇到一个问题，即没有记录下 docker run 命令，导致后续重新部署时无法准确找到之前的启动命令。这种情况让我们感到困扰。为了解决这个问题，我将分享一种方法，让您轻松找到当时的启动命令，方便后续的重新部署工作。让我们一起来了解如何记录和检索 Docker 容器的启动命令，以便在需要时快速找到并重新使用它们。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;runlike -p &amp;lt;container_id&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>多机批量加载Docker镜像&amp;镜像重命名</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%8A%A0%E8%BD%BDdocker%E9%95%9C%E5%83%8F%E9%95%9C%E5%83%8F%E9%87%8D%E5%91%BD%E5%90%8D/</link><pubDate>Thu, 28 Nov 2024 14:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%8A%A0%E8%BD%BDdocker%E9%95%9C%E5%83%8F%E9%95%9C%E5%83%8F%E9%87%8D%E5%91%BD%E5%90%8D/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 多台服务器同时批量加载 docker 镜像 + 重命名，并创建容器。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="加载镜像"&gt;加载镜像&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;前置条件为：机器hostname设置为h800-01, h800-xx格式。准备service.txt 文件，里面每行保存机器IP或者hostname。&lt;/li&gt;
-&lt;li&gt;单机执行命令&lt;/li&gt;
-&lt;li&gt;多机执行命令&lt;/li&gt;
-&lt;li&gt;验证&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="重命名镜像"&gt;重命名镜像&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;多机批量重命名命令&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="创建容器"&gt;创建容器&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;单机执行命令&lt;/li&gt;
-&lt;li&gt;多机执行命令&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;</description></item><item><title>多机批量安装Nvidia-Docker</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%AE%89%E8%A3%85nvidia-docker/</link><pubDate>Thu, 28 Nov 2024 14:23:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%AE%89%E8%A3%85nvidia-docker/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 多台服务器同时安装 Nvidia-docker&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="单机安装"&gt;单机安装&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;单机安装全部命令&lt;/li&gt;
-&lt;li&gt;将以上内容保存为一个文件，命名为：installNGC&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="批量安装脚本"&gt;批量安装脚本&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;脚本&lt;/li&gt;
-&lt;li&gt;脚本解释&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;</description></item><item><title>Docker Common Commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/docker-common-commands/</link><pubDate>Wed, 27 Nov 2024 15:00:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/docker-common-commands/</guid><description>&lt;hr&gt;
-&lt;h2 id="常用就完事"&gt;常用就完事&lt;/h2&gt;
-&lt;hr&gt;
-&lt;h2 id="解决问题"&gt;解决问题&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;问题：permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get &amp;ldquo;&lt;a href="http://%2Fvar%2Frun%2Fdocker.sock/v1.47/containers/json%22"&gt;http://%2Fvar%2Frun%2Fdocker.sock/v1.47/containers/json&amp;quot;&lt;/a&gt;: dial unix /var/run/docker.sock: connect: permission denied&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;问题: 修改docker源&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>离线安装Docker&amp;Nvidia-Docker</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</link><pubDate>Wed, 27 Nov 2024 13:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 录离线安装 Nvidia-Docker 流程手册，2023 年 8 月 5 日 20:48:35.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/8690192b-5740-4be7-a8d3-109dd45cd1b0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4665QHEM3LN%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034917Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQC4s2u6%2FGxtvGL7PHN1jNyFQ%2BQ9MYwHq8OHW4QkQaTzKwIgBQ%2BgQVxqsfcXrjm8SQGaySSbkzdOqT%2FCPJ6G2EaUHyAq%2FwMIfRAAGgw2Mzc0MjMxODM4MDUiDJPiB0cWZN0bdjF74yrcAz7os7KMtdCtW183UOmj0ZlNdX1pirFaZEpT6AySh9PerI0CAx0UVJXtevO4ejrOYQ%2FbY3pGWgg3UzZTKugRw1AAUvnGsp7nW7EjfYRkQdmJ0hhRpTYKOABh9kfgBCbs1vNtDkEfwdl%2FzIUYywyondKDKxTaJza7JZ7kZYZZh1dE59tvU9vhyA7gKpiHArkvfh5R7UC7qqEJ8lzHITOgRv78jWkiEWWGvYwXcZ%2B5D9HNks76EPWKt2e9CHy6aZou%2BdnTg5CJlUlpG7roYSO%2F6qUea2sN0Y%2FUar7rRSTKsu9xshskwyTTKXxVcvVRFW8piILQ5mUjiUoNAhr3Ts%2BxnwQT%2Fb3w5gpZfPZqfaJ508vgczAu84UX1aAjlR6jkRXONzlZ2wBV1RVQJCqG5AgSyJpW7WsxklgW%2FXxz4AeV2kEwLy2x6QvPMC4v6FZsWst0NL1IaG4SqseyLBPhs4Olzwdi%2B7q%2FsNlgjr9CTTXeC1JwIyNgA76hQMMlcZeEVeYdRVj%2BQD9LFNrhU8QzOdffJo3fB8y05P36t7MVCx4I3SiNIkrrqgchj17Pboz%2BzLqV9tl%2F1iw2A9PKy3pfWoJRszuPL9na8ibb0jwabdDXx7mOmKPGX8SlCwep3rFgMJbnvM4GOqUBYWRsHwoB8c9gmK1RSVYhBRoWz5BnXZwu%2BkEvOzELL6pa%2BbcjHd2HP%2Bt9iQb2%2BGXSlG9AWaqejpDqnPoGwJgQe5Gqov4Wnp6%2FWuOJOoaEYABc6ZgpPgRZrrSGIGz4NObxikd5j86eQecfVqc9JtvOvLjWkmL%2BxTFWXUnUqGkoGh8pDX6DOubv4UCOhnmLa5zm9C6feDa4yJLae9E1p2aG8x3mkVNR&amp;X-Amz-Signature=e1514cc9a45fa15a8bdedf26172db5ee715a39dee6c3ad198d7a328a8de1369c&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id="docker离线安装"&gt;Docker离线安装&lt;/h1&gt;
-&lt;p&gt;Emmm离线安装确实有点麻烦，有需要可以直接联系我~ 参考这份博客也行，写的也很详细。https://blog.csdn.net/chexlong/article/details/127932711&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id="docker-docker离线安装"&gt;Docker-Docker离线安装&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;下载docker执行文件&lt;/li&gt;
-&lt;li&gt;下载离线安装脚本&lt;/li&gt;
-&lt;li&gt;运行docker&lt;/li&gt;
-&lt;li&gt;设置开机自动启动&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>在线安装Docker&amp;Nvidia-Docker</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</link><pubDate>Wed, 27 Nov 2024 13:10:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 记录单机在线安装 docker 及英伟达 docker 的操作，只保留操作命令。选择自适应的操作系统，逐行执行即可。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Docker on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/docker/</link><description>Recent content in Docker on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2026 06:00:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>GitLab CI/CD 入门教程：从零开始自动化你的代码流水线</title><link>https://Pan-Binghong.github.io/daily-learning/devops/gitlab-cicd-%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%B5%81%E6%B0%B4%E7%BA%BF/</link><pubDate>Fri, 03 Apr 2026 05:57:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/gitlab-cicd-%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%B5%81%E6%B0%B4%E7%BA%BF/</guid><description>&lt;p>当多人协作开发一个项目时，每次提交代码都需要手动跑测试、手动打包、手动部署——这不仅耗时，还容易出错。CI/CD 就是用来解决这个问题的：让这些重复的工作自动化完成。&lt;/p>
+&lt;h2 id="1-什么是-cicd">1. 什么是 CI/CD？&lt;/h2>
+&lt;p>CI（Continuous Integration，持续集成）：每次开发者推送代码，自动触发构建和测试，及时发现问题。&lt;/p>
+&lt;p>CD（Continuous Delivery/Deployment，持续交付/部署）：测试通过后，自动将代码部署到服务器，无需人工干预。&lt;/p>
+&lt;blockquote>
+&lt;p>💡 一句话总结：你只管写代码 push，剩下的测试、打包、部署全由 GitLab 自动完成。&lt;/p>&lt;/blockquote>
+&lt;h3 id="cicd-的好处">CI/CD 的好处&lt;/h3>
+&lt;ul>
+&lt;li>减少手动操作失误，部署更可靠&lt;/li>
+&lt;li>问题更早暴露：每次提交就跑测试，不用等集成阶段才发现 Bug&lt;/li>
+&lt;li>发布更快：从提交到上线可以做到分钟级自动化&lt;/li>
+&lt;li>团队协作更顺畅：所有人遵循同一套自动化流程&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="2-gitlab-cicd-核心概念">2. GitLab CI/CD 核心概念&lt;/h2>
+&lt;p>&lt;img loading="lazy" src="https://about.gitlab.com/images/blogimages/gitlab-flow-duo/The-GitLab-Flow-2023-mr-pushing-code-portion.png">&lt;/p>
+&lt;p>GitLab CI/CD 由以下几个核心概念组成，理解它们是使用的基础：&lt;/p>
+&lt;h3 id="pipeline流水线">Pipeline（流水线）&lt;/h3>
+&lt;p>Pipeline 是整个自动化流程的总称。每次你 git push 时，GitLab 就会触发一条 Pipeline。你可以把它理解为一条「生产线」，代码在这条线上经历测试、构建、部署等步骤。&lt;/p>
+&lt;h3 id="stage阶段">Stage（阶段）&lt;/h3>
+&lt;p>Pipeline 被分成多个 Stage，Stage 按顺序执行。常见的 Stage 包括：test（测试）、build（构建）、deploy（部署）。上一个 Stage 全部成功，才会进入下一个 Stage。&lt;/p>
+&lt;h3 id="job任务">Job（任务）&lt;/h3>
+&lt;p>Job 是具体执行的单元，每个 Job 属于某个 Stage，定义了要运行的 Shell 命令。同一个 Stage 内的多个 Job 会并行执行。&lt;/p>
+&lt;h3 id="runner执行者">Runner（执行者）&lt;/h3>
+&lt;p>Runner 是真正执行 Job 命令的机器（或容器）。GitLab 提供公共的 Shared Runner，你也可以在自己的服务器上注册私有 Runner。&lt;/p>
+&lt;blockquote>
+&lt;p>💡 关系总结：一条 Pipeline 包含多个 Stage，每个 Stage 包含多个 Job，Job 由 Runner 负责执行。&lt;/p></description></item><item><title>查看容器启动命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 26 Feb 2026 04:50:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote>
+&lt;p>💡 在使用 Docker 部署和启动容器时，我们常常会遇到一个问题，即没有记录下 docker run 命令，导致后续重新部署时无法准确找到之前的启动命令。这种情况让我们感到困扰。为了解决这个问题，我将分享一种方法，让您轻松找到当时的启动命令，方便后续的重新部署工作。让我们一起来了解如何记录和检索 Docker 容器的启动命令，以便在需要时快速找到并重新使用它们。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">runlike -p &amp;lt;container_id&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>多机批量加载Docker镜像&amp;镜像重命名</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%8A%A0%E8%BD%BDdocker%E9%95%9C%E5%83%8F%E9%95%9C%E5%83%8F%E9%87%8D%E5%91%BD%E5%90%8D/</link><pubDate>Thu, 28 Nov 2024 14:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%8A%A0%E8%BD%BDdocker%E9%95%9C%E5%83%8F%E9%95%9C%E5%83%8F%E9%87%8D%E5%91%BD%E5%90%8D/</guid><description>&lt;blockquote>
+&lt;p>💡 多台服务器同时批量加载 docker 镜像 + 重命名，并创建容器。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="加载镜像">加载镜像&lt;/h2>
+&lt;ul>
+&lt;li>前置条件为：机器hostname设置为h800-01, h800-xx格式。准备service.txt 文件，里面每行保存机器IP或者hostname。&lt;/li>
+&lt;li>单机执行命令&lt;/li>
+&lt;li>多机执行命令&lt;/li>
+&lt;li>验证&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="重命名镜像">重命名镜像&lt;/h2>
+&lt;ul>
+&lt;li>多机批量重命名命令&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="创建容器">创建容器&lt;/h2>
+&lt;ul>
+&lt;li>单机执行命令&lt;/li>
+&lt;li>多机执行命令&lt;/li>
+&lt;/ul>
+&lt;hr></description></item><item><title>多机批量安装Nvidia-Docker</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%AE%89%E8%A3%85nvidia-docker/</link><pubDate>Thu, 28 Nov 2024 14:23:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E5%A4%9A%E6%9C%BA%E6%89%B9%E9%87%8F%E5%AE%89%E8%A3%85nvidia-docker/</guid><description>&lt;blockquote>
+&lt;p>💡 多台服务器同时安装 Nvidia-docker&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="单机安装">单机安装&lt;/h2>
+&lt;ul>
+&lt;li>单机安装全部命令&lt;/li>
+&lt;li>将以上内容保存为一个文件，命名为：installNGC&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="批量安装脚本">批量安装脚本&lt;/h2>
+&lt;ul>
+&lt;li>脚本&lt;/li>
+&lt;li>脚本解释&lt;/li>
+&lt;/ul>
+&lt;hr></description></item><item><title>Docker Common Commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/docker-common-commands/</link><pubDate>Wed, 27 Nov 2024 15:00:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/docker-common-commands/</guid><description>&lt;hr>
+&lt;h2 id="常用就完事">常用就完事&lt;/h2>
+&lt;hr>
+&lt;h2 id="解决问题">解决问题&lt;/h2>
+&lt;ul>
+&lt;li>问题：permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get &amp;ldquo;&lt;a href="http://%2Fvar%2Frun%2Fdocker.sock/v1.47/containers/json%22">http://%2Fvar%2Frun%2Fdocker.sock/v1.47/containers/json&amp;quot;&lt;/a>: dial unix /var/run/docker.sock: connect: permission denied&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;ul>
+&lt;li>问题: 修改docker源&lt;/li>
+&lt;/ul></description></item><item><title>离线安装Docker&amp;Nvidia-Docker</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</link><pubDate>Wed, 27 Nov 2024 13:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</guid><description>&lt;blockquote>
+&lt;p>💡 录离线安装 Nvidia-Docker 流程手册，2023 年 8 月 5 日 20:48:35.&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/8690192b-5740-4be7-a8d3-109dd45cd1b0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663P6XJX3Y%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063614Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQD7Lgr2dCb2cHJJ4BL5oCYjoUdAR6zAllz0li8cIJGb0QIhAJEqMWvSfOu1E%2FIzLwejKb8lGQh3HfFa184STP6STMpeKv8DCH8QABoMNjM3NDIzMTgzODA1IgyuvOpDHlxYiAwvUkgq3AMLNefwdIoq29jgkVxIvX9MIoxuk17xNukQ%2FZQruT37fOQp5NhzR0xDqkCzTnLx94WHojPaeTF0xUEFhGUPjVmq4JPdk43TwwGDldv0IflcZhNB3fLJNI7uBHAe%2FZAsqCJtRadDgpJqP3v3o3MIm55vm6znBLor0hJRar4WIePNozY%2BLuQFo7mKHgt6%2FwsASqdvnqlby2niOfepY4bY350HVCINIj7Sv5B0DjO%2FtbHxc1kFkvGZDCBI8%2FiMzPRqm0FheRzBKQs3CJJP%2BBxPSozvjObgAIoeICU1VlbW7K7KZfENXfFknkbOmrT%2FxFQAkbpGkd1hvJqZsmrZHlKEA9hREHmLJGGQJhBG8BbT3tJWbTzuSJ%2Fd9BgtIwNJBWgmqFTdVc1TAJKoLPfpEaGBIJGKkc8Z30eob41CGntKe7xUKhGxRyvCDRgqI8YLQlyMV0fsVyzCSR977WFvrbXmylJ7fTPsWNjiL8ejQKMrwJX9ftqkR3tRg9UujIEilo8Ohnu63iQ2WMaJDifLqtAUhbG%2FMaSEZWbFouLyKLj5uI%2B0qDlHvus19otrAsKzsDgk8jHW3fXXNKnHctrxpfDnEx2ejm7pkxf16H9%2Fv0zMZMPavfD%2BmQ9gUhAW8YdAgDCBrb3OBjqkAQ6DxcWZRfchTFpHv2X74PP%2BgUTgFYQkUxglq%2BrGRoW4b2b7oz8%2BrIpF5UDDJ0mXTh2MA6%2B8CVZpKxsLqpYII09%2BHyJhHQ5yLwOQJT%2FjSoxS5UnK9YDysvwritbhax%2Fx6T3n4kDIDyl9LqjMtfdWbGp%2BanQxQV4E6eiG0IozQXPblBSUBsH4TeLThz5fkQLPnuHDKmbPMzy0VFu1IfanHnd%2BCVYk&amp;X-Amz-Signature=47d02f55b8761f15e95765799c35a7f544ea6dec7f8ab4a90d44a13f866d4da5&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h1 id="docker离线安装">Docker离线安装&lt;/h1>
+&lt;p>Emmm离线安装确实有点麻烦，有需要可以直接联系我~ 参考这份博客也行，写的也很详细。https://blog.csdn.net/chexlong/article/details/127932711&lt;/p>
+&lt;hr>
+&lt;h1 id="docker-docker离线安装">Docker-Docker离线安装&lt;/h1>
+&lt;ol>
+&lt;li>下载docker执行文件&lt;/li>
+&lt;li>下载离线安装脚本&lt;/li>
+&lt;li>运行docker&lt;/li>
+&lt;li>设置开机自动启动&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>在线安装Docker&amp;Nvidia-Docker</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</link><pubDate>Wed, 27 Nov 2024 13:10:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85dockernvidia-docker/</guid><description>&lt;blockquote>
+&lt;p>💡 记录单机在线安装 docker 及英伟达 docker 的操作，只保留操作命令。选择自适应的操作系统，逐行执行即可。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;hr>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item></channel></rss>

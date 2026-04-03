@@ -1,32 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Claude on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/claude/</link><description>Recent content in Claude on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2026 14:04:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/claude/index.xml" rel="self" type="application/rss+xml"/><item><title>Claude Code /buddy 宠物系统：如何刷到想要的宠物并改名</title><link>https://Pan-Binghong.github.io/daily-learning/other/claude-code-buddy-%E5%AE%A0%E7%89%A9%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E5%88%B7%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E5%AE%A0%E7%89%A9%E5%B9%B6%E6%94%B9%E5%90%8D/</link><pubDate>Wed, 01 Apr 2026 14:01:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/claude-code-buddy-%E5%AE%A0%E7%89%A9%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E5%88%B7%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E5%AE%A0%E7%89%A9%E5%B9%B6%E6%94%B9%E5%90%8D/</guid><description>&lt;h1 id="claude-code-buddy-宠物系统如何刷到想要的宠物并改名"&gt;Claude Code /buddy 宠物系统：如何刷到想要的宠物并改名&lt;/h1&gt;
-&lt;h2 id="背景"&gt;背景&lt;/h2&gt;
-&lt;p&gt;Claude Code 2.x 新增了 /buddy 功能，启动后可领养一只专属像素宠物。宠物的物种、稀有度、眼睛、帽子、属性完全由账号 userID 经哈希算法决定，官方没有提供重置入口——也就是说，你天生注定只能领养一种宠物。但社区已经破解了这套算法，通过 bruteforce 暴力枚举 userID，可以找到任意你想要的宠物对应的 uid，然后替换配置文件即可。本文介绍完整操作流程。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://images.unsplash.com/photo-1762242298589-582f5f6c3fb1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTEyNTV8MHwxfHNlYXJjaHwxfHx0ZXJtaW5hbCUyMGNvbW1hbmQlMjBsaW5lJTIwZGV2ZWxvcGVyfGVufDB8MHx8fDE3NzUwNTE4OTV8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080"&gt;&lt;/p&gt;
-&lt;h2 id="核心原理"&gt;核心原理&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;💡 算法链路：userID + SALT(&amp;ldquo;friend-2026-401&amp;rdquo;) → Bun.hash() → Mulberry32 PRNG → rarity / species / eye / hat / shiny(1%) / stats&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;宠物系统支持 18 种物种：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;duck（鸭子）&lt;/li&gt;
-&lt;li&gt;goose（鹅）&lt;/li&gt;
-&lt;li&gt;blob（史莱姆）&lt;/li&gt;
-&lt;li&gt;cat（猫）&lt;/li&gt;
-&lt;li&gt;dragon（龙）&lt;/li&gt;
-&lt;li&gt;octopus（章鱼）&lt;/li&gt;
-&lt;li&gt;owl（猫头鹰）&lt;/li&gt;
-&lt;li&gt;penguin（企鹅）&lt;/li&gt;
-&lt;li&gt;turtle（乌龟）&lt;/li&gt;
-&lt;li&gt;snail（蜗牛）&lt;/li&gt;
-&lt;li&gt;ghost（幽灵）&lt;/li&gt;
-&lt;li&gt;axolotl（六角恐龙）&lt;/li&gt;
-&lt;li&gt;capybara（水豚）&lt;/li&gt;
-&lt;li&gt;cactus（仙人掌）&lt;/li&gt;
-&lt;li&gt;robot（机器人）&lt;/li&gt;
-&lt;li&gt;rabbit（兔子）&lt;/li&gt;
-&lt;li&gt;mushroom（蘑菇）&lt;/li&gt;
-&lt;li&gt;chonk（肥猫）
-稀有度权重分布：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;💡 native 安装（brew install bun / curl 安装）用 Bun.hash()，npm install -g bun 安装用 FNV-1a，两者结果完全不同！确认安装方式再跑脚本，否则刷出来的 uid 对应宠物会不一致。&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Claude on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/claude/</link><description>Recent content in Claude on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2026 14:04:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/claude/index.xml" rel="self" type="application/rss+xml"/><item><title>Claude Code /buddy 宠物系统：如何刷到想要的宠物并改名</title><link>https://Pan-Binghong.github.io/daily-learning/other/claude-code-buddy-%E5%AE%A0%E7%89%A9%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E5%88%B7%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E5%AE%A0%E7%89%A9%E5%B9%B6%E6%94%B9%E5%90%8D/</link><pubDate>Wed, 01 Apr 2026 14:01:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/claude-code-buddy-%E5%AE%A0%E7%89%A9%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E5%88%B7%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E5%AE%A0%E7%89%A9%E5%B9%B6%E6%94%B9%E5%90%8D/</guid><description>&lt;h1 id="claude-code-buddy-宠物系统如何刷到想要的宠物并改名">Claude Code /buddy 宠物系统：如何刷到想要的宠物并改名&lt;/h1>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;p>Claude Code 2.x 新增了 /buddy 功能，启动后可领养一只专属像素宠物。宠物的物种、稀有度、眼睛、帽子、属性完全由账号 userID 经哈希算法决定，官方没有提供重置入口——也就是说，你天生注定只能领养一种宠物。但社区已经破解了这套算法，通过 bruteforce 暴力枚举 userID，可以找到任意你想要的宠物对应的 uid，然后替换配置文件即可。本文介绍完整操作流程。&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://images.unsplash.com/photo-1762242298589-582f5f6c3fb1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTEyNTV8MHwxfHNlYXJjaHwxfHx0ZXJtaW5hbCUyMGNvbW1hbmQlMjBsaW5lJTIwZGV2ZWxvcGVyfGVufDB8MHx8fDE3NzUwNTE4OTV8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080">&lt;/p>
+&lt;h2 id="核心原理">核心原理&lt;/h2>
+&lt;blockquote>
+&lt;p>💡 算法链路：userID + SALT(&amp;ldquo;friend-2026-401&amp;rdquo;) → Bun.hash() → Mulberry32 PRNG → rarity / species / eye / hat / shiny(1%) / stats&lt;/p>&lt;/blockquote>
+&lt;p>宠物系统支持 18 种物种：&lt;/p>
+&lt;ul>
+&lt;li>duck（鸭子）&lt;/li>
+&lt;li>goose（鹅）&lt;/li>
+&lt;li>blob（史莱姆）&lt;/li>
+&lt;li>cat（猫）&lt;/li>
+&lt;li>dragon（龙）&lt;/li>
+&lt;li>octopus（章鱼）&lt;/li>
+&lt;li>owl（猫头鹰）&lt;/li>
+&lt;li>penguin（企鹅）&lt;/li>
+&lt;li>turtle（乌龟）&lt;/li>
+&lt;li>snail（蜗牛）&lt;/li>
+&lt;li>ghost（幽灵）&lt;/li>
+&lt;li>axolotl（六角恐龙）&lt;/li>
+&lt;li>capybara（水豚）&lt;/li>
+&lt;li>cactus（仙人掌）&lt;/li>
+&lt;li>robot（机器人）&lt;/li>
+&lt;li>rabbit（兔子）&lt;/li>
+&lt;li>mushroom（蘑菇）&lt;/li>
+&lt;li>chonk（肥猫）
+稀有度权重分布：&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>💡 native 安装（brew install bun / curl 安装）用 Bun.hash()，npm install -g bun 安装用 FNV-1a，两者结果完全不同！确认安装方式再跑脚本，否则刷出来的 uid 对应宠物会不一致。&lt;/p></description></item></channel></rss>

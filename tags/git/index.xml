@@ -1,217 +1,239 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Git on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/git/</link><description>Recent content in Git on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2026 03:50:06 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Git 分支合并完全指南：从功能分支到 Merge Request</title><link>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E4%BB%8E%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF%E5%88%B0-merge-request/</link><pubDate>Tue, 31 Mar 2026 14:30:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E4%BB%8E%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF%E5%88%B0-merge-request/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 本文以 moodoor-agent-tools 项目为实战案例，系统讲解 Git 分支合并的完整工作流，涵盖从功能分支创建、Merge Request 提交，到冲突解决的全过程。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id="一基本概念"&gt;一、基本概念&lt;/h1&gt;
-&lt;p&gt;在多人协作项目中，分支管理是日常开发的核心。以下是几个关键概念：&lt;/p&gt;
-&lt;p&gt;标准合并流程：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;feature/xxx → (MR) → dev → (MR) → main
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://git-scm.com/book/en/v2/images/basic-merging-2.png"&gt;&lt;/p&gt;
-&lt;p&gt;Git 分支工作流示意图&lt;/p&gt;
-&lt;h1 id="二日常开发流程从头到尾"&gt;二、日常开发流程（从头到尾）&lt;/h1&gt;
-&lt;h2 id="第一步从-dev-切出功能分支"&gt;第一步：从 dev 切出功能分支&lt;/h2&gt;
-&lt;p&gt;开始新功能开发前，先确保本地 dev 与远端同步，再切出专属功能分支：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout dev
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin dev
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout -b feature/htp-workflow
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="第二步开发提交代码"&gt;第二步：开发、提交代码&lt;/h2&gt;
-&lt;p&gt;在功能分支上自由开发，提交时建议遵循 Conventional Commits 规范（feat / fix / chore 等前缀）：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &lt;span class="s2"&gt;&amp;#34;feat: 新增HTP房树人绘画测验(htp) workflow&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin feature/htp-workflow
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="第三步在-gitlab-创建-merge-request"&gt;第三步：在 GitLab 创建 Merge Request&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;打开 GitLab 项目页面&lt;/li&gt;
-&lt;li&gt;左侧菜单 → Merge Requests → New merge request&lt;/li&gt;
-&lt;li&gt;Source branch 选 feature/htp-workflow，Target branch 选 dev&lt;/li&gt;
-&lt;li&gt;填写标题和描述（简要说明本次改动的目的和影响），点击 Create merge request
-&lt;img loading="lazy" src="https://git-scm.com/book/en/v2/images/basic-merging-1.png"&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;GitLab Merge Request 审查界面示意&lt;/p&gt;</description></item><item><title>Git 分支合并操作指南</title><link>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 31 Mar 2026 13:57:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 本文以 moodoor-agent-tools 项目为背景，系统梳理 Git 分支合并的完整工作流，涵盖日常开发、冲突解决、受保护分支等核心场景，适合团队协作开发时参考。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id="一基本概念"&gt;一、基本概念&lt;/h1&gt;
-&lt;p&gt;在 Git 多人协作开发中，分支管理是保证代码质量和发布稳定性的关键机制。以下是常见的分支角色与术语说明：&lt;/p&gt;
-&lt;p&gt;标准分支合并流程：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;feature/xxx → (MR) → dev → (MR) → main
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h1 id="二日常开发流程从头到尾"&gt;二、日常开发流程（从头到尾）&lt;/h1&gt;
-&lt;h2 id="第一步从-dev-切出功能分支"&gt;第一步：从 dev 切出功能分支&lt;/h2&gt;
-&lt;p&gt;每次开发新功能前，先同步 dev 的最新代码，再切出独立的功能分支，避免与他人工作产生干扰。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 切换到 dev 并拉取最新代码&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout dev
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin dev
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建并切换到新功能分支&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout -b feature/htp-workflow
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="第二步开发并提交代码"&gt;第二步：开发并提交代码&lt;/h2&gt;
-&lt;p&gt;在功能分支上自由提交，遵循语义化提交信息规范（feat / fix / refactor / docs 等），方便后续代码审查和历史追溯。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 暂存所有修改并提交&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &lt;span class="s2"&gt;&amp;#34;feat: 新增HTP房树人绘画测验(htp) workflow&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 推送到远程仓库&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin feature/htp-workflow
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="第三步在-gitlab-创建-merge-request"&gt;第三步：在 GitLab 创建 Merge Request&lt;/h2&gt;
-&lt;p&gt;功能开发完成后，通过 MR 流程申请将代码合入 dev，触发代码审查，确保代码质量。&lt;/p&gt;</description></item><item><title>Git在Windows中出现Line Endings警告提示</title><link>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</link><pubDate>Wed, 29 Oct 2025 03:19:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</guid><description>&lt;p&gt;这个警告的原因是 Git 在 Windows 系统上会自动将 LF（Linux/Mac 风格的换行符）转换为 CRLF（Windows 风格的换行符）。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;span class="lnt"&gt;8
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;禁用自动转换&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--global core.autocrlf false
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;删除已暂存的文件&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;rm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--cached .
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;重新添加所有文件&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>Git Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/git-common-commands/</link><pubDate>Wed, 20 Nov 2024 01:22:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/git-common-commands/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 Git代码管理规范说明，以及常用命令。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/957b9d02-7d7c-45ab-bcf8-38731684567f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UHEMYCTK%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034948Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDwZCexn19D8PU9liRWOIL2eaCyzRUZRNEnBxZks3AOXAIhAMKtYIeVdIrajvbFol%2B%2BsWjE3xUPF9%2Fw1gsLpBqRadUoKv8DCH0QABoMNjM3NDIzMTgzODA1IgwVpCdTcI9zEFrGTZoq3AN75qDbJ2cUkC0H3psCv37aij1ylOrVz5tbIjGTSLf8bJt30lmmwJzpG4U4Y5tWjYdLkzBEEunhDLLLZmPuQIkejbyudbhT5GJ%2Fje32Rmh5WfG3eolDXsp5wAKdI9qDNcsU6N%2FGXjVUAdqd3Qjmu%2F4y0DvCiOaWhqqfDkZG2Xi%2FqfpJbtQTX7V7CQwbn2r65HQbcb%2FMaEdaPRPGbOQQynMBJxKfg7dL2EyYkMSVEkDSHqdBKCDNg1g4pbSXl9uUk2A7WCck87fBJbIp%2BGFGRYnHmT6yJWPAtftsW2SIOFQ1p3t59GHVpZHUcpzvf%2FcEbkRAb7EvekG%2BAaryyOq5AIyEuM8zZt98%2BzSK%2FcJ87zYZVVtfG2t%2BBqhwsQ1reULt5G6bEZAbkkorUxf4NZ2Sne%2BvZChcYDHiES3Q7DsPRxj5ZafY0tfQ3nycPwDoAIFGDoRJfNQ40Dac%2FlcnVilW6q2sdkI41pei5DqM6VjpNDFiWKBeYNh%2Bq1W4f1xKWPDe5tOAoWDKK4JEENFH8FQFRrB%2FVI83QDONTvGpABNUKn9X5sh7iJ6uFr8mRyWnhOIguCHMYnM9SvP7OZN3G1PvuY%2B3ZDt69abQbT%2BsLDEbo8dsD2gIfpwWXX9bfrE2RzCs5bzOBjqkAVqxuT1rprRrg7OA65hBmcm8%2BOG0hXmRVFHlbVFjKwRx0eaSkqq20F3hcZH28Y7tX01k4c7O3eo3kKdEN4LzCSNHQUu4OyioCled%2FMLNglPA%2F%2FJjl2JKa0h00Wo61kI5DUKBRIpkqT3%2BsDd%2Bpy9ItVdoaYTt5LMMGW1tjvzha%2BMWpWVTnXLSx9oZusrXr5v8vzo4EyRatdVZu61pBR%2FJT0CVLsyZ&amp;X-Amz-Signature=8ab18bc519f745ba70b9ad013583d8a075ee34ec473a2b35b04a81600d326f29&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="分支说明"&gt;分支说明&lt;/h2&gt;
-&lt;p&gt;最常见的三种类型分支，名称与解释。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;main&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;develop&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;test
-开发人员经常创建的两种临时分支。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;featrue（功能）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;bugfix（Bug修复）&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="工作环境常用命令"&gt;工作环境常用命令&lt;/h2&gt;
-&lt;h3 id="git基础常用命令"&gt;Git基础常用命令&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;💡 想多看就继续看吧。以下主要涉及：上传并提交，合并，标签等操作。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;添加到暂存区&lt;/li&gt;
-&lt;li&gt;提交到HEAD&lt;/li&gt;
-&lt;li&gt;提交到服务器内的仓库中&lt;/li&gt;
-&lt;li&gt;分支操作&lt;/li&gt;
-&lt;li&gt;拉取以及合并&lt;/li&gt;
-&lt;li&gt;标签&lt;/li&gt;
-&lt;li&gt;替换本地改动&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="git常用配置"&gt;Git常用配置&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;解决win和linux换行符格式问题&lt;/li&gt;
-&lt;li&gt;解决旧版本初始化分支名称为master问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id="实战经历"&gt;实战经历&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
-&lt;/span&gt;&lt;span class="lnt"&gt;14
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 初始化本地仓库&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git init
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建并切换到 main 分支&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout -b main
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 添加文件&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 初始提交&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &lt;span class="s2"&gt;&amp;#34;Initial commit&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 推送代码到远程仓库&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin main
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Git on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/git/</link><description>Recent content in Git on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2026 06:36:52 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>GitLab CI/CD 入门教程：从零开始自动化你的代码流水线</title><link>https://Pan-Binghong.github.io/daily-learning/devops/gitlab-cicd-%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%B5%81%E6%B0%B4%E7%BA%BF/</link><pubDate>Fri, 03 Apr 2026 05:57:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/gitlab-cicd-%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%B5%81%E6%B0%B4%E7%BA%BF/</guid><description>&lt;p>当多人协作开发一个项目时，每次提交代码都需要手动跑测试、手动打包、手动部署——这不仅耗时，还容易出错。CI/CD 就是用来解决这个问题的：让这些重复的工作自动化完成。&lt;/p>
+&lt;h2 id="1-什么是-cicd">1. 什么是 CI/CD？&lt;/h2>
+&lt;p>CI（Continuous Integration，持续集成）：每次开发者推送代码，自动触发构建和测试，及时发现问题。&lt;/p>
+&lt;p>CD（Continuous Delivery/Deployment，持续交付/部署）：测试通过后，自动将代码部署到服务器，无需人工干预。&lt;/p>
+&lt;blockquote>
+&lt;p>💡 一句话总结：你只管写代码 push，剩下的测试、打包、部署全由 GitLab 自动完成。&lt;/p>&lt;/blockquote>
+&lt;h3 id="cicd-的好处">CI/CD 的好处&lt;/h3>
+&lt;ul>
+&lt;li>减少手动操作失误，部署更可靠&lt;/li>
+&lt;li>问题更早暴露：每次提交就跑测试，不用等集成阶段才发现 Bug&lt;/li>
+&lt;li>发布更快：从提交到上线可以做到分钟级自动化&lt;/li>
+&lt;li>团队协作更顺畅：所有人遵循同一套自动化流程&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="2-gitlab-cicd-核心概念">2. GitLab CI/CD 核心概念&lt;/h2>
+&lt;p>&lt;img loading="lazy" src="https://about.gitlab.com/images/blogimages/gitlab-flow-duo/The-GitLab-Flow-2023-mr-pushing-code-portion.png">&lt;/p>
+&lt;p>GitLab CI/CD 由以下几个核心概念组成，理解它们是使用的基础：&lt;/p>
+&lt;h3 id="pipeline流水线">Pipeline（流水线）&lt;/h3>
+&lt;p>Pipeline 是整个自动化流程的总称。每次你 git push 时，GitLab 就会触发一条 Pipeline。你可以把它理解为一条「生产线」，代码在这条线上经历测试、构建、部署等步骤。&lt;/p>
+&lt;h3 id="stage阶段">Stage（阶段）&lt;/h3>
+&lt;p>Pipeline 被分成多个 Stage，Stage 按顺序执行。常见的 Stage 包括：test（测试）、build（构建）、deploy（部署）。上一个 Stage 全部成功，才会进入下一个 Stage。&lt;/p>
+&lt;h3 id="job任务">Job（任务）&lt;/h3>
+&lt;p>Job 是具体执行的单元，每个 Job 属于某个 Stage，定义了要运行的 Shell 命令。同一个 Stage 内的多个 Job 会并行执行。&lt;/p>
+&lt;h3 id="runner执行者">Runner（执行者）&lt;/h3>
+&lt;p>Runner 是真正执行 Job 命令的机器（或容器）。GitLab 提供公共的 Shared Runner，你也可以在自己的服务器上注册私有 Runner。&lt;/p>
+&lt;blockquote>
+&lt;p>💡 关系总结：一条 Pipeline 包含多个 Stage，每个 Stage 包含多个 Job，Job 由 Runner 负责执行。&lt;/p></description></item><item><title>Git 分支合并完全指南：从功能分支到 Merge Request</title><link>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E4%BB%8E%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF%E5%88%B0-merge-request/</link><pubDate>Tue, 31 Mar 2026 14:30:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E4%BB%8E%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF%E5%88%B0-merge-request/</guid><description>&lt;blockquote>
+&lt;p>💡 本文以 moodoor-agent-tools 项目为实战案例，系统讲解 Git 分支合并的完整工作流，涵盖从功能分支创建、Merge Request 提交，到冲突解决的全过程。&lt;/p>&lt;/blockquote>
+&lt;h1 id="一基本概念">一、基本概念&lt;/h1>
+&lt;p>在多人协作项目中，分支管理是日常开发的核心。以下是几个关键概念：&lt;/p>
+&lt;p>标准合并流程：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">feature/xxx → (MR) → dev → (MR) → main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img loading="lazy" src="https://git-scm.com/book/en/v2/images/basic-merging-2.png">&lt;/p>
+&lt;p>Git 分支工作流示意图&lt;/p>
+&lt;h1 id="二日常开发流程从头到尾">二、日常开发流程（从头到尾）&lt;/h1>
+&lt;h2 id="第一步从-dev-切出功能分支">第一步：从 dev 切出功能分支&lt;/h2>
+&lt;p>开始新功能开发前，先确保本地 dev 与远端同步，再切出专属功能分支：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git checkout dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git pull origin dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git checkout -b feature/htp-workflow
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="第二步开发提交代码">第二步：开发、提交代码&lt;/h2>
+&lt;p>在功能分支上自由开发，提交时建议遵循 Conventional Commits 规范（feat / fix / chore 等前缀）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git add .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &lt;span class="s2">&amp;#34;feat: 新增HTP房树人绘画测验(htp) workflow&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push origin feature/htp-workflow
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="第三步在-gitlab-创建-merge-request">第三步：在 GitLab 创建 Merge Request&lt;/h2>
+&lt;ol>
+&lt;li>打开 GitLab 项目页面&lt;/li>
+&lt;li>左侧菜单 → Merge Requests → New merge request&lt;/li>
+&lt;li>Source branch 选 feature/htp-workflow，Target branch 选 dev&lt;/li>
+&lt;li>填写标题和描述（简要说明本次改动的目的和影响），点击 Create merge request
+&lt;img loading="lazy" src="https://git-scm.com/book/en/v2/images/basic-merging-1.png">&lt;/li>
+&lt;/ol>
+&lt;p>GitLab Merge Request 审查界面示意&lt;/p></description></item><item><title>Git 分支合并操作指南</title><link>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 31 Mar 2026 13:57:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/git-%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</guid><description>&lt;blockquote>
+&lt;p>💡 本文以 moodoor-agent-tools 项目为背景，系统梳理 Git 分支合并的完整工作流，涵盖日常开发、冲突解决、受保护分支等核心场景，适合团队协作开发时参考。&lt;/p>&lt;/blockquote>
+&lt;h1 id="一基本概念">一、基本概念&lt;/h1>
+&lt;p>在 Git 多人协作开发中，分支管理是保证代码质量和发布稳定性的关键机制。以下是常见的分支角色与术语说明：&lt;/p>
+&lt;p>标准分支合并流程：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">feature/xxx → (MR) → dev → (MR) → main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h1 id="二日常开发流程从头到尾">二、日常开发流程（从头到尾）&lt;/h1>
+&lt;h2 id="第一步从-dev-切出功能分支">第一步：从 dev 切出功能分支&lt;/h2>
+&lt;p>每次开发新功能前，先同步 dev 的最新代码，再切出独立的功能分支，避免与他人工作产生干扰。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 切换到 dev 并拉取最新代码&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git checkout dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git pull origin dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 创建并切换到新功能分支&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git checkout -b feature/htp-workflow
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="第二步开发并提交代码">第二步：开发并提交代码&lt;/h2>
+&lt;p>在功能分支上自由提交，遵循语义化提交信息规范（feat / fix / refactor / docs 等），方便后续代码审查和历史追溯。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 暂存所有修改并提交&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git add .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &lt;span class="s2">&amp;#34;feat: 新增HTP房树人绘画测验(htp) workflow&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 推送到远程仓库&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push origin feature/htp-workflow
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="第三步在-gitlab-创建-merge-request">第三步：在 GitLab 创建 Merge Request&lt;/h2>
+&lt;p>功能开发完成后，通过 MR 流程申请将代码合入 dev，触发代码审查，确保代码质量。&lt;/p></description></item><item><title>Git在Windows中出现Line Endings警告提示</title><link>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</link><pubDate>Wed, 29 Oct 2025 03:19:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</guid><description>&lt;p>这个警告的原因是 Git 在 Windows 系统上会自动将 LF（Linux/Mac 风格的换行符）转换为 CRLF（Windows 风格的换行符）。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="o">#&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">禁用自动转换&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="n">git&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">config&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c1">--global core.autocrlf false
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">#&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">删除已暂存的文件&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="n">git&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">rm&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">r&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c1">--cached .
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">#&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">重新添加所有文件&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="n">git&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">add&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Git Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/git-common-commands/</link><pubDate>Wed, 20 Nov 2024 01:22:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/git-common-commands/</guid><description>&lt;blockquote>
+&lt;p>💡 Git代码管理规范说明，以及常用命令。&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/957b9d02-7d7c-45ab-bcf8-38731684567f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466YJNXEUFV%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063631Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIDwVdyZSaICtECZwjp22uCySD7vBvcoRRJYnMTIC97GMAiAmWybKH%2BW639bICHfm4nri%2BzrdTXsyIBiAORnKtbpt6ir%2FAwh%2FEAAaDDYzNzQyMzE4MzgwNSIMQXDrm2i2ppNCFsLfKtwDhUdvYVjoQeEYd1OqtwuqnEayEAQWB5WJ9NzJ0poXkwhs6bra4On0WNaag3EgL2PrPIGtVu56TPFTBtGFYRQAN5hdOE9BWLhQ%2F1T38TOETJAqErlc584lxZ1CK5Hgba2nyP8iJGKmFs126ymrTTp7iHx9E9GNicX4LalCXVzKMzzcyiqtGNAN5FtZD1ySM3s4dEiddjUBWv%2FO3CA8BxFO7niKLIYnd4Cw8T7aezfC5%2BofwI4QbEQjWvvOCwx3VmGMcoNmya2FtcMzyh1msIi7cqOA16prx7jfa6Ps4rpkqFsw781bgfmoy7LbO%2ByH0a6JJBqeVCNIHLcNG3i58CTi1WhIWc3OeyPehGH%2FtT5ulwFtQ6sGFMiq%2Byt6%2FKYhE113qasdiJcd7TXk4pRg2PvE5WOr2ekjPKw%2B7RgWsyf7bDcsn%2FQGMOa2w2ferStazlbOP7rnFRgKa%2F8pzhRXWx719hYbhsqiP1v3GlvCx%2BKAZP17WEx6oZEGmim3LG0wSyEdw3s03R0WMZ6BXP4vcGsLtMiMf6BVRgeddqk3j68II8LdNzabElkDQrF%2FeyGhdd8KYCvlGzCM%2BmE556X72dKyyJHcBFhCEu7y%2FZYQteZvBgjKf6%2BA6csqObqzIqsw56y9zgY6pgG5lfJgmuTd7ef12ihe7RavESHKsfxHV1dmvDn%2Fi77qm4PPQCo%2F5LroVEiX5DAJY6oIVfUoOwcs9qAdPqYuFSSrgqVWnlnRSbbzHDokb1ugHQahr%2B80DI4xDFt9LUYu2Bd7s3qVOV2zor6pnRYDPdLDtZL34Umbq%2FlFODVe9kkWSER87tt5odSRAxN6O0EEX8GCOE8JjYbR9kU4RjX2fkUSdFkFltV7&amp;X-Amz-Signature=f4102f35f3f8e3f9564938dc14b13e8f95ea5f36b03548e1c80beb9e1d3275d2&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="分支说明">分支说明&lt;/h2>
+&lt;p>最常见的三种类型分支，名称与解释。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>main&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>develop&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>test
+开发人员经常创建的两种临时分支。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>featrue（功能）&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>bugfix（Bug修复）&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="工作环境常用命令">工作环境常用命令&lt;/h2>
+&lt;h3 id="git基础常用命令">Git基础常用命令&lt;/h3>
+&lt;blockquote>
+&lt;p>💡 想多看就继续看吧。以下主要涉及：上传并提交，合并，标签等操作。&lt;/p>&lt;/blockquote>
+&lt;ol>
+&lt;li>添加到暂存区&lt;/li>
+&lt;li>提交到HEAD&lt;/li>
+&lt;li>提交到服务器内的仓库中&lt;/li>
+&lt;li>分支操作&lt;/li>
+&lt;li>拉取以及合并&lt;/li>
+&lt;li>标签&lt;/li>
+&lt;li>替换本地改动&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="git常用配置">Git常用配置&lt;/h3>
+&lt;ul>
+&lt;li>解决win和linux换行符格式问题&lt;/li>
+&lt;li>解决旧版本初始化分支名称为master问题&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="实战经历">实战经历&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 初始化本地仓库&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git init
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 创建并切换到 main 分支&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git checkout -b main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git add .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 初始提交&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &lt;span class="s2">&amp;#34;Initial commit&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 推送代码到远程仓库&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push -u origin main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>References&lt;/p></description></item></channel></rss>

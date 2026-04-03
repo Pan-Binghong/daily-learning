@@ -1,69 +1,67 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tmux on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/tmux/</link><description>Recent content in Tmux on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2026 04:32:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/tmux/index.xml" rel="self" type="application/rss+xml"/><item><title>Tmux操作一览</title><link>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</link><pubDate>Tue, 25 Feb 2025 01:49:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 Tmux 是一个非常强大的终端复用工具，它可以帮助你在一个窗口中管理多个会话，非常适合长时间运行任务或多任务处理。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="安装"&gt;安装&lt;/h2&gt;
-&lt;hr&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install tmux
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="基本操作"&gt;基本操作&lt;/h2&gt;
-&lt;h3 id="会话管理"&gt;会话管理&lt;/h3&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;新建会话&lt;/li&gt;
-&lt;li&gt;分离会话&lt;/li&gt;
-&lt;li&gt;列出会话&lt;/li&gt;
-&lt;li&gt;关闭会话&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="窗口操作"&gt;窗口操作&lt;/h3&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;新建窗口&lt;/li&gt;
-&lt;li&gt;切换窗口&lt;/li&gt;
-&lt;li&gt;重命名窗口&lt;/li&gt;
-&lt;li&gt;关闭窗口&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="窗格操作"&gt;窗格操作&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;水平分割&lt;/li&gt;
-&lt;li&gt;垂直分割&lt;/li&gt;
-&lt;li&gt;切换窗格&lt;/li&gt;
-&lt;li&gt;关闭&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="使用示例"&gt;使用示例&lt;/h2&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;查看当前服务器内，有无tmux会话，输入命令进入。&lt;/li&gt;
-&lt;li&gt;进入会话后，开启2个窗格。Ctrl + b ，%&lt;/li&gt;
-&lt;li&gt;在model 会话内，新建窗口，并修改名称。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h1 id="核心概念server--session--window--pane"&gt;核心概念：Server / Session / Window / Pane&lt;/h1&gt;
-&lt;p&gt;tmux 的架构分为四层，从外到内依次是：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tmux server（后台进程，自动启动）
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └── session（会话，可多个）
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └── window（窗口，类似浏览器标签页）
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └── pane（窗格，窗口内分割的终端）
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="server服务进程"&gt;Server（服务进程）&lt;/h3&gt;
-&lt;p&gt;tmux 启动后会在后台运行一个 server 进程，管理所有会话。通常不需要手动操作，关闭所有 session 后 server 自动退出。&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tmux on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/tmux/</link><description>Recent content in Tmux on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2026 04:32:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/tmux/index.xml" rel="self" type="application/rss+xml"/><item><title>Tmux操作一览</title><link>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</link><pubDate>Tue, 25 Feb 2025 01:49:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/tmux%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/</guid><description>&lt;blockquote>
+&lt;p>💡 Tmux 是一个非常强大的终端复用工具，它可以帮助你在一个窗口中管理多个会话，非常适合长时间运行任务或多任务处理。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;hr>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install tmux
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="基本操作">基本操作&lt;/h2>
+&lt;h3 id="会话管理">会话管理&lt;/h3>
+&lt;hr>
+&lt;ul>
+&lt;li>新建会话&lt;/li>
+&lt;li>分离会话&lt;/li>
+&lt;li>列出会话&lt;/li>
+&lt;li>关闭会话&lt;/li>
+&lt;/ul>
+&lt;h3 id="窗口操作">窗口操作&lt;/h3>
+&lt;hr>
+&lt;ul>
+&lt;li>新建窗口&lt;/li>
+&lt;li>切换窗口&lt;/li>
+&lt;li>重命名窗口&lt;/li>
+&lt;li>关闭窗口&lt;/li>
+&lt;/ul>
+&lt;h3 id="窗格操作">窗格操作&lt;/h3>
+&lt;ul>
+&lt;li>水平分割&lt;/li>
+&lt;li>垂直分割&lt;/li>
+&lt;li>切换窗格&lt;/li>
+&lt;li>关闭&lt;/li>
+&lt;/ul>
+&lt;h2 id="使用示例">使用示例&lt;/h2>
+&lt;hr>
+&lt;ul>
+&lt;li>查看当前服务器内，有无tmux会话，输入命令进入。&lt;/li>
+&lt;li>进入会话后，开启2个窗格。Ctrl + b ，%&lt;/li>
+&lt;li>在model 会话内，新建窗口，并修改名称。&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h1 id="核心概念server--session--window--pane">核心概念：Server / Session / Window / Pane&lt;/h1>
+&lt;p>tmux 的架构分为四层，从外到内依次是：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">tmux server（后台进程，自动启动）
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── session（会话，可多个）
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── window（窗口，类似浏览器标签页）
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── pane（窗格，窗口内分割的终端）
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="server服务进程">Server（服务进程）&lt;/h3>
+&lt;p>tmux 启动后会在后台运行一个 server 进程，管理所有会话。通常不需要手动操作，关闭所有 session 后 server 自动退出。&lt;/p></description></item></channel></rss>

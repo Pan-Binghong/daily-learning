@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>CI/CD on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/ci/cd/</link><description>Recent content in CI/CD on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2026 06:00:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/ci/cd/index.xml" rel="self" type="application/rss+xml"/><item><title>GitLab CI/CD 入门教程：从零开始自动化你的代码流水线</title><link>https://Pan-Binghong.github.io/daily-learning/devops/gitlab-cicd-%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%B5%81%E6%B0%B4%E7%BA%BF/</link><pubDate>Fri, 03 Apr 2026 05:57:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/gitlab-cicd-%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%B5%81%E6%B0%B4%E7%BA%BF/</guid><description>&lt;p>当多人协作开发一个项目时，每次提交代码都需要手动跑测试、手动打包、手动部署——这不仅耗时，还容易出错。CI/CD 就是用来解决这个问题的：让这些重复的工作自动化完成。&lt;/p>
+&lt;h2 id="1-什么是-cicd">1. 什么是 CI/CD？&lt;/h2>
+&lt;p>CI（Continuous Integration，持续集成）：每次开发者推送代码，自动触发构建和测试，及时发现问题。&lt;/p>
+&lt;p>CD（Continuous Delivery/Deployment，持续交付/部署）：测试通过后，自动将代码部署到服务器，无需人工干预。&lt;/p>
+&lt;blockquote>
+&lt;p>💡 一句话总结：你只管写代码 push，剩下的测试、打包、部署全由 GitLab 自动完成。&lt;/p>&lt;/blockquote>
+&lt;h3 id="cicd-的好处">CI/CD 的好处&lt;/h3>
+&lt;ul>
+&lt;li>减少手动操作失误，部署更可靠&lt;/li>
+&lt;li>问题更早暴露：每次提交就跑测试，不用等集成阶段才发现 Bug&lt;/li>
+&lt;li>发布更快：从提交到上线可以做到分钟级自动化&lt;/li>
+&lt;li>团队协作更顺畅：所有人遵循同一套自动化流程&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="2-gitlab-cicd-核心概念">2. GitLab CI/CD 核心概念&lt;/h2>
+&lt;p>&lt;img loading="lazy" src="https://about.gitlab.com/images/blogimages/gitlab-flow-duo/The-GitLab-Flow-2023-mr-pushing-code-portion.png">&lt;/p>
+&lt;p>GitLab CI/CD 由以下几个核心概念组成，理解它们是使用的基础：&lt;/p>
+&lt;h3 id="pipeline流水线">Pipeline（流水线）&lt;/h3>
+&lt;p>Pipeline 是整个自动化流程的总称。每次你 git push 时，GitLab 就会触发一条 Pipeline。你可以把它理解为一条「生产线」，代码在这条线上经历测试、构建、部署等步骤。&lt;/p>
+&lt;h3 id="stage阶段">Stage（阶段）&lt;/h3>
+&lt;p>Pipeline 被分成多个 Stage，Stage 按顺序执行。常见的 Stage 包括：test（测试）、build（构建）、deploy（部署）。上一个 Stage 全部成功，才会进入下一个 Stage。&lt;/p>
+&lt;h3 id="job任务">Job（任务）&lt;/h3>
+&lt;p>Job 是具体执行的单元，每个 Job 属于某个 Stage，定义了要运行的 Shell 命令。同一个 Stage 内的多个 Job 会并行执行。&lt;/p>
+&lt;h3 id="runner执行者">Runner（执行者）&lt;/h3>
+&lt;p>Runner 是真正执行 Job 命令的机器（或容器）。GitLab 提供公共的 Shared Runner，你也可以在自己的服务器上注册私有 Runner。&lt;/p>
+&lt;blockquote>
+&lt;p>💡 关系总结：一条 Pipeline 包含多个 Stage，每个 Stage 包含多个 Job，Job 由 Runner 负责执行。&lt;/p></description></item></channel></rss>

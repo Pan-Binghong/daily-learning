@@ -1,77 +1,74 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>ModelArts on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/modelarts/</link><description>Recent content in ModelArts on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Thu, 06 Nov 2025 01:32:55 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/modelarts/index.xml" rel="self" type="application/rss+xml"/><item><title>OBS Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/obs-common-commands/</link><pubDate>Tue, 26 Nov 2024 05:53:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/obs-common-commands/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 工作中使用Obs用到的几个命令。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="下载obsutil工具"&gt;下载obsutil工具&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;根据自身操作系统下载所对应的版本。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="初始化配置"&gt;初始化配置&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;访问密钥&lt;/li&gt;
-&lt;li&gt;永久绑定&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="常用命令"&gt;常用命令&lt;/h2&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>基于ModelArts部署AI服务_文字纯享版</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Emodelarts%E9%83%A8%E7%BD%B2ai%E6%9C%8D%E5%8A%A1_%E6%96%87%E5%AD%97%E7%BA%AF%E4%BA%AB%E7%89%88/</link><pubDate>Tue, 26 Nov 2024 02:41:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Emodelarts%E9%83%A8%E7%BD%B2ai%E6%9C%8D%E5%8A%A1_%E6%96%87%E5%AD%97%E7%BA%AF%E4%BA%AB%E7%89%88/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 记录操作过程。大概只有自己看得懂。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="上传模型"&gt;上传模型&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;上传到OBS内，特殊要求：OBS文件夹名称必须为model结尾&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="上传推理脚本"&gt;上传推理脚本&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;上传到OBS内，特殊要求：脚本文件名称必须为run_vllm.sh&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="在esc弹性云上生成私钥并上传"&gt;在ESC（弹性云）上生成私钥，并上传&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;这个命令会生成一个 2048 位的 RSA 私钥，并将其保存到名为 key.pem 的文件中。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;基于之前生成的 key.pem 私钥，创建一个有效期为 1095 天的自签名 X.509 证书，并将其保存到 cert.pem 文件中&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;OBS复制&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="上传镜像"&gt;上传镜像&lt;/h2&gt;
-&lt;p&gt;选择华为云内的 容器镜像服务SWR 服务模块&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;点击”创建组织“按钮&lt;/li&gt;
-&lt;li&gt;点击”登录指令“按钮&lt;/li&gt;
-&lt;li&gt;登录esc服务器&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="创建ai应用"&gt;创建AI应用&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;点击“创建”按钮&lt;/li&gt;
-&lt;li&gt;跳转新页面，填写以下信息&lt;/li&gt;
-&lt;li&gt;点击“立即创建”按钮&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="部署上线"&gt;部署上线&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;选择“在线服务”&lt;/li&gt;
-&lt;li&gt;点击”部署“按钮&lt;/li&gt;
-&lt;li&gt;跳转新页面，填写以下信息&lt;/li&gt;
-&lt;li&gt;点击”立即创建“按钮&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="预测测试"&gt;预测测试&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;点击刚才上线成功的服务，进入&lt;/li&gt;
-&lt;li&gt;选择“预测”&lt;/li&gt;
-&lt;li&gt;设置请求路径为：/generate&lt;/li&gt;
-&lt;li&gt;输入代码&lt;/li&gt;
-&lt;li&gt;点击“预测”按钮&lt;/li&gt;
-&lt;/ol&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>ModelArts on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/modelarts/</link><description>Recent content in ModelArts on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Thu, 06 Nov 2025 01:32:55 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/modelarts/index.xml" rel="self" type="application/rss+xml"/><item><title>OBS Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/obs-common-commands/</link><pubDate>Tue, 26 Nov 2024 05:53:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/obs-common-commands/</guid><description>&lt;blockquote>
+&lt;p>💡 工作中使用Obs用到的几个命令。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="下载obsutil工具">下载obsutil工具&lt;/h2>
+&lt;ul>
+&lt;li>根据自身操作系统下载所对应的版本。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="初始化配置">初始化配置&lt;/h2>
+&lt;ul>
+&lt;li>访问密钥&lt;/li>
+&lt;li>永久绑定&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="常用命令">常用命令&lt;/h2>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>基于ModelArts部署AI服务_文字纯享版</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Emodelarts%E9%83%A8%E7%BD%B2ai%E6%9C%8D%E5%8A%A1_%E6%96%87%E5%AD%97%E7%BA%AF%E4%BA%AB%E7%89%88/</link><pubDate>Tue, 26 Nov 2024 02:41:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Emodelarts%E9%83%A8%E7%BD%B2ai%E6%9C%8D%E5%8A%A1_%E6%96%87%E5%AD%97%E7%BA%AF%E4%BA%AB%E7%89%88/</guid><description>&lt;blockquote>
+&lt;p>💡 记录操作过程。大概只有自己看得懂。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="上传模型">上传模型&lt;/h2>
+&lt;ul>
+&lt;li>上传到OBS内，特殊要求：OBS文件夹名称必须为model结尾&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="上传推理脚本">上传推理脚本&lt;/h2>
+&lt;ul>
+&lt;li>上传到OBS内，特殊要求：脚本文件名称必须为run_vllm.sh&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="在esc弹性云上生成私钥并上传">在ESC（弹性云）上生成私钥，并上传&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>这个命令会生成一个 2048 位的 RSA 私钥，并将其保存到名为 key.pem 的文件中。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>基于之前生成的 key.pem 私钥，创建一个有效期为 1095 天的自签名 X.509 证书，并将其保存到 cert.pem 文件中&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>OBS复制&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="上传镜像">上传镜像&lt;/h2>
+&lt;p>选择华为云内的 容器镜像服务SWR 服务模块&lt;/p>
+&lt;ol>
+&lt;li>点击”创建组织“按钮&lt;/li>
+&lt;li>点击”登录指令“按钮&lt;/li>
+&lt;li>登录esc服务器&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="创建ai应用">创建AI应用&lt;/h2>
+&lt;ol>
+&lt;li>点击“创建”按钮&lt;/li>
+&lt;li>跳转新页面，填写以下信息&lt;/li>
+&lt;li>点击“立即创建”按钮&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="部署上线">部署上线&lt;/h2>
+&lt;ol>
+&lt;li>选择“在线服务”&lt;/li>
+&lt;li>点击”部署“按钮&lt;/li>
+&lt;li>跳转新页面，填写以下信息&lt;/li>
+&lt;li>点击”立即创建“按钮&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="预测测试">预测测试&lt;/h2>
+&lt;ol>
+&lt;li>点击刚才上线成功的服务，进入&lt;/li>
+&lt;li>选择“预测”&lt;/li>
+&lt;li>设置请求路径为：/generate&lt;/li>
+&lt;li>输入代码&lt;/li>
+&lt;li>点击“预测”按钮&lt;/li>
+&lt;/ol></description></item></channel></rss>

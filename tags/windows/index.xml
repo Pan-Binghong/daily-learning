@@ -1,323 +1,302 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Windows on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/windows/</link><description>Recent content in Windows on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2026 03:50:06 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>查看本机的SSH公钥&amp;绑定到Github</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E7%9A%84ssh%E5%85%AC%E9%92%A5%E7%BB%91%E5%AE%9A%E5%88%B0github/</link><pubDate>Tue, 03 Feb 2026 02:14:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E7%9A%84ssh%E5%85%AC%E9%92%A5%E7%BB%91%E5%AE%9A%E5%88%B0github/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 配置Git使用SSH方式, 本文环境：windows + powershell + git guissh&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="查看"&gt;查看&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;ls&lt;/span&gt; &lt;span class="err"&gt;~/.ssh&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/fe6cede4-097d-4b42-b12f-a631e083d66e/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X2AEUJKP%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034943Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIERil8VcTF8KfdxM5BDpNFaGbi%2FI84Cv02NZ1W8rxVMpAiEAjFif%2F2mQKpGFQ0MNYlkS5N8KgJK9hQdRivIEukHFWNIq%2FwMIfRAAGgw2Mzc0MjMxODM4MDUiDGnDQslz629apyb5FSrcA6Ubp3FHggV1Usi7g4kF9UAavSMXokQ0ZlLgTlgz%2Btz8bRUjGlhQ2Bz%2FOMD%2BpwxyViM6o2wxmV3mVPPHtYpaza2lNZ%2BO0Y2KqKC0u2zdtLhyaYRboJoYYlpadp9YXtnGO5tr6RSD65gIs7KAcWC%2BgGTnS1WvVshG1vCPLtRe7kH0PmVmvmxCbCgQaSLMKvnRZjWYkKhBw9ntd7GeQGqvn%2FYeh6sGUflvjfJlSj3ljm06pk0PS0KTgzdzkHqTFGXAGa91ww6yeIi8YeN5VrHX4t1G5V2Xjxo7eQf7WaNmk6%2FOGJ6IXPu3UaniQ%2FL65ZQAT5WiwGEy4jCnSdTWm0U7t0wAEL4G9xZYmdzF0bhYHDgQjvCIw1eieJT7dP8TBy3vwBvO8ickVwaiHYC4uLYodwtqOeU9fv%2Fps%2Fg3SQM%2BChf0HSl4jiWDpYxG1U%2BZrs%2Bi3tq8a1JSo17zjTtQC%2BtYjDaiMdi7GKqVHIFNyHKVyjZ12TT%2BX9NyxbyLARi9i1JrTEyiZZ43jBdgJFgf6geT64rB058DDtM9G8YszfnANDt3bSafJ75mC1SqEW1XkwkYAfhSVG1C7Ykbp0dlfM5AD5E3VdUdedWDuIryBTLk0DyxeW9kau4nHA9pYZa%2FMLblvM4GOqUBlhXkCPo1ADU99lZjcnJ6jmn9TOuEzD4RMrtsFYZ86idn6o2qNLpDF5LQUikp2B%2BvvnsxDHE39EZeXMetNts44FzYEnYeOZ8aeGIlcbhY%2FDjg%2FbOmf6u1hsprLRdD1YgQv1kIajA%2BNW0tvHDQOFAt9FnkMNsAxDmPduv0VkqTyocds%2F2r1l7ZhLXesXcIH9gYeEBGYwu%2BYop4lkO9D9qF15x5uPyI&amp;X-Amz-Signature=2883636bc9589723c08cb929beb1bbd26770d5ab1f7f72c1dddaff1f51511402&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="创建"&gt;创建&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;推荐使用Ed&lt;/span&gt;&lt;span class="mi"&gt;25519&lt;/span&gt;&lt;span class="err"&gt;算法&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;ssh-keygen&lt;/span&gt; &lt;span class="err"&gt;-t&lt;/span&gt; &lt;span class="err"&gt;ed&lt;/span&gt;&lt;span class="mi"&gt;25519&lt;/span&gt; &lt;span class="err"&gt;-C&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;your_email@example.com&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;备选&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;ssh-keygen&lt;/span&gt; &lt;span class="err"&gt;-t&lt;/span&gt; &lt;span class="err"&gt;rsa&lt;/span&gt; &lt;span class="err"&gt;-b&lt;/span&gt; &lt;span class="mi"&gt;4096&lt;/span&gt; &lt;span class="err"&gt;-C&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;your_email@example.com&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h2 id="配置"&gt;配置&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;将ssh密钥添加到ssh-agent&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;Get-Service&lt;/span&gt; &lt;span class="err"&gt;ssh-agent&lt;/span&gt; &lt;span class="err"&gt;|&lt;/span&gt; &lt;span class="err"&gt;Set-Service&lt;/span&gt; &lt;span class="err"&gt;-StartupType&lt;/span&gt; &lt;span class="err"&gt;Automatic&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;Start-Service&lt;/span&gt; &lt;span class="err"&gt;ssh-agent&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;ssh-add&lt;/span&gt; &lt;span class="err"&gt;.\.ssh\id_ed&lt;/span&gt;&lt;span class="mi"&gt;25519&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;查看是否添加成功&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;ssh-add&lt;/span&gt; &lt;span class="err"&gt;-l&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="安装ghgithub-cli"&gt;安装gh（github cli）&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;打开powershell&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;choco&lt;/span&gt; &lt;span class="err"&gt;install&lt;/span&gt; &lt;span class="err"&gt;gh&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;登录&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;gh&lt;/span&gt; &lt;span class="err"&gt;auth&lt;/span&gt; &lt;span class="err"&gt;login&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="打开git提交"&gt;打开GIT/提交&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;gh&lt;/span&gt; &lt;span class="err"&gt;ssh-key&lt;/span&gt; &lt;span class="err"&gt;add&lt;/span&gt; &lt;span class="err"&gt;~/.ssh/id_ed&lt;/span&gt;&lt;span class="mi"&gt;25519&lt;/span&gt;&lt;span class="err"&gt;.pub&lt;/span&gt; &lt;span class="err"&gt;--title&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;公司主机&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="验证"&gt;验证&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;ssh&lt;/span&gt; &lt;span class="err"&gt;-T&lt;/span&gt; &lt;span class="err"&gt;git@github.com&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/edba0e64-2598-46d9-91d5-7a4acdc9e627/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X2AEUJKP%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034943Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIERil8VcTF8KfdxM5BDpNFaGbi%2FI84Cv02NZ1W8rxVMpAiEAjFif%2F2mQKpGFQ0MNYlkS5N8KgJK9hQdRivIEukHFWNIq%2FwMIfRAAGgw2Mzc0MjMxODM4MDUiDGnDQslz629apyb5FSrcA6Ubp3FHggV1Usi7g4kF9UAavSMXokQ0ZlLgTlgz%2Btz8bRUjGlhQ2Bz%2FOMD%2BpwxyViM6o2wxmV3mVPPHtYpaza2lNZ%2BO0Y2KqKC0u2zdtLhyaYRboJoYYlpadp9YXtnGO5tr6RSD65gIs7KAcWC%2BgGTnS1WvVshG1vCPLtRe7kH0PmVmvmxCbCgQaSLMKvnRZjWYkKhBw9ntd7GeQGqvn%2FYeh6sGUflvjfJlSj3ljm06pk0PS0KTgzdzkHqTFGXAGa91ww6yeIi8YeN5VrHX4t1G5V2Xjxo7eQf7WaNmk6%2FOGJ6IXPu3UaniQ%2FL65ZQAT5WiwGEy4jCnSdTWm0U7t0wAEL4G9xZYmdzF0bhYHDgQjvCIw1eieJT7dP8TBy3vwBvO8ickVwaiHYC4uLYodwtqOeU9fv%2Fps%2Fg3SQM%2BChf0HSl4jiWDpYxG1U%2BZrs%2Bi3tq8a1JSo17zjTtQC%2BtYjDaiMdi7GKqVHIFNyHKVyjZ12TT%2BX9NyxbyLARi9i1JrTEyiZZ43jBdgJFgf6geT64rB058DDtM9G8YszfnANDt3bSafJ75mC1SqEW1XkwkYAfhSVG1C7Ykbp0dlfM5AD5E3VdUdedWDuIryBTLk0DyxeW9kau4nHA9pYZa%2FMLblvM4GOqUBlhXkCPo1ADU99lZjcnJ6jmn9TOuEzD4RMrtsFYZ86idn6o2qNLpDF5LQUikp2B%2BvvnsxDHE39EZeXMetNts44FzYEnYeOZ8aeGIlcbhY%2FDjg%2FbOmf6u1hsprLRdD1YgQv1kIajA%2BNW0tvHDQOFAt9FnkMNsAxDmPduv0VkqTyocds%2F2r1l7ZhLXesXcIH9gYeEBGYwu%2BYop4lkO9D9qF15x5uPyI&amp;X-Amz-Signature=f788e96c4a11b350727d8021f282bd700ff670b6fc10f3048bc90a2bb050ab05&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Windows创建bat脚本踩坑</title><link>https://Pan-Binghong.github.io/daily-learning/other/windows%E5%88%9B%E5%BB%BAbat%E8%84%9A%E6%9C%AC%E8%B8%A9%E5%9D%91/</link><pubDate>Fri, 07 Nov 2025 05:54:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/windows%E5%88%9B%E5%BB%BAbat%E8%84%9A%E6%9C%AC%E8%B8%A9%E5%9D%91/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="解决方法"&gt;解决方法&lt;/h2&gt;
-&lt;h3 id="在windows记事本中重新创建"&gt;在Windows记事本中重新创建&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;打开记事本（Notepad）&lt;/li&gt;
-&lt;li&gt;复制脚本&lt;/li&gt;
-&lt;li&gt;另存为，修改编码格式和文件后缀&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;当使用编辑器打开保存后的bat文件，显示乱码是正常的。&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Windows设置定时任务</title><link>https://Pan-Binghong.github.io/daily-learning/other/windows%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</link><pubDate>Wed, 05 Nov 2025 04:40:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/windows%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</guid><description>&lt;ol&gt;
-&lt;li&gt;打开cmd, 输入taskschd.msc ，弹出任务计划程序页面&lt;/li&gt;
-&lt;li&gt;创建基本任务&lt;/li&gt;
-&lt;li&gt;依次输入基本任务的参数配置&lt;/li&gt;
-&lt;li&gt;设置任务级别&lt;/li&gt;
-&lt;li&gt;运行测试&lt;/li&gt;
-&lt;li&gt;刷新后查看运行结果是否正常&lt;/li&gt;
-&lt;/ol&gt;</description></item><item><title>Ubuntu挂载Windows的共享文件夹</title><link>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</link><pubDate>Fri, 31 Oct 2025 08:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</guid><description>&lt;ol&gt;
-&lt;li&gt;创建凭据文件，将windows的账号、密码写入配置文件.smbcredentials 中&lt;/li&gt;
-&lt;li&gt;挂载&lt;/li&gt;
-&lt;/ol&gt;</description></item><item><title>SQL Server常用语句</title><link>https://Pan-Binghong.github.io/daily-learning/devops/sql-server%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/</link><pubDate>Thu, 25 Sep 2025 02:02:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/sql-server%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>配置子域名并绑定数字证书</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%B9%B6%E7%BB%91%E5%AE%9A%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/</link><pubDate>Thu, 10 Jul 2025 01:38:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%B9%B6%E7%BB%91%E5%AE%9A%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="1-新增子域名"&gt;1. 新增子域名&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;域名控制台&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;域名列表&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;找到域名&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;xxx&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;域名解析&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;添加记录&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/d53e1cf2-57f9-4949-8c28-befc13f93203/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WIPO7HNS%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034941Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDLyGqHtgYq41LwmJPeFr779YPPpBkQiyQU6I8Pf%2FRMngIhAIGFE8njnJuU61uLkd71xmlEm3W8E4ayaVr4mhrYbKVeKv8DCHoQABoMNjM3NDIzMTgzODA1Igx7OOf6ZGgECDAci3cq3AM18%2BFV6Lwwk5hqxQJ2m6%2FYOTG5NHNxItqkoJj3NFuDNRhUo29mzeWrAIN7KeQk9Zcpur1XvXIzov6FGdA7PhTHg7OiXtM44QxdeWZA4UeEcGw8n7T5hSBSJD2VedOdVFqsmhuRgr9Y9myXuKbvaDRQUPrvM3ghKvRlPzGlyz6hyCAnU3SojPMkUntJIR4mueD8AwpsDNCuIpN1ScdljUWDkD%2FmPA%2BbhmGZgrrougTVN9ulRZR7NHhbQ5rm8KlnN4YyR%2B3jrzoRPrzNl6IE8DzT%2FpHOWnJqX01N4sTo9hMwPFbgPW8xziywQNP7Kpm3mH%2F2rvrMStgO8KR3ipa2%2FIOVZk52X3Px1EEp0xcUgXtP%2B9aJVMMmGC196k1pmzFFnjKv%2FuAyo1sChYXFTk25T1V5d3%2Fsk%2FCLvRi1CNPv%2BGR3yRzS3EzFO%2BYve7N0%2BFFUPTi%2BOUStdAbtK8epVKiEmf6V9rdZ1%2Fl2ep1z88GSvlIR8e7RoUB3qmBcmkkH5Mzt%2B8gDnwDWHTOQiHJTLvIT0neUYl%2Bhl4ojAURQgiNyuj6vgUdpvEPSFoNheZqS4JL1o6iKg1Hg4D1deZsNBCrOdJRFhLXT9Y7KeqTTm%2BLr0aD9kSHBdMu17JDUlD8gczC7rbzOBjqkAQ8s6Kir4GPcq%2BwrbCdHdzX5Hft5Zr3jtn75X3B%2Fjz%2FE3swZEeAWDXJidQmy5RcS57kGP9S5f3%2FqSFMiv6Ct5BJ0hhQt9JVSa7NOnSJFRTbwCa5FXmN%2F2yPue6tx7shwu5GVZHl6yxB8Iyu69L49b%2FUQwTmSuyQSdQ5zDKMABq0cK99PnbQ%2BLo5zckl%2F89eNTGuFZ%2FutOAK%2FKe7YDTQ5uo%2Ba3Udh&amp;X-Amz-Signature=ebb1563a6628fc7d55f1d85495ce15c81726569f2f2e1979c18ef32f78479dce&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="2-数字证书管理服务"&gt;2. 数字证书管理服务&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;证书管理&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;SSL证书管理&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;个人测试证书&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;原免费证书&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;创建证书&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/e1520a28-fbab-4de2-92b8-70367c718ba5/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WIPO7HNS%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034941Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDLyGqHtgYq41LwmJPeFr779YPPpBkQiyQU6I8Pf%2FRMngIhAIGFE8njnJuU61uLkd71xmlEm3W8E4ayaVr4mhrYbKVeKv8DCHoQABoMNjM3NDIzMTgzODA1Igx7OOf6ZGgECDAci3cq3AM18%2BFV6Lwwk5hqxQJ2m6%2FYOTG5NHNxItqkoJj3NFuDNRhUo29mzeWrAIN7KeQk9Zcpur1XvXIzov6FGdA7PhTHg7OiXtM44QxdeWZA4UeEcGw8n7T5hSBSJD2VedOdVFqsmhuRgr9Y9myXuKbvaDRQUPrvM3ghKvRlPzGlyz6hyCAnU3SojPMkUntJIR4mueD8AwpsDNCuIpN1ScdljUWDkD%2FmPA%2BbhmGZgrrougTVN9ulRZR7NHhbQ5rm8KlnN4YyR%2B3jrzoRPrzNl6IE8DzT%2FpHOWnJqX01N4sTo9hMwPFbgPW8xziywQNP7Kpm3mH%2F2rvrMStgO8KR3ipa2%2FIOVZk52X3Px1EEp0xcUgXtP%2B9aJVMMmGC196k1pmzFFnjKv%2FuAyo1sChYXFTk25T1V5d3%2Fsk%2FCLvRi1CNPv%2BGR3yRzS3EzFO%2BYve7N0%2BFFUPTi%2BOUStdAbtK8epVKiEmf6V9rdZ1%2Fl2ep1z88GSvlIR8e7RoUB3qmBcmkkH5Mzt%2B8gDnwDWHTOQiHJTLvIT0neUYl%2Bhl4ojAURQgiNyuj6vgUdpvEPSFoNheZqS4JL1o6iKg1Hg4D1deZsNBCrOdJRFhLXT9Y7KeqTTm%2BLr0aD9kSHBdMu17JDUlD8gczC7rbzOBjqkAQ8s6Kir4GPcq%2BwrbCdHdzX5Hft5Zr3jtn75X3B%2Fjz%2FE3swZEeAWDXJidQmy5RcS57kGP9S5f3%2FqSFMiv6Ct5BJ0hhQt9JVSa7NOnSJFRTbwCa5FXmN%2F2yPue6tx7shwu5GVZHl6yxB8Iyu69L49b%2FUQwTmSuyQSdQ5zDKMABq0cK99PnbQ%2BLo5zckl%2F89eNTGuFZ%2FutOAK%2FKe7YDTQ5uo%2Ba3Udh&amp;X-Amz-Signature=00f2df981c9db0557d2c048298b3e7307cf4dc1c90341b826fcfd43c321a55db&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="3-下载证书"&gt;3. 下载证书&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;数字证书管理服务&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;证书管理&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;SLL证书管理&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;xxx&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;刚才申请的证书&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;下载&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Nginx&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;下载&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/90ae2530-2256-4686-83de-6e41b7d2c171/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WIPO7HNS%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034941Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDLyGqHtgYq41LwmJPeFr779YPPpBkQiyQU6I8Pf%2FRMngIhAIGFE8njnJuU61uLkd71xmlEm3W8E4ayaVr4mhrYbKVeKv8DCHoQABoMNjM3NDIzMTgzODA1Igx7OOf6ZGgECDAci3cq3AM18%2BFV6Lwwk5hqxQJ2m6%2FYOTG5NHNxItqkoJj3NFuDNRhUo29mzeWrAIN7KeQk9Zcpur1XvXIzov6FGdA7PhTHg7OiXtM44QxdeWZA4UeEcGw8n7T5hSBSJD2VedOdVFqsmhuRgr9Y9myXuKbvaDRQUPrvM3ghKvRlPzGlyz6hyCAnU3SojPMkUntJIR4mueD8AwpsDNCuIpN1ScdljUWDkD%2FmPA%2BbhmGZgrrougTVN9ulRZR7NHhbQ5rm8KlnN4YyR%2B3jrzoRPrzNl6IE8DzT%2FpHOWnJqX01N4sTo9hMwPFbgPW8xziywQNP7Kpm3mH%2F2rvrMStgO8KR3ipa2%2FIOVZk52X3Px1EEp0xcUgXtP%2B9aJVMMmGC196k1pmzFFnjKv%2FuAyo1sChYXFTk25T1V5d3%2Fsk%2FCLvRi1CNPv%2BGR3yRzS3EzFO%2BYve7N0%2BFFUPTi%2BOUStdAbtK8epVKiEmf6V9rdZ1%2Fl2ep1z88GSvlIR8e7RoUB3qmBcmkkH5Mzt%2B8gDnwDWHTOQiHJTLvIT0neUYl%2Bhl4ojAURQgiNyuj6vgUdpvEPSFoNheZqS4JL1o6iKg1Hg4D1deZsNBCrOdJRFhLXT9Y7KeqTTm%2BLr0aD9kSHBdMu17JDUlD8gczC7rbzOBjqkAQ8s6Kir4GPcq%2BwrbCdHdzX5Hft5Zr3jtn75X3B%2Fjz%2FE3swZEeAWDXJidQmy5RcS57kGP9S5f3%2FqSFMiv6Ct5BJ0hhQt9JVSa7NOnSJFRTbwCa5FXmN%2F2yPue6tx7shwu5GVZHl6yxB8Iyu69L49b%2FUQwTmSuyQSdQ5zDKMABq0cK99PnbQ%2BLo5zckl%2F89eNTGuFZ%2FutOAK%2FKe7YDTQ5uo%2Ba3Udh&amp;X-Amz-Signature=7ab597d43f2413906d06ab0baeca117f3455be1196e6b879ee02399b6d87b260&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="4-宿主机内配置"&gt;4. 宿主机内配置&lt;/h2&gt;
-&lt;h3 id="41-配置docker-composeyaml"&gt;4.1 配置Docker-compose.yaml&lt;/h3&gt;
-&lt;h3 id="42-配置"&gt;4.2 配置&lt;/h3&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>uv Common Commands|Install</title><link>https://Pan-Binghong.github.io/daily-learning/devops/uv-common-commandsinstall/</link><pubDate>Tue, 25 Mar 2025 07:19:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/uv-common-commandsinstall/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 Anaconda对员工超过200人的组织，需要为使用其默认包仓库的每位用户获取商业许可。总之就是变天了。现在大家都准备用uv来替代anconda。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h1 id="安装uv"&gt;安装uv&lt;/h1&gt;
-&lt;h2 id="windows安装"&gt;Windows安装|&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;用管理员身份打开powershell&lt;/li&gt;
-&lt;li&gt;运行安装命令&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="更新"&gt;更新&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;如果使用pip或者别的安装方法，需要使用pip install &amp;ndash;upgrade uv 进行更新。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;uv&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/792413cd-74e7-4497-8bc9-a54b5dcd1fe8/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZLC33XRP%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034935Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIAOOtQFpwYja95lwgBrt6%2FZ0BKoDE6ZRCAehFEUsp9xKAiBxdPwlIolLOJJnyHZvXiOeo2hj8gQegE7lb%2BpTw21tCir%2FAwh9EAAaDDYzNzQyMzE4MzgwNSIMbm3coPxkYuEsB9ipKtwD3D1hEDSElVeAwI539oFjzTl4%2BTAFYTaV8VmyVrKO0xZMhiaX1f%2BVuAFQQZrLYIYchW8y1AzJfGElyRRcv7ptbjwiYUri%2FHEEBZ8p2ZtBXkQubr78SY2afq%2BB23wvjP7YMaRL8KR5MQWmkL%2FSnnx1ZYeeMH%2BCdrl2Y9UQi81CwnioQfVXiY7i4khyaejMHkS1bdrePc%2Ff8TYOv6qb%2B34%2FuzyTY%2FuOEA2ZO59tG8nsX%2FW1lsgDr2KvtufJcOX4PQWE1Vst3JwaLtME8f17khWLD1hbW3ryTe80pOVteLFYs6DU9Er2%2BSGPv1N66Gl3PiXYhM83ca%2FfVxJt7lYoEd5HronUhIqcOo5jkyoe0h0TcsCmG00nh4mdTCFvJp7tlFIpKcDHS6qrDaxBfZB84GbEKWtf5Op%2FBOKq8lhd0oI6unsaiSOM6lvIf7eJpbo6F0ujGVbGUhIuVhfZMteeZYvfiBQ3UAwhNvRMIK0BhSqOXB2upETpPHkeuwE4sB7u6p2zWY%2Bzv%2BekIHlJ1kt%2FD1KuzqlLqVdSGx31JpTlkiK917SXQl2sYJpHv1UinkZmsJPblAQfXRhwy8pHEccmkYEXauInUkCIGRUQrkeSJAxy0vmo8zOkX3H6fIFe17kw%2FOe8zgY6pgFimCeNN9Nlg5FRsyKabC%2FtfPdFktZtw7tqhrRSUMQQf6AjAMUWhzGEz5G63XHCqeJsu68HI%2FRqomckZ481XmitAo1ZMFiVcpAuE6iVtrCctdTuVpv96hwebVVXXPRmogbcV%2BjKICxJxsNstF29b5rroxkkctgcpmV51qQqHgGvbVl1wz56mZCRbMMzyqDMVsMSlI4nqtuH2p4Hc%2BxmM3O51KVwN0%2Fq&amp;X-Amz-Signature=caee629ac4c3a6a2dadb39eec311f0b242a02762344d3815d2f11f2940ea8ba1&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="卸载"&gt;卸载&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;清理缓存&lt;/li&gt;
-&lt;li&gt;删除uv和二进制文件&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="安装linux"&gt;安装|Linux&lt;/h2&gt;
-&lt;p&gt;官方建议使用以下两种方法均可，但是我都下载不动。。。最终采用pip的方法进行安装的。&lt;/p&gt;
-&lt;p&gt;pip install uv -i &lt;a href="https://pypi.tuna.tsinghua.edu.cn/simple"&gt;https://pypi.tuna.tsinghua.edu.cn/simple&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/362c823c-ff0f-4a1f-8401-871a82af32c0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZLC33XRP%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034935Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIAOOtQFpwYja95lwgBrt6%2FZ0BKoDE6ZRCAehFEUsp9xKAiBxdPwlIolLOJJnyHZvXiOeo2hj8gQegE7lb%2BpTw21tCir%2FAwh9EAAaDDYzNzQyMzE4MzgwNSIMbm3coPxkYuEsB9ipKtwD3D1hEDSElVeAwI539oFjzTl4%2BTAFYTaV8VmyVrKO0xZMhiaX1f%2BVuAFQQZrLYIYchW8y1AzJfGElyRRcv7ptbjwiYUri%2FHEEBZ8p2ZtBXkQubr78SY2afq%2BB23wvjP7YMaRL8KR5MQWmkL%2FSnnx1ZYeeMH%2BCdrl2Y9UQi81CwnioQfVXiY7i4khyaejMHkS1bdrePc%2Ff8TYOv6qb%2B34%2FuzyTY%2FuOEA2ZO59tG8nsX%2FW1lsgDr2KvtufJcOX4PQWE1Vst3JwaLtME8f17khWLD1hbW3ryTe80pOVteLFYs6DU9Er2%2BSGPv1N66Gl3PiXYhM83ca%2FfVxJt7lYoEd5HronUhIqcOo5jkyoe0h0TcsCmG00nh4mdTCFvJp7tlFIpKcDHS6qrDaxBfZB84GbEKWtf5Op%2FBOKq8lhd0oI6unsaiSOM6lvIf7eJpbo6F0ujGVbGUhIuVhfZMteeZYvfiBQ3UAwhNvRMIK0BhSqOXB2upETpPHkeuwE4sB7u6p2zWY%2Bzv%2BekIHlJ1kt%2FD1KuzqlLqVdSGx31JpTlkiK917SXQl2sYJpHv1UinkZmsJPblAQfXRhwy8pHEccmkYEXauInUkCIGRUQrkeSJAxy0vmo8zOkX3H6fIFe17kw%2FOe8zgY6pgFimCeNN9Nlg5FRsyKabC%2FtfPdFktZtw7tqhrRSUMQQf6AjAMUWhzGEz5G63XHCqeJsu68HI%2FRqomckZ481XmitAo1ZMFiVcpAuE6iVtrCctdTuVpv96hwebVVXXPRmogbcV%2BjKICxJxsNstF29b5rroxkkctgcpmV51qQqHgGvbVl1wz56mZCRbMMzyqDMVsMSlI4nqtuH2p4Hc%2BxmM3O51KVwN0%2Fq&amp;X-Amz-Signature=6fe5aa49624c3dc28e5be0621337fb40bcf7b52fe40e2247ef7373af857f76dc&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id="检查"&gt;检查&lt;/h1&gt;
-&lt;p&gt;安装完毕后，在终端直接运行uv ，查看是否出现以下内容。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/d2350aa7-bbba-455d-860d-34eee2ae196e/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZLC33XRP%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034935Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIAOOtQFpwYja95lwgBrt6%2FZ0BKoDE6ZRCAehFEUsp9xKAiBxdPwlIolLOJJnyHZvXiOeo2hj8gQegE7lb%2BpTw21tCir%2FAwh9EAAaDDYzNzQyMzE4MzgwNSIMbm3coPxkYuEsB9ipKtwD3D1hEDSElVeAwI539oFjzTl4%2BTAFYTaV8VmyVrKO0xZMhiaX1f%2BVuAFQQZrLYIYchW8y1AzJfGElyRRcv7ptbjwiYUri%2FHEEBZ8p2ZtBXkQubr78SY2afq%2BB23wvjP7YMaRL8KR5MQWmkL%2FSnnx1ZYeeMH%2BCdrl2Y9UQi81CwnioQfVXiY7i4khyaejMHkS1bdrePc%2Ff8TYOv6qb%2B34%2FuzyTY%2FuOEA2ZO59tG8nsX%2FW1lsgDr2KvtufJcOX4PQWE1Vst3JwaLtME8f17khWLD1hbW3ryTe80pOVteLFYs6DU9Er2%2BSGPv1N66Gl3PiXYhM83ca%2FfVxJt7lYoEd5HronUhIqcOo5jkyoe0h0TcsCmG00nh4mdTCFvJp7tlFIpKcDHS6qrDaxBfZB84GbEKWtf5Op%2FBOKq8lhd0oI6unsaiSOM6lvIf7eJpbo6F0ujGVbGUhIuVhfZMteeZYvfiBQ3UAwhNvRMIK0BhSqOXB2upETpPHkeuwE4sB7u6p2zWY%2Bzv%2BekIHlJ1kt%2FD1KuzqlLqVdSGx31JpTlkiK917SXQl2sYJpHv1UinkZmsJPblAQfXRhwy8pHEccmkYEXauInUkCIGRUQrkeSJAxy0vmo8zOkX3H6fIFe17kw%2FOe8zgY6pgFimCeNN9Nlg5FRsyKabC%2FtfPdFktZtw7tqhrRSUMQQf6AjAMUWhzGEz5G63XHCqeJsu68HI%2FRqomckZ481XmitAo1ZMFiVcpAuE6iVtrCctdTuVpv96hwebVVXXPRmogbcV%2BjKICxJxsNstF29b5rroxkkctgcpmV51qQqHgGvbVl1wz56mZCRbMMzyqDMVsMSlI4nqtuH2p4Hc%2BxmM3O51KVwN0%2Fq&amp;X-Amz-Signature=e5044d48b25c0dd0783db48fedaea187d92019ef2dc4c688e85692f7be578150&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id="python"&gt;Python&lt;/h1&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;创建项目&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;管理依赖&lt;/li&gt;
-&lt;li&gt;修改源&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id="坑"&gt;坑&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;警告如下:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Windows专线直连服务器</title><link>https://Pan-Binghong.github.io/daily-learning/devops/windows%E4%B8%93%E7%BA%BF%E7%9B%B4%E8%BF%9E%E6%9C%8D%E5%8A%A1%E5%99%A8/</link><pubDate>Fri, 14 Mar 2025 08:07:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/windows%E4%B8%93%E7%BA%BF%E7%9B%B4%E8%BF%9E%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 记录一下如何解决的。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="前置条件"&gt;前置条件&lt;/h2&gt;
-&lt;p&gt;需已知服务器的静态IP和子网掩码，自己配置也行。&lt;/p&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li&gt;Windows电脑和服务器网线连接&lt;/li&gt;
-&lt;li&gt;打开网络和共享中心-进入适配器设置&lt;/li&gt;
-&lt;li&gt;找到对应的网络连接，右键属性，双击internet协议版本4（TCP4/IP)
-&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/863c402f-4ab1-45e1-a148-3d37932cc3bf/9c5d35113aa3fbe01deeff992970e27.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466VC75LHKN%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034933Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDrNWvSX9BRjgOP3nf1j34%2BbXv4CRuD1JoNT732m79fhwIgWqyGbz5wRk0OAQ65H8B1FQ%2BK40wXm0I%2Fcy%2FF0x%2FV3v4q%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDM7rg%2BCGCq9jv%2B8nUircAyjLHOsTrpHe6V%2BjtmUE8Av1n1ggbS8ptI9posLrXoim4AVBePaJZazkX%2FgnCyrOsejo8e%2FMBrT9QpbOf6TcY%2BOxX%2FjC61iNT5xRDRzGIfSZ6G%2FseuysM%2FNi6UJ4DNr5TPtTibP9pJWpNws%2FLiuABAgPOtxbnRQdQ6kvKkRUZ6knWq45%2BjYP%2FwW4l8%2BLo%2BpDMX48Y624RT6IjKSSBZRVfGv3rXoLvF%2BoFR8UQRsWUedQOyZyXv%2BCV2qUqJtDFNqtss4LrsSSEiLn%2Bo5eA%2FV7W9LAzfRb29barmuCjnT%2B4LAPwYJr4cTdoxABUHi%2FNGvx1IYy%2FzsW5MNmTA0Uumz4qsCN%2BepKVYQQbQEwz%2BatO4XTUl4sAdVl3g1adPdYT8IUwFhewuM1KLuoswTuGwLrsudNM8k1yA4YJUoQibGXFcW%2B2Ji%2B2WtyAAubFkotvRRykr8HKP%2FgobxHaU8qgpMtdu31CR8nGH1dk1w4TPKgPEhE5sC0FpRxyehtGl5NhAbqc%2BDOy6yju%2B1toqSPPTQ7MmPDGqK140%2F764CGZNhiu4nJkqopcnk%2F200ByTdumncrWaOsIdTH645qHvC5v33Ci6HmqeHiDiVhNsc%2B5tuMEkJnZlQ8OJQe9%2BLim82jMJvivM4GOqUBXup7dyWL3jgAgMEkemjnab4dQCUHdStUB5gbgtyyHluv1H2iRmPOWwmEVCct4WIvaMbpwrf%2F0nzkqLFeFtlL%2Bcx8CxFp7oqgYaGC12FkFV%2BynSCP8JpSMVQT92xVuquUXXicah7xwzSBoLIaTcFgC0HA6Z84FUMZFqsYTZ8Q6IcKIH19sAaHAtNWFlIHPEHUr%2BgfOEmRoeYb6fker6oHHLV02SXv&amp;X-Amz-Signature=dc7ac5294640dd4316950ff5e378a5229ec2bb0a8e0427af2d20ddbbadfa8b2e&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;</description></item><item><title>开启gpedit.msc</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E5%BC%80%E5%90%AFgpedit.msc/</link><pubDate>Thu, 19 Dec 2024 01:11:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E5%BC%80%E5%90%AFgpedit.msc/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 Windows为家庭版或者教育版，打开win+r输入gpedit.msc会显示找不到。记录修改过程。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="设置步骤"&gt;设置步骤&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;新建一个txt文件&lt;/li&gt;
-&lt;li&gt;写入代码&lt;/li&gt;
-&lt;li&gt;保存，将txt修改为bat&lt;/li&gt;
-&lt;li&gt;双击运行&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="验证结果"&gt;验证结果&lt;/h2&gt;
-&lt;p&gt;win + R 输入gpedit.msc&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/b211b15a-1374-48d3-935b-8a75ed2bb52f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ROM274WM%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034925Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQC4YdW%2FR4e3izCq2uHIp9gq9FlLBdGWqQH05Ge7mJBTwgIhAPVKK9o1BmcnGAXcZMu0LBXOevB5PYPlR5%2BZ1xMNKOiEKv8DCH0QABoMNjM3NDIzMTgzODA1Igw4hlsXjkotn8eSzHAq3AMHyAx%2BJu2Fc8zMAADk%2BnU6DzuKsJh4cHS4pHtTtlGk9lPwx97SvhMbCKtQ5oafB74nWGCGTGkoHg84sfiUTqgLGphzl%2BAHkqdgaPffAqBu0Yhm8ozWJ6HG8ciwcZ%2FklAz5nAXKvpO16tDSH3Z06geL88%2FRj%2FyWw7CA0oVA9S6P7q%2BxCRPx2keg%2ByejH90ppU5%2Bk9LxMlbW4A%2FvYBksdi2i86Z%2F2wqF4M6o2t3%2BhYuhriNGqYlSJPATL%2BQRxLy4Z9LU%2FpCqu%2FkgONnjCo%2FQsXtIGrxeWeuGozboRpk02ovihSOX54BMzJCbN7A8yIYrItCBN93O%2BXPtV1Lv%2FMDYseXC02N1pGxh34%2Bioi%2FgBZ9zNsJuh9VkhcPxfaV%2FZcuQF228qyDUUaiyxaiK1%2Ft86KvqCfj6clq0tqgdauG85FCY92NhjxpV1SgmzDEg84GzVCeutnP097GGy%2FG%2Fsgx1TZzygk4VakCKUSnBaEfzKSeh%2FSjLolYNvehIMWHCcsqPDSFPDMExSK3DH55TL%2FKb8cAYCBIGqO2ioksGQrgluFrDjJY1SdCLMY9nCTUohMxKoswDI2w0Zu%2B1S%2Bwj02fiBh2XYo4pIqU46VYAVJZm80G5mDt0gJvRuYeDlydAYjD97rzOBjqkATJF7h7ZwdITRRg2mC1HfTzRBzQk9NaeMwTQiusYouK6bQwWXKHXw6ER6VykTsOEDJDX5snKcZeA0tVWnq0uLni8XuOz%2Bw1j4lOZoIGjoQbo1n9gV3iwxFW0lUOrZqBdLvlv28RzFr7Em4QVUetPXDNikIU0QOAwyybm8HMpaF9A5N7uCvALs3BAs9llAOKT5V9ZImOBe0KGPENBDaTH%2FTbQg4jr&amp;X-Amz-Signature=482dcad6536b2949d1832a81175ccbc5e41b481dae917777b34852b164a1eabb&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="懒人版本"&gt;懒人版本&lt;/h2&gt;
-&lt;p&gt;下载，运行即可&lt;/p&gt;</description></item><item><title>VSCode常用快捷键</title><link>https://Pan-Binghong.github.io/daily-learning/devops/vscode%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</link><pubDate>Sun, 01 Dec 2024 08:26:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/vscode%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>PowerShell Common Commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/powershell-common-commands/</link><pubDate>Thu, 28 Nov 2024 00:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/powershell-common-commands/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 记录常用的PowerShell命令，以及说明PowerShell和CMD区别。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="基本概念"&gt;基本概念&lt;/h2&gt;
-&lt;hr&gt;
-&lt;h2 id="常用命令"&gt;常用命令&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;PowerShell 是 Windows 的命令行终端增强工具，其设计理念之一就是向下兼容旧的 CMD 工具。因此，PowerShell 能够直接调用 CMD 的内部命令和外部工具。以下内容为CMD基础命令，同时也可以在PowerShell内执行。&lt;/li&gt;
-&lt;li&gt;PowerShell特有的常用命令&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>VNC安装 | 配置</title><link>https://Pan-Binghong.github.io/daily-learning/devops/vnc%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE/</link><pubDate>Tue, 19 Nov 2024 08:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/vnc%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 使用两台 windows 电脑进行远程控制，配置 VNC 的详细教程。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;VNC（Virtual Network Computing），为一种使用 RFB 协议的屏幕画面分享及远程操作软件。此软件借由网络，可发送键盘与鼠标的动作及即时的屏幕画面。&lt;/p&gt;
-&lt;p&gt;VNC 与操作系统无关，因此可跨平台使用，例如可用 Windows 连线到某 Linux 的电脑，反之亦同。甚至在没有安装客户端程序的电脑中，只要有支持 JAVA 的浏览器，也可使用。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/e5533731-6b04-4ab5-baeb-4a6dcb57f177/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667LAXDZYB%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034912Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCsTu6LyoHw9wsikH5wMTvNtmYlcEy2qnB5IPiAumsaxAIhAIIBvfgJxH1xLlsWwqywWYoJTIBypxCgTTn8HTk74YKuKv8DCH0QABoMNjM3NDIzMTgzODA1IgysHM3uAuNEz69X9m8q3AOsNBgzj6tyNEkcSh2bGZeR4RxsR41Uy4bThIHOS4SdKhYIOJ5dDjG1cNZNlRvbSmnNyMSzmNyavSgDMZoI6L97j1WDTKRpkQhsTbeVaec63Z4aSUpT6krB7tLRtA40szdT2yZQKMCVG2J8%2FOWvneqZrJ%2BtwFehV0guuZ3M5nwuiLebtoHMtIV65OgXZb9YKYP5bJH%2FWGR2PaPVt0QvmNLXGEwhFMgHXRP6VNMmseSnx6Ulw1%2B5Ugb053NhChkkogzlUcINF5dGlECqhI8gSqWV2BB394NBDSjAsWRgylNrtSjP9BhpcDGy2LhMnNpLpmFUDHm1E1onfOXTeIp3JvJnp%2FT0Ma5lwiJdpFkao0YJifwE%2FBtW39jpK08tLAjahDjXYQPUxfa1963PwyL%2FZBGZ3U3JYgAhlzSU%2BUoeBIL3GLfJ6gK5j%2B3gIekBOnB0gS8MXfNmk8dKomuHGRrE2VISaOp1TjF%2FbZGdvct9uBluUBot%2BIzbM8GFDBiaVW83a9yuaGV29K4s1sXYU5tmm%2FyCdcUMBF%2F3pFNFMBsfGUXNM48k7kJzsg4ga%2B65bZLHnjHFRASKkgCbQkClJz1U6W9eDF5%2F4RgKI2Lkcbd7xooMw12%2B2WXIOXxpZGdqOjDE6LzOBjqkAfG6xT7L6zlbZDDDoaX8UpXRZN4uVK7WhJTb37fL8k%2FCFU%2BsLDro8csp1uBM94NjyZi7EFm4fwQc7t%2BUtCYeAigAu04nxtNrP6EiThDtSH3%2BfsS72QbmJFK4pp%2FuSK20EdAvHkwWlhETnyk0HAfh43YDDo8ahwQyvdYeEWpUQN4nnXqVq%2BWOCm6xADGqeAuUWxKNQeMWLn95Lt%2FlSsf0626j8nB%2F&amp;X-Amz-Signature=d05275b7f20b3b8758adc2fb6ec05479f195a718dddf3ab9baca85f8fcb0d356&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="两台windows-电脑内下载并安装"&gt;两台 Windows 电脑内下载并安装&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;TightVNC官网地址&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="tightvnc服务端被连接端-配置"&gt;TightVNC 服务端 (被连接端) 配置&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;启动&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="tightvnc客户端连接端-配置"&gt;TightVNC 客户端 (连接端) 配置&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;打开客户端
-&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/501a68f3-43c8-4924-9dc5-0e6e1bb6fe39/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667LAXDZYB%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034912Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCsTu6LyoHw9wsikH5wMTvNtmYlcEy2qnB5IPiAumsaxAIhAIIBvfgJxH1xLlsWwqywWYoJTIBypxCgTTn8HTk74YKuKv8DCH0QABoMNjM3NDIzMTgzODA1IgysHM3uAuNEz69X9m8q3AOsNBgzj6tyNEkcSh2bGZeR4RxsR41Uy4bThIHOS4SdKhYIOJ5dDjG1cNZNlRvbSmnNyMSzmNyavSgDMZoI6L97j1WDTKRpkQhsTbeVaec63Z4aSUpT6krB7tLRtA40szdT2yZQKMCVG2J8%2FOWvneqZrJ%2BtwFehV0guuZ3M5nwuiLebtoHMtIV65OgXZb9YKYP5bJH%2FWGR2PaPVt0QvmNLXGEwhFMgHXRP6VNMmseSnx6Ulw1%2B5Ugb053NhChkkogzlUcINF5dGlECqhI8gSqWV2BB394NBDSjAsWRgylNrtSjP9BhpcDGy2LhMnNpLpmFUDHm1E1onfOXTeIp3JvJnp%2FT0Ma5lwiJdpFkao0YJifwE%2FBtW39jpK08tLAjahDjXYQPUxfa1963PwyL%2FZBGZ3U3JYgAhlzSU%2BUoeBIL3GLfJ6gK5j%2B3gIekBOnB0gS8MXfNmk8dKomuHGRrE2VISaOp1TjF%2FbZGdvct9uBluUBot%2BIzbM8GFDBiaVW83a9yuaGV29K4s1sXYU5tmm%2FyCdcUMBF%2F3pFNFMBsfGUXNM48k7kJzsg4ga%2B65bZLHnjHFRASKkgCbQkClJz1U6W9eDF5%2F4RgKI2Lkcbd7xooMw12%2B2WXIOXxpZGdqOjDE6LzOBjqkAfG6xT7L6zlbZDDDoaX8UpXRZN4uVK7WhJTb37fL8k%2FCFU%2BsLDro8csp1uBM94NjyZi7EFm4fwQc7t%2BUtCYeAigAu04nxtNrP6EiThDtSH3%2BfsS72QbmJFK4pp%2FuSK20EdAvHkwWlhETnyk0HAfh43YDDo8ahwQyvdYeEWpUQN4nnXqVq%2BWOCm6xADGqeAuUWxKNQeMWLn95Lt%2FlSsf0626j8nB%2F&amp;X-Amz-Signature=f9fa9add81e649ea534859ac80b28eefadfa5f686e89aaefa2665f2e9f7263d4&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;输入IP端口点击“Connect”连接即可。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>mstsc.exe端口修改</title><link>https://Pan-Binghong.github.io/daily-learning/devops/mstsc.exe%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9/</link><pubDate>Mon, 18 Nov 2024 08:36:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/mstsc.exe%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 mstsc 是 Microsoft Terminal Services Client 的缩写，是用于远程桌面连接的工具。通过它，你可以使用 Windows 自带的远程桌面协议（RDP）连接到其他 Windows 设备的桌面环境。通过 Win + R，然后输入 mstsc，打开远程桌面连接界面。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li&gt;打开注册表&lt;/li&gt;
-&lt;li&gt;修改端口号
-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp PortNumber 为 xxxx&lt;/li&gt;
-&lt;li&gt;防火墙设置&lt;/li&gt;
-&lt;li&gt;启动服务&lt;/li&gt;
-&lt;li&gt;勾选设置&lt;/li&gt;
-&lt;li&gt;重启电脑&lt;/li&gt;
-&lt;/ol&gt;</description></item><item><title>CMD Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/cmd-common-commands/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/cmd-common-commands/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 在Windows操作系统内，使用终端进行的常用操作命令。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/574982fa-f0a8-4734-99fc-4bcec0b9d96c/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466TJI4RVOZ%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034838Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQD1h14EUYDUHddzlBJYzaGE4xdu6ZaJr%2FNaKP9MT7Yp8gIhAPUJAwgI0qpK%2FQ4pnsAw1MNIfKLX2ZO4IeCZTHucT3C%2FKv8DCHwQABoMNjM3NDIzMTgzODA1IgwgrLEt7bkC9%2BAClg4q3AOYT7EvCYoRupvsAq%2BW6IX6UHPV3fkjwGTMzV8YxhN3%2F%2B7vCTfTzOgaw8ycKHpx9j8v0WJWbYGQddi0UcY9gi2MLYWKyrVdBK6A6inzqD1esJsFZIT0vnNdXueIlm1iIaQVk9t0NYsymFph%2BF5syvtvJDcPObe0QnTr7uWjcOWlLMJNCCGQwQr%2FnTcb2rUcGKhTjB51UCKXitSNBh2VT0pqWAW06BynOuW%2F4DYyphndDMyYgPaSBrHQYWaE1tZobO8OAGrR7zHcpz30hxbG1O6%2Bg%2B18wlrG1Kzq7CdHYFQAMORJb3f5v9U7yksDXF%2B5kMeZoT3XKTDpiZL6ZN2cRzqmQAfWGk5Ff6UgCW701rJE7X5y0DRUPAZjq3d8OGJaAP1t8B%2BsiYgRUNW3TzKLaaADH54SBcyhXN1eUkB7%2B0BSJo5PEji9mUeuGxApIcnsdsPbzX1gt89EqCi1%2BkFceqqQs7nkUdureRRXjnt8aRyVfcaFidiTRXtlsmCM0NL%2BrpAqgDMJKIQlfy6d1rG5Wxu62ZzzxkSDLg3d1NLT6tFZ2PHkoSTT1dcPO4VoBj3785lRKsAuF%2BdwigdE3x9SyJTX9HFUDOxnkqcvn7BEaete%2FEsTHwrlBsiDFmY4EzDi4bzOBjqkAXxhlj8uqZ80vbMOhw4Ts7KAsEVtIGJhNzpxq7zWEyQmp33soVVGRFrMU3SL2SnF8hvVgt4YbvDPExI3hiBu6A2UWouOOFYMvhQAO4AsFuUQuoyfs2H92RxpoxuaM6XnctfI97b7dA4zj9dA1i69FaInsb7adVMevTg8An8ED5PH5dwbJf78CK3nyrFBqxQx1FSqmP%2BXsi7N1jsKlhpJoSlcZZxI&amp;X-Amz-Signature=2de72442ac5acae07228154ddc681a8a8852a8e1efb0152a165c3cafa137a9dc&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;h2 id="系统信息与管理"&gt;系统信息与管理&lt;/h2&gt;</description></item><item><title>Win+R Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/win+r-common-commands/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/win+r-common-commands/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 记录Windows操作系统内，使用Win+R键，常用的一些快捷命令。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/4b9666c2-1827-47e3-9979-ab2a14fad8ea/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WDZ2VPZO%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034845Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDn%2F4%2F8qRHhQK9fVJP%2B0y6H6YfOftTUJH4YiV%2B8LBNuQAIgXjtxJ%2BwmUZqPIx80fCL9kf2RItjKpLkEx5tOkQNg988q%2FwMIfRAAGgw2Mzc0MjMxODM4MDUiDJdKDRYVnx1LBzV%2FVCrcAy9eHhH4x%2FrwfxXkzLWCFyipN6U4GjShPatUr5GldViyh7brsby8LBpPdA3GP2%2FkucTtKH6dksZJHI0y0itmggjQ88ujpfskf2%2FPFmdktEMS1cw8ksYOkgenQ2Ld%2FDm1i5dRVY5biqGyE92U6DLWReCS49anKSrh7yUAz%2BXBnHFDUUSATEMsrRCWUAhPcNB4gO5noaPangQ7d8OF%2B1JE7q4kpzqL%2FLVAcXuOtGto%2FOCLxLib3Q%2FfzZjUaeXm30gURlbV98tngu62Y0WcUXEydKzAoVIeEK26D%2Fju5xcLWKJggBe7qhDtzDAhzIeBrmF0PdiHYlb65m1AO6wdghsfHK5ZhRoWPsO3NQQ2dilo4qomTO%2B8W38SIgsV4v6neI0srATccrBhGB9OFi%2BwX8rQXyXPTpSgtLndRgIgWbATYAmF5RsCcWPhgBLwnAPFfO6sXBbQTuUiHstHSF9mpft2GdZ1wAWHrtyG2V7tCXtxgNsPeEQudyNif8LSBva3MwoHb3pbOmKcZwipno0rU7o8gbHONZWYdoOrCqeeFOGZ0%2FxS209JHQ3wEktAtEM9DGi3ies7HSg5G538fH6q27lZuPI958aLNP4TuIYtuNCFxC%2B%2FDVqCNdpH201185JTMM%2FqvM4GOqUBQH9O3vG4MAbHuaZJhNQMdCQyeyLgLyWpA0%2BddGPLOO7FfLsRUv3r%2B%2FaGElof1SqxCtdUOw2THOxujeAbp2BKi5laPrYAhv0FJa%2Bcia1C9icNfWGW40ZRKKlZSgX6JFxqo7R%2Bj%2BJXwEn4X%2BPYtIEsTC8DbdQemBGfKrkbhe77%2BByNVfOloBFsfqDsNMps5gJZC%2F5HiIINmkjX%2F4Rew%2BYao6yppaGt&amp;X-Amz-Signature=8140a4729a43579a40726b8bb682fa25b48823dc09ac3ea5b9126f1631120f65&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="常用命令"&gt;常用命令&lt;/h3&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Windows on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/windows/</link><description>Recent content in Windows on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2026 06:36:52 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>查看本机的SSH公钥&amp;绑定到Github</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E7%9A%84ssh%E5%85%AC%E9%92%A5%E7%BB%91%E5%AE%9A%E5%88%B0github/</link><pubDate>Tue, 03 Feb 2026 02:14:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E7%9A%84ssh%E5%85%AC%E9%92%A5%E7%BB%91%E5%AE%9A%E5%88%B0github/</guid><description>&lt;blockquote>
+&lt;p>💡 配置Git使用SSH方式, 本文环境：windows + powershell + git guissh&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="查看">查看&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="err">ls&lt;/span> &lt;span class="err">~/.ssh&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/fe6cede4-097d-4b42-b12f-a631e083d66e/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667HQKKJZJ%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063626Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFoAoYezWvur6UEhARYVmILxDhWeipfODeHBgYuQsdcBAiEAiRLHngd3OWc%2Fs%2FFGZ6Ag1J4gVhQURtMgDwFGD4Y9B0oq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDJtBgBGxb%2Ff5FXdlRyrcA8MTFvLu0m3da5VJD%2Frc%2BAi0RpWhS7rFHujba6gafkL4nDjS8VghZzbEorpyUFmvDQSmjl400ljZ5qovDGwm0f7POhhYICCN7MRlgoLDBndbDn4psTxhq9sDdpBWiO1V%2FT7V14Qsx6vRxyhHd37sRcKve3LgBDuUhQmL%2F6xabzPK4V6Mfa3lB3TVc%2B68YDTnvFVjSu1HMPz7cd%2FzvUqng1HMxGJzPojVPwchCReOX6%2F%2BDbnEVy3EQLbyYXvsfoL121o2bcHzFYpWh%2ByPf8T0Q%2Fwuia2CSm7rK%2BdVBKxGSKBbXni7xXj%2FuhPaap3xw65GbKE2IwfnxDXSgWrNVteuxKBf9lnyGrEuZV88duNdl6yz7%2B%2B1K0QOfCJld3lqyyyjDOrwoVuvJHdg7lKxsOK08lvxJXABzav0MtOBLHCIi8RMrdB%2BHDxDbN2B%2FMyGBAGVnO85fkUoqIBIvmn1pbmrvDMK6AmLLn6onCVRTLxRgKm5lXVjL2aEnuV0nkn%2FcpdeYXKM4h68L3Vm6NIsS2cVT8EowKy7dXSdg6bUPaoZxZ0yJnGHdiLKNmoe5x5MpyhL87wS%2BlRbsoEttlNCRyK2wo2qzUyqjPDAb%2FdMUmQWVKK6cKSQvoPeLqqPRxmqMKWtvc4GOqUBm8v%2FU9dgHvGQJ3xiYeODXgTSrqKKrmhtcF22UTOnZADM112iQ5sSoPpDwOq1i7%2Buu5JQZs3R8rZEFfPYr%2FoMuthRwxmuLklp8eg%2B8vGgBoNc3EZG3g7xVKom%2BYX77CsrtKXwNV9w%2F%2FKvY0QcP8zA4S05yoUEHgF3Z%2BWMWrMP%2F4%2B4pwTX7YNggigAw4YpVXI3DC4DkB%2F2i93H7Xbm%2FpPhJlBEqgtn&amp;X-Amz-Signature=abc7625fd5e0e99f2fde15056f2a25c64d7415665b792147650d9bce681461ae&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="创建">创建&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="err">推荐使用Ed&lt;/span>&lt;span class="mi">25519&lt;/span>&lt;span class="err">算法&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">ssh-keygen&lt;/span> &lt;span class="err">-t&lt;/span> &lt;span class="err">ed&lt;/span>&lt;span class="mi">25519&lt;/span> &lt;span class="err">-C&lt;/span> &lt;span class="s2">&amp;#34;your_email@example.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="err">备选&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">ssh-keygen&lt;/span> &lt;span class="err">-t&lt;/span> &lt;span class="err">rsa&lt;/span> &lt;span class="err">-b&lt;/span> &lt;span class="mi">4096&lt;/span> &lt;span class="err">-C&lt;/span> &lt;span class="s2">&amp;#34;your_email@example.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h2 id="配置">配置&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="err">将ssh密钥添加到ssh-agent&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">Get-Service&lt;/span> &lt;span class="err">ssh-agent&lt;/span> &lt;span class="err">|&lt;/span> &lt;span class="err">Set-Service&lt;/span> &lt;span class="err">-StartupType&lt;/span> &lt;span class="err">Automatic&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">Start-Service&lt;/span> &lt;span class="err">ssh-agent&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">ssh-add&lt;/span> &lt;span class="err">.\.ssh\id_ed&lt;/span>&lt;span class="mi">25519&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="err">查看是否添加成功&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">ssh-add&lt;/span> &lt;span class="err">-l&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="安装ghgithub-cli">安装gh（github cli）&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="err">打开powershell&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">choco&lt;/span> &lt;span class="err">install&lt;/span> &lt;span class="err">gh&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="err">登录&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">gh&lt;/span> &lt;span class="err">auth&lt;/span> &lt;span class="err">login&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="打开git提交">打开GIT/提交&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="err">gh&lt;/span> &lt;span class="err">ssh-key&lt;/span> &lt;span class="err">add&lt;/span> &lt;span class="err">~/.ssh/id_ed&lt;/span>&lt;span class="mi">25519&lt;/span>&lt;span class="err">.pub&lt;/span> &lt;span class="err">--title&lt;/span> &lt;span class="s2">&amp;#34;公司主机&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="验证">验证&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="err">ssh&lt;/span> &lt;span class="err">-T&lt;/span> &lt;span class="err">git@github.com&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/edba0e64-2598-46d9-91d5-7a4acdc9e627/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667HQKKJZJ%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063626Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFoAoYezWvur6UEhARYVmILxDhWeipfODeHBgYuQsdcBAiEAiRLHngd3OWc%2Fs%2FFGZ6Ag1J4gVhQURtMgDwFGD4Y9B0oq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDJtBgBGxb%2Ff5FXdlRyrcA8MTFvLu0m3da5VJD%2Frc%2BAi0RpWhS7rFHujba6gafkL4nDjS8VghZzbEorpyUFmvDQSmjl400ljZ5qovDGwm0f7POhhYICCN7MRlgoLDBndbDn4psTxhq9sDdpBWiO1V%2FT7V14Qsx6vRxyhHd37sRcKve3LgBDuUhQmL%2F6xabzPK4V6Mfa3lB3TVc%2B68YDTnvFVjSu1HMPz7cd%2FzvUqng1HMxGJzPojVPwchCReOX6%2F%2BDbnEVy3EQLbyYXvsfoL121o2bcHzFYpWh%2ByPf8T0Q%2Fwuia2CSm7rK%2BdVBKxGSKBbXni7xXj%2FuhPaap3xw65GbKE2IwfnxDXSgWrNVteuxKBf9lnyGrEuZV88duNdl6yz7%2B%2B1K0QOfCJld3lqyyyjDOrwoVuvJHdg7lKxsOK08lvxJXABzav0MtOBLHCIi8RMrdB%2BHDxDbN2B%2FMyGBAGVnO85fkUoqIBIvmn1pbmrvDMK6AmLLn6onCVRTLxRgKm5lXVjL2aEnuV0nkn%2FcpdeYXKM4h68L3Vm6NIsS2cVT8EowKy7dXSdg6bUPaoZxZ0yJnGHdiLKNmoe5x5MpyhL87wS%2BlRbsoEttlNCRyK2wo2qzUyqjPDAb%2FdMUmQWVKK6cKSQvoPeLqqPRxmqMKWtvc4GOqUBm8v%2FU9dgHvGQJ3xiYeODXgTSrqKKrmhtcF22UTOnZADM112iQ5sSoPpDwOq1i7%2Buu5JQZs3R8rZEFfPYr%2FoMuthRwxmuLklp8eg%2B8vGgBoNc3EZG3g7xVKom%2BYX77CsrtKXwNV9w%2F%2FKvY0QcP8zA4S05yoUEHgF3Z%2BWMWrMP%2F4%2B4pwTX7YNggigAw4YpVXI3DC4DkB%2F2i93H7Xbm%2FpPhJlBEqgtn&amp;X-Amz-Signature=d9d1f5050af5f73949056eb8dbee17330fba94e7e2e6b477335804820dbad417&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>Windows创建bat脚本踩坑</title><link>https://Pan-Binghong.github.io/daily-learning/other/windows%E5%88%9B%E5%BB%BAbat%E8%84%9A%E6%9C%AC%E8%B8%A9%E5%9D%91/</link><pubDate>Fri, 07 Nov 2025 05:54:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/windows%E5%88%9B%E5%BB%BAbat%E8%84%9A%E6%9C%AC%E8%B8%A9%E5%9D%91/</guid><description>&lt;blockquote>
+&lt;p>💡&lt;/p>&lt;/blockquote>
+&lt;h2 id="解决方法">解决方法&lt;/h2>
+&lt;h3 id="在windows记事本中重新创建">在Windows记事本中重新创建&lt;/h3>
+&lt;ol>
+&lt;li>打开记事本（Notepad）&lt;/li>
+&lt;li>复制脚本&lt;/li>
+&lt;li>另存为，修改编码格式和文件后缀&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;blockquote>
+&lt;p>当使用编辑器打开保存后的bat文件，显示乱码是正常的。&lt;/p>&lt;/blockquote></description></item><item><title>Windows设置定时任务</title><link>https://Pan-Binghong.github.io/daily-learning/other/windows%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</link><pubDate>Wed, 05 Nov 2025 04:40:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/windows%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</guid><description>&lt;ol>
+&lt;li>打开cmd, 输入taskschd.msc ，弹出任务计划程序页面&lt;/li>
+&lt;li>创建基本任务&lt;/li>
+&lt;li>依次输入基本任务的参数配置&lt;/li>
+&lt;li>设置任务级别&lt;/li>
+&lt;li>运行测试&lt;/li>
+&lt;li>刷新后查看运行结果是否正常&lt;/li>
+&lt;/ol></description></item><item><title>Ubuntu挂载Windows的共享文件夹</title><link>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</link><pubDate>Fri, 31 Oct 2025 08:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</guid><description>&lt;ol>
+&lt;li>创建凭据文件，将windows的账号、密码写入配置文件.smbcredentials 中&lt;/li>
+&lt;li>挂载&lt;/li>
+&lt;/ol></description></item><item><title>SQL Server常用语句</title><link>https://Pan-Binghong.github.io/daily-learning/devops/sql-server%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/</link><pubDate>Thu, 25 Sep 2025 02:02:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/sql-server%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/</guid><description>&lt;blockquote>
+&lt;p>💡&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;hr>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>配置子域名并绑定数字证书</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%B9%B6%E7%BB%91%E5%AE%9A%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/</link><pubDate>Thu, 10 Jul 2025 01:38:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E9%85%8D%E7%BD%AE%E5%AD%90%E5%9F%9F%E5%90%8D%E5%B9%B6%E7%BB%91%E5%AE%9A%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/</guid><description>&lt;blockquote>
+&lt;p>💡&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="1-新增子域名">1. 新增子域名&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">域名控制台&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">域名列表&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">找到域名&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">xxx&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">域名解析&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">添加记录&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/d53e1cf2-57f9-4949-8c28-befc13f93203/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663S5IK6GC%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063624Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDcWfC0qPTBTkhLGNZckZTuZIXQzMnxukuOt74ur0OevgIhALDXzcILhEJx7JB057IhZ9xdeTY3b%2Fzlf6EyBHCDzD9HKv8DCH8QABoMNjM3NDIzMTgzODA1Igxfed%2FCGfoh1S%2FGspcq3AOpjj%2BhVxnTcCAdlva0ezFjWEgmKl%2FbPVJcy2U6%2BXQmnLL9l7v6ZNda193XzkI2yAkiw5qB%2FHb%2F05sGuKuvjOc3cZUi0PGEskh843PtTzjxd42crCKqCmG5u4PhCrv5duc7QmJEO5qtdCDrqqFxuG5Jb7yAlhsAY%2B1YAoqnSUWrU1J8uy%2BTod0eaSZenq20uaMgmCCpPFpfsgucPZCG%2BO5TzKoIbS10GHaqEQUoctcULMM8rPiC%2FBbl9zwbeSkkAR72nM1OjVsJzvg05UjqTS50VJgWS44zqG8BhNi3AENrIoWPVshfAEI%2BTcMMT9akVn6iVN%2Bt6D%2BGoidG6EYW6%2FhflGbkIZiayfUirlNlf6U%2F0%2B9epFBcoXI9BaJpLqfRkN5Z%2F5TmywabJF0r%2Fb%2FL9uaVkGZ0CpnVoRB6I3MxOUyBEbqoz82BNlwgS9FDSgmURBc1sykbc6nJy1AstgpswGOpUKaw%2BBzdX%2BmZWQlfqqYi90UF8yaoXWt286xri7vSrQreo8%2Bzzb0BovG3U3sOwrDfldwNpBOYCX%2BmVhUUPuXacUEBvz5fYWbZoryWArY1inPxA2giVLMxRMSuPE9G7II1y4l%2FZp9qDeiIWq6yIpXR9k%2BV7cERJNuAWAPPfDDorL3OBjqkAezWF2ajmMjFLQ8G5yQiyhAZMT8zMTFvhXxTKpEvoYrutQvGJUKmY6EhpjJvx63gnAmKsrcHhRNZ4l1Old5xdED1KWUXfCNL5gGL1tTfSjl9oRxpAlb6Xza9UEeb7wtWH8wTEGU6Jxp8omHhkJGPd4E9Gffpn2cgZ43HLDZHX09D7H0ngFFM5tUNScagTpOI%2Bp2RB3QD005TEk%2BAKeV1xCSiY1SU&amp;X-Amz-Signature=798923414653a8957f11fa0cabc16f8c76109400abbd012b782258d817233707&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="2-数字证书管理服务">2. 数字证书管理服务&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">证书管理&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">SSL证书管理&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">个人测试证书&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">原免费证书&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">创建证书&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/e1520a28-fbab-4de2-92b8-70367c718ba5/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663S5IK6GC%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063624Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDcWfC0qPTBTkhLGNZckZTuZIXQzMnxukuOt74ur0OevgIhALDXzcILhEJx7JB057IhZ9xdeTY3b%2Fzlf6EyBHCDzD9HKv8DCH8QABoMNjM3NDIzMTgzODA1Igxfed%2FCGfoh1S%2FGspcq3AOpjj%2BhVxnTcCAdlva0ezFjWEgmKl%2FbPVJcy2U6%2BXQmnLL9l7v6ZNda193XzkI2yAkiw5qB%2FHb%2F05sGuKuvjOc3cZUi0PGEskh843PtTzjxd42crCKqCmG5u4PhCrv5duc7QmJEO5qtdCDrqqFxuG5Jb7yAlhsAY%2B1YAoqnSUWrU1J8uy%2BTod0eaSZenq20uaMgmCCpPFpfsgucPZCG%2BO5TzKoIbS10GHaqEQUoctcULMM8rPiC%2FBbl9zwbeSkkAR72nM1OjVsJzvg05UjqTS50VJgWS44zqG8BhNi3AENrIoWPVshfAEI%2BTcMMT9akVn6iVN%2Bt6D%2BGoidG6EYW6%2FhflGbkIZiayfUirlNlf6U%2F0%2B9epFBcoXI9BaJpLqfRkN5Z%2F5TmywabJF0r%2Fb%2FL9uaVkGZ0CpnVoRB6I3MxOUyBEbqoz82BNlwgS9FDSgmURBc1sykbc6nJy1AstgpswGOpUKaw%2BBzdX%2BmZWQlfqqYi90UF8yaoXWt286xri7vSrQreo8%2Bzzb0BovG3U3sOwrDfldwNpBOYCX%2BmVhUUPuXacUEBvz5fYWbZoryWArY1inPxA2giVLMxRMSuPE9G7II1y4l%2FZp9qDeiIWq6yIpXR9k%2BV7cERJNuAWAPPfDDorL3OBjqkAezWF2ajmMjFLQ8G5yQiyhAZMT8zMTFvhXxTKpEvoYrutQvGJUKmY6EhpjJvx63gnAmKsrcHhRNZ4l1Old5xdED1KWUXfCNL5gGL1tTfSjl9oRxpAlb6Xza9UEeb7wtWH8wTEGU6Jxp8omHhkJGPd4E9Gffpn2cgZ43HLDZHX09D7H0ngFFM5tUNScagTpOI%2Bp2RB3QD005TEk%2BAKeV1xCSiY1SU&amp;X-Amz-Signature=12824b16d03f422ecc99811cbd90b23f2210aa73ba2bf7adfcffe5e96881042a&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="3-下载证书">3. 下载证书&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">数字证书管理服务&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">证书管理&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">SLL证书管理&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">xxx&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">刚才申请的证书&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">下载&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">Nginx&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">下载&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/90ae2530-2256-4686-83de-6e41b7d2c171/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663S5IK6GC%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063624Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDcWfC0qPTBTkhLGNZckZTuZIXQzMnxukuOt74ur0OevgIhALDXzcILhEJx7JB057IhZ9xdeTY3b%2Fzlf6EyBHCDzD9HKv8DCH8QABoMNjM3NDIzMTgzODA1Igxfed%2FCGfoh1S%2FGspcq3AOpjj%2BhVxnTcCAdlva0ezFjWEgmKl%2FbPVJcy2U6%2BXQmnLL9l7v6ZNda193XzkI2yAkiw5qB%2FHb%2F05sGuKuvjOc3cZUi0PGEskh843PtTzjxd42crCKqCmG5u4PhCrv5duc7QmJEO5qtdCDrqqFxuG5Jb7yAlhsAY%2B1YAoqnSUWrU1J8uy%2BTod0eaSZenq20uaMgmCCpPFpfsgucPZCG%2BO5TzKoIbS10GHaqEQUoctcULMM8rPiC%2FBbl9zwbeSkkAR72nM1OjVsJzvg05UjqTS50VJgWS44zqG8BhNi3AENrIoWPVshfAEI%2BTcMMT9akVn6iVN%2Bt6D%2BGoidG6EYW6%2FhflGbkIZiayfUirlNlf6U%2F0%2B9epFBcoXI9BaJpLqfRkN5Z%2F5TmywabJF0r%2Fb%2FL9uaVkGZ0CpnVoRB6I3MxOUyBEbqoz82BNlwgS9FDSgmURBc1sykbc6nJy1AstgpswGOpUKaw%2BBzdX%2BmZWQlfqqYi90UF8yaoXWt286xri7vSrQreo8%2Bzzb0BovG3U3sOwrDfldwNpBOYCX%2BmVhUUPuXacUEBvz5fYWbZoryWArY1inPxA2giVLMxRMSuPE9G7II1y4l%2FZp9qDeiIWq6yIpXR9k%2BV7cERJNuAWAPPfDDorL3OBjqkAezWF2ajmMjFLQ8G5yQiyhAZMT8zMTFvhXxTKpEvoYrutQvGJUKmY6EhpjJvx63gnAmKsrcHhRNZ4l1Old5xdED1KWUXfCNL5gGL1tTfSjl9oRxpAlb6Xza9UEeb7wtWH8wTEGU6Jxp8omHhkJGPd4E9Gffpn2cgZ43HLDZHX09D7H0ngFFM5tUNScagTpOI%2Bp2RB3QD005TEk%2BAKeV1xCSiY1SU&amp;X-Amz-Signature=5dfc711e5722ee3ecb01a4d9469ab55874e3f55e3bc051a11e4a5e2cc0e814e3&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="4-宿主机内配置">4. 宿主机内配置&lt;/h2>
+&lt;h3 id="41-配置docker-composeyaml">4.1 配置Docker-compose.yaml&lt;/h3>
+&lt;h3 id="42-配置">4.2 配置&lt;/h3>
+&lt;hr>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>uv Common Commands|Install</title><link>https://Pan-Binghong.github.io/daily-learning/devops/uv-common-commandsinstall/</link><pubDate>Tue, 25 Mar 2025 07:19:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/uv-common-commandsinstall/</guid><description>&lt;blockquote>
+&lt;p>💡 Anaconda对员工超过200人的组织，需要为使用其默认包仓库的每位用户获取商业许可。总之就是变天了。现在大家都准备用uv来替代anconda。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h1 id="安装uv">安装uv&lt;/h1>
+&lt;h2 id="windows安装">Windows安装|&lt;/h2>
+&lt;ol>
+&lt;li>用管理员身份打开powershell&lt;/li>
+&lt;li>运行安装命令&lt;/li>
+&lt;/ol>
+&lt;h2 id="更新">更新&lt;/h2>
+&lt;blockquote>
+&lt;p>如果使用pip或者别的安装方法，需要使用pip install &amp;ndash;upgrade uv 进行更新。&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">uv&lt;/span> &lt;span class="bp">self&lt;/span> &lt;span class="n">update&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/792413cd-74e7-4497-8bc9-a54b5dcd1fe8/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZD7YVN7P%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063622Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDXouaOHzL7%2BtroYF7My3y7VsKzJLXIDKGB6HONx6AN%2FgIgLl9LnTfO3l87RF6UDWn5doc%2FnwcXzZAfgy3gLBbaHGYq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDPG1PYknhsj0eZ2zOSrcA204RxqU70PSyKit7ZLjuStN29rzk04Edp4Qm4y0cu0f6qgkOOk5WLqXvh%2BNAjfMOuauvk6hTzAFewiHQcUhvGwAerkgtZDwvYdE9FQ0y4js%2FlSb8VgOsUxmnXLLz9Km5F2ihLhbVHHl8BeqyS3KTkNAFHOUa6mQAbWCutwzPS5H%2FT4YMavxRkbnJAmnXiBiX9albGnEJi7qd%2FlqRqx2OZu14YSrqNNBh48BMpBY0LYXuBgXuWwKUa%2FlECqeN%2BDCKjTE%2BkQLemFh90EvOYTUtaAQSRQigCvgAU146Xt84nSHLjdcc4OBIPHYOwY2S1cb9d4Tr386e80T0%2FW0zkjtC5a2Oloujvm8okn0wqzkahZ0cHrvvo2wSMFxXKTKu60%2BGhiS5ZY0%2B%2Fi1X1owmQji8AGGUk%2BzI3MhBvH%2BNbq9SnK92oriZbIlpdS%2Bn4J4IEE4b9JagjimgWzU1l3iBLEzjp5AwhkleXcaOcY8N8sjWAXctUm4qf0VVAQrN%2Ftfr2qQCzLmnf3jTjlSxUtHlIN8z6DGBzQU%2FyJYGzv7rdl5YDMMp15MBqqXOR%2FEZxt5XmuEk4wakue2EPRAxHhTI3iBP%2F55UFWYsT5jRaY8aJBT8mJVk7sl8UCpvyjwSn%2B7MP%2Bsvc4GOqUBIPtuSGMqnPDT8UwojvSfGz88VRT4vn348JzQ1zsmkCttOl4mhHqacINzfql2fCI22cpj5C9WpdDAc2GlZrXclo1BYfzWn3tHNYTnpbNjJ03XepcBREx57wJkAE3U6PkeR0TMEMk1n3pf0L8m9quXX64BLHquTEkEvyXTpqajny4wJHXf0xTTnBGinnlwI6RhpVNrHBxkxrboEvuEQ1BEb5RADJd4&amp;X-Amz-Signature=5efa3ba830337c00e268a6cc06364e52c3860cdb16fbdd576ac3746c05a79cf4&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="卸载">卸载&lt;/h2>
+&lt;ol>
+&lt;li>清理缓存&lt;/li>
+&lt;li>删除uv和二进制文件&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="安装linux">安装|Linux&lt;/h2>
+&lt;p>官方建议使用以下两种方法均可，但是我都下载不动。。。最终采用pip的方法进行安装的。&lt;/p>
+&lt;p>pip install uv -i &lt;a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple&lt;/a>&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/362c823c-ff0f-4a1f-8401-871a82af32c0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZD7YVN7P%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063622Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDXouaOHzL7%2BtroYF7My3y7VsKzJLXIDKGB6HONx6AN%2FgIgLl9LnTfO3l87RF6UDWn5doc%2FnwcXzZAfgy3gLBbaHGYq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDPG1PYknhsj0eZ2zOSrcA204RxqU70PSyKit7ZLjuStN29rzk04Edp4Qm4y0cu0f6qgkOOk5WLqXvh%2BNAjfMOuauvk6hTzAFewiHQcUhvGwAerkgtZDwvYdE9FQ0y4js%2FlSb8VgOsUxmnXLLz9Km5F2ihLhbVHHl8BeqyS3KTkNAFHOUa6mQAbWCutwzPS5H%2FT4YMavxRkbnJAmnXiBiX9albGnEJi7qd%2FlqRqx2OZu14YSrqNNBh48BMpBY0LYXuBgXuWwKUa%2FlECqeN%2BDCKjTE%2BkQLemFh90EvOYTUtaAQSRQigCvgAU146Xt84nSHLjdcc4OBIPHYOwY2S1cb9d4Tr386e80T0%2FW0zkjtC5a2Oloujvm8okn0wqzkahZ0cHrvvo2wSMFxXKTKu60%2BGhiS5ZY0%2B%2Fi1X1owmQji8AGGUk%2BzI3MhBvH%2BNbq9SnK92oriZbIlpdS%2Bn4J4IEE4b9JagjimgWzU1l3iBLEzjp5AwhkleXcaOcY8N8sjWAXctUm4qf0VVAQrN%2Ftfr2qQCzLmnf3jTjlSxUtHlIN8z6DGBzQU%2FyJYGzv7rdl5YDMMp15MBqqXOR%2FEZxt5XmuEk4wakue2EPRAxHhTI3iBP%2F55UFWYsT5jRaY8aJBT8mJVk7sl8UCpvyjwSn%2B7MP%2Bsvc4GOqUBIPtuSGMqnPDT8UwojvSfGz88VRT4vn348JzQ1zsmkCttOl4mhHqacINzfql2fCI22cpj5C9WpdDAc2GlZrXclo1BYfzWn3tHNYTnpbNjJ03XepcBREx57wJkAE3U6PkeR0TMEMk1n3pf0L8m9quXX64BLHquTEkEvyXTpqajny4wJHXf0xTTnBGinnlwI6RhpVNrHBxkxrboEvuEQ1BEb5RADJd4&amp;X-Amz-Signature=52e00427c241733bda417437ea725535d4542ad18480ae5448197d448fb087e0&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h1 id="检查">检查&lt;/h1>
+&lt;p>安装完毕后，在终端直接运行uv ，查看是否出现以下内容。&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/d2350aa7-bbba-455d-860d-34eee2ae196e/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZD7YVN7P%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063622Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDXouaOHzL7%2BtroYF7My3y7VsKzJLXIDKGB6HONx6AN%2FgIgLl9LnTfO3l87RF6UDWn5doc%2FnwcXzZAfgy3gLBbaHGYq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDPG1PYknhsj0eZ2zOSrcA204RxqU70PSyKit7ZLjuStN29rzk04Edp4Qm4y0cu0f6qgkOOk5WLqXvh%2BNAjfMOuauvk6hTzAFewiHQcUhvGwAerkgtZDwvYdE9FQ0y4js%2FlSb8VgOsUxmnXLLz9Km5F2ihLhbVHHl8BeqyS3KTkNAFHOUa6mQAbWCutwzPS5H%2FT4YMavxRkbnJAmnXiBiX9albGnEJi7qd%2FlqRqx2OZu14YSrqNNBh48BMpBY0LYXuBgXuWwKUa%2FlECqeN%2BDCKjTE%2BkQLemFh90EvOYTUtaAQSRQigCvgAU146Xt84nSHLjdcc4OBIPHYOwY2S1cb9d4Tr386e80T0%2FW0zkjtC5a2Oloujvm8okn0wqzkahZ0cHrvvo2wSMFxXKTKu60%2BGhiS5ZY0%2B%2Fi1X1owmQji8AGGUk%2BzI3MhBvH%2BNbq9SnK92oriZbIlpdS%2Bn4J4IEE4b9JagjimgWzU1l3iBLEzjp5AwhkleXcaOcY8N8sjWAXctUm4qf0VVAQrN%2Ftfr2qQCzLmnf3jTjlSxUtHlIN8z6DGBzQU%2FyJYGzv7rdl5YDMMp15MBqqXOR%2FEZxt5XmuEk4wakue2EPRAxHhTI3iBP%2F55UFWYsT5jRaY8aJBT8mJVk7sl8UCpvyjwSn%2B7MP%2Bsvc4GOqUBIPtuSGMqnPDT8UwojvSfGz88VRT4vn348JzQ1zsmkCttOl4mhHqacINzfql2fCI22cpj5C9WpdDAc2GlZrXclo1BYfzWn3tHNYTnpbNjJ03XepcBREx57wJkAE3U6PkeR0TMEMk1n3pf0L8m9quXX64BLHquTEkEvyXTpqajny4wJHXf0xTTnBGinnlwI6RhpVNrHBxkxrboEvuEQ1BEb5RADJd4&amp;X-Amz-Signature=6f504e09c8404cf03d40f45944c76c87efe9b2c4d92344438c0450eb4655ff67&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h1 id="python">Python&lt;/h1>
+&lt;hr>
+&lt;ul>
+&lt;li>创建项目&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;ul>
+&lt;li>管理依赖&lt;/li>
+&lt;li>修改源&lt;/li>
+&lt;/ul>
+&lt;h1 id="坑">坑&lt;/h1>
+&lt;ol>
+&lt;li>警告如下:&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>Windows专线直连服务器</title><link>https://Pan-Binghong.github.io/daily-learning/devops/windows%E4%B8%93%E7%BA%BF%E7%9B%B4%E8%BF%9E%E6%9C%8D%E5%8A%A1%E5%99%A8/</link><pubDate>Fri, 14 Mar 2025 08:07:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/windows%E4%B8%93%E7%BA%BF%E7%9B%B4%E8%BF%9E%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid><description>&lt;blockquote>
+&lt;p>💡 记录一下如何解决的。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="前置条件">前置条件&lt;/h2>
+&lt;p>需已知服务器的静态IP和子网掩码，自己配置也行。&lt;/p>
+&lt;hr>
+&lt;ol>
+&lt;li>Windows电脑和服务器网线连接&lt;/li>
+&lt;li>打开网络和共享中心-进入适配器设置&lt;/li>
+&lt;li>找到对应的网络连接，右键属性，双击internet协议版本4（TCP4/IP)
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/863c402f-4ab1-45e1-a148-3d37932cc3bf/9c5d35113aa3fbe01deeff992970e27.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667DCCUOVW%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063621Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIF44mEmOBr2htFyVcVNcGCOQtoL6Y1sBtsXWVpVV6PetAiAOoa9q9YXGV7CkkZioCi7sF6hQ4Wtqzx0eT7Mpc7IxEir%2FAwh%2FEAAaDDYzNzQyMzE4MzgwNSIMRQJ07%2FctwzfMus23KtwDDcXUvAEOeT%2Bg2%2F3jgAM2gtBcMvIgj4yIoASbqYBH0VtA%2FSHC44PlfcYAPxDFFh0wqx0qbc4srU0xxT1ilwSap2Q7Ezjvf2EGv1cAC9cgdvXe9qJzZ36S1QiZQI%2Fe%2FctId1MZa4IHfdRK7VXg2HENMCE3oXbxMJqkJP2bYtMYnAamhX83BI6A3hI3F3K9InFd%2B2JChzimObTiVNqkhhhFtLmg1gRy3vMNuUNwOS0jUIZhHkIq2yZswk7ObTpK86M6XAhdzkSBi45buAAORUHzLeN1uHRAYenUv%2FHEjNM9nIeiImB8eIHcE0SJhQezqzq2nQZrisizBTxyauudS30b1YSJAfh0%2B9zosn7WxxtTflz%2Bkxf5z7ttehxvEHQM9k6erhCU91MCfCQlnPlCSTvcqgGqxKRAbYGkTisWUeQRxfksBf5j6YoO%2Fmf%2Ba%2B3YfB6r8WMqVL%2B9yet7rgbe6j4syoYwQ4R3m1LrMHraGavppz39LuzZXFdEKj4qN8n37nbEd%2F1Tn7tD1nGd4mZ9TDZJV%2BU8D9IOrT95nUkZ7ectCVQV4R3fe2xtoq38ZPP2uCPJnqab0mL7XcyUrVLNTYnqWmGMnOKFB3b02Nl5S1lxwRBy7Q0vSTkh3MfNI2kw%2F6y9zgY6pgGmhGNjbLd2DWWL986caeAsSnYkhtygOobnKSedTOrWzdhQyOA6EV6KblUB%2FaEaaEGtXwhHW1rEoDitoP%2FH%2FwbVgrB1sM2o3KHkcl2ejU05D1aLJ%2FcvpaPJTLVXWvLVwQo1bf%2BLxaJaZz4RDAckWka47LEGo6mjbC9v821C6HwbFdFDLHfRejkRrPbemViFnEgV2XUaBFqaUXJ7GAMbppI9d1SeYPL5&amp;X-Amz-Signature=13032fdb7b9c108ea8cd8de4ac947089c081704b5328fa7b5507bfe3ad31ccc3&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/li>
+&lt;/ol>
+&lt;hr></description></item><item><title>开启gpedit.msc</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E5%BC%80%E5%90%AFgpedit.msc/</link><pubDate>Thu, 19 Dec 2024 01:11:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E5%BC%80%E5%90%AFgpedit.msc/</guid><description>&lt;blockquote>
+&lt;p>💡 Windows为家庭版或者教育版，打开win+r输入gpedit.msc会显示找不到。记录修改过程。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="设置步骤">设置步骤&lt;/h2>
+&lt;ol>
+&lt;li>新建一个txt文件&lt;/li>
+&lt;li>写入代码&lt;/li>
+&lt;li>保存，将txt修改为bat&lt;/li>
+&lt;li>双击运行&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="验证结果">验证结果&lt;/h2>
+&lt;p>win + R 输入gpedit.msc&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/b211b15a-1374-48d3-935b-8a75ed2bb52f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466RF3Z663J%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063616Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCz8%2Bswy4P3imMOVcbJYKFlCoxRFs15mInaazvZ97QAXAIgJeRsv%2Bsz2T77PnBJZpKr3QBhoe8wVZX7Tj4edNP26Z8q%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDL5bJTAeh7KoKJDwTircAw1CpzYY1VrOB%2FqAUqgpeBjOQVTRn%2FqWel0CSpQSETFOmgUUzQ%2B%2F8jiAM0EatUvdt4VHa5yBxK%2FgNJ8KbEs402Jhoxtr%2FGRQuCJJZAOdw4kcRwWDI3ZFt2I2%2BkHsj2%2FTdkG5iduQo1xfFknVxcPkb%2BZ%2F01V%2Bi9R0PfJp66oR6FELUCmVtX8dAQ4LOQskuFUMQH%2FFsnlpI4x9Y126ipL6%2BgdFzYMFsLXouHBIgy4sifIl5%2FD%2FEyOkAopf90eVH4ArweNRf0QTnu2dLxWlwsfkH7jCN%2FyJbdiyil0oFxobZ7mXC0b1lOatko58RwI05pPQ%2BPismNuJ8Ufq9rSca%2Ff%2F0vLcQxtTfdTjQ700xyX97XJg7cSKxhWOulsqzDOcARqmWTkqZ8jYmEMjSBI%2FgnFJl%2FZgWT3trtR6G3EtCd5XKmqC0ioeDvlMSUa5E30g81fGJAM9JZjlfprqqzoouu7kgfKsnCBI9cA7d7itggk9g1QwUyvOSVmhiUw6Axw2s0x9lhc%2FGpuWiYqUHRM1MTR%2FdXWy1Lnc2aSltBS4XPxJqvXs8GUYuHhqyULrrdeNx03e0klRM22nVKETg%2B8jBQ8Jx%2FhUh3zKqGaYIHClB1e5KTcvI8HkycBKAy2bv1seMMiuvc4GOqUB1tjvHdyS4enaq9fLzHNh%2BsCyN8XjseNOMB3rJPmRAPxFFd9bYZC7CaX3gdpMA9HYf9YsUGjI67XHn%2BDfECYJUPZcEQUyXjYKoIVULKexQDJ9apbLNDOYmogZlad4cIS6H2jmA0gbo%2F740Nw0bsdnRllbbo6JwNGbzRRGMVjX1ahTZ6cpEzma2k8%2BXfLqe2wrzQ7RIiG6e0cNLDy5pmwSpe6r5x3%2B&amp;X-Amz-Signature=76ca9413205ad542a1dd3043254d1a92a1100645d6b4dac8f4d4f2f7b876e487&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="懒人版本">懒人版本&lt;/h2>
+&lt;p>下载，运行即可&lt;/p></description></item><item><title>VSCode常用快捷键</title><link>https://Pan-Binghong.github.io/daily-learning/devops/vscode%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</link><pubDate>Sun, 01 Dec 2024 08:26:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/vscode%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid><description>&lt;blockquote>
+&lt;p>💡&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;hr>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>PowerShell Common Commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/powershell-common-commands/</link><pubDate>Thu, 28 Nov 2024 00:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/powershell-common-commands/</guid><description>&lt;blockquote>
+&lt;p>💡 记录常用的PowerShell命令，以及说明PowerShell和CMD区别。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="基本概念">基本概念&lt;/h2>
+&lt;hr>
+&lt;h2 id="常用命令">常用命令&lt;/h2>
+&lt;ul>
+&lt;li>PowerShell 是 Windows 的命令行终端增强工具，其设计理念之一就是向下兼容旧的 CMD 工具。因此，PowerShell 能够直接调用 CMD 的内部命令和外部工具。以下内容为CMD基础命令，同时也可以在PowerShell内执行。&lt;/li>
+&lt;li>PowerShell特有的常用命令&lt;/li>
+&lt;/ul></description></item><item><title>VNC安装 | 配置</title><link>https://Pan-Binghong.github.io/daily-learning/devops/vnc%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE/</link><pubDate>Tue, 19 Nov 2024 08:34:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/vnc%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE/</guid><description>&lt;blockquote>
+&lt;p>💡 使用两台 windows 电脑进行远程控制，配置 VNC 的详细教程。&lt;/p>&lt;/blockquote>
+&lt;p>VNC（Virtual Network Computing），为一种使用 RFB 协议的屏幕画面分享及远程操作软件。此软件借由网络，可发送键盘与鼠标的动作及即时的屏幕画面。&lt;/p>
+&lt;p>VNC 与操作系统无关，因此可跨平台使用，例如可用 Windows 连线到某 Linux 的电脑，反之亦同。甚至在没有安装客户端程序的电脑中，只要有支持 JAVA 的浏览器，也可使用。&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/e5533731-6b04-4ab5-baeb-4a6dcb57f177/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466VLSO7RC4%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063610Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFm51rYbhw4iboMUnL74Z9CfE7XHj5Q0FQBEgXjy4ZNVAiBhj%2F65vUSqLUkms3OyItAQzj0oEbcthtGeDvO96VX0lyr%2FAwh%2FEAAaDDYzNzQyMzE4MzgwNSIMkVCzRCAQE%2FX9ZYdrKtwDPcZOkFDG76Ox73ahATpqKPwzbN4YfmKKXKSanGgP4bXkFvL3%2BD8B%2FcpeLzTYooZYEDV%2BXbA7i3QINMIqdI%2BeEkuCl9AdyP08CFJmfhSiifEf8ebxYIXPDD9a%2F%2FfwO3dbXxzI1L%2FCPDNN7CnCqZtWq3lv9EO6ty7kVUJVo%2Fla1Szo2b7xWweI3Rv9%2Bg6AG6xDEIjMSSA3Ht9hVnZs0rxHPA%2FmdCvYNmM71Qhl96%2FkckMzpZRVHaE3BRVz3ybCD%2FvxhuPRmY5Bljb3J3XWccdFPgW9Xy0mN9%2FEF132hP3b641KOeWWNvWpIYg%2BsfAbY%2Foc5d%2BGPygddTtkNyHr1Xp8AAmO9lfikOe66ZbSe%2FDrXFuf7iDb94XQl4hz%2BB7%2Fo%2FEGrZ8eZz4Qo0klwT97EmRsRi4SwM9iLRZ01N8M1lfHqSv3y8o2xO6Eed20eZzvYzmQKRxDGmjwrU7sRS6uf4Dv0Ey9iy4EUYil2lPfFQTpT7hrFzdlashp1c5rM6nIY6GNf%2BErbY2p5dpEwLscgRKxzrlyVPMD64%2FNhlQOlRA666wUUSgdyKbO5S%2FqPoxVu9hCfMdGwjuBqSSJWXz31Lbkd1IUWSOXpUfjViEP8yG6TtmfD5UF3%2BPdKAEJZ8YwqK69zgY6pgG%2F5b%2BHhDTns%2B0vp1PS%2BSnYrD3jlerzxjhC%2FpitKsDCnwWlQzaB6Tx93eQH1yuDVhPUaoGIGtF%2BF5pgW25rWUux7punDU3N4daNB6wa%2BwKPCxwhtZnBKjvJhWpTlZokBV0bVHxVS8dOGVQ9kXNyiuUo0KK6l8DAxbK7WdmgAhx3rO1E6zgo7OIDzefYKYIYfA5wNWYZFjcTy6%2FKYG6SCgr6VtfmXdZn&amp;X-Amz-Signature=7bc9d6d736effe85e3d99984ab76e1e2a994403d1f9901b55ff1328d9ad54e80&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="两台windows-电脑内下载并安装">两台 Windows 电脑内下载并安装&lt;/h2>
+&lt;ul>
+&lt;li>TightVNC官网地址&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="tightvnc服务端被连接端-配置">TightVNC 服务端 (被连接端) 配置&lt;/h2>
+&lt;ul>
+&lt;li>启动&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="tightvnc客户端连接端-配置">TightVNC 客户端 (连接端) 配置&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>打开客户端
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/501a68f3-43c8-4924-9dc5-0e6e1bb6fe39/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466VLSO7RC4%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063610Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFm51rYbhw4iboMUnL74Z9CfE7XHj5Q0FQBEgXjy4ZNVAiBhj%2F65vUSqLUkms3OyItAQzj0oEbcthtGeDvO96VX0lyr%2FAwh%2FEAAaDDYzNzQyMzE4MzgwNSIMkVCzRCAQE%2FX9ZYdrKtwDPcZOkFDG76Ox73ahATpqKPwzbN4YfmKKXKSanGgP4bXkFvL3%2BD8B%2FcpeLzTYooZYEDV%2BXbA7i3QINMIqdI%2BeEkuCl9AdyP08CFJmfhSiifEf8ebxYIXPDD9a%2F%2FfwO3dbXxzI1L%2FCPDNN7CnCqZtWq3lv9EO6ty7kVUJVo%2Fla1Szo2b7xWweI3Rv9%2Bg6AG6xDEIjMSSA3Ht9hVnZs0rxHPA%2FmdCvYNmM71Qhl96%2FkckMzpZRVHaE3BRVz3ybCD%2FvxhuPRmY5Bljb3J3XWccdFPgW9Xy0mN9%2FEF132hP3b641KOeWWNvWpIYg%2BsfAbY%2Foc5d%2BGPygddTtkNyHr1Xp8AAmO9lfikOe66ZbSe%2FDrXFuf7iDb94XQl4hz%2BB7%2Fo%2FEGrZ8eZz4Qo0klwT97EmRsRi4SwM9iLRZ01N8M1lfHqSv3y8o2xO6Eed20eZzvYzmQKRxDGmjwrU7sRS6uf4Dv0Ey9iy4EUYil2lPfFQTpT7hrFzdlashp1c5rM6nIY6GNf%2BErbY2p5dpEwLscgRKxzrlyVPMD64%2FNhlQOlRA666wUUSgdyKbO5S%2FqPoxVu9hCfMdGwjuBqSSJWXz31Lbkd1IUWSOXpUfjViEP8yG6TtmfD5UF3%2BPdKAEJZ8YwqK69zgY6pgG%2F5b%2BHhDTns%2B0vp1PS%2BSnYrD3jlerzxjhC%2FpitKsDCnwWlQzaB6Tx93eQH1yuDVhPUaoGIGtF%2BF5pgW25rWUux7punDU3N4daNB6wa%2BwKPCxwhtZnBKjvJhWpTlZokBV0bVHxVS8dOGVQ9kXNyiuUo0KK6l8DAxbK7WdmgAhx3rO1E6zgo7OIDzefYKYIYfA5wNWYZFjcTy6%2FKYG6SCgr6VtfmXdZn&amp;X-Amz-Signature=682a8e6dd135ae24125466231a980ae166429b4da7caba5d1c3fa88ddcf3e0fd&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>输入IP端口点击“Connect”连接即可。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>mstsc.exe端口修改</title><link>https://Pan-Binghong.github.io/daily-learning/devops/mstsc.exe%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9/</link><pubDate>Mon, 18 Nov 2024 08:36:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/mstsc.exe%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9/</guid><description>&lt;blockquote>
+&lt;p>💡 mstsc 是 Microsoft Terminal Services Client 的缩写，是用于远程桌面连接的工具。通过它，你可以使用 Windows 自带的远程桌面协议（RDP）连接到其他 Windows 设备的桌面环境。通过 Win + R，然后输入 mstsc，打开远程桌面连接界面。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;ol>
+&lt;li>打开注册表&lt;/li>
+&lt;li>修改端口号
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp PortNumber 为 xxxx&lt;/li>
+&lt;li>防火墙设置&lt;/li>
+&lt;li>启动服务&lt;/li>
+&lt;li>勾选设置&lt;/li>
+&lt;li>重启电脑&lt;/li>
+&lt;/ol></description></item><item><title>CMD Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/cmd-common-commands/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/cmd-common-commands/</guid><description>&lt;blockquote>
+&lt;p>💡 在Windows操作系统内，使用终端进行的常用操作命令。&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/574982fa-f0a8-4734-99fc-4bcec0b9d96c/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466W44EOJXV%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063602Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDve%2F6sK%2FlcoT2Q0KTFHw1ddbfsbmvCSFU9SNAYwZowwQIhAPypnEAEa63PWKhRC7tuZQHuMHLI9P2PfmAqYgUapCAyKv8DCH8QABoMNjM3NDIzMTgzODA1Igz82P0shHizHdWwz7kq3AN%2Fl0nvLykRQ%2FhkksYgvKXNedCGbTZLn%2FIbVRCVguw1CYi98RNYtT22RwoOI6HQN%2BpOO2iMwrXXRyCP8hHX2xKclxSDh8jfK2%2FTiPPlyrcUDbUUsAJMk28s1ws0u%2BfjPLIqPogom2pA5G9IFtXLNJk44xlpzjs0nS%2FFOycElsEFjlY8274hVxRWppJk61Hk21%2BJBYIYZuZImgKIBQxlzGsjFUZbgxosZqVqz2iLLnFvx3fJmLj6JHklJrlGw5iN5RVzMsAz7RJmQblka0a66bvwvfvpxh6Dxg49lWg1nvyqrAO%2Fr3G%2F94xnpA0KcAnvNJNy8fWT%2F0br1%2BiTw%2BZR0e00ELBRSUtYzZgVSF83oFAJxOAg%2BAAp27bNUjkFw9UcaOGWanankw6R50Ik9AxfTe%2FLz9svnx2HOhmICRSSKYY4P8HSg0yNp5F8uBpg4gKpgytsaO4yG3RDOpv0eNVOefj%2F5BqdUT5nsaaaT146kRcdPgBgVZCG32cbLiCmhy3YGbuWG3dn%2BMxYBVTI49%2B0qqDcmO%2B0eooYySROf0QTqlbxbYhlqRK1I7OFywtJn7k9mzkVByAGGZpzlYHZwaULRvHiQJmqfo2cPnh6fAw4JL7218seBeS3qVKRttG5IzCrrL3OBjqkAcKxwoPupDh%2BcUNN6OovgS5LN5SfLvznJu7Uij8SAJTAGWIvYC%2FVTBCDXUjm9w%2BkWxI1BktABCssPOD%2B5OX5Pu%2BtZJDQBzbBzjB3m%2FvI6Xay2y16FTUYpSiyBF2FWFfc01QAutFn266CcIzY0%2FO2sb0crRXEFS8ySWcgfKY%2FVrPq8ugd8CjA18I2DMCVGFXXJMAbr2%2BrOwUdg1kee6YO3I%2F5dnHY&amp;X-Amz-Signature=61188c2d4f35b4000c3a2ddc155c598f43fa1341f00fdc42aaeedf636d928476&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;h2 id="系统信息与管理">系统信息与管理&lt;/h2></description></item><item><title>Win+R Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/win+r-common-commands/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/win+r-common-commands/</guid><description>&lt;blockquote>
+&lt;p>💡 记录Windows操作系统内，使用Win+R键，常用的一些快捷命令。&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/4b9666c2-1827-47e3-9979-ab2a14fad8ea/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UO4C5MAG%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063603Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIDkTPFcJmWd3xkjRFtdo7gGRfAWqSQxHymRzxTaf0SvWAiATeoGJwanN3lZYLLTqcbgPkzk4wwr6Zp3qEt%2Fu%2B2oQmyr%2FAwh%2FEAAaDDYzNzQyMzE4MzgwNSIMQB2IBPQ%2FwMf7fDIYKtwD3yUj%2F1fiF285KmQjLWbiet%2BmbEfjamECfxXIfhjET42SC298InZwpaGp9fW8%2Fm2OMNEOYpd%2BYwcXqOFdBSzvtAuZXlcGT6L%2FI1thLzxIvLGMIN2tk6N5Mng4w9iBRe8DrXyYaEgzo67JF9878tUvEj2GzVOnyidQghpZ90q%2BnqQHdK86Q6xpcegaHLxIKjSzP8%2F7DnMbO%2B%2Fi3daTfPVclRty4qz02Z%2FdVPnXo8eFR%2B544W8c0AG2i6xL9sRNk1f7SaS%2BJyg26CA5YQ8pmrmwY2jVWilBIsz6N63dtxFJhAFKxKx7hgsgzvrGRcz%2FZL3wFmPWrzQOIjJbrqUbKAf792qTeWmAW6Za5VcklwVRZYoNdCfTXBpT850VKAkroRdUuVmOG0fecCzKMw4uBNUkO5RG1EpSRFx1Or%2BTK4zAfIDyDIYuFxScLUqz0sYz0J%2BkcTT6boXa7ShL2%2B0n2KEo5JyR%2BWlN2dYG9VbcfjEbGWAzxcTN%2BiXkDjrE%2FNa3MwPwlZpF4hJC4xTPFke8P0dipZfLor%2F4xy4wEOD44pdILn%2Bi%2B5DMsvG1OJz4aUnBWJUWXyuXykceszV2E1hITDrdIw52XL7nsDxp0TfzrgOnks7qBrvFLpY31tJcd54w4K29zgY6pgGE73kNVu3HybsTEZ3QLlt7fsMUTYA8tWtKUidDagRa8aIGc8Ah62jt3csxJi7MyrnEbuq%2BtIGe%2FRXu5e5PuBItlWEJvs%2B0ozNDhLfwvw%2FBDp7bGAJ%2FrTwC8HfzEu5wvFrwyvXzBxm1kiUOv%2FKwi%2Bbj%2F0X%2B7zldd%2FW6pwj%2F10VUS0lvcJkwl7noaGha9Jn67s0CGu%2FaHfXmTzkovnLK6So7MZ7jvJYR&amp;X-Amz-Signature=7d5f81b8aba98424a8ed30aa856e176180a9117762823d602eac13b9e413b7ee&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h3 id="常用命令">常用命令&lt;/h3></description></item></channel></rss>

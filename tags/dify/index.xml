@@ -1,205 +1,195 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Dify on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/dify/</link><description>Recent content in Dify on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Tue, 02 Sep 2025 09:21:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/dify/index.xml" rel="self" type="application/rss+xml"/><item><title>Dify获取用户的对话记录</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84%E5%AF%B9%E8%AF%9D%E8%AE%B0%E5%BD%95/</link><pubDate>Tue, 02 Sep 2025 08:58:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84%E5%AF%B9%E8%AF%9D%E8%AE%B0%E5%BD%95/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 从dify的数据库中获取用户的对话记录。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;进入postgres容器数据库&lt;/li&gt;
-&lt;li&gt;查看数据表&lt;/li&gt;
-&lt;li&gt;查看message表的结构&lt;/li&gt;
-&lt;li&gt;查看最新的10条对话记录&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li&gt;copy&lt;/li&gt;
-&lt;li&gt;容器到宿主机&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;</description></item><item><title>解决Dify Sandbox环境无法访问网络</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E8%A7%A3%E5%86%B3dify-sandbox%E7%8E%AF%E5%A2%83%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E7%BD%91%E7%BB%9C/</link><pubDate>Thu, 28 Aug 2025 09:20:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E8%A7%A3%E5%86%B3dify-sandbox%E7%8E%AF%E5%A2%83%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E7%BD%91%E7%BB%9C/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 想要在Dify中实现，上传xlsx文件或者csv文件，最终通过代码执行节点，将文件写入到远程数据库内。踩坑记录。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="解决步骤"&gt;解决步骤&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;编辑squid.conf文件&lt;/li&gt;
-&lt;li&gt;增加以下内容&lt;/li&gt;
-&lt;li&gt;在Sandbox中增加PySQL等依赖&lt;/li&gt;
-&lt;li&gt;重启项目&lt;/li&gt;
-&lt;li&gt;额外操作&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;</description></item><item><title>Dify使用http模块403报错</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BD%BF%E7%94%A8http%E6%A8%A1%E5%9D%97403%E6%8A%A5%E9%94%99/</link><pubDate>Fri, 22 Aug 2025 06:36:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BD%BF%E7%94%A8http%E6%A8%A1%E5%9D%97403%E6%8A%A5%E9%94%99/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 解决报错记录&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li&gt;进入cd /home/xxx/dify/docker/ssrf_proxy&lt;/li&gt;
-&lt;li&gt;编辑文件，注释&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;</description></item><item><title>Dify插件之MineU2使用踩坑</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E6%8F%92%E4%BB%B6%E4%B9%8Bmineu2%E4%BD%BF%E7%94%A8%E8%B8%A9%E5%9D%91/</link><pubDate>Tue, 19 Aug 2025 05:24:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E6%8F%92%E4%BB%B6%E4%B9%8Bmineu2%E4%BD%BF%E7%94%A8%E8%B8%A9%E5%9D%91/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 MineU 2在Dify插件中使用过程中的踩坑记录。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h3 id="1-安装"&gt;1. 安装&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://marketplace.dify.ai/plugins/langgenius/mineru?source=http%253A%252F%252F172.16.0.138%253A9001&amp;amp;language=zh-Hans&amp;amp;theme=light"&gt;https://marketplace.dify.ai/plugins/langgenius/mineru?source=http%253A%252F%252F172.16.0.138%253A9001&amp;amp;language=zh-Hans&amp;amp;theme=light&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/84c70f26-507f-4869-ac2a-5568d999fa76/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WMZHK3FD%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034728Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFr69O%2F%2FOGDqEjZv6DPgRiad0IN4U1hBl5iiW0to4Q%2FxAiBvqmwG39BZRhTgq3GhiCRhy7f%2B17HEJhA1BwVBfbqEISr%2FAwh9EAAaDDYzNzQyMzE4MzgwNSIMymWAETdKcVhcBut3KtwD%2F96BZeqUWksMq%2BWYXEKg3GOPMeVsTU%2BoDB6P0OGditX5Py2t69LQHLWcvH6MfSFH8BO1wtStTT%2BOonSR%2Buq2c3zThHVvRg6lCfANkFX4ABS01SNvUXnSCJPCLM7IHzcIM%2Ftq4UM0%2FLPRk3neb7XjxEfUdv%2FNzC7At0YEuRmS1p5BAW%2BEE20V8EVZ%2B%2BK0QN6gwmu%2FbpM66tXvgyxOAuVaxcRJu4O8ghx5jzBx42XPREpi48bFcWJcfMgYT8J1MlhGvDCMa0PQbL3NoYl0r3MjJXvXz76voPbwL993PX405J8rnQ7KZnWgBA%2F18TsEGS%2BjaULoHbuYfbjHljGyqNUNo0793WW1fAyoJhm5qknp8RaEmF1A7dhPzoNvNo5EZWI60WToyCyRXiVpAa83nNXacZ0QkJgUx5m0Kl5o0KJH8EwphqsNYounbjWSnFLFFimBQ3PR1FiuoGW%2FBM5368RnNGZa7YTilCd%2Bb7%2FW9O%2ByYn%2B3%2FwsvIAzVSxP%2FeeYoJqcNKGZ%2FiGY6TZK1fqQhVWCfGsBOpRuXZFyCRNVdGklSdHqmrkiVON8VslMJcCa0yibMm2OFDfTwXsH3DdxsR5gOMlWYlFoq6%2FQ1CkutSck9dErAWF3nakfu0mwGcsgw4eu8zgY6pgGKVkzlJJRImNOa9NESzIHHDf7sySJDB5lKY9m329TwhOrz7V9cPQh4OR%2BWSakk6CJ3HC2UO4CkjIKcCrUdALixcRUPZnn6Uk0cWquy4eVFvVNbu5hva%2FPN4eFHVmhZ33uTAVrgVWkwm8%2Fm0EbY2dt1379Y34%2B4Ne%2BUvxTNidb7%2FQoIIjmpuv0XshpoNbYUDqL3CezigK%2ByOstOTweeRs6bQpVH%2FPht&amp;X-Amz-Signature=9393fbb4a6f7bf002ccae98ac26b6b73ddd26d742352701831a3fb8d676d978f&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="2-配置"&gt;2. 配置&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;获取API KEY | 在官网申请即可&lt;/li&gt;
-&lt;li&gt;填入配置&lt;/li&gt;
-&lt;li&gt;Detail&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="踩坑"&gt;踩坑&lt;/h3&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/eedc93e7-7aaf-430d-918c-fa4fd03fa6a4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WMZHK3FD%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034728Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFr69O%2F%2FOGDqEjZv6DPgRiad0IN4U1hBl5iiW0to4Q%2FxAiBvqmwG39BZRhTgq3GhiCRhy7f%2B17HEJhA1BwVBfbqEISr%2FAwh9EAAaDDYzNzQyMzE4MzgwNSIMymWAETdKcVhcBut3KtwD%2F96BZeqUWksMq%2BWYXEKg3GOPMeVsTU%2BoDB6P0OGditX5Py2t69LQHLWcvH6MfSFH8BO1wtStTT%2BOonSR%2Buq2c3zThHVvRg6lCfANkFX4ABS01SNvUXnSCJPCLM7IHzcIM%2Ftq4UM0%2FLPRk3neb7XjxEfUdv%2FNzC7At0YEuRmS1p5BAW%2BEE20V8EVZ%2B%2BK0QN6gwmu%2FbpM66tXvgyxOAuVaxcRJu4O8ghx5jzBx42XPREpi48bFcWJcfMgYT8J1MlhGvDCMa0PQbL3NoYl0r3MjJXvXz76voPbwL993PX405J8rnQ7KZnWgBA%2F18TsEGS%2BjaULoHbuYfbjHljGyqNUNo0793WW1fAyoJhm5qknp8RaEmF1A7dhPzoNvNo5EZWI60WToyCyRXiVpAa83nNXacZ0QkJgUx5m0Kl5o0KJH8EwphqsNYounbjWSnFLFFimBQ3PR1FiuoGW%2FBM5368RnNGZa7YTilCd%2Bb7%2FW9O%2ByYn%2B3%2FwsvIAzVSxP%2FeeYoJqcNKGZ%2FiGY6TZK1fqQhVWCfGsBOpRuXZFyCRNVdGklSdHqmrkiVON8VslMJcCa0yibMm2OFDfTwXsH3DdxsR5gOMlWYlFoq6%2FQ1CkutSck9dErAWF3nakfu0mwGcsgw4eu8zgY6pgGKVkzlJJRImNOa9NESzIHHDf7sySJDB5lKY9m329TwhOrz7V9cPQh4OR%2BWSakk6CJ3HC2UO4CkjIKcCrUdALixcRUPZnn6Uk0cWquy4eVFvVNbu5hva%2FPN4eFHVmhZ33uTAVrgVWkwm8%2Fm0EbY2dt1379Y34%2B4Ne%2BUvxTNidb7%2FQoIIjmpuv0XshpoNbYUDqL3CezigK%2ByOstOTweeRs6bQpVH%2FPht&amp;X-Amz-Signature=4b2ef2a810d8b91330b2d1d06d814938f8a0cad65fe2ea77b8b6a58072b2a529&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;解决方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Dify修改SandBox权限</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BF%AE%E6%94%B9sandbox%E6%9D%83%E9%99%90/</link><pubDate>Fri, 15 Aug 2025 08:59:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BF%AE%E6%94%B9sandbox%E6%9D%83%E9%99%90/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 使用dify的代码执行模块时, 导入了第三方库, 但是在运行时出现: operation not permitted&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li&gt;修改文件&lt;/li&gt;
-&lt;li&gt;改成这样&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;</description></item><item><title>Dify修改默认80端口</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A480%E7%AB%AF%E5%8F%A3/</link><pubDate>Fri, 15 Aug 2025 01:24:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A480%E7%AB%AF%E5%8F%A3/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 记录Dify修改端口的操作&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="操作流程"&gt;操作流程&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;进入dify/docker目录&lt;/li&gt;
-&lt;li&gt;进入.env文件&lt;/li&gt;
-&lt;li&gt;修改端口80&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;</description></item><item><title>Dify中安装额外的Pip包</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%B8%AD%E5%AE%89%E8%A3%85%E9%A2%9D%E5%A4%96%E7%9A%84pip%E5%8C%85/</link><pubDate>Tue, 12 Aug 2025 06:08:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%B8%AD%E5%AE%89%E8%A3%85%E9%A2%9D%E5%A4%96%E7%9A%84pip%E5%8C%85/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 最近需要在dify的代码执行模块中运行python-docx库的功能。记录一下怎么在dify中安装额外的包。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="1-找到requirements"&gt;1. 找到requirements&lt;/h2&gt;
-&lt;p&gt;在 /data/dify/docker/volumes/sandbox/dependencies/python-requirements.txt 文件中添加需要安装的包的名称以及版本即可。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/936e47ea-45b6-4eea-9424-e90d2e6939a1/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UCXSBFAB%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034724Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAzZwUYNU8wpEGvGJebH0OUHQrmShnfIxGWqN8ySrj21AiEA6M34JcqKKMfWN%2FAzhbdCFwp73HugCeFye1aKkJVRAO4q%2FwMIfRAAGgw2Mzc0MjMxODM4MDUiDK1qXVw%2BhO%2Fkjqk%2BjCrcA2s76tDO96FWsldtrHVNtCrDubt3%2BCXsSh6UUNSyXK6Vn65SByppQtSol39TDF3dgmC2Ph30WVonotw616Pnaw4H59QNvPYOCVpMNCebaDrh5csxB1nW%2FkyXKV9kZxDBgDQEGmGviHXT4mUBTM8%2FQpaO9H5U%2BRycvtZKAin2gpqqPxPFfc0lVqHgxBeXKRTUDaBX6KsfTRrDwqj1cSMrch3kablk91ta%2FKUptr1JwbEaOa3tQGyW%2FAOQNwXy41UlU6EAii%2FNAMH3gR192JsMP2S1mq99y2OGd0f8h74g8ncpsuI%2FH79TbgksFC1pl2fqxqzyYleCJd5zC07WHavBPl8xltCqlI7xgnb9UHXostLTh9zBK9U6a9ji0oiWninKng3VZ6GhQP45UnDmQh3L3e5XLa0q%2BxkOIDQBcKdzZWKXNGqAdbCtdG4biE4NAlzywroZy20Y09kQMEv3CFdCy1vgeZ06XuVkjArYDa2l5re3KmllgaU8AXX2%2BsngM8x3uJJH9Z8ikwBP5J3WAcH%2FR83DJkFkgHvBiA6Zuhar2fvxclO07%2B8W6j36N3FgCOZ3osWF0WYJa6zrD7tV3QJejO70COs44iN1DiwfaP1seQ5ivhbDplE4ijiePuhpMMvpvM4GOqUBZBfhCOPbYRa3ELUsAhe1MMN0ZaZR0gI2VeXzZFevh08ZxWEo6giH3Cf%2BfQbqlv4WCh0YYBT6vRNBR6dZwsmR%2FP7fe3Dt2oPNXPTuyeBizRy9r%2BsNdblZ2RL310MvrgOLNGWFCyo5jJwd4PN2ZqrOnVUpWRmopVi3pjCEPPHvLdX5uJ7rHPT5Atok4a3pTmnLvT%2B05kemkDv0Vjdwl6BUz6ADe6XU&amp;X-Amz-Signature=1540667c02af63510c9b828b9157264323e36cb2f5be3f10504398bcbb6aeac0&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="2-重启docker"&gt;2. 重启docker&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;docker&lt;/span&gt; &lt;span class="nx"&gt;compose&lt;/span&gt; &lt;span class="nx"&gt;restart&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>Dify工作流案例复现</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%A1%88%E4%BE%8B%E5%A4%8D%E7%8E%B0/</link><pubDate>Mon, 25 Nov 2024 02:07:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%A1%88%E4%BE%8B%E5%A4%8D%E7%8E%B0/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 参考B站视频进行复现。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="dsl原始文件"&gt;DSL原始文件&lt;/h2&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Dify私有化部署</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2/</link><pubDate>Fri, 15 Nov 2024 09:08:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2/</guid><description>&lt;h1 id="1创建服务器准备工作"&gt;1.创建服务器准备工作&lt;/h1&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/f74139a7-e3a8-448f-8ecc-ce9bee8e5977/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667XLN5BWG%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034752Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDGtF3GEg37lFzFPgQCU7aPYf5MDsLhmNWZM87IfP7udAIgTVNBrmfl4aAu0X2WsgGfmcOeux5vJqGYb4z%2B5WxeNE0q%2FwMIfRAAGgw2Mzc0MjMxODM4MDUiDNPFFnCD5QhLKAsJsyrcA3C9k3aWs%2FVsbf02nNHGzSAr1rPNaYVz3tHWb5l4QE66W3bwN8reUzUcnmBfpL7CWX1%2FJOsXitANhj9VKpicJE4tCmtOZgs8sAPSX%2BUk3uCfhtc2nr8dbEOj1eY6YzlrB4rG9V3WNSblymNE4sVepU%2F8cNnHJajihhZmduMpu2eQVP7fCgA9xFM%2F5VuotdJsIAjjChVmTUTmMxEj98KK0IRdW%2BJwTSqJE0%2FRu58zdChq7bqZ2CKlnyLcamEVmS6z1JqMKjg6%2BBcnnToC6pOOTM5boK0ITKaxl%2BPmJNSnA257f3%2BfGYCfuBxPZrprxuZqVAsywbt7%2BFnmBoBlR7eRkyMdbJKykkeuwTeHSQZop0Y1H6jRfOWsW3o%2BWe%2FqKDtQvTCoUIOsGzqG7%2B8ZaoeYPBvSkFDrw%2B4FHdwt3WDo4OjufKsusniel7sMFnrlh39ZMDEuxakA0aq7nJp%2BnqhqPOFmcmdUbMaef6xfIiNdJVd91NM3Rezg2lx8VaR5Kv9HPXP1XlXxnb0ueaXsewafVxTIr1m8RI1%2FfIcH5NkV74X7WErpvTwXrHLUd%2FAy0O3zlhZkVFzqttJ2pl%2BrIfVdRw8BH8gJVzF%2Fs%2BATpczqOovDwtupMp2H3MkKSo6sMKnqvM4GOqUBzsztY6evUEUg1PQXxDNs5xXRUSbwKYPpTd3wjsbvo9tCWRNanjoRHaKSUi8NvGC8dP3YomWFCpzP4nQtLAeg2tWIhSFNBhSnhVTeAHd7FMGRHItMsrCd1JtSlgdugcxpKOvlACe0nlLIcifuIVt%2BsJYYMoG%2Bl4izws5jyUrbUShGJD3UYb0ceJegc3IA6hDEL%2BR8eel1FsrozKrknAEDek9iI5P%2F&amp;X-Amz-Signature=e08d276ecc2e14f0c952148102466406e0d7fd62007257f280548d5c93b44011&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;p&gt;无论是在本地的服务器还是在网上的服务器（阿里云，腾讯云，天翼云…）都要满足这个配置,至少要有2个cpu核心并且有4g的内存&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/fa9b78cc-a1fb-4411-9a98-78111a3badf7/946a4c0a5fbcb748a6abe213a5069d2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667XLN5BWG%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034752Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDGtF3GEg37lFzFPgQCU7aPYf5MDsLhmNWZM87IfP7udAIgTVNBrmfl4aAu0X2WsgGfmcOeux5vJqGYb4z%2B5WxeNE0q%2FwMIfRAAGgw2Mzc0MjMxODM4MDUiDNPFFnCD5QhLKAsJsyrcA3C9k3aWs%2FVsbf02nNHGzSAr1rPNaYVz3tHWb5l4QE66W3bwN8reUzUcnmBfpL7CWX1%2FJOsXitANhj9VKpicJE4tCmtOZgs8sAPSX%2BUk3uCfhtc2nr8dbEOj1eY6YzlrB4rG9V3WNSblymNE4sVepU%2F8cNnHJajihhZmduMpu2eQVP7fCgA9xFM%2F5VuotdJsIAjjChVmTUTmMxEj98KK0IRdW%2BJwTSqJE0%2FRu58zdChq7bqZ2CKlnyLcamEVmS6z1JqMKjg6%2BBcnnToC6pOOTM5boK0ITKaxl%2BPmJNSnA257f3%2BfGYCfuBxPZrprxuZqVAsywbt7%2BFnmBoBlR7eRkyMdbJKykkeuwTeHSQZop0Y1H6jRfOWsW3o%2BWe%2FqKDtQvTCoUIOsGzqG7%2B8ZaoeYPBvSkFDrw%2B4FHdwt3WDo4OjufKsusniel7sMFnrlh39ZMDEuxakA0aq7nJp%2BnqhqPOFmcmdUbMaef6xfIiNdJVd91NM3Rezg2lx8VaR5Kv9HPXP1XlXxnb0ueaXsewafVxTIr1m8RI1%2FfIcH5NkV74X7WErpvTwXrHLUd%2FAy0O3zlhZkVFzqttJ2pl%2BrIfVdRw8BH8gJVzF%2Fs%2BATpczqOovDwtupMp2H3MkKSo6sMKnqvM4GOqUBzsztY6evUEUg1PQXxDNs5xXRUSbwKYPpTd3wjsbvo9tCWRNanjoRHaKSUi8NvGC8dP3YomWFCpzP4nQtLAeg2tWIhSFNBhSnhVTeAHd7FMGRHItMsrCd1JtSlgdugcxpKOvlACe0nlLIcifuIVt%2BsJYYMoG%2Bl4izws5jyUrbUShGJD3UYb0ceJegc3IA6hDEL%2BR8eel1FsrozKrknAEDek9iI5P%2F&amp;X-Amz-Signature=7973dfab6995b8d4a62c4a0005848e52f20fe819c003e09bb163a03204373507&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;p&gt;服务器的系统选择Ubuntu 22.04版本并且克隆 Dify 源代码至本地环境&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;git&lt;/span&gt; &lt;span class="nx"&gt;clone&lt;/span&gt; &lt;span class="nx"&gt;https&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//github.com/langgenius/dify.git
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h1 id="2安装docker和docker-compose"&gt;2.安装docker和docker compose&lt;/h1&gt;
-&lt;h2 id="首先确保你的软件包是最新的"&gt;首先，确保你的软件包是最新的：&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;sudo&lt;/span&gt; &lt;span class="nx"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt; &lt;span class="nx"&gt;update&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;sudo&lt;/span&gt; &lt;span class="nx"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt; &lt;span class="nx"&gt;upgrade&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="安装docker"&gt;安装docker&lt;/h2&gt;
-&lt;h3 id="第一种方法一键安装"&gt;第一种方法(一键安装)&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;sSL&lt;/span&gt; &lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;docker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;geekery&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;cn&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nx"&gt;bash&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="第二种方法"&gt;第二种方法&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
-&lt;/span&gt;&lt;span class="lnt"&gt;14
-&lt;/span&gt;&lt;span class="lnt"&gt;15
-&lt;/span&gt;&lt;span class="lnt"&gt;16
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nx"&gt;安装必要的依赖&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="nx"&gt;让apt支持https&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;sudo&lt;/span&gt; &lt;span class="nx"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt; &lt;span class="nx"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt; &lt;span class="nx"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;transport&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;https&lt;/span&gt; &lt;span class="nx"&gt;ca&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;certificates&lt;/span&gt; &lt;span class="nx"&gt;curl&lt;/span&gt; &lt;span class="nx"&gt;software&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;properties&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;common&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nx"&gt;添加&lt;/span&gt; &lt;span class="nx"&gt;Docker&lt;/span&gt; &lt;span class="nx"&gt;的官方&lt;/span&gt; &lt;span class="nx"&gt;GPG&lt;/span&gt; &lt;span class="nx"&gt;密钥&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;fsSL&lt;/span&gt; &lt;span class="nx"&gt;https&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nx"&gt;添加&lt;/span&gt; &lt;span class="nx"&gt;Docker&lt;/span&gt; &lt;span class="nx"&gt;APT&lt;/span&gt; &lt;span class="nx"&gt;仓库&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&amp;#34;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nx"&gt;sudo&lt;/span&gt; &lt;span class="nx"&gt;tee&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;sources&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;list&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;docker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;list&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="err"&gt;/dev/null&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nx"&gt;更新&lt;/span&gt; &lt;span class="nx"&gt;APT&lt;/span&gt; &lt;span class="nx"&gt;包索引&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;sudo&lt;/span&gt; &lt;span class="nx"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt; &lt;span class="nx"&gt;update&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nx"&gt;安装&lt;/span&gt; &lt;span class="nx"&gt;Docker&lt;/span&gt; &lt;span class="nx"&gt;CE&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;sudo&lt;/span&gt; &lt;span class="nx"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt; &lt;span class="nx"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt; &lt;span class="nx"&gt;docker&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;ce&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="nx"&gt;验证安装&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;docker&lt;/span&gt; &lt;span class="nx"&gt;version&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="安装docker-compose"&gt;安装docker compose&lt;/h2&gt;
-&lt;h3 id="下载最新的-docker-compose-二进制文件"&gt;下载最新的 Docker Compose 二进制文件&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;sudo&lt;/span&gt; &lt;span class="nx"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;L&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)&amp;#34;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;o&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;docker&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;compose&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="为-docker-compose-二进制文件添加执行权限"&gt;为 Docker Compose 二进制文件添加执行权限&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;sudo&lt;/span&gt; &lt;span class="nx"&gt;chmod&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;docker&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;compose&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="验证安装"&gt;验证安装&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;docker&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;compose&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nx"&gt;version&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h1 id="3docker换源和配置dns"&gt;3.docker换源和配置DNS&lt;/h1&gt;
-&lt;h2 id="docker换源"&gt;docker换源&lt;/h2&gt;
-&lt;p&gt;首先输入&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Dify on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/dify/</link><description>Recent content in Dify on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Tue, 02 Sep 2025 09:21:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/dify/index.xml" rel="self" type="application/rss+xml"/><item><title>Dify获取用户的对话记录</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84%E5%AF%B9%E8%AF%9D%E8%AE%B0%E5%BD%95/</link><pubDate>Tue, 02 Sep 2025 08:58:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84%E5%AF%B9%E8%AF%9D%E8%AE%B0%E5%BD%95/</guid><description>&lt;blockquote>
+&lt;p>💡 从dify的数据库中获取用户的对话记录。&lt;/p>&lt;/blockquote>
+&lt;ol>
+&lt;li>进入postgres容器数据库&lt;/li>
+&lt;li>查看数据表&lt;/li>
+&lt;li>查看message表的结构&lt;/li>
+&lt;li>查看最新的10条对话记录&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;ol>
+&lt;li>copy&lt;/li>
+&lt;li>容器到宿主机&lt;/li>
+&lt;/ol>
+&lt;hr></description></item><item><title>解决Dify Sandbox环境无法访问网络</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E8%A7%A3%E5%86%B3dify-sandbox%E7%8E%AF%E5%A2%83%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E7%BD%91%E7%BB%9C/</link><pubDate>Thu, 28 Aug 2025 09:20:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E8%A7%A3%E5%86%B3dify-sandbox%E7%8E%AF%E5%A2%83%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E7%BD%91%E7%BB%9C/</guid><description>&lt;blockquote>
+&lt;p>💡 想要在Dify中实现，上传xlsx文件或者csv文件，最终通过代码执行节点，将文件写入到远程数据库内。踩坑记录。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="解决步骤">解决步骤&lt;/h2>
+&lt;ol>
+&lt;li>编辑squid.conf文件&lt;/li>
+&lt;li>增加以下内容&lt;/li>
+&lt;li>在Sandbox中增加PySQL等依赖&lt;/li>
+&lt;li>重启项目&lt;/li>
+&lt;li>额外操作&lt;/li>
+&lt;/ol>
+&lt;hr></description></item><item><title>Dify使用http模块403报错</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BD%BF%E7%94%A8http%E6%A8%A1%E5%9D%97403%E6%8A%A5%E9%94%99/</link><pubDate>Fri, 22 Aug 2025 06:36:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BD%BF%E7%94%A8http%E6%A8%A1%E5%9D%97403%E6%8A%A5%E9%94%99/</guid><description>&lt;blockquote>
+&lt;p>💡 解决报错记录&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;ol>
+&lt;li>进入cd /home/xxx/dify/docker/ssrf_proxy&lt;/li>
+&lt;li>编辑文件，注释&lt;/li>
+&lt;/ol>
+&lt;hr></description></item><item><title>Dify插件之MineU2使用踩坑</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E6%8F%92%E4%BB%B6%E4%B9%8Bmineu2%E4%BD%BF%E7%94%A8%E8%B8%A9%E5%9D%91/</link><pubDate>Tue, 19 Aug 2025 05:24:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E6%8F%92%E4%BB%B6%E4%B9%8Bmineu2%E4%BD%BF%E7%94%A8%E8%B8%A9%E5%9D%91/</guid><description>&lt;blockquote>
+&lt;p>💡 MineU 2在Dify插件中使用过程中的踩坑记录。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h3 id="1-安装">1. 安装&lt;/h3>
+&lt;p>&lt;a href="https://marketplace.dify.ai/plugins/langgenius/mineru?source=http%253A%252F%252F172.16.0.138%253A9001&amp;amp;language=zh-Hans&amp;amp;theme=light">https://marketplace.dify.ai/plugins/langgenius/mineru?source=http%253A%252F%252F172.16.0.138%253A9001&amp;amp;language=zh-Hans&amp;amp;theme=light&lt;/a>&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/84c70f26-507f-4869-ac2a-5568d999fa76/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466VTAEHVIC%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063501Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIBnZeLt1GNMp0%2BGla716QtgDB1fN%2Fk%2F1pGyu9Mlb58nAAiEA9CN7sGE2cLzkI6JLtlY9mufbkJ7cH42heSvxJtx%2BhSgq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDEF0oGArSZnwvZVa0SrcAzE2hNNphrzfOEgmlnB2EgP%2BzO2mLy0gYuyCP9ADJd6JTLGsBcD65bbl6MFNqsJRRfUlHj66huqXuTrMYu7%2F99i3ap%2FBNh657bT6NEq9F7K7RJKtqENmYczO55agQHsQOz%2FXVkUYEpJxmvxO3cpbdAHZvn4hEAPa9XRz%2BctnyJutMzbplqd%2F0lvMZKdlmMOubhr1DNQKuGT%2B902aCYdNzoPT%2FKf4DCWCIs7vmTkIfrUjjuk5lCdIY%2FpIaQr49FTQp8Q6ervhAWbIoMjU2XGatMERAkc600%2FaycNpkazq%2F%2BQpERi%2B28SdW%2Fx2QAXeLEusqscPArwNxPth5btwonpcOES6ar6KmEi5fOO%2BmmqiHULYU06ESmpt49iCWWnsmKR7USV7EOV1ywu8Sjng8Y1qx5MSb4ykcoYToaftha%2FP82CuCJmiO0xREV3PGxLS6PY85wOTIPgqkgrE4mRVdBDYLmI68FuoTV0xb6DPmVd38lqZmpwyOiJGAznEGQ7bYq74fOJ%2BOrnZXJZzZf%2Fst6nzD%2FT38WPB3zj4WFOmxaG3N%2FG%2FCapJjsuovfajoshPl2nOdfXhyc9b%2FZo4thrXJQpxCvpDWnuK7Gfm7gbDykvefVmKK625PgoFgzJF6f17MMCvvc4GOqUBlARySR%2F%2Bc8iZqdzeyHePdOGLZXL6uDayQ17H83LVpNA37jyhLUGzm1h4LHwNFXZF5d3njPvCB59wJafU7OF4hwoZU80t8nIcsH1ODalXiFa3pbFpwABsx8E%2BgoE5fM4cPcLEkpJSComTvmVO1BOexLC0kgLzdr4XIpmPySvCWAN8DYlXTpZd7XO13DdxlddGhjT%2BJxYLO6o74sPiVKYSQAatw%2FL5&amp;X-Amz-Signature=5ddc0351978a3db1b3a17e656c569b3db3665caa5a6db88c68e9311986a1c16d&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h3 id="2-配置">2. 配置&lt;/h3>
+&lt;ol>
+&lt;li>获取API KEY | 在官网申请即可&lt;/li>
+&lt;li>填入配置&lt;/li>
+&lt;li>Detail&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="踩坑">踩坑&lt;/h3>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/eedc93e7-7aaf-430d-918c-fa4fd03fa6a4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466VTAEHVIC%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063501Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIBnZeLt1GNMp0%2BGla716QtgDB1fN%2Fk%2F1pGyu9Mlb58nAAiEA9CN7sGE2cLzkI6JLtlY9mufbkJ7cH42heSvxJtx%2BhSgq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDEF0oGArSZnwvZVa0SrcAzE2hNNphrzfOEgmlnB2EgP%2BzO2mLy0gYuyCP9ADJd6JTLGsBcD65bbl6MFNqsJRRfUlHj66huqXuTrMYu7%2F99i3ap%2FBNh657bT6NEq9F7K7RJKtqENmYczO55agQHsQOz%2FXVkUYEpJxmvxO3cpbdAHZvn4hEAPa9XRz%2BctnyJutMzbplqd%2F0lvMZKdlmMOubhr1DNQKuGT%2B902aCYdNzoPT%2FKf4DCWCIs7vmTkIfrUjjuk5lCdIY%2FpIaQr49FTQp8Q6ervhAWbIoMjU2XGatMERAkc600%2FaycNpkazq%2F%2BQpERi%2B28SdW%2Fx2QAXeLEusqscPArwNxPth5btwonpcOES6ar6KmEi5fOO%2BmmqiHULYU06ESmpt49iCWWnsmKR7USV7EOV1ywu8Sjng8Y1qx5MSb4ykcoYToaftha%2FP82CuCJmiO0xREV3PGxLS6PY85wOTIPgqkgrE4mRVdBDYLmI68FuoTV0xb6DPmVd38lqZmpwyOiJGAznEGQ7bYq74fOJ%2BOrnZXJZzZf%2Fst6nzD%2FT38WPB3zj4WFOmxaG3N%2FG%2FCapJjsuovfajoshPl2nOdfXhyc9b%2FZo4thrXJQpxCvpDWnuK7Gfm7gbDykvefVmKK625PgoFgzJF6f17MMCvvc4GOqUBlARySR%2F%2Bc8iZqdzeyHePdOGLZXL6uDayQ17H83LVpNA37jyhLUGzm1h4LHwNFXZF5d3njPvCB59wJafU7OF4hwoZU80t8nIcsH1ODalXiFa3pbFpwABsx8E%2BgoE5fM4cPcLEkpJSComTvmVO1BOexLC0kgLzdr4XIpmPySvCWAN8DYlXTpZd7XO13DdxlddGhjT%2BJxYLO6o74sPiVKYSQAatw%2FL5&amp;X-Amz-Signature=847d9230f30abb03d2c2f4b396f295ee68286cad2fcbcede1bff0e446871e777&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;ul>
+&lt;li>解决方法&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>Dify修改SandBox权限</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BF%AE%E6%94%B9sandbox%E6%9D%83%E9%99%90/</link><pubDate>Fri, 15 Aug 2025 08:59:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BF%AE%E6%94%B9sandbox%E6%9D%83%E9%99%90/</guid><description>&lt;blockquote>
+&lt;p>💡 使用dify的代码执行模块时, 导入了第三方库, 但是在运行时出现: operation not permitted&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;ol>
+&lt;li>修改文件&lt;/li>
+&lt;li>改成这样&lt;/li>
+&lt;/ol>
+&lt;hr></description></item><item><title>Dify修改默认80端口</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A480%E7%AB%AF%E5%8F%A3/</link><pubDate>Fri, 15 Aug 2025 01:24:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A480%E7%AB%AF%E5%8F%A3/</guid><description>&lt;blockquote>
+&lt;p>💡 记录Dify修改端口的操作&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="操作流程">操作流程&lt;/h2>
+&lt;ol>
+&lt;li>进入dify/docker目录&lt;/li>
+&lt;li>进入.env文件&lt;/li>
+&lt;li>修改端口80&lt;/li>
+&lt;/ol>
+&lt;hr></description></item><item><title>Dify中安装额外的Pip包</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%B8%AD%E5%AE%89%E8%A3%85%E9%A2%9D%E5%A4%96%E7%9A%84pip%E5%8C%85/</link><pubDate>Tue, 12 Aug 2025 06:08:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E4%B8%AD%E5%AE%89%E8%A3%85%E9%A2%9D%E5%A4%96%E7%9A%84pip%E5%8C%85/</guid><description>&lt;blockquote>
+&lt;p>💡 最近需要在dify的代码执行模块中运行python-docx库的功能。记录一下怎么在dify中安装额外的包。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="1-找到requirements">1. 找到requirements&lt;/h2>
+&lt;p>在 /data/dify/docker/volumes/sandbox/dependencies/python-requirements.txt 文件中添加需要安装的包的名称以及版本即可。&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/936e47ea-45b6-4eea-9424-e90d2e6939a1/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UY6BHQFF%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063459Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDQR5zaUlGlBaHeB9PczEUF7kWMepb3QQVDftWi5p0QSwIhAPrm3uJAWEwR6KUiIjoxGJu6E7rzuL5%2F5tVd1WCNDgKbKv8DCH8QABoMNjM3NDIzMTgzODA1IgxzB0A95J%2FbivQiOTAq3AMaD2rZaxXAqaptvBXOrEKzmBHIh8K6DUAPmm0OyLbz84AVfb0QdnTg5ayW84ziVzwhTHC3VKm1WqKfngMslFucmNa6Pvh%2F0xBylgLdKFQONy4wNkkF4edpWWcRDtnffogdD9hYXEucXd7bH6iApMXVW7dqeLbn1gYGi0c%2FzE%2B6t6bmZGohBqvMm06uYnwqKP9JiUrFiJWsrjC5B1wXWHb%2Fwcuz4AMLjuPjZAkie06swKGJvGR36IkMIeC1%2F3WIyOqgwgvHCnSrB8Zb3cD8RvKniutJKQCb%2Bi%2BWuZYKjol%2FTeZvn4jZXnlbNI2Rkeng53V8vmlNKZ7TrdEbGIeJe%2FMo56aSBawjdzwqLySLa%2FtVEJHpSxnDVxG7BXb1M5ILLmjdhEYXpBC5S2HDseEA80Wjc375OF8XYLNvzsBI14%2FTAfm0BDFuqQpBRRH60EurBz8gMzu1NlIcARfL%2Fs8IGkuNjVUi%2FiPaLwAmYHsW2eRL3SeQyBnI4LAvsr2KHEyIjm4XmR1up5Jj5mbufv7UlT2u5MYeLQBWSMDkq3WcxqA9wOmmJiCSuQQS7RMYfT9z%2FL6imNLtZY9DIvYv3jj0n226H6g5Pb2iWTv2oRs2HZYNg%2FwEyPLZdVJsvr6AZzDlrL3OBjqkAS2Wto%2FRgyefXJjl8pdxQcOiSChLEV3bXuqyx%2BfY8bQ%2FWVhjIe9yUFEqg0Br6%2FPW4kd2yyxDfYWS9VPaEZ6YPtzd3Txp9BpRFO04EC2lt61NrYz%2Bl%2FVAZ1aF0uyeAyBJBYala08yuWE1QX1gyFw8XyVmjTAd5Ul5xUvdoLSmBN9YSYglGGJWDgS75aSH%2FptSttrDQh0AmULvXjZQYehpF%2BDeoHPi&amp;X-Amz-Signature=e91658cb3999e33810a68b29115b68a87f31b2506852ba94500ceb397d39e06e&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="2-重启docker">2. 重启docker&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">docker&lt;/span> &lt;span class="nx">compose&lt;/span> &lt;span class="nx">restart&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Dify工作流案例复现</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%A1%88%E4%BE%8B%E5%A4%8D%E7%8E%B0/</link><pubDate>Mon, 25 Nov 2024 02:07:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%A1%88%E4%BE%8B%E5%A4%8D%E7%8E%B0/</guid><description>&lt;blockquote>
+&lt;p>💡 参考B站视频进行复现。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="dsl原始文件">DSL原始文件&lt;/h2>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>Dify私有化部署</title><link>https://Pan-Binghong.github.io/daily-learning/ai/dify%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2/</link><pubDate>Fri, 15 Nov 2024 09:08:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/dify%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2/</guid><description>&lt;h1 id="1创建服务器准备工作">1.创建服务器准备工作&lt;/h1>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/f74139a7-e3a8-448f-8ecc-ce9bee8e5977/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X4OPW2KY%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063516Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDAclszQBPUCXlqoi%2FXeC707ZSvvQBgvfevKBChTguIhAIhALcC0q%2Bv5pGF%2Bm6QX4l%2Fk4E%2BbHe8bgZ5zfdqZqWqM3n8Kv8DCH8QABoMNjM3NDIzMTgzODA1IgwagqMtjkgZgNfXu%2Fgq3APAbyCLHUm2AmYb0av79BylsR3sdDku41ftUdqrP6j1Xfrl2%2BdWvqEpcFlYiMzxRPoCGsqybKwRKYq5RWDpd5woXZ04MBL5eoGU7mUVVeVFQEd8AeoRauiJo%2BlXHrDRDZ%2F6KPhzFZI5oX1%2FGfF7shUfj7G9S9LV3Zihvtw5QlSDVl2ENxkS4QMnhd2yVGrmFQHDmVv6u5wt5WlBm3yobWAIE1CnD0LyGqiYWSSoFwMpMNOxmBmaZbEkOtZP53Hk1xO4BDAaGrFRLYIOENuWiRjfA8CeeZRsrEotzMV5mzYnsED3XrjIhwGsRKNjolLRjOLh%2FWMWr24iQqN9FoEoD2%2B%2FUorBr6Hm4r3%2FfhaxSpET8hdQou7bvkkPdUERKNe%2F1RnlO%2FiGBHE%2Bz4TzVbpheh1%2Bn%2F%2BCrvUJFT4vvJya%2B2ZyfPBaT0UCEiL6hV%2BkMz32LpLDkqXuOtj%2BcFaMRWB5%2B5fpOhgHAWVULJXJzCSvmhuBIUbu1nM20mgCuHhwkk4NLnWda3l31mf65sf9gb6I6fagAEsELmaKJgi0oM7yiairUkPviku2y7Kol9TZs4FoIJZ6P0YQkrKx2ooxOu%2Bc04sKWMbvWGGM2%2F8x0NnyVgfziHddbLWO42npR6x3%2BjCBrL3OBjqkAekvVMA8DWhNCJPbyVeifQrvtyPAZARFjVnIL568usTysVs5s9JvhlA4kW4sh0%2BoJDOgU05Ahzlpz5jvBR7Jh88igk6TFxybaZBOlLYkFLGneVFfkl2TbASabUa3T3Ull4X2Ujt7SnuZ9IptnbnJLzE8OLvj2u2vANyonbiVORFDXgEAHrkesEVdvG2v6z%2FHGH96d9Zx1yLV6QLIG4fG3Ix2OaZV&amp;X-Amz-Signature=bd55657075d76b5992a22644819c2f588a622057e913bb3ca7c61252c53b5eaf&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;p>无论是在本地的服务器还是在网上的服务器（阿里云，腾讯云，天翼云…）都要满足这个配置,至少要有2个cpu核心并且有4g的内存&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/fa9b78cc-a1fb-4411-9a98-78111a3badf7/946a4c0a5fbcb748a6abe213a5069d2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X4OPW2KY%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063516Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDAclszQBPUCXlqoi%2FXeC707ZSvvQBgvfevKBChTguIhAIhALcC0q%2Bv5pGF%2Bm6QX4l%2Fk4E%2BbHe8bgZ5zfdqZqWqM3n8Kv8DCH8QABoMNjM3NDIzMTgzODA1IgwagqMtjkgZgNfXu%2Fgq3APAbyCLHUm2AmYb0av79BylsR3sdDku41ftUdqrP6j1Xfrl2%2BdWvqEpcFlYiMzxRPoCGsqybKwRKYq5RWDpd5woXZ04MBL5eoGU7mUVVeVFQEd8AeoRauiJo%2BlXHrDRDZ%2F6KPhzFZI5oX1%2FGfF7shUfj7G9S9LV3Zihvtw5QlSDVl2ENxkS4QMnhd2yVGrmFQHDmVv6u5wt5WlBm3yobWAIE1CnD0LyGqiYWSSoFwMpMNOxmBmaZbEkOtZP53Hk1xO4BDAaGrFRLYIOENuWiRjfA8CeeZRsrEotzMV5mzYnsED3XrjIhwGsRKNjolLRjOLh%2FWMWr24iQqN9FoEoD2%2B%2FUorBr6Hm4r3%2FfhaxSpET8hdQou7bvkkPdUERKNe%2F1RnlO%2FiGBHE%2Bz4TzVbpheh1%2Bn%2F%2BCrvUJFT4vvJya%2B2ZyfPBaT0UCEiL6hV%2BkMz32LpLDkqXuOtj%2BcFaMRWB5%2B5fpOhgHAWVULJXJzCSvmhuBIUbu1nM20mgCuHhwkk4NLnWda3l31mf65sf9gb6I6fagAEsELmaKJgi0oM7yiairUkPviku2y7Kol9TZs4FoIJZ6P0YQkrKx2ooxOu%2Bc04sKWMbvWGGM2%2F8x0NnyVgfziHddbLWO42npR6x3%2BjCBrL3OBjqkAekvVMA8DWhNCJPbyVeifQrvtyPAZARFjVnIL568usTysVs5s9JvhlA4kW4sh0%2BoJDOgU05Ahzlpz5jvBR7Jh88igk6TFxybaZBOlLYkFLGneVFfkl2TbASabUa3T3Ull4X2Ujt7SnuZ9IptnbnJLzE8OLvj2u2vANyonbiVORFDXgEAHrkesEVdvG2v6z%2FHGH96d9Zx1yLV6QLIG4fG3Ix2OaZV&amp;X-Amz-Signature=9fb4a4baf98a44cbcf630ed5517434ca9fea8815c3c626146cd4952b383367c8&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;p>服务器的系统选择Ubuntu 22.04版本并且克隆 Dify 源代码至本地环境&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">git&lt;/span> &lt;span class="nx">clone&lt;/span> &lt;span class="nx">https&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="c1">//github.com/langgenius/dify.git
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="2安装docker和docker-compose">2.安装docker和docker compose&lt;/h1>
+&lt;h2 id="首先确保你的软件包是最新的">首先，确保你的软件包是最新的：&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">sudo&lt;/span> &lt;span class="nx">apt&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">get&lt;/span> &lt;span class="nx">update&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">sudo&lt;/span> &lt;span class="nx">apt&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">get&lt;/span> &lt;span class="nx">upgrade&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="nx">y&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="安装docker">安装docker&lt;/h2>
+&lt;h3 id="第一种方法一键安装">第一种方法(一键安装)&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">curl&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="nx">sSL&lt;/span> &lt;span class="nx">get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">docker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">geekery&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">cn&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nx">bash&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="第二种方法">第二种方法&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="nx">安装必要的依赖&lt;/span>&lt;span class="err">，&lt;/span>&lt;span class="nx">让apt支持https&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">sudo&lt;/span> &lt;span class="nx">apt&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">get&lt;/span> &lt;span class="nx">install&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="nx">y&lt;/span> &lt;span class="nx">apt&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">transport&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">https&lt;/span> &lt;span class="nx">ca&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">certificates&lt;/span> &lt;span class="nx">curl&lt;/span> &lt;span class="nx">software&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">properties&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">common&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="nx">添加&lt;/span> &lt;span class="nx">Docker&lt;/span> &lt;span class="nx">的官方&lt;/span> &lt;span class="nx">GPG&lt;/span> &lt;span class="nx">密钥&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">curl&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="nx">fsSL&lt;/span> &lt;span class="nx">https&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="c1">//download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="nx">添加&lt;/span> &lt;span class="nx">Docker&lt;/span> &lt;span class="nx">APT&lt;/span> &lt;span class="nx">仓库&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">echo&lt;/span> &lt;span class="s2">&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&amp;#34;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nx">sudo&lt;/span> &lt;span class="nx">tee&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="nx">etc&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">apt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">sources&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">list&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">d&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">docker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">list&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="err">/dev/null&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="nx">更新&lt;/span> &lt;span class="nx">APT&lt;/span> &lt;span class="nx">包索引&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">sudo&lt;/span> &lt;span class="nx">apt&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">get&lt;/span> &lt;span class="nx">update&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="nx">安装&lt;/span> &lt;span class="nx">Docker&lt;/span> &lt;span class="nx">CE&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">sudo&lt;/span> &lt;span class="nx">apt&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">get&lt;/span> &lt;span class="nx">install&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="nx">y&lt;/span> &lt;span class="nx">docker&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">ce&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span>&lt;span class="nx">验证安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">docker&lt;/span> &lt;span class="nx">version&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="安装docker-compose">安装docker compose&lt;/h2>
+&lt;h3 id="下载最新的-docker-compose-二进制文件">下载最新的 Docker Compose 二进制文件&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">sudo&lt;/span> &lt;span class="nx">curl&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="nx">L&lt;/span> &lt;span class="s2">&amp;#34;https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)&amp;#34;&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="nx">o&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="nx">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">local&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">bin&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">docker&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">compose&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="为-docker-compose-二进制文件添加执行权限">为 Docker Compose 二进制文件添加执行权限&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">sudo&lt;/span> &lt;span class="nx">chmod&lt;/span> &lt;span class="o">+&lt;/span>&lt;span class="nx">x&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="nx">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">local&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">bin&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">docker&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">compose&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="验证安装">验证安装&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">docker&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">compose&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="nx">version&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="3docker换源和配置dns">3.docker换源和配置DNS&lt;/h1>
+&lt;h2 id="docker换源">docker换源&lt;/h2>
+&lt;p>首先输入&lt;/p></description></item></channel></rss>

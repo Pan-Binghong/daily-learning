@@ -1,96 +1,95 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Iptables on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/iptables/</link><description>Recent content in Iptables on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2026 03:50:06 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/iptables/index.xml" rel="self" type="application/rss+xml"/><item><title>Iptables Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/iptables-common-commands/</link><pubDate>Wed, 12 Mar 2025 05:46:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/iptables-common-commands/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 iptables 全称为：netfilter/iptables 是一个IP数据包过滤系统。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="iptables工作流程"&gt;iptables工作流程&lt;/h2&gt;
-&lt;p&gt;采用数据包过滤机制工作的，所以它会对请求的数据包的包头进行分析，并根据我们预先设定的规则进行匹配来决定是否可以进入主机。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;防火墙是一层一层过滤的。实际是按照配置规则的顺序从上到下，从前到后进行filter。&lt;/li&gt;
-&lt;li&gt;如果匹配上规则，表明阻止还是通过，此时数据包就不再向下匹配新规则。&lt;/li&gt;
-&lt;li&gt;如果规则中，没有表明阻止还是通过，即等同于没有匹配上规则，按照默认策略处理。&lt;/li&gt;
-&lt;li&gt;防火墙的默认规则是对应的链的所有规则执行完成后才会执行。
-&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/5da2e1eb-c9ee-47d7-8b26-5710b6c7fa13/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB46656DPA5ZU%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034932Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDp5ivxDoV514K%2BQu73NlSlOV4nTVqRNfqn2ADyG%2FaAugIhAIYph1AD1UrSRX6uU%2Bw6p4NtKElf9J7vPG1hwnfQbN7vKv8DCH0QABoMNjM3NDIzMTgzODA1Igwl%2BxLHBaIoY9Scmfoq3APA4cq5mJEyjtexS0ocLH9J6AUyy9i4Lp9ilAlKPnlX8WMA9%2FmkdUGRNYaOJ9TJkjyZl9teeIgMrfhvN%2ByVGLTGQDbwjRqhqPbs%2B0Rh%2BHc9%2F%2BQzkFLBsYhBlszPpaGud0Iezw5t2FvfLkS2jODkNXaytb%2BAZFYP6wdZxJBCfOqG7LRQ1%2FpidsiMO9OHIgmYsLZPNx0Twm3fFqOeosKKwUJNZrY%2FyM5bKnn4zdr40etC6HHp3zSu0iqc7TpobTbcGEaakcGJJr8rA1x2GWqNxQ5Oo91D20S3jS3B%2F4ylaRQtA543hcX0AmRjxka0J6GV5WVEjTEW3lBsh4YrUcAqTp%2BmOWEgXHf%2FFaY0YB37QmVhwfpSRVf1JDARhYHr4YmghiooB3uXYA3rVGotSuxtwjA6LF02XOD91421jJV7nJS4%2FqzlA3bnzz5MdtaPyHE65JxejpHXzO1a%2FaQRHl4kEJoUgUdD8L1Xhnwdy2aBw4Bw36n4BmOgIY3UJp5j4aOH0oPaNqrxVFHl6cs7A3HoLeJjH3MrNKryQYiPV86xi6Hh7Wo3jHv9ILcfeAxQSQx0OJa6Fjx3dTOMfdfMtRr5%2FZHMu4fiKzCUfIpE20WUL8Y6bklzU%2BcstScSiRbFbDDP6rzOBjqkAYSpr%2B8n2c8MRmUlN3%2BEDeuoYkdrEnIWSZYEjY8ruDHj7I%2FOksO2luAiCq77o2pVTrbcbrTBAyp%2FYg2%2F00cvkJN5DhTdKIKVIQJcQH7ahvW3c5Y6LEa%2F0bh6CYFGdXnrosF3AhAJ0un15TBsdC3csNSbiyDjtgeRMpNw8PxU1iqoOu4TIywjoAur5Wf4e4ZGd0ciYIaQqq6DbTFAVKpC9EqcN1L0&amp;X-Amz-Signature=a3b8c58b39b8b39bc33c6e8e5fbe4c53efb996b329a09fc1e293fa4b273891cc&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;details&gt;&lt;summary&gt;数据包基本结构&lt;/summary&gt;
-&lt;/details&gt;
-&lt;hr&gt;
-&lt;h2 id="四表五链"&gt;四表五链&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;链就是位置：共有5个，进路由（PREROUTING)、进系统（INPUT）、转发（FORWARD)、出系统（OUTPUT）、出路由（POSTROUTING)。&lt;/li&gt;
-&lt;li&gt;表就是存储的规则：数据包到了该链处，会去对应表中查询设置的规则，然后决定是否放行、丢弃、转发还是修改等操作。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="四表"&gt;四表&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;filter表：过滤数据包。&lt;/li&gt;
-&lt;li&gt;nat表：用于网络地址转化（IP、端口）。&lt;/li&gt;
-&lt;li&gt;mangle表：修改数据包的服务类型、TTL、并且可以配置路由实现QOS。&lt;/li&gt;
-&lt;li&gt;raw表：主要用来决定是否对数据包进行状态跟踪。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="五链"&gt;五链&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;INPUT链——进来的数据包应用此规则链中的策略&lt;/li&gt;
-&lt;li&gt;OUTPUT链——外出的数据包应用此规则链中的策略&lt;/li&gt;
-&lt;li&gt;FORWARD链——转发数据包时应用此规则链中的策略&lt;/li&gt;
-&lt;li&gt;PREROUTING链——对数据包作路由选择前应用此链中的规则（所有的数据包进来的时侯都先由这个链处理）&lt;/li&gt;
-&lt;li&gt;POSTROUTING链——对数据包作路由选择后应用此链中的规则（所有的数据包出来的时侯都先由这个链处理）&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="iptables常用选项与参数"&gt;iptables常用选项与参数&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables &lt;span class="o"&gt;[&lt;/span&gt;-t 表名&lt;span class="o"&gt;]&lt;/span&gt; 管理选项 &lt;span class="o"&gt;[&lt;/span&gt;链名&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;匹配条件&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;-j 控制类型&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;表名、链名：指定iptables命令所操作的表和链，未指定表名时将默认使用filter表；&lt;/li&gt;
-&lt;li&gt;管理选项：表示iptables规则的操作方式，比如：插入、增加、删除、查看等；&lt;/li&gt;
-&lt;li&gt;匹配条件：指定要处理的数据包的特征，不符合指定条件的数据包不处理；&lt;/li&gt;
-&lt;li&gt;控制类型：指数据包的处理方式，比如：允许accept、拒绝reject、丢弃drop、日志LOG等；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;details&gt;&lt;summary&gt;管理选项&lt;/summary&gt;
-&lt;/details&gt;
-&lt;details&gt;&lt;summary&gt;完整版本&lt;/summary&gt;
-&lt;/details&gt;
-&lt;hr&gt;
-&lt;h3 id="常用命令"&gt;常用命令&lt;/h3&gt;
-&lt;p&gt;更多详细的命令见：https://www.cnblogs.com/zhujingzhi/p/9706664.html&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="实际案例"&gt;实际案例&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 添加新的DNAT规则&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -A PREROUTING -p tcp --dport &lt;span class="m"&gt;18083&lt;/span&gt; -j DNAT --to-destination 192.168.0.89:8003
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 添加新的MASQUERADE规则，保证数据包能正确返回&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.89 --dport &lt;span class="m"&gt;8003&lt;/span&gt; -j MASQUERADE
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 删除规则&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -D PREROUTING &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -D POSTROUTING &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 查看&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -L -n -v
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Iptables on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/iptables/</link><description>Recent content in Iptables on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2026 06:36:52 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/iptables/index.xml" rel="self" type="application/rss+xml"/><item><title>Iptables Common commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/iptables-common-commands/</link><pubDate>Wed, 12 Mar 2025 05:46:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/iptables-common-commands/</guid><description>&lt;blockquote>
+&lt;p>💡 iptables 全称为：netfilter/iptables 是一个IP数据包过滤系统。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="iptables工作流程">iptables工作流程&lt;/h2>
+&lt;p>采用数据包过滤机制工作的，所以它会对请求的数据包的包头进行分析，并根据我们预先设定的规则进行匹配来决定是否可以进入主机。&lt;/p>
+&lt;ol>
+&lt;li>防火墙是一层一层过滤的。实际是按照配置规则的顺序从上到下，从前到后进行filter。&lt;/li>
+&lt;li>如果匹配上规则，表明阻止还是通过，此时数据包就不再向下匹配新规则。&lt;/li>
+&lt;li>如果规则中，没有表明阻止还是通过，即等同于没有匹配上规则，按照默认策略处理。&lt;/li>
+&lt;li>防火墙的默认规则是对应的链的所有规则执行完成后才会执行。
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/5da2e1eb-c9ee-47d7-8b26-5710b6c7fa13/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466XKNG3MZ3%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063620Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCij7PMuMsHGsjIc6u64ss5SOzNnvoNGN59EptHJyR0cQIhAIXEQwM4P07OTCMDrnKrErMR%2F5BfGb7GqEqSPF4X79VxKv8DCH8QABoMNjM3NDIzMTgzODA1IgyBDGuN%2FV5MfYsAj7oq3AM%2FEk4Sl1stX0%2BI%2FhnKrKNjI4LpHrzV%2BFM4n9iTNjbl2Obp0RgNnmIAU7UirGdERlNx0zcpfJSPGmGgATEwemgE%2B3%2FgIAcSa34g0ut3dDR0rnXEI3EoT7miuEdSB8x4jXYJOkx3lHMzuk73Ovy%2FWWqaOGOAU7hL0C%2BtYrDT7sf8pvyJf3xa1UDCUnznpADDXr%2BlRl998wKZmFWGPLb7dATm5a6IDmOht9YgoJ4pxef5yh3QKBKBaKLeg%2FXN3oIXw8mv%2BG5akaGGqH0TH3EVAFxIh%2BtKpiSr%2B7sd0MM4BMY0Dlt%2FDZTe0uTZPYXg4AZardOhtbakiJt7o9jEQ1WLa9YftQLjXfb0tT3HGpgC3zFNqZZLPMj%2By3HlLFEZ4QnXAPvvNLVEOyNF2Tcoomm4lLf9tcpRaRnP6JcrtiM9Rd0unthecVlVzAfvpTWntqSkU%2BUw3iW7woEmOkAbEXj4ktoSoRQm5Et2O4CYs7FVKxGZvxPkBGAAjYF3GyP%2B%2FXC3Jwm78ghNMzLbvsij36fa27xbJXd7R0GjEcDMDOGL3O0z45fzWesqlkp7fQykmFK61%2Bi7Oz406olVciaxDkqHoZGB7TQS3OAvKnV3KAnCiydMcadhPlNmwtNikx06VjDrq73OBjqkAf%2BfQT2BMwbUY4R0RxQyFyskImWmTk2mzatSo5MTo08q8Qf0U28wboj97VqqIpprk%2BFTuKC3sK2cYefszCHxZGfLjydo3EfDzkWnWJmQ1vXJHNDb%2F7VdGurJmhEqFRJVBwC%2Bh%2FKf0nFEzYCe3CXfJviRnruDzrsUSUPG8we04vZHcFfreF5%2FqD4%2F%2B8IQU9%2Bb8scYRaT%2Bja%2FmIy%2FC%2BUDFuO12G6C9&amp;X-Amz-Signature=5e105ae81a9ef4bed0adf90c76d9b48be22bd609dd1f955347e281204f410548&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/li>
+&lt;/ol>
+&lt;details>&lt;summary>数据包基本结构&lt;/summary>
+&lt;/details>
+&lt;hr>
+&lt;h2 id="四表五链">四表五链&lt;/h2>
+&lt;ul>
+&lt;li>链就是位置：共有5个，进路由（PREROUTING)、进系统（INPUT）、转发（FORWARD)、出系统（OUTPUT）、出路由（POSTROUTING)。&lt;/li>
+&lt;li>表就是存储的规则：数据包到了该链处，会去对应表中查询设置的规则，然后决定是否放行、丢弃、转发还是修改等操作。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="四表">四表&lt;/h2>
+&lt;ol>
+&lt;li>filter表：过滤数据包。&lt;/li>
+&lt;li>nat表：用于网络地址转化（IP、端口）。&lt;/li>
+&lt;li>mangle表：修改数据包的服务类型、TTL、并且可以配置路由实现QOS。&lt;/li>
+&lt;li>raw表：主要用来决定是否对数据包进行状态跟踪。&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="五链">五链&lt;/h2>
+&lt;ol>
+&lt;li>INPUT链——进来的数据包应用此规则链中的策略&lt;/li>
+&lt;li>OUTPUT链——外出的数据包应用此规则链中的策略&lt;/li>
+&lt;li>FORWARD链——转发数据包时应用此规则链中的策略&lt;/li>
+&lt;li>PREROUTING链——对数据包作路由选择前应用此链中的规则（所有的数据包进来的时侯都先由这个链处理）&lt;/li>
+&lt;li>POSTROUTING链——对数据包作路由选择后应用此链中的规则（所有的数据包出来的时侯都先由这个链处理）&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="iptables常用选项与参数">iptables常用选项与参数&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">iptables &lt;span class="o">[&lt;/span>-t 表名&lt;span class="o">]&lt;/span> 管理选项 &lt;span class="o">[&lt;/span>链名&lt;span class="o">]&lt;/span> &lt;span class="o">[&lt;/span>匹配条件&lt;span class="o">]&lt;/span> &lt;span class="o">[&lt;/span>-j 控制类型&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>表名、链名：指定iptables命令所操作的表和链，未指定表名时将默认使用filter表；&lt;/li>
+&lt;li>管理选项：表示iptables规则的操作方式，比如：插入、增加、删除、查看等；&lt;/li>
+&lt;li>匹配条件：指定要处理的数据包的特征，不符合指定条件的数据包不处理；&lt;/li>
+&lt;li>控制类型：指数据包的处理方式，比如：允许accept、拒绝reject、丢弃drop、日志LOG等；&lt;/li>
+&lt;/ul>
+&lt;details>&lt;summary>管理选项&lt;/summary>
+&lt;/details>
+&lt;details>&lt;summary>完整版本&lt;/summary>
+&lt;/details>
+&lt;hr>
+&lt;h3 id="常用命令">常用命令&lt;/h3>
+&lt;p>更多详细的命令见：https://www.cnblogs.com/zhujingzhi/p/9706664.html&lt;/p>
+&lt;hr>
+&lt;h2 id="实际案例">实际案例&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加新的DNAT规则&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A PREROUTING -p tcp --dport &lt;span class="m">18083&lt;/span> -j DNAT --to-destination 192.168.0.89:8003
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加新的MASQUERADE规则，保证数据包能正确返回&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.89 --dport &lt;span class="m">8003&lt;/span> -j MASQUERADE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除规则&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -D PREROUTING &lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -D POSTROUTING &lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -L -n -v
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p></description></item></channel></rss>

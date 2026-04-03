@@ -1,88 +1,85 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fine Tuning on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/fine-tuning/</link><description>Recent content in Fine Tuning on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Wed, 27 Nov 2024 13:46:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/fine-tuning/index.xml" rel="self" type="application/rss+xml"/><item><title>基于ModelZOO(NPU)微调ChatGLM3全流程</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Emodelzoonpu%E5%BE%AE%E8%B0%83chatglm3%E5%85%A8%E6%B5%81%E7%A8%8B/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Emodelzoonpu%E5%BE%AE%E8%B0%83chatglm3%E5%85%A8%E6%B5%81%E7%A8%8B/</guid><description>&lt;h2 id="环境准备"&gt;环境准备&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;新建Conda虚拟环境&lt;/li&gt;
-&lt;li&gt;下载ChatGLM3源代码&lt;/li&gt;
-&lt;li&gt;下载模型权重&lt;/li&gt;
-&lt;li&gt;安装基础环境&lt;/li&gt;
-&lt;li&gt;安装npu基础环境&lt;/li&gt;
-&lt;li&gt;运行以下代码, 验证环境是否安装成功&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="推理"&gt;推理&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;修改代码ChatGLM3-main/basic_demo/cli_demo.py&lt;/li&gt;
-&lt;li&gt;运行代码&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="训练"&gt;训练&lt;/h2&gt;
-&lt;h3 id="安装依赖deepspeed"&gt;安装依赖deepspeed&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;下载DeepSpeed&lt;/li&gt;
-&lt;li&gt;本地安装&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li&gt;注释微调依赖文件vim requirements.txt , 安装微调相关依赖pip install -r requirements.txt&lt;/li&gt;
-&lt;li&gt;运行微调脚本, 按需修改路径&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>基于Swift微调MiniCPM-v2.6</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Eswift%E5%BE%AE%E8%B0%83minicpm-v2.6/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Eswift%E5%BE%AE%E8%B0%83minicpm-v2.6/</guid><description>&lt;p&gt;记录本人使用自定义数据, 从处理文本/图片, 到构建Train.jsonl, 最终使用SwiftLora微调MiniCPM-v-2.6的全部过程.&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/8a18f17b-ce98-4b1e-a6f3-5808468ecb85/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QGNQXHPH%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034649Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIDxS%2Bub03FXg8WpmuHIh3v4rTHor4F8pVIJ7%2F9vM2MRNAiAGx9mxP1my%2BC78HU6MhxdXBK2lOcs6rIVpvqy65jfL9Sr%2FAwh8EAAaDDYzNzQyMzE4MzgwNSIMzSQtqCajwX9nKw%2B6KtwDkDEwz702cA4O66U0qCieWmXOcdV7pw49vU69MZ0bW6RStIaXmJXwpfSgX7bC6F1D4JCXMM2fjVHjnNZztodySoXCM%2FgLnEZZ9oBy7Wb4WrcMBX7jM4ngSwmizTpYQBc7YLHBbOqPy0OFBN9C8ZCN1azuFW2U05fnBWUtHBPYWoEKnATrlNxGfxwQkFo0CR7Yy4GSd4doYJYl5Zfmz16uAyCqAyLU8x3a%2Flsj0rfZh%2FX4Ycn4b3wLzubhJPjlQlsBgsvvWbe7mExhZ%2FS8O%2FA9hhVczFr51NYxwvUFgWdLZqlmTB5dseJxksnfyowqmcdsKz8veS%2FUFfSuXyTfI9w6B2VDrzM8kbRI%2BHGm%2FlIDiDm5mcKwXMQ5Wxhp7ZtQLPEs779uQdGJUBG4NtI%2FXHnmP4TVk86PLbwuuaC1VURBXMbxal9lyc6dVtilKvbFVkTxk%2FoUD1DrFfGQn%2BPhNaDDnK%2FfUDbZPjW7G9as36jRVh%2Bg7KiROP%2BGtq0%2F%2BOq7roW2RoW7DIAjElKyksRa8Xk%2Bq42e9ViQQ7KGCFvjRjXz2%2FHh%2F6oziTvm2bRF%2FmXBbpWRlBx3OaAA6zEDOS3fWS%2BPodUJVibdhSh9uFpN9mb667sY17iSw2MAkpKqdwUw9uS8zgY6pgFizW%2FdNKgQaGrn3hVYFg23BdrkLTSymiRs%2FQbKJrkati8%2FIZnQDMxD0jRofktk9VYCB1K6hM8fD0xZ9vRl1BdfocUGIG8%2Fa6n%2FAhdcHgWIVGBpORrfYAjHCskigdv5oUlzOGeEGaYnFCXCLSoBwboShqW5fIKRSeNNMIZAv3fcjnOLUMpdnXPGsUat5KlMEl1T5sux56WyGMDPahKMVntd5Kxy3wID&amp;X-Amz-Signature=c0cc64fa0999962f822ecd3c3e3526c662e7493c61362c403f3f3ce7a9d1a30d&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;h3 id="下载模型"&gt;下载模型&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;方法一(手动下载):&lt;/li&gt;
-&lt;li&gt;方法二(huggingface-cli):&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id="安装推理训练框架swift"&gt;安装推理/训练框架(Swift)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;源码安装&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id="数据处理"&gt;数据处理&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;使用自己的数据, 需要最终处理为jsonl格式, 考虑到数据保密, 在此不展示真实数据.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;数据集格式可以自定义为以下几种格式 :&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;处理为train.jsonl的最终截图：
-&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/5b893c3e-69a9-4859-8eee-92f1caac826b/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QGNQXHPH%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034649Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIDxS%2Bub03FXg8WpmuHIh3v4rTHor4F8pVIJ7%2F9vM2MRNAiAGx9mxP1my%2BC78HU6MhxdXBK2lOcs6rIVpvqy65jfL9Sr%2FAwh8EAAaDDYzNzQyMzE4MzgwNSIMzSQtqCajwX9nKw%2B6KtwDkDEwz702cA4O66U0qCieWmXOcdV7pw49vU69MZ0bW6RStIaXmJXwpfSgX7bC6F1D4JCXMM2fjVHjnNZztodySoXCM%2FgLnEZZ9oBy7Wb4WrcMBX7jM4ngSwmizTpYQBc7YLHBbOqPy0OFBN9C8ZCN1azuFW2U05fnBWUtHBPYWoEKnATrlNxGfxwQkFo0CR7Yy4GSd4doYJYl5Zfmz16uAyCqAyLU8x3a%2Flsj0rfZh%2FX4Ycn4b3wLzubhJPjlQlsBgsvvWbe7mExhZ%2FS8O%2FA9hhVczFr51NYxwvUFgWdLZqlmTB5dseJxksnfyowqmcdsKz8veS%2FUFfSuXyTfI9w6B2VDrzM8kbRI%2BHGm%2FlIDiDm5mcKwXMQ5Wxhp7ZtQLPEs779uQdGJUBG4NtI%2FXHnmP4TVk86PLbwuuaC1VURBXMbxal9lyc6dVtilKvbFVkTxk%2FoUD1DrFfGQn%2BPhNaDDnK%2FfUDbZPjW7G9as36jRVh%2Bg7KiROP%2BGtq0%2F%2BOq7roW2RoW7DIAjElKyksRa8Xk%2Bq42e9ViQQ7KGCFvjRjXz2%2FHh%2F6oziTvm2bRF%2FmXBbpWRlBx3OaAA6zEDOS3fWS%2BPodUJVibdhSh9uFpN9mb667sY17iSw2MAkpKqdwUw9uS8zgY6pgFizW%2FdNKgQaGrn3hVYFg23BdrkLTSymiRs%2FQbKJrkati8%2FIZnQDMxD0jRofktk9VYCB1K6hM8fD0xZ9vRl1BdfocUGIG8%2Fa6n%2FAhdcHgWIVGBpORrfYAjHCskigdv5oUlzOGeEGaYnFCXCLSoBwboShqW5fIKRSeNNMIZAv3fcjnOLUMpdnXPGsUat5KlMEl1T5sux56WyGMDPahKMVntd5Kxy3wID&amp;X-Amz-Signature=259b17497fa178e0cbfc83c773b05b44d4d4a70b5685fed1e404aa26b612e1e4&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;详细数据集格式见:&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id="训练"&gt;训练&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;将图片以及处理后的train.jsonl、val.jsonl放置指定的目录下.&lt;/li&gt;
-&lt;li&gt;源码安装Swift&lt;/li&gt;
-&lt;li&gt;训练脚本&lt;/li&gt;
-&lt;li&gt;训练日志
-&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/16224622-1cd1-4465-9847-e485546450c4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QGNQXHPH%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034649Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIDxS%2Bub03FXg8WpmuHIh3v4rTHor4F8pVIJ7%2F9vM2MRNAiAGx9mxP1my%2BC78HU6MhxdXBK2lOcs6rIVpvqy65jfL9Sr%2FAwh8EAAaDDYzNzQyMzE4MzgwNSIMzSQtqCajwX9nKw%2B6KtwDkDEwz702cA4O66U0qCieWmXOcdV7pw49vU69MZ0bW6RStIaXmJXwpfSgX7bC6F1D4JCXMM2fjVHjnNZztodySoXCM%2FgLnEZZ9oBy7Wb4WrcMBX7jM4ngSwmizTpYQBc7YLHBbOqPy0OFBN9C8ZCN1azuFW2U05fnBWUtHBPYWoEKnATrlNxGfxwQkFo0CR7Yy4GSd4doYJYl5Zfmz16uAyCqAyLU8x3a%2Flsj0rfZh%2FX4Ycn4b3wLzubhJPjlQlsBgsvvWbe7mExhZ%2FS8O%2FA9hhVczFr51NYxwvUFgWdLZqlmTB5dseJxksnfyowqmcdsKz8veS%2FUFfSuXyTfI9w6B2VDrzM8kbRI%2BHGm%2FlIDiDm5mcKwXMQ5Wxhp7ZtQLPEs779uQdGJUBG4NtI%2FXHnmP4TVk86PLbwuuaC1VURBXMbxal9lyc6dVtilKvbFVkTxk%2FoUD1DrFfGQn%2BPhNaDDnK%2FfUDbZPjW7G9as36jRVh%2Bg7KiROP%2BGtq0%2F%2BOq7roW2RoW7DIAjElKyksRa8Xk%2Bq42e9ViQQ7KGCFvjRjXz2%2FHh%2F6oziTvm2bRF%2FmXBbpWRlBx3OaAA6zEDOS3fWS%2BPodUJVibdhSh9uFpN9mb667sY17iSw2MAkpKqdwUw9uS8zgY6pgFizW%2FdNKgQaGrn3hVYFg23BdrkLTSymiRs%2FQbKJrkati8%2FIZnQDMxD0jRofktk9VYCB1K6hM8fD0xZ9vRl1BdfocUGIG8%2Fa6n%2FAhdcHgWIVGBpORrfYAjHCskigdv5oUlzOGeEGaYnFCXCLSoBwboShqW5fIKRSeNNMIZAv3fcjnOLUMpdnXPGsUat5KlMEl1T5sux56WyGMDPahKMVntd5Kxy3wID&amp;X-Amz-Signature=f91f33405c45620776d000692ad73b01798ed4650d7229196f1f54982d67afbb&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id="合并权重推理"&gt;合并权重+推理&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;运行推理命令&lt;/li&gt;
-&lt;li&gt;ckpt_dir 微调后的模型权重地址&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id="效果演示"&gt;效果演示&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;根据上一步合并, 已经得到了新的模型权重, 位置在/你的服务器地址/root/autodl-tmp/.autodl/output/minicpm-v-v2_6-chat/v0-xxx/checkpoint-xxx-merged&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;使用Swift的web-ui推理演示&lt;/li&gt;
-&lt;li&gt;使用Swift的cli推理演示&lt;/li&gt;
-&lt;li&gt;使用MiniCPM代码库的web-ui推理演示&lt;/li&gt;
-&lt;li&gt;使用Python代码推理演示&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;reference&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fine Tuning on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/fine-tuning/</link><description>Recent content in Fine Tuning on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Wed, 27 Nov 2024 13:46:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/fine-tuning/index.xml" rel="self" type="application/rss+xml"/><item><title>基于ModelZOO(NPU)微调ChatGLM3全流程</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Emodelzoonpu%E5%BE%AE%E8%B0%83chatglm3%E5%85%A8%E6%B5%81%E7%A8%8B/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Emodelzoonpu%E5%BE%AE%E8%B0%83chatglm3%E5%85%A8%E6%B5%81%E7%A8%8B/</guid><description>&lt;h2 id="环境准备">环境准备&lt;/h2>
+&lt;ol>
+&lt;li>新建Conda虚拟环境&lt;/li>
+&lt;li>下载ChatGLM3源代码&lt;/li>
+&lt;li>下载模型权重&lt;/li>
+&lt;li>安装基础环境&lt;/li>
+&lt;li>安装npu基础环境&lt;/li>
+&lt;li>运行以下代码, 验证环境是否安装成功&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="推理">推理&lt;/h2>
+&lt;ol>
+&lt;li>修改代码ChatGLM3-main/basic_demo/cli_demo.py&lt;/li>
+&lt;li>运行代码&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="训练">训练&lt;/h2>
+&lt;h3 id="安装依赖deepspeed">安装依赖deepspeed&lt;/h3>
+&lt;ol>
+&lt;li>下载DeepSpeed&lt;/li>
+&lt;li>本地安装&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;ol>
+&lt;li>注释微调依赖文件vim requirements.txt , 安装微调相关依赖pip install -r requirements.txt&lt;/li>
+&lt;li>运行微调脚本, 按需修改路径&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>基于Swift微调MiniCPM-v2.6</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Eswift%E5%BE%AE%E8%B0%83minicpm-v2.6/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Eswift%E5%BE%AE%E8%B0%83minicpm-v2.6/</guid><description>&lt;p>记录本人使用自定义数据, 从处理文本/图片, 到构建Train.jsonl, 最终使用SwiftLora微调MiniCPM-v-2.6的全部过程.&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/8a18f17b-ce98-4b1e-a6f3-5808468ecb85/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UXYN5PW2%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063432Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDEtEmeoCb9pwZnro8I5IiiFrh8%2FmJyVtc4wGq6Iv9dlQIhAJKFGc5TvvxYpEeJjVYUGIneY2foRguMC%2B0u5qKGf4%2BVKv8DCH8QABoMNjM3NDIzMTgzODA1IgzFe249nSKw0AOzr20q3AMb4FeP84oWPd3O91UvImQpDYCBgBuEjmm%2F%2FztBKMKEuxoaIIz0o831NkzaOF422uljdYvNem4NwC%2BzOWaBps6txh8cT6iS4AJWCNubcLHfZwO%2BAM3wxKxneHbGUQ4iSdJbJmZU6Ms%2F%2BVGN3BdbABdTDm9bp5IwuoIqs%2BdLua%2BxwYEIehApX8E1AbHTdhZZK17AEEHZEpnnSkF7FXXVK5EnxOVy1X5OtNMymNOf9i3BDpc1MS2HT0TuARJYdSBSiLUs553LDy8C5r3YyL3q2Wrvkh93gr9y2247WuaIskS5QUyS5zHeniBvZyYaHVryZKIgRqj%2Fe3mLnxjhsIL7N89MOtVN3zsRavq%2Fa%2BftvcEOiO3HBTCMVyh4os0UpzqOCj%2Fn1NazIOMu3GmjJQOoUp1lroScXxP%2BIfTqM%2FQPTGH%2BsiZSDmrT%2B9CQ%2B8bK%2BaCHuvmx6BGPY%2B48UzT%2B6FC6rgGrTHI%2FQwaJ1g4dYo94OHz6woY%2BUadXy9CnDf%2BLFQDWJQIV6f0NjduRhQdlwxhTCUFBB9TqUzjBzWiPf6qx0pln7aC0YbrA7tMZo5yCxNzSWTgsbQWQ2oZ%2B2BY5WYMZz%2FzpB2e3p6wP1c9tFk6mDAFMoy97fvH8W4KZkKP3CjCsrL3OBjqkAeYPSwBdXd59g8N%2B9n%2FEwSTrczNazhJyjfukhzeg6CYW4a4kUZOsTLuVgoyogJOt8fnCpovILcio03sFrdIPV5LEQc8INJ0f1HiekiNVI3iqMcWcs2mDCN0dscI%2BOMvQZBe4Z3zw2l5ynVmALJaJ5t0PN13J6lPmVEZ%2Fv65m5w85L4NcwjoGcQHQM%2FUwZkD0%2BkBuVwoQCC%2F3zk4RUihQfHgx%2B6kT&amp;X-Amz-Signature=8b5f9bb9a79acec77626dc3e14e4d237c5423c562973f29a36f8c3a32e8e18ee&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;h3 id="下载模型">下载模型&lt;/h3>
+&lt;ul>
+&lt;li>方法一(手动下载):&lt;/li>
+&lt;li>方法二(huggingface-cli):&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="安装推理训练框架swift">安装推理/训练框架(Swift)&lt;/h3>
+&lt;ul>
+&lt;li>源码安装&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="数据处理">数据处理&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>使用自己的数据, 需要最终处理为jsonl格式, 考虑到数据保密, 在此不展示真实数据.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>数据集格式可以自定义为以下几种格式 :&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>处理为train.jsonl的最终截图：
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/5b893c3e-69a9-4859-8eee-92f1caac826b/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UXYN5PW2%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063432Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDEtEmeoCb9pwZnro8I5IiiFrh8%2FmJyVtc4wGq6Iv9dlQIhAJKFGc5TvvxYpEeJjVYUGIneY2foRguMC%2B0u5qKGf4%2BVKv8DCH8QABoMNjM3NDIzMTgzODA1IgzFe249nSKw0AOzr20q3AMb4FeP84oWPd3O91UvImQpDYCBgBuEjmm%2F%2FztBKMKEuxoaIIz0o831NkzaOF422uljdYvNem4NwC%2BzOWaBps6txh8cT6iS4AJWCNubcLHfZwO%2BAM3wxKxneHbGUQ4iSdJbJmZU6Ms%2F%2BVGN3BdbABdTDm9bp5IwuoIqs%2BdLua%2BxwYEIehApX8E1AbHTdhZZK17AEEHZEpnnSkF7FXXVK5EnxOVy1X5OtNMymNOf9i3BDpc1MS2HT0TuARJYdSBSiLUs553LDy8C5r3YyL3q2Wrvkh93gr9y2247WuaIskS5QUyS5zHeniBvZyYaHVryZKIgRqj%2Fe3mLnxjhsIL7N89MOtVN3zsRavq%2Fa%2BftvcEOiO3HBTCMVyh4os0UpzqOCj%2Fn1NazIOMu3GmjJQOoUp1lroScXxP%2BIfTqM%2FQPTGH%2BsiZSDmrT%2B9CQ%2B8bK%2BaCHuvmx6BGPY%2B48UzT%2B6FC6rgGrTHI%2FQwaJ1g4dYo94OHz6woY%2BUadXy9CnDf%2BLFQDWJQIV6f0NjduRhQdlwxhTCUFBB9TqUzjBzWiPf6qx0pln7aC0YbrA7tMZo5yCxNzSWTgsbQWQ2oZ%2B2BY5WYMZz%2FzpB2e3p6wP1c9tFk6mDAFMoy97fvH8W4KZkKP3CjCsrL3OBjqkAeYPSwBdXd59g8N%2B9n%2FEwSTrczNazhJyjfukhzeg6CYW4a4kUZOsTLuVgoyogJOt8fnCpovILcio03sFrdIPV5LEQc8INJ0f1HiekiNVI3iqMcWcs2mDCN0dscI%2BOMvQZBe4Z3zw2l5ynVmALJaJ5t0PN13J6lPmVEZ%2Fv65m5w85L4NcwjoGcQHQM%2FUwZkD0%2BkBuVwoQCC%2F3zk4RUihQfHgx%2B6kT&amp;X-Amz-Signature=4ea5a39061f850d27c95eafb7d1425626b59fb7073eb1103c0c92039c056e5cc&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>详细数据集格式见:&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="训练">训练&lt;/h3>
+&lt;ul>
+&lt;li>将图片以及处理后的train.jsonl、val.jsonl放置指定的目录下.&lt;/li>
+&lt;li>源码安装Swift&lt;/li>
+&lt;li>训练脚本&lt;/li>
+&lt;li>训练日志
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/16224622-1cd1-4465-9847-e485546450c4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UXYN5PW2%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063432Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDEtEmeoCb9pwZnro8I5IiiFrh8%2FmJyVtc4wGq6Iv9dlQIhAJKFGc5TvvxYpEeJjVYUGIneY2foRguMC%2B0u5qKGf4%2BVKv8DCH8QABoMNjM3NDIzMTgzODA1IgzFe249nSKw0AOzr20q3AMb4FeP84oWPd3O91UvImQpDYCBgBuEjmm%2F%2FztBKMKEuxoaIIz0o831NkzaOF422uljdYvNem4NwC%2BzOWaBps6txh8cT6iS4AJWCNubcLHfZwO%2BAM3wxKxneHbGUQ4iSdJbJmZU6Ms%2F%2BVGN3BdbABdTDm9bp5IwuoIqs%2BdLua%2BxwYEIehApX8E1AbHTdhZZK17AEEHZEpnnSkF7FXXVK5EnxOVy1X5OtNMymNOf9i3BDpc1MS2HT0TuARJYdSBSiLUs553LDy8C5r3YyL3q2Wrvkh93gr9y2247WuaIskS5QUyS5zHeniBvZyYaHVryZKIgRqj%2Fe3mLnxjhsIL7N89MOtVN3zsRavq%2Fa%2BftvcEOiO3HBTCMVyh4os0UpzqOCj%2Fn1NazIOMu3GmjJQOoUp1lroScXxP%2BIfTqM%2FQPTGH%2BsiZSDmrT%2B9CQ%2B8bK%2BaCHuvmx6BGPY%2B48UzT%2B6FC6rgGrTHI%2FQwaJ1g4dYo94OHz6woY%2BUadXy9CnDf%2BLFQDWJQIV6f0NjduRhQdlwxhTCUFBB9TqUzjBzWiPf6qx0pln7aC0YbrA7tMZo5yCxNzSWTgsbQWQ2oZ%2B2BY5WYMZz%2FzpB2e3p6wP1c9tFk6mDAFMoy97fvH8W4KZkKP3CjCsrL3OBjqkAeYPSwBdXd59g8N%2B9n%2FEwSTrczNazhJyjfukhzeg6CYW4a4kUZOsTLuVgoyogJOt8fnCpovILcio03sFrdIPV5LEQc8INJ0f1HiekiNVI3iqMcWcs2mDCN0dscI%2BOMvQZBe4Z3zw2l5ynVmALJaJ5t0PN13J6lPmVEZ%2Fv65m5w85L4NcwjoGcQHQM%2FUwZkD0%2BkBuVwoQCC%2F3zk4RUihQfHgx%2B6kT&amp;X-Amz-Signature=b16bd38088a2da6161c4a26ca88ff37893662b6171ff42d93071502ecb72b4d5&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="合并权重推理">合并权重+推理&lt;/h3>
+&lt;ul>
+&lt;li>运行推理命令&lt;/li>
+&lt;li>ckpt_dir 微调后的模型权重地址&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="效果演示">效果演示&lt;/h3>
+&lt;blockquote>
+&lt;p>根据上一步合并, 已经得到了新的模型权重, 位置在/你的服务器地址/root/autodl-tmp/.autodl/output/minicpm-v-v2_6-chat/v0-xxx/checkpoint-xxx-merged&lt;/p>&lt;/blockquote>
+&lt;ul>
+&lt;li>使用Swift的web-ui推理演示&lt;/li>
+&lt;li>使用Swift的cli推理演示&lt;/li>
+&lt;li>使用MiniCPM代码库的web-ui推理演示&lt;/li>
+&lt;li>使用Python代码推理演示&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>reference&lt;/p>&lt;/blockquote></description></item></channel></rss>

@@ -1,975 +1,953 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>其他 on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/categories/%E5%85%B6%E4%BB%96/</link><description>Recent content in 其他 on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2026 14:04:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/categories/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml"/><item><title>Claude Code /buddy 宠物系统：如何刷到想要的宠物并改名</title><link>https://Pan-Binghong.github.io/daily-learning/other/claude-code-buddy-%E5%AE%A0%E7%89%A9%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E5%88%B7%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E5%AE%A0%E7%89%A9%E5%B9%B6%E6%94%B9%E5%90%8D/</link><pubDate>Wed, 01 Apr 2026 14:01:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/claude-code-buddy-%E5%AE%A0%E7%89%A9%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E5%88%B7%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E5%AE%A0%E7%89%A9%E5%B9%B6%E6%94%B9%E5%90%8D/</guid><description>&lt;h1 id="claude-code-buddy-宠物系统如何刷到想要的宠物并改名"&gt;Claude Code /buddy 宠物系统：如何刷到想要的宠物并改名&lt;/h1&gt;
-&lt;h2 id="背景"&gt;背景&lt;/h2&gt;
-&lt;p&gt;Claude Code 2.x 新增了 /buddy 功能，启动后可领养一只专属像素宠物。宠物的物种、稀有度、眼睛、帽子、属性完全由账号 userID 经哈希算法决定，官方没有提供重置入口——也就是说，你天生注定只能领养一种宠物。但社区已经破解了这套算法，通过 bruteforce 暴力枚举 userID，可以找到任意你想要的宠物对应的 uid，然后替换配置文件即可。本文介绍完整操作流程。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://images.unsplash.com/photo-1762242298589-582f5f6c3fb1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTEyNTV8MHwxfHNlYXJjaHwxfHx0ZXJtaW5hbCUyMGNvbW1hbmQlMjBsaW5lJTIwZGV2ZWxvcGVyfGVufDB8MHx8fDE3NzUwNTE4OTV8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080"&gt;&lt;/p&gt;
-&lt;h2 id="核心原理"&gt;核心原理&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;💡 算法链路：userID + SALT(&amp;ldquo;friend-2026-401&amp;rdquo;) → Bun.hash() → Mulberry32 PRNG → rarity / species / eye / hat / shiny(1%) / stats&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;宠物系统支持 18 种物种：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;duck（鸭子）&lt;/li&gt;
-&lt;li&gt;goose（鹅）&lt;/li&gt;
-&lt;li&gt;blob（史莱姆）&lt;/li&gt;
-&lt;li&gt;cat（猫）&lt;/li&gt;
-&lt;li&gt;dragon（龙）&lt;/li&gt;
-&lt;li&gt;octopus（章鱼）&lt;/li&gt;
-&lt;li&gt;owl（猫头鹰）&lt;/li&gt;
-&lt;li&gt;penguin（企鹅）&lt;/li&gt;
-&lt;li&gt;turtle（乌龟）&lt;/li&gt;
-&lt;li&gt;snail（蜗牛）&lt;/li&gt;
-&lt;li&gt;ghost（幽灵）&lt;/li&gt;
-&lt;li&gt;axolotl（六角恐龙）&lt;/li&gt;
-&lt;li&gt;capybara（水豚）&lt;/li&gt;
-&lt;li&gt;cactus（仙人掌）&lt;/li&gt;
-&lt;li&gt;robot（机器人）&lt;/li&gt;
-&lt;li&gt;rabbit（兔子）&lt;/li&gt;
-&lt;li&gt;mushroom（蘑菇）&lt;/li&gt;
-&lt;li&gt;chonk（肥猫）
-稀有度权重分布：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;💡 native 安装（brew install bun / curl 安装）用 Bun.hash()，npm install -g bun 安装用 FNV-1a，两者结果完全不同！确认安装方式再跑脚本，否则刷出来的 uid 对应宠物会不一致。&lt;/p&gt;</description></item><item><title>LibreOffice-Docker部署问题记录</title><link>https://Pan-Binghong.github.io/daily-learning/other/libreoffice-docker%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Fri, 27 Mar 2026 06:56:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/libreoffice-docker%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>&lt;h1 id="libreoffice-docker-部署问题记录"&gt;LibreOffice Docker 部署问题记录&lt;/h1&gt;
-&lt;h2 id="背景"&gt;背景&lt;/h2&gt;
-&lt;p&gt;项目使用 LibreOffice 将 xlsx 文件转换为 PDF。
-Windows 本地测试正常，部署到 Linux Docker 容器后出现一系列问题。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="问题一pdf-文件大小不一致"&gt;问题一：PDF 文件大小不一致&lt;/h2&gt;
-&lt;h3 id="现象"&gt;现象&lt;/h3&gt;
-&lt;p&gt;同一份数据，Windows 本地生成的 PDF 比服务器生成的小约 25–35%。&lt;/p&gt;
-&lt;h3 id="原因"&gt;原因&lt;/h3&gt;
-&lt;p&gt;两端 LibreOffice 版本不同：&lt;/p&gt;
-&lt;p&gt;不同版本的 PDF 导出引擎在压缩算法和字体嵌入上有差异，导致文件大小不同。&lt;/p&gt;
-&lt;h3 id="解决方法"&gt;解决方法&lt;/h3&gt;
-&lt;p&gt;在 Dockerfile 中从 TDF 官网下载指定版本，而不是用 apt-get install libreoffice（apt 源版本无法控制）：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;RUN&lt;/span&gt; wget -q &lt;span class="s2"&gt;&amp;#34;https://download.documentfoundation.org/libreoffice/stable/26.2.2/deb/x86_64/LibreOffice_26.2.2_Linux_x86-64_deb.tar.gz&amp;#34;&lt;/span&gt; -O /tmp/lo.tar.gz &lt;span class="se"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; tar -xzf /tmp/lo.tar.gz -C /tmp/ &lt;span class="se"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get update &lt;span class="se"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; dpkg -i /tmp/LibreOffice_26*/DEBS/*.deb &lt;span class="o"&gt;||&lt;/span&gt; apt-get install -f -y --no-install-recommends &lt;span class="se"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; ln -sf /opt/libreoffice26.2/program/soffice /usr/bin/soffice &lt;span class="se"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -rf /tmp/lo.tar.gz /tmp/LibreOffice_26* &lt;span class="se"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get clean &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -rf /var/lib/apt/lists/*&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;TDF 版本下载地址规律：https://download.documentfoundation.org/libreoffice/stable/{版本号}/deb/x86_64/&lt;/p&gt;</description></item><item><title>企业微信智能表格-使用培训</title><link>https://Pan-Binghong.github.io/daily-learning/other/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%99%BA%E8%83%BD%E8%A1%A8%E6%A0%BC-%E4%BD%BF%E7%94%A8%E5%9F%B9%E8%AE%AD/</link><pubDate>Wed, 21 Jan 2026 09:32:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%99%BA%E8%83%BD%E8%A1%A8%E6%A0%BC-%E4%BD%BF%E7%94%A8%E5%9F%B9%E8%AE%AD/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 智能表格（Smart Spreadsheet）是一种融合了人工智能、数据分析和自动化功能的新型电子表格工具。它在传统电子表格基础上，增加了智能数据处理、自动化工作流、协同编辑等高级功能。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id="1-企业微信智能表格入口界面总览"&gt;1. 企业微信智能表格入口&amp;amp;界面总览&lt;/h1&gt;
-&lt;h2 id="11-入口"&gt;1.1 入口&lt;/h2&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/416b4a95-7373-4ed6-b3fe-7705073122a0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZBH6LIEZ%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T035003Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDXHxuIWNBNLXrJ7wDHU7lssbuDyeiS7yKGkaX6NZQQRgIgV6YWJeX1SfdcH81owV7wBBAr0lPH017SPrU9A273gCAq%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDJjQG7TLHGUojBb3SyrcA5askbgGq5rvU5zfuJ9RP7VhcUZiaLmlSlrlXZId3UAjaWksB8aRQNMLfewRCvHZhB14o1vtECArFJHG7rVmOFba4QrBIhcD7os2mKoFoyEU9fUNxod2OHIORJ3UBGxvlFQ5CeUdH6Pygyt%2B2KeKWno%2FYg1yKP3CdFP7%2B6gsPgTuHye8Kqd5mF0hDC5ZkdPsog%2Fi0HUJl95NxJkuswUMNP3luv92CEIpvRuQ%2BzPotNzcbZU0485jOJMpZanoT5O3dmKAUQkqQMdv4IYD1um1HIFdg75zNU%2FiaXJ98ABrn7FPDEiMdk%2B3xYGJ9ZMqOfyyvKRX7B%2BMY8eYO7d%2BEDu33agUQzkL%2FZwMpmHD2T8TTVSyMI3wfCC5eOVydf44zJORZ%2BKXxP%2BIjJ1%2Bsjap%2FdX7PJLzrXmFGN%2FLq7EcJu%2Ftzdktl9GfDuC7pqeB7C5p2X1wej%2FG%2BvzxiclUfpNCjall89ep1tOeLjEcC0pTik0vChfTkCftGgVF4S25M5fcC7SZdx8KxdOcXQJCQSz4MNTCSSYNilU6DZehcecyK%2BINLsgdm8EKa9yDARpeVYhoe96nXwszLg7huEmbTXimuH8Bk4zCB8Hm4k3yaOsNWI7Lbv5Y1gt0ipTMRrOyFHKjMOrkvM4GOqUBi%2BwcYYmw6M%2F3WgD%2Buq%2BQNycRiQz944kMWxrghNxKWW0FlbfAxMnp3jl26RqWD4TCTYfSn53EaJQbQNnYhqRPkGgJ%2BMyQxX7n6BuY6Mii4NITcbpdBxFFxt2L%2FQ1L32bv8FxNGX97Nmr7sPr71%2BZKsF5VkH0bE5xA0IjRCBEKUcZbII2RmwtdXHiClk8wEncx0XUm7%2B1X4dxIxe0SORZ8Gc1fiMT6&amp;X-Amz-Signature=2f818e530683f5dbfb7d85ea924fa7525dbe8b2ac985be440323f8c4e7968d1d&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;h2 id="12-界面总览"&gt;1.2 界面总览&lt;/h2&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/c1cc94cf-a1ef-4423-b5ba-25a1b07029dd/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZBH6LIEZ%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T035003Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDXHxuIWNBNLXrJ7wDHU7lssbuDyeiS7yKGkaX6NZQQRgIgV6YWJeX1SfdcH81owV7wBBAr0lPH017SPrU9A273gCAq%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDJjQG7TLHGUojBb3SyrcA5askbgGq5rvU5zfuJ9RP7VhcUZiaLmlSlrlXZId3UAjaWksB8aRQNMLfewRCvHZhB14o1vtECArFJHG7rVmOFba4QrBIhcD7os2mKoFoyEU9fUNxod2OHIORJ3UBGxvlFQ5CeUdH6Pygyt%2B2KeKWno%2FYg1yKP3CdFP7%2B6gsPgTuHye8Kqd5mF0hDC5ZkdPsog%2Fi0HUJl95NxJkuswUMNP3luv92CEIpvRuQ%2BzPotNzcbZU0485jOJMpZanoT5O3dmKAUQkqQMdv4IYD1um1HIFdg75zNU%2FiaXJ98ABrn7FPDEiMdk%2B3xYGJ9ZMqOfyyvKRX7B%2BMY8eYO7d%2BEDu33agUQzkL%2FZwMpmHD2T8TTVSyMI3wfCC5eOVydf44zJORZ%2BKXxP%2BIjJ1%2Bsjap%2FdX7PJLzrXmFGN%2FLq7EcJu%2Ftzdktl9GfDuC7pqeB7C5p2X1wej%2FG%2BvzxiclUfpNCjall89ep1tOeLjEcC0pTik0vChfTkCftGgVF4S25M5fcC7SZdx8KxdOcXQJCQSz4MNTCSSYNilU6DZehcecyK%2BINLsgdm8EKa9yDARpeVYhoe96nXwszLg7huEmbTXimuH8Bk4zCB8Hm4k3yaOsNWI7Lbv5Y1gt0ipTMRrOyFHKjMOrkvM4GOqUBi%2BwcYYmw6M%2F3WgD%2Buq%2BQNycRiQz944kMWxrghNxKWW0FlbfAxMnp3jl26RqWD4TCTYfSn53EaJQbQNnYhqRPkGgJ%2BMyQxX7n6BuY6Mii4NITcbpdBxFFxt2L%2FQ1L32bv8FxNGX97Nmr7sPr71%2BZKsF5VkH0bE5xA0IjRCBEKUcZbII2RmwtdXHiClk8wEncx0XUm7%2B1X4dxIxe0SORZ8Gc1fiMT6&amp;X-Amz-Signature=af9dfbbbf66cf688fe968d5674a7f48d70f66d804eb5c91bc2603bc70bd196fd&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id="2-我们可以用来做什么"&gt;2. 我们可以用来做什么？&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;💡 本次培训，我们从部门和个人两个维度，分别演示多个案例。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;项目管理、工单跟踪管理、部门周会日报…&lt;/li&gt;
-&lt;li&gt;待办清单&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="21-部门常用"&gt;2.1 部门常用&lt;/h2&gt;
-&lt;h3 id="211-项目管理"&gt;2.1.1 项目管理&lt;/h3&gt;
-&lt;hr&gt;
-&lt;h2 id="21-个人"&gt;2.1 个人&lt;/h2&gt;
-&lt;h3 id="211-todo-list"&gt;2.1.1 Todo list&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;💡 创建个人向待办清单。可每天创建或每周创建。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/c76f1e08-6e73-4284-a00a-074ed834c54b/PixPin_2026-01-22_12-38-01.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZBH6LIEZ%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T035003Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDXHxuIWNBNLXrJ7wDHU7lssbuDyeiS7yKGkaX6NZQQRgIgV6YWJeX1SfdcH81owV7wBBAr0lPH017SPrU9A273gCAq%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDJjQG7TLHGUojBb3SyrcA5askbgGq5rvU5zfuJ9RP7VhcUZiaLmlSlrlXZId3UAjaWksB8aRQNMLfewRCvHZhB14o1vtECArFJHG7rVmOFba4QrBIhcD7os2mKoFoyEU9fUNxod2OHIORJ3UBGxvlFQ5CeUdH6Pygyt%2B2KeKWno%2FYg1yKP3CdFP7%2B6gsPgTuHye8Kqd5mF0hDC5ZkdPsog%2Fi0HUJl95NxJkuswUMNP3luv92CEIpvRuQ%2BzPotNzcbZU0485jOJMpZanoT5O3dmKAUQkqQMdv4IYD1um1HIFdg75zNU%2FiaXJ98ABrn7FPDEiMdk%2B3xYGJ9ZMqOfyyvKRX7B%2BMY8eYO7d%2BEDu33agUQzkL%2FZwMpmHD2T8TTVSyMI3wfCC5eOVydf44zJORZ%2BKXxP%2BIjJ1%2Bsjap%2FdX7PJLzrXmFGN%2FLq7EcJu%2Ftzdktl9GfDuC7pqeB7C5p2X1wej%2FG%2BvzxiclUfpNCjall89ep1tOeLjEcC0pTik0vChfTkCftGgVF4S25M5fcC7SZdx8KxdOcXQJCQSz4MNTCSSYNilU6DZehcecyK%2BINLsgdm8EKa9yDARpeVYhoe96nXwszLg7huEmbTXimuH8Bk4zCB8Hm4k3yaOsNWI7Lbv5Y1gt0ipTMRrOyFHKjMOrkvM4GOqUBi%2BwcYYmw6M%2F3WgD%2Buq%2BQNycRiQz944kMWxrghNxKWW0FlbfAxMnp3jl26RqWD4TCTYfSn53EaJQbQNnYhqRPkGgJ%2BMyQxX7n6BuY6Mii4NITcbpdBxFFxt2L%2FQ1L32bv8FxNGX97Nmr7sPr71%2BZKsF5VkH0bE5xA0IjRCBEKUcZbII2RmwtdXHiClk8wEncx0XUm7%2B1X4dxIxe0SORZ8Gc1fiMT6&amp;X-Amz-Signature=976c8d29a57ea10e04daa1747d971589500613a4e235987fdcb39f9508251311&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;details&gt;&lt;summary&gt;视频教程&lt;/summary&gt;
-&lt;/details&gt;</description></item><item><title>Windows创建bat脚本踩坑</title><link>https://Pan-Binghong.github.io/daily-learning/other/windows%E5%88%9B%E5%BB%BAbat%E8%84%9A%E6%9C%AC%E8%B8%A9%E5%9D%91/</link><pubDate>Fri, 07 Nov 2025 05:54:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/windows%E5%88%9B%E5%BB%BAbat%E8%84%9A%E6%9C%AC%E8%B8%A9%E5%9D%91/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="解决方法"&gt;解决方法&lt;/h2&gt;
-&lt;h3 id="在windows记事本中重新创建"&gt;在Windows记事本中重新创建&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;打开记事本（Notepad）&lt;/li&gt;
-&lt;li&gt;复制脚本&lt;/li&gt;
-&lt;li&gt;另存为，修改编码格式和文件后缀&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;当使用编辑器打开保存后的bat文件，显示乱码是正常的。&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Windows设置定时任务</title><link>https://Pan-Binghong.github.io/daily-learning/other/windows%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</link><pubDate>Wed, 05 Nov 2025 04:40:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/windows%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</guid><description>&lt;ol&gt;
-&lt;li&gt;打开cmd, 输入taskschd.msc ，弹出任务计划程序页面&lt;/li&gt;
-&lt;li&gt;创建基本任务&lt;/li&gt;
-&lt;li&gt;依次输入基本任务的参数配置&lt;/li&gt;
-&lt;li&gt;设置任务级别&lt;/li&gt;
-&lt;li&gt;运行测试&lt;/li&gt;
-&lt;li&gt;刷新后查看运行结果是否正常&lt;/li&gt;
-&lt;/ol&gt;</description></item><item><title>Linux 挂载 Windows 共享文件夹（SMB/CIFS）完整指南</title><link>https://Pan-Binghong.github.io/daily-learning/other/linux-%E6%8C%82%E8%BD%BD-windows-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9smbcifs%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</link><pubDate>Fri, 31 Oct 2025 10:22:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/linux-%E6%8C%82%E8%BD%BD-windows-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9smbcifs%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</guid><description>&lt;p&gt;在 Linux 中挂载 Windows 的共享文件夹，使用的是 SMB/CIFS 协议。下面是详细的操作步骤：&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="一前提条件"&gt;一、前提条件&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Windows 端已开启文件夹共享（右键文件夹 → 属性 → 共享）&lt;/li&gt;
-&lt;li&gt;Linux 端需要有 root 或 sudo 权限&lt;/li&gt;
-&lt;li&gt;两台机器之间网络互通（可以互相 ping 通）&lt;/li&gt;
-&lt;li&gt;知道 Windows 共享的用户名和密码 [1]&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="二linux-端安装-cifs-utils"&gt;二、Linux 端安装 cifs-utils&lt;/h2&gt;
-&lt;p&gt;cifs-utils 是 Linux 挂载 SMB/CIFS 共享所需的工具包 [5]。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;span class="lnt"&gt;8
-&lt;/span&gt;&lt;span class="lnt"&gt;9
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Debian / Ubuntu 系列&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install cifs-utils
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# RHEL / CentOS / Rocky Linux 系列&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo dnf install cifs-utils
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 旧版 CentOS&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo yum install cifs-utils
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h2 id="三临时挂载重启后失效"&gt;三、临时挂载（重启后失效）&lt;/h2&gt;
-&lt;h3 id="1-创建挂载点目录"&gt;1. 创建挂载点目录&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mkdir -p /mnt/winshare
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="2-执行挂载命令"&gt;2. 执行挂载命令&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mount -t cifs -o &lt;span class="nv"&gt;username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Windows用户名,password&lt;span class="o"&gt;=&lt;/span&gt;Windows密码 //Windows_IP/共享文件夹名 /mnt/winshare
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;实际示例（假设 Windows IP 为 192.168.1.100，共享文件夹名为 share，用户名 admin，密码 123456）：&lt;/p&gt;</description></item><item><title>将Windows的文件夹设置为共享文件夹（设置SMB共享）</title><link>https://Pan-Binghong.github.io/daily-learning/other/%E5%B0%86windows%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E8%AE%BE%E7%BD%AE%E4%B8%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9%E8%AE%BE%E7%BD%AEsmb%E5%85%B1%E4%BA%AB/</link><pubDate>Fri, 31 Oct 2025 10:22:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/%E5%B0%86windows%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E8%AE%BE%E7%BD%AE%E4%B8%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9%E8%AE%BE%E7%BD%AEsmb%E5%85%B1%E4%BA%AB/</guid><description>&lt;h3 id="步骤一"&gt;步骤一&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;打开「控制面板」→「网络和共享中心」→「更改高级共享设置」&lt;/li&gt;
-&lt;li&gt;启用：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;网络发现&lt;/li&gt;
-&lt;li&gt;文件和打印机共享&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="步骤二"&gt;步骤二&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;选择需要共享的目录&lt;/li&gt;
-&lt;li&gt;右键 → 属性 → 共享 → 高级共享 → 勾选“共享此文件夹” → 设置共享名&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="步骤三"&gt;步骤三&lt;/h3&gt;
-&lt;p&gt;在ubuntu服务器中运行:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install -y cifs-utils&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="0-打开tmux-切换双终端进行操作"&gt;0. 打开tmux, 切换双终端进行操作&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建tmux会话&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tmux
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建分屏显示&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;$ctrl&lt;/span&gt; + b 再按 %
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;$ctrl&lt;/span&gt; + b 再按 ⬅️ or 👉
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="1-运行监控脚本"&gt;1. 运行监控脚本&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ai&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pan&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;myscript&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;myenv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python3&lt;/span&gt;&lt;span class="mf"&gt;.12&lt;/span&gt; &lt;span class="n"&gt;monitor_mirror_v2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;pan&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;haohong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pan&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;-s表示本地目录&lt;/li&gt;
-&lt;li&gt;-b表示bucket桶的位置&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="2-运行上传命令"&gt;2. 运行上传命令&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mc mirror /home/ai-dev/pan myminio/haohong/pan --overwrite --retry --ship--errors
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
-&lt;/span&gt;&lt;span class="lnt"&gt;14
-&lt;/span&gt;&lt;span class="lnt"&gt;15
-&lt;/span&gt;&lt;span class="lnt"&gt;16
-&lt;/span&gt;&lt;span class="lnt"&gt;17
-&lt;/span&gt;&lt;span class="lnt"&gt;18
-&lt;/span&gt;&lt;span class="lnt"&gt;19
-&lt;/span&gt;&lt;span class="lnt"&gt;20
-&lt;/span&gt;&lt;span class="lnt"&gt;21
-&lt;/span&gt;&lt;span class="lnt"&gt;22
-&lt;/span&gt;&lt;span class="lnt"&gt;23
-&lt;/span&gt;&lt;span class="lnt"&gt;24
-&lt;/span&gt;&lt;span class="lnt"&gt;25
-&lt;/span&gt;&lt;span class="lnt"&gt;26
-&lt;/span&gt;&lt;span class="lnt"&gt;27
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gh"&gt;# 批量上传文件到MiniO
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;## 一、将Windows的文件夹设置为共享文件夹（设置SMB共享）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;### 步骤一
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;1.&lt;/span&gt; 打开「控制面板」→「网络和共享中心」→「更改高级共享设置」
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;2.&lt;/span&gt; 启用：
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;-&lt;/span&gt; 网络发现
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;-&lt;/span&gt; 文件和打印机共享
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;### 步骤二
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;1.&lt;/span&gt; 选择需要共享的目录
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;2.&lt;/span&gt; 右键 → 属性 → 共享 → 高级共享 → 勾选“共享此文件夹” → 设置共享名
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;### 步骤三
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;在ubuntu服务器中运行:
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;```bash
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install -y cifs-utils
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gh"&gt;# 创建挂载点
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mkdir -p /mnt/TestWindowsShare
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gh"&gt;# 临时手动挂载测试（替换 IP 和路径）
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mount -t cifs \
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;#34;//10.36.67.49/qc_data&amp;#34; \
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; /mnt/TestWindowsShare \
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -o username=Administrator,password=123,dom=WORKGROUP,vers=2.0,iocharset=utf8
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;检查是否挂载成功: &lt;code&gt;ls -la /mnt/TestWindowsShare&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Ubuntu挂载Windows的共享文件夹</title><link>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</link><pubDate>Fri, 31 Oct 2025 08:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</guid><description>&lt;ol&gt;
-&lt;li&gt;创建凭据文件，将windows的账号、密码写入配置文件.smbcredentials 中&lt;/li&gt;
-&lt;li&gt;挂载&lt;/li&gt;
-&lt;/ol&gt;</description></item><item><title>Git在Windows中出现Line Endings警告提示</title><link>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</link><pubDate>Wed, 29 Oct 2025 03:19:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</guid><description>&lt;p&gt;这个警告的原因是 Git 在 Windows 系统上会自动将 LF（Linux/Mac 风格的换行符）转换为 CRLF（Windows 风格的换行符）。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;span class="lnt"&gt;8
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;禁用自动转换&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--global core.autocrlf false
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;删除已暂存的文件&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;rm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--cached .
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;重新添加所有文件&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>DBeaver连接Mysql8失败</title><link>https://Pan-Binghong.github.io/daily-learning/other/dbeaver%E8%BF%9E%E6%8E%A5mysql8%E5%A4%B1%E8%B4%A5/</link><pubDate>Thu, 09 Oct 2025 02:35:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/dbeaver%E8%BF%9E%E6%8E%A5mysql8%E5%A4%B1%E8%B4%A5/</guid><description>&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/bd9f66ea-b1d1-4a9a-9127-798dff44eb43/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_17599772003331.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466R5GP3EF4%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034956Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQD1aUXiOBfFgxnEnX1Z%2Fi6UEiDIcuB8L6EZIRlYWx9ffAIgRRWEQUBYuX78K9RfsLMymt0RisfVAfdMbYQBe9RLprsq%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDA06cxbWBkh5N8FRGSrcAxnUbiqIKJoWAywfmGppgpEcY58MxPtayrauHfg2BmTxA6Wvb1kyPJHmZ4hKMP9hTnnABug88JxESgfqB9%2BLHKO8Neq4WaTFzfqe2DcGzMdZF8uIqUhHtVrrFM2BztpliUc75WwY7VbtY6FpdmyOMAMG%2BYynrEJRqS%2FfMTLITJXvrmnbucqtdj4%2B8obgNaaFaTae2d3rfUEa%2BOY41GgxT0lOJVBhswFjcpvw5RJEVX%2FX108Jz0dsU6l%2FbBsbnm6xi9hPLG82mdldayKyOKHM4gsxKhRr96Gqo%2B%2FYG9gITpR%2BDDJtrpcD8tikxCnmIWu3Wia4Pg5nnN%2FwTc1M7N7mJsEnlAZV7D4wyAV82wHZFps%2BQlxnFcmuNWjM8vvoaVXtUnJfdSJpubeHTxN3upVJRrL%2BZAXneC96x8i9BdYGv7c%2BBvWuts1fQhyOHdcgmxNfG3LvWjqE1VPhCUK5LmNu20uHipCWKD82pmm8nlMul376%2FN6%2FEtApfVZHt%2FkvdK6lTPzt1U4SpFzBh5GLtWeEcrRXvmMsOWGfmjgUfjqM5RY3%2Fx3fCUBsjKNJ98vu7NxaV9hExxaKKsJQHF3ITc3NE8IB%2BD6O4acKqQ0ZUR7G%2BIrPV%2F4QQzUD1kiQLAUoMIbjvM4GOqUB2ggawdCzabDRDEkrAmLHFU2LWrxKxXErFkCohVHWqFxiyEdP%2FChyey0jB80q%2F15kyf7zUUm67qxOh%2F%2BD3InirHzbRRBCvI%2FxZ5agBc7B66jj%2F7gHbhc6Bu9obFhGox%2F56o5gGOmXryyAb9xTPJp7rP4EypY3%2BAbhx%2BucHCGJ9BIvvJDBh824jzffx1RClalFLPvD%2BRlt9Rfb7TwrSFwvnRW1lCe5&amp;X-Amz-Signature=4597050af23f20840dc7abd8f0c59431d6fad89b477f888661cf9f8ff85bfc3c&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/4010ec00-f198-4739-aa20-4dea4e8eceae/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_17599772304812.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466R5GP3EF4%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034956Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQD1aUXiOBfFgxnEnX1Z%2Fi6UEiDIcuB8L6EZIRlYWx9ffAIgRRWEQUBYuX78K9RfsLMymt0RisfVAfdMbYQBe9RLprsq%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDA06cxbWBkh5N8FRGSrcAxnUbiqIKJoWAywfmGppgpEcY58MxPtayrauHfg2BmTxA6Wvb1kyPJHmZ4hKMP9hTnnABug88JxESgfqB9%2BLHKO8Neq4WaTFzfqe2DcGzMdZF8uIqUhHtVrrFM2BztpliUc75WwY7VbtY6FpdmyOMAMG%2BYynrEJRqS%2FfMTLITJXvrmnbucqtdj4%2B8obgNaaFaTae2d3rfUEa%2BOY41GgxT0lOJVBhswFjcpvw5RJEVX%2FX108Jz0dsU6l%2FbBsbnm6xi9hPLG82mdldayKyOKHM4gsxKhRr96Gqo%2B%2FYG9gITpR%2BDDJtrpcD8tikxCnmIWu3Wia4Pg5nnN%2FwTc1M7N7mJsEnlAZV7D4wyAV82wHZFps%2BQlxnFcmuNWjM8vvoaVXtUnJfdSJpubeHTxN3upVJRrL%2BZAXneC96x8i9BdYGv7c%2BBvWuts1fQhyOHdcgmxNfG3LvWjqE1VPhCUK5LmNu20uHipCWKD82pmm8nlMul376%2FN6%2FEtApfVZHt%2FkvdK6lTPzt1U4SpFzBh5GLtWeEcrRXvmMsOWGfmjgUfjqM5RY3%2Fx3fCUBsjKNJ98vu7NxaV9hExxaKKsJQHF3ITc3NE8IB%2BD6O4acKqQ0ZUR7G%2BIrPV%2F4QQzUD1kiQLAUoMIbjvM4GOqUB2ggawdCzabDRDEkrAmLHFU2LWrxKxXErFkCohVHWqFxiyEdP%2FChyey0jB80q%2F15kyf7zUUm67qxOh%2F%2BD3InirHzbRRBCvI%2FxZ5agBc7B66jj%2F7gHbhc6Bu9obFhGox%2F56o5gGOmXryyAb9xTPJp7rP4EypY3%2BAbhx%2BucHCGJ9BIvvJDBh824jzffx1RClalFLPvD%2BRlt9Rfb7TwrSFwvnRW1lCe5&amp;X-Amz-Signature=4f41db8eb9a701e37b116ed0c9138e93d9c9420c9218fd46d5fce8bd12695d68&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;</description></item><item><title>Nano Banana手办提示词</title><link>https://Pan-Binghong.github.io/daily-learning/other/nano-banana%E6%89%8B%E5%8A%9E%E6%8F%90%E7%A4%BA%E8%AF%8D/</link><pubDate>Fri, 05 Sep 2025 01:21:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/nano-banana%E6%89%8B%E5%8A%9E%E6%8F%90%E7%A4%BA%E8%AF%8D/</guid><description>&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Use the nano-banana model to create a 1/7 scale commercialized figure of thecharacter in the illustration, in a realistic style and environment.Place the figure on a computer desk, using a circular transparent acrylic basewithout any text. On the computer screen, display the ZBrush modeling process of the figure.Next to the computer screen, place a BANDAl-style toy packaging box printedwith the original artwork.
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>好用好看的nvidia-smi</title><link>https://Pan-Binghong.github.io/daily-learning/other/%E5%A5%BD%E7%94%A8%E5%A5%BD%E7%9C%8B%E7%9A%84nvidia-smi/</link><pubDate>Mon, 24 Mar 2025 16:02:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/%E5%A5%BD%E7%94%A8%E5%A5%BD%E7%9C%8B%E7%9A%84nvidia-smi/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 找到一个比nvidia-smi展示gpu更加美观的工具。在此记录一下。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/167921cd-a496-4b4d-8768-9b56d39ca4ed/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4664RHGXRSR%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034956Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCeOFA%2BBR3ypDw4ImdW6ONqOiJyYkdkNGnwISiOmkXaGQIgTThQQ1LJCAkAMXRjNPJpbR6KYhVO8wTBprGU07d8TxMq%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDB%2FSQgnZhDNAbWXJBircA6rMWwQ4%2BGk9zNp1KwfFUMpM1kfaGSt7zf5eNaVEp9rwa2ItGHTBgZRzUeTYmmelv6xJpeMF5FDRUUMA4tdNN78rZhfAg3JWWwB0eExR4OghIFB5huqe79QKRzu1jysLxQJYiHADLQXXf2vRpVkgcaHz8mFRJpPoUZN06NXe6V20UqttcGy9J%2BGFpis8tyJcCfsS5f2hJDaiAZDDskwAwCH%2BXrRtWR9eNduksdYR%2F97JX01snDpc%2FoiP4dugpo2FHtvDNhuVgqUfOcJpTC8V%2BJ02S0vkU5Bhh%2FcIftKE%2BTPPGuV161vn1HbQUzQ66uS882HTRFE2ZbjgvrHPjCVXgHyfx%2FM6QpD%2F5QY30NBB8p72fjzB2hwz7V9wp%2BFB7RxCzsoZ8rdvzyQf1uEhuDRnm0JT4YH7nci%2BV2b9%2FPSY6t7WdhjnCbZq156MkzKnOruAGFAdiXLC44Un8Pdh6DuQZusvtvoPdrKoqJQNAP6f0qFxe%2BHxQO3GOzKGjdhR5gEt7BtgjobgFj4cuwO1VukVbDXHke%2FGcSQIfwLy3GpC4oNdLsSeIrR7jkjFvCMhj8cR2Bgja8lmQ%2FSP%2BS6SEMCeJ8693htBAMsR99c8tzgB7zOpo4qpXhMxo3qWeovBMKrivM4GOqUBmnxEWdhrGlWjS3M3F1CuANQW0uTnDBXko%2FdOKf4x0yJos5KtwGC8yZW%2BaNMhOytsPcuWDaDs6IRoR8Ia2JlFq8VrRaxjIOtKKjaCp1IREuI%2BO88fHXRZkVoCRYWW1E1XT4KP8RhRIrXcJpDBxs%2BCLqKOy7cJsNinhKqB6gxvKQxxgBzU9%2FvedZPWWfd%2BVxKuhxST2wUWEtILdVRI6CWhEhhoIruz&amp;X-Amz-Signature=83f98098a0213a29b79b31a056621f0b41f52346a440e38a528b968affccb324&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="安装"&gt;安装&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;nvitop&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h2 id="查看gpu状态"&gt;查看gpu状态&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;nvitop&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;查看更加详细的gpu内容&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;nvitop&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;full&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/38595db5-5c7e-4dcb-ab27-48bf45fecafc/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4664RHGXRSR%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034956Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCeOFA%2BBR3ypDw4ImdW6ONqOiJyYkdkNGnwISiOmkXaGQIgTThQQ1LJCAkAMXRjNPJpbR6KYhVO8wTBprGU07d8TxMq%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDB%2FSQgnZhDNAbWXJBircA6rMWwQ4%2BGk9zNp1KwfFUMpM1kfaGSt7zf5eNaVEp9rwa2ItGHTBgZRzUeTYmmelv6xJpeMF5FDRUUMA4tdNN78rZhfAg3JWWwB0eExR4OghIFB5huqe79QKRzu1jysLxQJYiHADLQXXf2vRpVkgcaHz8mFRJpPoUZN06NXe6V20UqttcGy9J%2BGFpis8tyJcCfsS5f2hJDaiAZDDskwAwCH%2BXrRtWR9eNduksdYR%2F97JX01snDpc%2FoiP4dugpo2FHtvDNhuVgqUfOcJpTC8V%2BJ02S0vkU5Bhh%2FcIftKE%2BTPPGuV161vn1HbQUzQ66uS882HTRFE2ZbjgvrHPjCVXgHyfx%2FM6QpD%2F5QY30NBB8p72fjzB2hwz7V9wp%2BFB7RxCzsoZ8rdvzyQf1uEhuDRnm0JT4YH7nci%2BV2b9%2FPSY6t7WdhjnCbZq156MkzKnOruAGFAdiXLC44Un8Pdh6DuQZusvtvoPdrKoqJQNAP6f0qFxe%2BHxQO3GOzKGjdhR5gEt7BtgjobgFj4cuwO1VukVbDXHke%2FGcSQIfwLy3GpC4oNdLsSeIrR7jkjFvCMhj8cR2Bgja8lmQ%2FSP%2BS6SEMCeJ8693htBAMsR99c8tzgB7zOpo4qpXhMxo3qWeovBMKrivM4GOqUBmnxEWdhrGlWjS3M3F1CuANQW0uTnDBXko%2FdOKf4x0yJos5KtwGC8yZW%2BaNMhOytsPcuWDaDs6IRoR8Ia2JlFq8VrRaxjIOtKKjaCp1IREuI%2BO88fHXRZkVoCRYWW1E1XT4KP8RhRIrXcJpDBxs%2BCLqKOy7cJsNinhKqB6gxvKQxxgBzU9%2FvedZPWWfd%2BVxKuhxST2wUWEtILdVRI6CWhEhhoIruz&amp;X-Amz-Signature=2fe0bed385bd7c2517d033388e8032bdca127d7bbea35f302dad4dab755f712c&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;</description></item><item><title>Win11安装WSL2</title><link>https://Pan-Binghong.github.io/daily-learning/other/win11%E5%AE%89%E8%A3%85wsl2/</link><pubDate>Sat, 30 Nov 2024 07:00:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/win11%E5%AE%89%E8%A3%85wsl2/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 VMware实在是太占内存了，然后Linux系统打算用WSL2来弄。这里记录一下安装WSL2的全流程。更详细的过程可以参考引用的帖子，这个大佬写的很详细，方法也很多。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="启动windows子系统以及虚拟化"&gt;启动Windows子系统以及虚拟化&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;打开PowerShell（使用管理员方式）&lt;/li&gt;
-&lt;li&gt;依次输入以下命令：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="安装系统"&gt;安装系统&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;打开PowerShell（使用管理员方式）&lt;/li&gt;
-&lt;li&gt;依次输入以下命令：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="额外补充"&gt;额外补充&lt;/h2&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Apache2.0开源软件许可协议</title><link>https://Pan-Binghong.github.io/daily-learning/other/apache2.0%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE/</link><pubDate>Fri, 29 Nov 2024 11:23:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/apache2.0%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 Apache License（Apache许可证），是Apache软件基金会发布的一个自由软件许可证。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;Apache Licence是著名的非盈利开源组织Apache采用的协议。该协议和BSD类似，同样鼓励代码共享和最终原作者的著作权，同样允许源代码修改和再发布。但是也需要遵循以下条件：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;需要给代码的用户一份Apache Licence。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;如果修改了代码，需要再被修改的文件中说明。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;在衍生的代码中（修改和有源代码衍生的代码中）需要带有原来代码中的协议，商标，专利声明和其他原来作者规定需要包含的说明。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有Apache Licence。你可以再Notice中增加自己的许可，但是不可以表现为对Apache Licence构成更改。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Apache Licence也是对商业应用友好的许可。使用者也可以再需要的时候修改代码来满足并作为开源或商业产品发布/销售。
-使用这个协议的好处是:&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;永久权利 一旦被授权，永久拥有。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;全球范围的权利 在一个国家获得授权，适用于所有国家。假如你在美国，许可是从印度授权的，也没有问题。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;授权免费 无版税， 前期、后期均无任何费用。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;授权无排他性 任何人都可以获得授权&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;授权不可撤消 一旦获得授权，没有任何人可以取消。比如，你基于该产品代码开发了衍生产品，你不用担心会在某一天被禁止使用该代码&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="apache20-license-官方文本"&gt;Apache2.0 License 官方文本&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt; 10
-&lt;/span&gt;&lt;span class="lnt"&gt; 11
-&lt;/span&gt;&lt;span class="lnt"&gt; 12
-&lt;/span&gt;&lt;span class="lnt"&gt; 13
-&lt;/span&gt;&lt;span class="lnt"&gt; 14
-&lt;/span&gt;&lt;span class="lnt"&gt; 15
-&lt;/span&gt;&lt;span class="lnt"&gt; 16
-&lt;/span&gt;&lt;span class="lnt"&gt; 17
-&lt;/span&gt;&lt;span class="lnt"&gt; 18
-&lt;/span&gt;&lt;span class="lnt"&gt; 19
-&lt;/span&gt;&lt;span class="lnt"&gt; 20
-&lt;/span&gt;&lt;span class="lnt"&gt; 21
-&lt;/span&gt;&lt;span class="lnt"&gt; 22
-&lt;/span&gt;&lt;span class="lnt"&gt; 23
-&lt;/span&gt;&lt;span class="lnt"&gt; 24
-&lt;/span&gt;&lt;span class="lnt"&gt; 25
-&lt;/span&gt;&lt;span class="lnt"&gt; 26
-&lt;/span&gt;&lt;span class="lnt"&gt; 27
-&lt;/span&gt;&lt;span class="lnt"&gt; 28
-&lt;/span&gt;&lt;span class="lnt"&gt; 29
-&lt;/span&gt;&lt;span class="lnt"&gt; 30
-&lt;/span&gt;&lt;span class="lnt"&gt; 31
-&lt;/span&gt;&lt;span class="lnt"&gt; 32
-&lt;/span&gt;&lt;span class="lnt"&gt; 33
-&lt;/span&gt;&lt;span class="lnt"&gt; 34
-&lt;/span&gt;&lt;span class="lnt"&gt; 35
-&lt;/span&gt;&lt;span class="lnt"&gt; 36
-&lt;/span&gt;&lt;span class="lnt"&gt; 37
-&lt;/span&gt;&lt;span class="lnt"&gt; 38
-&lt;/span&gt;&lt;span class="lnt"&gt; 39
-&lt;/span&gt;&lt;span class="lnt"&gt; 40
-&lt;/span&gt;&lt;span class="lnt"&gt; 41
-&lt;/span&gt;&lt;span class="lnt"&gt; 42
-&lt;/span&gt;&lt;span class="lnt"&gt; 43
-&lt;/span&gt;&lt;span class="lnt"&gt; 44
-&lt;/span&gt;&lt;span class="lnt"&gt; 45
-&lt;/span&gt;&lt;span class="lnt"&gt; 46
-&lt;/span&gt;&lt;span class="lnt"&gt; 47
-&lt;/span&gt;&lt;span class="lnt"&gt; 48
-&lt;/span&gt;&lt;span class="lnt"&gt; 49
-&lt;/span&gt;&lt;span class="lnt"&gt; 50
-&lt;/span&gt;&lt;span class="lnt"&gt; 51
-&lt;/span&gt;&lt;span class="lnt"&gt; 52
-&lt;/span&gt;&lt;span class="lnt"&gt; 53
-&lt;/span&gt;&lt;span class="lnt"&gt; 54
-&lt;/span&gt;&lt;span class="lnt"&gt; 55
-&lt;/span&gt;&lt;span class="lnt"&gt; 56
-&lt;/span&gt;&lt;span class="lnt"&gt; 57
-&lt;/span&gt;&lt;span class="lnt"&gt; 58
-&lt;/span&gt;&lt;span class="lnt"&gt; 59
-&lt;/span&gt;&lt;span class="lnt"&gt; 60
-&lt;/span&gt;&lt;span class="lnt"&gt; 61
-&lt;/span&gt;&lt;span class="lnt"&gt; 62
-&lt;/span&gt;&lt;span class="lnt"&gt; 63
-&lt;/span&gt;&lt;span class="lnt"&gt; 64
-&lt;/span&gt;&lt;span class="lnt"&gt; 65
-&lt;/span&gt;&lt;span class="lnt"&gt; 66
-&lt;/span&gt;&lt;span class="lnt"&gt; 67
-&lt;/span&gt;&lt;span class="lnt"&gt; 68
-&lt;/span&gt;&lt;span class="lnt"&gt; 69
-&lt;/span&gt;&lt;span class="lnt"&gt; 70
-&lt;/span&gt;&lt;span class="lnt"&gt; 71
-&lt;/span&gt;&lt;span class="lnt"&gt; 72
-&lt;/span&gt;&lt;span class="lnt"&gt; 73
-&lt;/span&gt;&lt;span class="lnt"&gt; 74
-&lt;/span&gt;&lt;span class="lnt"&gt; 75
-&lt;/span&gt;&lt;span class="lnt"&gt; 76
-&lt;/span&gt;&lt;span class="lnt"&gt; 77
-&lt;/span&gt;&lt;span class="lnt"&gt; 78
-&lt;/span&gt;&lt;span class="lnt"&gt; 79
-&lt;/span&gt;&lt;span class="lnt"&gt; 80
-&lt;/span&gt;&lt;span class="lnt"&gt; 81
-&lt;/span&gt;&lt;span class="lnt"&gt; 82
-&lt;/span&gt;&lt;span class="lnt"&gt; 83
-&lt;/span&gt;&lt;span class="lnt"&gt; 84
-&lt;/span&gt;&lt;span class="lnt"&gt; 85
-&lt;/span&gt;&lt;span class="lnt"&gt; 86
-&lt;/span&gt;&lt;span class="lnt"&gt; 87
-&lt;/span&gt;&lt;span class="lnt"&gt; 88
-&lt;/span&gt;&lt;span class="lnt"&gt; 89
-&lt;/span&gt;&lt;span class="lnt"&gt; 90
-&lt;/span&gt;&lt;span class="lnt"&gt; 91
-&lt;/span&gt;&lt;span class="lnt"&gt; 92
-&lt;/span&gt;&lt;span class="lnt"&gt; 93
-&lt;/span&gt;&lt;span class="lnt"&gt; 94
-&lt;/span&gt;&lt;span class="lnt"&gt; 95
-&lt;/span&gt;&lt;span class="lnt"&gt; 96
-&lt;/span&gt;&lt;span class="lnt"&gt; 97
-&lt;/span&gt;&lt;span class="lnt"&gt; 98
-&lt;/span&gt;&lt;span class="lnt"&gt; 99
-&lt;/span&gt;&lt;span class="lnt"&gt;100
-&lt;/span&gt;&lt;span class="lnt"&gt;101
-&lt;/span&gt;&lt;span class="lnt"&gt;102
-&lt;/span&gt;&lt;span class="lnt"&gt;103
-&lt;/span&gt;&lt;span class="lnt"&gt;104
-&lt;/span&gt;&lt;span class="lnt"&gt;105
-&lt;/span&gt;&lt;span class="lnt"&gt;106
-&lt;/span&gt;&lt;span class="lnt"&gt;107
-&lt;/span&gt;&lt;span class="lnt"&gt;108
-&lt;/span&gt;&lt;span class="lnt"&gt;109
-&lt;/span&gt;&lt;span class="lnt"&gt;110
-&lt;/span&gt;&lt;span class="lnt"&gt;111
-&lt;/span&gt;&lt;span class="lnt"&gt;112
-&lt;/span&gt;&lt;span class="lnt"&gt;113
-&lt;/span&gt;&lt;span class="lnt"&gt;114
-&lt;/span&gt;&lt;span class="lnt"&gt;115
-&lt;/span&gt;&lt;span class="lnt"&gt;116
-&lt;/span&gt;&lt;span class="lnt"&gt;117
-&lt;/span&gt;&lt;span class="lnt"&gt;118
-&lt;/span&gt;&lt;span class="lnt"&gt;119
-&lt;/span&gt;&lt;span class="lnt"&gt;120
-&lt;/span&gt;&lt;span class="lnt"&gt;121
-&lt;/span&gt;&lt;span class="lnt"&gt;122
-&lt;/span&gt;&lt;span class="lnt"&gt;123
-&lt;/span&gt;&lt;span class="lnt"&gt;124
-&lt;/span&gt;&lt;span class="lnt"&gt;125
-&lt;/span&gt;&lt;span class="lnt"&gt;126
-&lt;/span&gt;&lt;span class="lnt"&gt;127
-&lt;/span&gt;&lt;span class="lnt"&gt;128
-&lt;/span&gt;&lt;span class="lnt"&gt;129
-&lt;/span&gt;&lt;span class="lnt"&gt;130
-&lt;/span&gt;&lt;span class="lnt"&gt;131
-&lt;/span&gt;&lt;span class="lnt"&gt;132
-&lt;/span&gt;&lt;span class="lnt"&gt;133
-&lt;/span&gt;&lt;span class="lnt"&gt;134
-&lt;/span&gt;&lt;span class="lnt"&gt;135
-&lt;/span&gt;&lt;span class="lnt"&gt;136
-&lt;/span&gt;&lt;span class="lnt"&gt;137
-&lt;/span&gt;&lt;span class="lnt"&gt;138
-&lt;/span&gt;&lt;span class="lnt"&gt;139
-&lt;/span&gt;&lt;span class="lnt"&gt;140
-&lt;/span&gt;&lt;span class="lnt"&gt;141
-&lt;/span&gt;&lt;span class="lnt"&gt;142
-&lt;/span&gt;&lt;span class="lnt"&gt;143
-&lt;/span&gt;&lt;span class="lnt"&gt;144
-&lt;/span&gt;&lt;span class="lnt"&gt;145
-&lt;/span&gt;&lt;span class="lnt"&gt;146
-&lt;/span&gt;&lt;span class="lnt"&gt;147
-&lt;/span&gt;&lt;span class="lnt"&gt;148
-&lt;/span&gt;&lt;span class="lnt"&gt;149
-&lt;/span&gt;&lt;span class="lnt"&gt;150
-&lt;/span&gt;&lt;span class="lnt"&gt;151
-&lt;/span&gt;&lt;span class="lnt"&gt;152
-&lt;/span&gt;&lt;span class="lnt"&gt;153
-&lt;/span&gt;&lt;span class="lnt"&gt;154
-&lt;/span&gt;&lt;span class="lnt"&gt;155
-&lt;/span&gt;&lt;span class="lnt"&gt;156
-&lt;/span&gt;&lt;span class="lnt"&gt;157
-&lt;/span&gt;&lt;span class="lnt"&gt;158
-&lt;/span&gt;&lt;span class="lnt"&gt;159
-&lt;/span&gt;&lt;span class="lnt"&gt;160
-&lt;/span&gt;&lt;span class="lnt"&gt;161
-&lt;/span&gt;&lt;span class="lnt"&gt;162
-&lt;/span&gt;&lt;span class="lnt"&gt;163
-&lt;/span&gt;&lt;span class="lnt"&gt;164
-&lt;/span&gt;&lt;span class="lnt"&gt;165
-&lt;/span&gt;&lt;span class="lnt"&gt;166
-&lt;/span&gt;&lt;span class="lnt"&gt;167
-&lt;/span&gt;&lt;span class="lnt"&gt;168
-&lt;/span&gt;&lt;span class="lnt"&gt;169
-&lt;/span&gt;&lt;span class="lnt"&gt;170
-&lt;/span&gt;&lt;span class="lnt"&gt;171
-&lt;/span&gt;&lt;span class="lnt"&gt;172
-&lt;/span&gt;&lt;span class="lnt"&gt;173
-&lt;/span&gt;&lt;span class="lnt"&gt;174
-&lt;/span&gt;&lt;span class="lnt"&gt;175
-&lt;/span&gt;&lt;span class="lnt"&gt;176
-&lt;/span&gt;&lt;span class="lnt"&gt;177
-&lt;/span&gt;&lt;span class="lnt"&gt;178
-&lt;/span&gt;&lt;span class="lnt"&gt;179
-&lt;/span&gt;&lt;span class="lnt"&gt;180
-&lt;/span&gt;&lt;span class="lnt"&gt;181
-&lt;/span&gt;&lt;span class="lnt"&gt;182
-&lt;/span&gt;&lt;span class="lnt"&gt;183
-&lt;/span&gt;&lt;span class="lnt"&gt;184
-&lt;/span&gt;&lt;span class="lnt"&gt;185
-&lt;/span&gt;&lt;span class="lnt"&gt;186
-&lt;/span&gt;&lt;span class="lnt"&gt;187
-&lt;/span&gt;&lt;span class="lnt"&gt;188
-&lt;/span&gt;&lt;span class="lnt"&gt;189
-&lt;/span&gt;&lt;span class="lnt"&gt;190
-&lt;/span&gt;&lt;span class="lnt"&gt;191
-&lt;/span&gt;&lt;span class="lnt"&gt;192
-&lt;/span&gt;&lt;span class="lnt"&gt;193
-&lt;/span&gt;&lt;span class="lnt"&gt;194
-&lt;/span&gt;&lt;span class="lnt"&gt;195
-&lt;/span&gt;&lt;span class="lnt"&gt;196
-&lt;/span&gt;&lt;span class="lnt"&gt;197
-&lt;/span&gt;&lt;span class="lnt"&gt;198
-&lt;/span&gt;&lt;span class="lnt"&gt;199
-&lt;/span&gt;&lt;span class="lnt"&gt;200
-&lt;/span&gt;&lt;span class="lnt"&gt;201
-&lt;/span&gt;&lt;span class="lnt"&gt;202
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Apache License
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Version 2.0, January &lt;span class="m"&gt;2004&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; http://www.apache.org/licenses/
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 1. Definitions.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;License&amp;#34;&lt;/span&gt; shall mean the terms and conditions &lt;span class="k"&gt;for&lt;/span&gt; use, reproduction,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; and distribution as defined by Sections &lt;span class="m"&gt;1&lt;/span&gt; through &lt;span class="m"&gt;9&lt;/span&gt; of this document.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;Licensor&amp;#34;&lt;/span&gt; shall mean the copyright owner or entity authorized by
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; the copyright owner that is granting the License.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;Legal Entity&amp;#34;&lt;/span&gt; shall mean the union of the acting entity and all
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; other entities that control, are controlled by, or are under common
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; control with that entity. For the purposes of this definition,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;control&amp;#34;&lt;/span&gt; means &lt;span class="o"&gt;(&lt;/span&gt;i&lt;span class="o"&gt;)&lt;/span&gt; the power, direct or indirect, to cause the
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; direction or management of such entity, whether by contract or
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; otherwise, or &lt;span class="o"&gt;(&lt;/span&gt;ii&lt;span class="o"&gt;)&lt;/span&gt; ownership of fifty percent &lt;span class="o"&gt;(&lt;/span&gt;50%&lt;span class="o"&gt;)&lt;/span&gt; or more of the
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; outstanding shares, or &lt;span class="o"&gt;(&lt;/span&gt;iii&lt;span class="o"&gt;)&lt;/span&gt; beneficial ownership of such entity.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;You&amp;#34;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;or &lt;span class="s2"&gt;&amp;#34;Your&amp;#34;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; shall mean an individual or Legal Entity
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; exercising permissions granted by this License.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;Source&amp;#34;&lt;/span&gt; form shall mean the preferred form &lt;span class="k"&gt;for&lt;/span&gt; making modifications,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; including but not limited to software &lt;span class="nb"&gt;source&lt;/span&gt; code, documentation
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; source, and configuration files.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;Object&amp;#34;&lt;/span&gt; form shall mean any form resulting from mechanical
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; transformation or translation of a Source form, including but
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; not limited to compiled object code, generated documentation,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; and conversions to other media types.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;Work&amp;#34;&lt;/span&gt; shall mean the work of authorship, whether in Source or
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Object form, made available under the License, as indicated by a
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; copyright notice that is included in or attached to the work
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;(&lt;/span&gt;an example is provided in the Appendix below&lt;span class="o"&gt;)&lt;/span&gt;.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;Derivative Works&amp;#34;&lt;/span&gt; shall mean any work, whether in Source or Object
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; form, that is based on &lt;span class="o"&gt;(&lt;/span&gt;or derived from&lt;span class="o"&gt;)&lt;/span&gt; the Work and &lt;span class="k"&gt;for&lt;/span&gt; which the
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; editorial revisions, annotations, elaborations, or other modifications
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; represent, as a whole, an original work of authorship. For the purposes
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; of this License, Derivative Works shall not include works that remain
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; separable from, or merely link &lt;span class="o"&gt;(&lt;/span&gt;or &lt;span class="nb"&gt;bind&lt;/span&gt; by name&lt;span class="o"&gt;)&lt;/span&gt; to the interfaces of,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; the Work and Derivative Works thereof.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;Contribution&amp;#34;&lt;/span&gt; shall mean any work of authorship, including
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; the original version of the Work and any modifications or additions
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; to that Work or Derivative Works thereof, that is intentionally
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; submitted to Licensor &lt;span class="k"&gt;for&lt;/span&gt; inclusion in the Work by the copyright owner
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; or by an individual or Legal Entity authorized to submit on behalf of
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; the copyright owner. For the purposes of this definition, &lt;span class="s2"&gt;&amp;#34;submitted&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; means any form of electronic, verbal, or written communication sent
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; to the Licensor or its representatives, including but not limited to
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; communication on electronic mailing lists, &lt;span class="nb"&gt;source&lt;/span&gt; code control systems,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; and issue tracking systems that are managed by, or on behalf of, the
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Licensor &lt;span class="k"&gt;for&lt;/span&gt; the purpose of discussing and improving the Work, but
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; excluding communication that is conspicuously marked or otherwise
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; designated in writing by the copyright owner as &lt;span class="s2"&gt;&amp;#34;Not a Contribution.&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;Contributor&amp;#34;&lt;/span&gt; shall mean Licensor and any individual or Legal Entity
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; on behalf of whom a Contribution has been received by Licensor and
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subsequently incorporated within the Work.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 2. Grant of Copyright License. Subject to the terms and conditions of
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; this License, each Contributor hereby grants to You a perpetual,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; copyright license to reproduce, prepare Derivative Works of,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; publicly display, publicly perform, sublicense, and distribute the
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Work and such Derivative Works in Source or Object form.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 3. Grant of Patent License. Subject to the terms and conditions of
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; this License, each Contributor hereby grants to You a perpetual,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;(&lt;/span&gt;except as stated in this section&lt;span class="o"&gt;)&lt;/span&gt; patent license to make, have made,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; use, offer to sell, sell, import, and otherwise transfer the Work,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; where such license applies only to those patent claims licensable
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; by such Contributor that are necessarily infringed by their
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Contribution&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; alone or by combination of their Contribution&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; with the Work to which such Contribution&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; was submitted. If You
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; institute patent litigation against any entity &lt;span class="o"&gt;(&lt;/span&gt;including a
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; cross-claim or counterclaim in a lawsuit&lt;span class="o"&gt;)&lt;/span&gt; alleging that the Work
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; or a Contribution incorporated within the Work constitutes direct
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; or contributory patent infringement, &lt;span class="k"&gt;then&lt;/span&gt; any patent licenses
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; granted to You under this License &lt;span class="k"&gt;for&lt;/span&gt; that Work shall terminate
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; as of the date such litigation is filed.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 4. Redistribution. You may reproduce and distribute copies of the
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Work or Derivative Works thereof in any medium, with or without
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; modifications, and in Source or Object form, provided that You
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; meet the following conditions:
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt; You must give any other recipients of the Work or
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Derivative Works a copy of this License&lt;span class="p"&gt;;&lt;/span&gt; and
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;(&lt;/span&gt;b&lt;span class="o"&gt;)&lt;/span&gt; You must cause any modified files to carry prominent notices
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stating that You changed the files&lt;span class="p"&gt;;&lt;/span&gt; and
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;(&lt;/span&gt;c&lt;span class="o"&gt;)&lt;/span&gt; You must retain, in the Source form of any Derivative Works
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; that You distribute, all copyright, patent, trademark, and
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; attribution notices from the Source form of the Work,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; excluding those notices that &lt;span class="k"&gt;do&lt;/span&gt; not pertain to any part of
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; the Derivative Works&lt;span class="p"&gt;;&lt;/span&gt; and
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;(&lt;/span&gt;d&lt;span class="o"&gt;)&lt;/span&gt; If the Work includes a &lt;span class="s2"&gt;&amp;#34;NOTICE&amp;#34;&lt;/span&gt; text file as part of its
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; distribution, &lt;span class="k"&gt;then&lt;/span&gt; any Derivative Works that You distribute must
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; include a readable copy of the attribution notices contained
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; within such NOTICE file, excluding those notices that &lt;span class="k"&gt;do&lt;/span&gt; not
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; pertain to any part of the Derivative Works, in at least one
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; of the following places: within a NOTICE text file distributed
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; as part of the Derivative Works&lt;span class="p"&gt;;&lt;/span&gt; within the Source form or
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; documentation, &lt;span class="k"&gt;if&lt;/span&gt; provided along with the Derivative Works&lt;span class="p"&gt;;&lt;/span&gt; or,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; within a display generated by the Derivative Works, &lt;span class="k"&gt;if&lt;/span&gt; and
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; wherever such third-party notices normally appear. The contents
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; of the NOTICE file are &lt;span class="k"&gt;for&lt;/span&gt; informational purposes only and
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;do&lt;/span&gt; not modify the License. You may add Your own attribution
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; notices within Derivative Works that You distribute, alongside
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; or as an addendum to the NOTICE text from the Work, provided
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; that such additional attribution notices cannot be construed
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; as modifying the License.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; You may add Your own copyright statement to Your modifications and
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; may provide additional or different license terms and conditions
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;for&lt;/span&gt; use, reproduction, or distribution of Your modifications, or
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;for&lt;/span&gt; any such Derivative Works as a whole, provided Your use,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; reproduction, and distribution of the Work otherwise complies with
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; the conditions stated in this License.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 5. Submission of Contributions. Unless You explicitly state otherwise,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; any Contribution intentionally submitted &lt;span class="k"&gt;for&lt;/span&gt; inclusion in the Work
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; by You to the Licensor shall be under the terms and conditions of
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; this License, without any additional terms or conditions.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Notwithstanding the above, nothing herein shall supersede or modify
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; the terms of any separate license agreement you may have executed
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; with Licensor regarding such Contributions.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 6. Trademarks. This License does not grant permission to use the trade
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; names, trademarks, service marks, or product names of the Licensor,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; except as required &lt;span class="k"&gt;for&lt;/span&gt; reasonable and customary use in describing the
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; origin of the Work and reproducing the content of the NOTICE file.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 7. Disclaimer of Warranty. Unless required by applicable law or
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; agreed to in writing, Licensor provides the Work &lt;span class="o"&gt;(&lt;/span&gt;and each
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Contributor provides its Contributions&lt;span class="o"&gt;)&lt;/span&gt; on an &lt;span class="s2"&gt;&amp;#34;AS IS&amp;#34;&lt;/span&gt; BASIS,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; implied, including, without limitation, any warranties or conditions
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; PARTICULAR PURPOSE. You are solely responsible &lt;span class="k"&gt;for&lt;/span&gt; determining the
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; appropriateness of using or redistributing the Work and assume any
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; risks associated with Your exercise of permissions under this License.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 8. Limitation of Liability. In no event and under no legal theory,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; whether in tort &lt;span class="o"&gt;(&lt;/span&gt;including negligence&lt;span class="o"&gt;)&lt;/span&gt;, contract, or otherwise,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; unless required by applicable law &lt;span class="o"&gt;(&lt;/span&gt;such as deliberate and grossly
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; negligent acts&lt;span class="o"&gt;)&lt;/span&gt; or agreed to in writing, shall any Contributor be
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; liable to You &lt;span class="k"&gt;for&lt;/span&gt; damages, including any direct, indirect, special,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; incidental, or consequential damages of any character arising as a
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; result of this License or out of the use or inability to use the
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Work &lt;span class="o"&gt;(&lt;/span&gt;including but not limited to damages &lt;span class="k"&gt;for&lt;/span&gt; loss of goodwill,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; work stoppage, computer failure or malfunction, or any and all
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; other commercial damages or losses&lt;span class="o"&gt;)&lt;/span&gt;, even &lt;span class="k"&gt;if&lt;/span&gt; such Contributor
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; has been advised of the possibility of such damages.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 9. Accepting Warranty or Additional Liability. While redistributing
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; the Work or Derivative Works thereof, You may choose to offer,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; and charge a fee &lt;span class="k"&gt;for&lt;/span&gt;, acceptance of support, warranty, indemnity,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; or other liability obligations and/or rights consistent with this
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; License. However, in accepting such obligations, You may act only
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; on Your own behalf and on Your sole responsibility, not on behalf
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; of any other Contributor, and only &lt;span class="k"&gt;if&lt;/span&gt; You agree to indemnify,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; defend, and hold each Contributor harmless &lt;span class="k"&gt;for&lt;/span&gt; any liability
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; incurred by, or claims asserted against, such Contributor by reason
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; of your accepting any such warranty or additional liability.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; END OF TERMS AND CONDITIONS
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; APPENDIX: How to apply the Apache License to your work.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; To apply the Apache License to your work, attach the following
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; boilerplate notice, with the fields enclosed by brackets &lt;span class="s2"&gt;&amp;#34;[]&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; replaced with your own identifying information. &lt;span class="o"&gt;(&lt;/span&gt;Don&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t include
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; the brackets!&lt;span class="o"&gt;)&lt;/span&gt; The text should be enclosed in the appropriate
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; comment syntax &lt;span class="k"&gt;for&lt;/span&gt; the file format. We also recommend that a
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; file or class name and description of purpose be included on the
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; same &lt;span class="s2"&gt;&amp;#34;printed page&amp;#34;&lt;/span&gt; as the copyright notice &lt;span class="k"&gt;for&lt;/span&gt; easier
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; identification within third-party archives.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Copyright &lt;span class="o"&gt;[&lt;/span&gt;yyyy&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;name of copyright owner&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Licensed under the Apache License, Version 2.0 &lt;span class="o"&gt;(&lt;/span&gt;the &lt;span class="s2"&gt;&amp;#34;License&amp;#34;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; you may not use this file except in compliance with the License.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; You may obtain a copy of the License at
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; http://www.apache.org/licenses/LICENSE-2.0
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Unless required by applicable law or agreed to in writing, software
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; distributed under the License is distributed on an &lt;span class="s2"&gt;&amp;#34;AS IS&amp;#34;&lt;/span&gt; BASIS,
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; See the License &lt;span class="k"&gt;for&lt;/span&gt; the specific language governing permissions and
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; limitations under the License.
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Reference&lt;/p&gt;</description></item><item><title>17岁高中生的Thinking Claude</title><link>https://Pan-Binghong.github.io/daily-learning/other/17%E5%B2%81%E9%AB%98%E4%B8%AD%E7%94%9F%E7%9A%84thinking-claude/</link><pubDate>Thu, 28 Nov 2024 05:24:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/17%E5%B2%81%E9%AB%98%E4%B8%AD%E7%94%9F%E7%9A%84thinking-claude/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 保存一下这个牛逼的提示词_Thinking Claude。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="完整的内容"&gt;完整的内容&lt;/h2&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Reference&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>C盘深度清理</title><link>https://Pan-Binghong.github.io/daily-learning/other/c%E7%9B%98%E6%B7%B1%E5%BA%A6%E6%B8%85%E7%90%86/</link><pubDate>Thu, 28 Nov 2024 02:59:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/c%E7%9B%98%E6%B7%B1%E5%BA%A6%E6%B8%85%E7%90%86/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 在知乎上看见一个帖子，想试一下。在此记录。Emm…本人用的第三方清理工具。hhhh&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="操作步骤"&gt;操作步骤&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;设置显示隐藏的文件&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>VMware配置共享文件夹</title><link>https://Pan-Binghong.github.io/daily-learning/other/vmware%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</link><pubDate>Wed, 27 Nov 2024 14:24:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/vmware%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 VMware 设置共享文件夹，改过一次然后文件夹消失了。很奇怪…&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2690c9e4-a7e2-46b6-ae6e-556b52a86dd0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667IK6LGCW%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034954Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDQy07u3bWXUoA9%2BjA6ECeCD7WMYa5CZGfPKxtUFxzoRgIgOZ3pIrN%2Bm5eDc3iZ59CyWdAqkcmzp6kueLi6i5bjt%2BIq%2FwMIfRAAGgw2Mzc0MjMxODM4MDUiDFSmNg4JMr2oRujJPircAz%2F7lP%2Bd91mMF105%2ByLsGpBge7ljEPxBmxZ8OzuTTZVGtiX9oQJXCzjmu5Fyezk9eseYdr7YIldN60knvCv0bvWQLWiOF2432F11IZaGmaWqV1BAkHdvBKniwnH%2FRexbOidqYcJXoTYAcB5L%2FPSNK05eqMNPPJex9ydJ28tId0y3NvmiiIFTwu%2FdYNhSvHS6uLNleLS8KPhHixjwzlbXvOh0dRUKfWdA7RiuzRVrqqVf%2B0pT7jxH2LOqyuP7SQmpWD%2BtPLw6JVOqHsDFemsDGPkTX2D65dUVGBVBsY9Z0PmU40K1pkYAOJ4LdKdtBww4%2BA66fFuLXdIYF5aVHmIvA8GckqQ%2B%2BlVuKXhJoI5Kt%2F7qwPsRMKEKtRgab2xjYIudZ609GTxkgEacaKUK51DSb8upHgNxwdVlxej46rkZQxaYzTMX0mdJmN6qFimCIrx1mFj0UiONRvQprlBPHz0BAbQxycTne%2BY%2FEQcII6vBRZiMUmRrfveLNERfiEKNhXWskxRjmOAcwmQ%2FFuJ2tQp%2FTBIGB4DEFX0dU4P4qUxLXUjxIg4t%2Bx1XGKrWajkD9JxqXqgqlKIJTB4rRMVdhzo4TW73qm14W4PJrnJ1%2Fpsg1fXwwA7T9f1JBlzg8dWdMNztvM4GOqUBqSxdTcBbn2N4YaUTd1BdOGdDOviWXthUHW0fztuLpBzNYImZ1PGyFHojeDKxS5Bn8KtRh%2BVKu%2BMGcEHjvH7eqz41fI5K3jVXZWMTjhpOpgyfZW6or4LhtaFGn39E4skhMWXFXi4O4LjcltZpbshUrHbdxN%2BotBqOwmGCiM0VCsOJicmP9Th3kNrFpZtH516Pf9axFOxbfP5a%2B63Sf7CJBgxLhZBx&amp;X-Amz-Signature=cc0fedbc93d0f32d4e9f908090e8eee7f8aa8f68f919e52cad3521005ff6d331&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="安装-vmware-tools"&gt;安装 VMware Tools&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;找到虚拟机 - 重新安装 VMware Tools | 如果是灰色就执行下一步&lt;/li&gt;
-&lt;li&gt;重启虚拟机&lt;/li&gt;
-&lt;li&gt;重启的过程中，不停的查看重新安装 VMware Tools&lt;/li&gt;
-&lt;li&gt;当能点击时，点击安装即可&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="配置共享文件夹"&gt;配置共享文件夹&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;点击虚拟机设置&lt;/li&gt;
-&lt;li&gt;找到选项&lt;/li&gt;
-&lt;li&gt;选中共享文件夹，按照上图进行配置&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="查看共享文件夹"&gt;查看共享文件夹&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /mnt/hgfs
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ls
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id="坑"&gt;坑&lt;/h2&gt;
-&lt;p&gt;当执行完后，如果没有看见自己的共享文件夹，执行以下命令&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果输出文件夹的名称, 快执行下一步, 如果这个啥都没输出, 我没治了.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;vmhgfs-fuse /mnt/hgfs
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mount -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>基于Notion发布的网站绑定自己的域名</title><link>https://Pan-Binghong.github.io/daily-learning/other/%E5%9F%BA%E4%BA%8Enotion%E5%8F%91%E5%B8%83%E7%9A%84%E7%BD%91%E7%AB%99%E7%BB%91%E5%AE%9A%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9F%9F%E5%90%8D/</link><pubDate>Wed, 27 Nov 2024 07:10:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/%E5%9F%BA%E4%BA%8Enotion%E5%8F%91%E5%B8%83%E7%9A%84%E7%BD%91%E7%AB%99%E7%BB%91%E5%AE%9A%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9F%9F%E5%90%8D/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 最近在投简历，想把博客网址也进去。结果发现Notion自带的，太不优雅了（https://panbinghong.notion.site/Pan-Space-12f57052b490803c9422d85f5a763433）。索性买了1年的域名，打算绑定一下。在此记录整个过程。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;整个过程，坑很多。一共分为 买域名，代理域名，创建Woker，复制代码，配置Woker域和路由。5个大步骤。我用折叠标题来写吧。&lt;/p&gt;
-&lt;h2 id="如何购买域名"&gt;如何购买域名&lt;/h2&gt;
-&lt;hr&gt;
-&lt;h2 id="添加域名配置cloudflare的dns服务器"&gt;添加域名+配置CloudFlare的DNS服务器&lt;/h2&gt;
-&lt;hr&gt;
-&lt;h2 id="创建woker"&gt;创建Woker&lt;/h2&gt;
-&lt;hr&gt;
-&lt;h2 id="复制代码"&gt;复制代码&lt;/h2&gt;
-&lt;hr&gt;
-&lt;h2 id="配置woker域和路由"&gt;配置Woker域和路由&lt;/h2&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>Notion安装小组件</title><link>https://Pan-Binghong.github.io/daily-learning/other/notion%E5%AE%89%E8%A3%85%E5%B0%8F%E7%BB%84%E4%BB%B6/</link><pubDate>Wed, 27 Nov 2024 06:49:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/notion%E5%AE%89%E8%A3%85%E5%B0%8F%E7%BB%84%E4%BB%B6/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 每天都打开Notion，就想着美化美化。欸呦喂，还真别说，有美化插件，不过很多都要钱。我这边记录一下，我找的不要钱的那种。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="插件网站"&gt;插件网站&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;自备梯子哈，这个不多叭叭。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;网站&lt;/li&gt;
-&lt;li&gt;网站页面截图&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="案例演示"&gt;案例演示&lt;/h2&gt;
-&lt;p&gt;现在，我在这里增加一个倒计时的小插件。然后把流程截图放在下面。&lt;/p&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li&gt;在Web内打开Countdown模块，&lt;/li&gt;
-&lt;li&gt;配置组件外观&lt;/li&gt;
-&lt;li&gt;复制组件链接&lt;/li&gt;
-&lt;li&gt;回到Notion，输入”/&amp;quot;，然后输入”embed ”&lt;/li&gt;
-&lt;li&gt;粘贴到嵌入的模块内，没了&lt;/li&gt;
-&lt;/ol&gt;</description></item><item><title>MIT开源软件许可协议</title><link>https://Pan-Binghong.github.io/daily-learning/other/mit%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE/</link><pubDate>Thu, 21 Nov 2024 03:13:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/mit%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 MIT License 是一种非常宽松、简单、流行的开源软件许可协议，允许用户自由地使用、复制、修改、合并、发布、分发和销售软件，只需满足以下条件：保留原始版权声明和许可声明。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="mit-license-官方文本"&gt;MIT License 官方文本&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;span class="lnt"&gt;5
-&lt;/span&gt;&lt;span class="lnt"&gt;6
-&lt;/span&gt;&lt;span class="lnt"&gt;7
-&lt;/span&gt;&lt;span class="lnt"&gt;8
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;The MIT License &lt;span class="o"&gt;(&lt;/span&gt;MIT&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Copyright © &lt;span class="m"&gt;2024&lt;/span&gt; &amp;lt;copyright holders&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files &lt;span class="o"&gt;(&lt;/span&gt;the “Software”&lt;span class="o"&gt;)&lt;/span&gt;, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to &lt;span class="k"&gt;do&lt;/span&gt; so, subject to the following conditions:
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Reference&lt;/p&gt;</description></item><item><title>Suno体验心得|风格收藏</title><link>https://Pan-Binghong.github.io/daily-learning/other/suno%E4%BD%93%E9%AA%8C%E5%BF%83%E5%BE%97%E9%A3%8E%E6%A0%BC%E6%94%B6%E8%97%8F/</link><pubDate>Mon, 18 Nov 2024 08:59:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/suno%E4%BD%93%E9%AA%8C%E5%BF%83%E5%BE%97%E9%A3%8E%E6%A0%BC%E6%94%B6%E8%97%8F/</guid><description>&lt;details&gt;&lt;summary&gt;在这里藏一个音频数据库&lt;/summary&gt;
-&lt;/details&gt;</description></item><item><title>Word批量删除换行</title><link>https://Pan-Binghong.github.io/daily-learning/other/word%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%8D%A2%E8%A1%8C/</link><pubDate>Thu, 07 Nov 2024 06:53:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/word%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%8D%A2%E8%A1%8C/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 申请软著的过程中，经历 “需要将源码复制到Word内的要求” 累死我喽， 之后在@小葵同学的帮助下，最终找到解决方案。在此记录操作过程。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="问题展示"&gt;问题展示&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;word内有3行空行，需要全部删除多余的空行。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="操作流程"&gt;操作流程&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;操作打开查找和替换(Ctrl + H)。&lt;/li&gt;
-&lt;li&gt;点击&lt;code&gt;查找内容&lt;/code&gt; ，填入&lt;code&gt;特殊格式&lt;/code&gt;中的&lt;code&gt;段落标记&lt;/code&gt; 。&lt;/li&gt;
-&lt;li&gt;点击&lt;code&gt;替换为&lt;/code&gt; ，填入&lt;code&gt;特殊格式&lt;/code&gt;中的&lt;code&gt;段落标记&lt;/code&gt; 。&lt;/li&gt;
-&lt;li&gt;点&lt;code&gt;全部替换&lt;/code&gt;。&lt;/li&gt;
-&lt;/ol&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>其他 on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/categories/%E5%85%B6%E4%BB%96/</link><description>Recent content in 其他 on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2026 14:04:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/categories/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml"/><item><title>Claude Code /buddy 宠物系统：如何刷到想要的宠物并改名</title><link>https://Pan-Binghong.github.io/daily-learning/other/claude-code-buddy-%E5%AE%A0%E7%89%A9%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E5%88%B7%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E5%AE%A0%E7%89%A9%E5%B9%B6%E6%94%B9%E5%90%8D/</link><pubDate>Wed, 01 Apr 2026 14:01:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/claude-code-buddy-%E5%AE%A0%E7%89%A9%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E5%88%B7%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E5%AE%A0%E7%89%A9%E5%B9%B6%E6%94%B9%E5%90%8D/</guid><description>&lt;h1 id="claude-code-buddy-宠物系统如何刷到想要的宠物并改名">Claude Code /buddy 宠物系统：如何刷到想要的宠物并改名&lt;/h1>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;p>Claude Code 2.x 新增了 /buddy 功能，启动后可领养一只专属像素宠物。宠物的物种、稀有度、眼睛、帽子、属性完全由账号 userID 经哈希算法决定，官方没有提供重置入口——也就是说，你天生注定只能领养一种宠物。但社区已经破解了这套算法，通过 bruteforce 暴力枚举 userID，可以找到任意你想要的宠物对应的 uid，然后替换配置文件即可。本文介绍完整操作流程。&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://images.unsplash.com/photo-1762242298589-582f5f6c3fb1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTEyNTV8MHwxfHNlYXJjaHwxfHx0ZXJtaW5hbCUyMGNvbW1hbmQlMjBsaW5lJTIwZGV2ZWxvcGVyfGVufDB8MHx8fDE3NzUwNTE4OTV8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080">&lt;/p>
+&lt;h2 id="核心原理">核心原理&lt;/h2>
+&lt;blockquote>
+&lt;p>💡 算法链路：userID + SALT(&amp;ldquo;friend-2026-401&amp;rdquo;) → Bun.hash() → Mulberry32 PRNG → rarity / species / eye / hat / shiny(1%) / stats&lt;/p>&lt;/blockquote>
+&lt;p>宠物系统支持 18 种物种：&lt;/p>
+&lt;ul>
+&lt;li>duck（鸭子）&lt;/li>
+&lt;li>goose（鹅）&lt;/li>
+&lt;li>blob（史莱姆）&lt;/li>
+&lt;li>cat（猫）&lt;/li>
+&lt;li>dragon（龙）&lt;/li>
+&lt;li>octopus（章鱼）&lt;/li>
+&lt;li>owl（猫头鹰）&lt;/li>
+&lt;li>penguin（企鹅）&lt;/li>
+&lt;li>turtle（乌龟）&lt;/li>
+&lt;li>snail（蜗牛）&lt;/li>
+&lt;li>ghost（幽灵）&lt;/li>
+&lt;li>axolotl（六角恐龙）&lt;/li>
+&lt;li>capybara（水豚）&lt;/li>
+&lt;li>cactus（仙人掌）&lt;/li>
+&lt;li>robot（机器人）&lt;/li>
+&lt;li>rabbit（兔子）&lt;/li>
+&lt;li>mushroom（蘑菇）&lt;/li>
+&lt;li>chonk（肥猫）
+稀有度权重分布：&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>💡 native 安装（brew install bun / curl 安装）用 Bun.hash()，npm install -g bun 安装用 FNV-1a，两者结果完全不同！确认安装方式再跑脚本，否则刷出来的 uid 对应宠物会不一致。&lt;/p></description></item><item><title>LibreOffice-Docker部署问题记录</title><link>https://Pan-Binghong.github.io/daily-learning/other/libreoffice-docker%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Fri, 27 Mar 2026 06:56:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/libreoffice-docker%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>&lt;h1 id="libreoffice-docker-部署问题记录">LibreOffice Docker 部署问题记录&lt;/h1>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;p>项目使用 LibreOffice 将 xlsx 文件转换为 PDF。
+Windows 本地测试正常，部署到 Linux Docker 容器后出现一系列问题。&lt;/p>
+&lt;hr>
+&lt;h2 id="问题一pdf-文件大小不一致">问题一：PDF 文件大小不一致&lt;/h2>
+&lt;h3 id="现象">现象&lt;/h3>
+&lt;p>同一份数据，Windows 本地生成的 PDF 比服务器生成的小约 25–35%。&lt;/p>
+&lt;h3 id="原因">原因&lt;/h3>
+&lt;p>两端 LibreOffice 版本不同：&lt;/p>
+&lt;p>不同版本的 PDF 导出引擎在压缩算法和字体嵌入上有差异，导致文件大小不同。&lt;/p>
+&lt;h3 id="解决方法">解决方法&lt;/h3>
+&lt;p>在 Dockerfile 中从 TDF 官网下载指定版本，而不是用 apt-get install libreoffice（apt 源版本无法控制）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-docker" data-lang="docker">&lt;span class="line">&lt;span class="cl">&lt;span class="k">RUN&lt;/span> wget -q &lt;span class="s2">&amp;#34;https://download.documentfoundation.org/libreoffice/stable/26.2.2/deb/x86_64/LibreOffice_26.2.2_Linux_x86-64_deb.tar.gz&amp;#34;&lt;/span> -O /tmp/lo.tar.gz &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> tar -xzf /tmp/lo.tar.gz -C /tmp/ &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt-get update &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> dpkg -i /tmp/LibreOffice_26*/DEBS/*.deb &lt;span class="o">||&lt;/span> apt-get install -f -y --no-install-recommends &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> ln -sf /opt/libreoffice26.2/program/soffice /usr/bin/soffice &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> rm -rf /tmp/lo.tar.gz /tmp/LibreOffice_26* &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt-get clean &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> rm -rf /var/lib/apt/lists/*&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>TDF 版本下载地址规律：https://download.documentfoundation.org/libreoffice/stable/{版本号}/deb/x86_64/&lt;/p></description></item><item><title>企业微信智能表格-使用培训</title><link>https://Pan-Binghong.github.io/daily-learning/other/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%99%BA%E8%83%BD%E8%A1%A8%E6%A0%BC-%E4%BD%BF%E7%94%A8%E5%9F%B9%E8%AE%AD/</link><pubDate>Wed, 21 Jan 2026 09:32:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%99%BA%E8%83%BD%E8%A1%A8%E6%A0%BC-%E4%BD%BF%E7%94%A8%E5%9F%B9%E8%AE%AD/</guid><description>&lt;blockquote>
+&lt;p>💡 智能表格（Smart Spreadsheet）是一种融合了人工智能、数据分析和自动化功能的新型电子表格工具。它在传统电子表格基础上，增加了智能数据处理、自动化工作流、协同编辑等高级功能。&lt;/p>&lt;/blockquote>
+&lt;h1 id="1-企业微信智能表格入口界面总览">1. 企业微信智能表格入口&amp;amp;界面总览&lt;/h1>
+&lt;h2 id="11-入口">1.1 入口&lt;/h2>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/416b4a95-7373-4ed6-b3fe-7705073122a0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466YMLCJUOP%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063648Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIBLLU4I%2F1Dexh3eUFdQxXqthWrLyRjoufuGPfrRFTgdaAiEAxOZCc%2F2kf51EE9bb%2Bvlu4lfawNQxolYAjp4ALh9RY58q%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDIbYRKC9mMSDwiQ0lircA9KmvjCiJo6OjSH6ofo2kXfxm1qJ0rMbSG3T92BHPW5pcxhMCpbyMxPkprXdbJHhWVFNV803qjBiOPKAr4GdlaNhhR5kvGtZktpHc26mIk8QKM00hq3ditpuentZlOb5ccuz2ntPw%2BJeDBm7MhB1%2FQOv3iHkvIrmMtmL5k1F3tfexVYwqbbKuSVBiShOUuq6F2MihDN3FKEkp7C%2BUpRXMcDvZQDsGS1Wj8uaseufhTPmZ2pey%2Bd4fdx4QM4Fa8b11NjXFdfVM6JvJGoqd1gP8My4w0dIfWuv0JdTJj0dERhEL5GM2l%2ByO4jItLXX8WMvht%2FqLshcWpEql0F0MmUSqkBj%2Fhep8ELfRR35ZjEDsIPuEZadKsYv5XU2OrERygDwC1Id%2Bed3XJjxew5ec0bqQ%2BRypI2Y9ntd1GVBfuivFIPhfls1J5jG%2FcvZf%2BFLQzn9E3KUE2U7gDORoqXTXTxjpB8zfJHxtJ49CNQ18M0%2BFpVBnM2wtfRxvim%2Fwps%2F5UC1zHPYZxHQmYLYLt8mtea6m8T%2BgzxSm%2FxbKGQIR%2FfoHomqCl5vR4pLXIuAXGYYhTAjlZHZElLMVAG%2FLdkOA8AZlEIZSYYzVlo6HIn25jFPTBa7NNOMDYTkVxGzxZqpMJCvvc4GOqUBeFtx0mLhvPEWzApBrHqqESzh60JRhNs5o20JWxqUr7YX4liiwYHv2kHIQNSc7PKLW91NtxhrdVQi5%2FDor0ijgR1rRTvwAVY8wC2gRBuwihPwZuvnSnPC85Nuli8TSd1XeDG%2BpoFiMCJUnuOs3RZuRGytokCrbYtPFIi%2FlD0%2FH4pxxsNmyvuB2VErcIO4OnT0dgqvErjKSuM2tiKgFT04hTlY9fHF&amp;X-Amz-Signature=997e12d54e93cead0b19fe74633697d05b6cb5da69db0104cb84d1cc55d36294&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;h2 id="12-界面总览">1.2 界面总览&lt;/h2>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/c1cc94cf-a1ef-4423-b5ba-25a1b07029dd/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466YMLCJUOP%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063648Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIBLLU4I%2F1Dexh3eUFdQxXqthWrLyRjoufuGPfrRFTgdaAiEAxOZCc%2F2kf51EE9bb%2Bvlu4lfawNQxolYAjp4ALh9RY58q%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDIbYRKC9mMSDwiQ0lircA9KmvjCiJo6OjSH6ofo2kXfxm1qJ0rMbSG3T92BHPW5pcxhMCpbyMxPkprXdbJHhWVFNV803qjBiOPKAr4GdlaNhhR5kvGtZktpHc26mIk8QKM00hq3ditpuentZlOb5ccuz2ntPw%2BJeDBm7MhB1%2FQOv3iHkvIrmMtmL5k1F3tfexVYwqbbKuSVBiShOUuq6F2MihDN3FKEkp7C%2BUpRXMcDvZQDsGS1Wj8uaseufhTPmZ2pey%2Bd4fdx4QM4Fa8b11NjXFdfVM6JvJGoqd1gP8My4w0dIfWuv0JdTJj0dERhEL5GM2l%2ByO4jItLXX8WMvht%2FqLshcWpEql0F0MmUSqkBj%2Fhep8ELfRR35ZjEDsIPuEZadKsYv5XU2OrERygDwC1Id%2Bed3XJjxew5ec0bqQ%2BRypI2Y9ntd1GVBfuivFIPhfls1J5jG%2FcvZf%2BFLQzn9E3KUE2U7gDORoqXTXTxjpB8zfJHxtJ49CNQ18M0%2BFpVBnM2wtfRxvim%2Fwps%2F5UC1zHPYZxHQmYLYLt8mtea6m8T%2BgzxSm%2FxbKGQIR%2FfoHomqCl5vR4pLXIuAXGYYhTAjlZHZElLMVAG%2FLdkOA8AZlEIZSYYzVlo6HIn25jFPTBa7NNOMDYTkVxGzxZqpMJCvvc4GOqUBeFtx0mLhvPEWzApBrHqqESzh60JRhNs5o20JWxqUr7YX4liiwYHv2kHIQNSc7PKLW91NtxhrdVQi5%2FDor0ijgR1rRTvwAVY8wC2gRBuwihPwZuvnSnPC85Nuli8TSd1XeDG%2BpoFiMCJUnuOs3RZuRGytokCrbYtPFIi%2FlD0%2FH4pxxsNmyvuB2VErcIO4OnT0dgqvErjKSuM2tiKgFT04hTlY9fHF&amp;X-Amz-Signature=8c282403b7d162e79bb9e8387de4a03133ce748869ad9caaf1d7485cf45ff2a7&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h1 id="2-我们可以用来做什么">2. 我们可以用来做什么？&lt;/h1>
+&lt;blockquote>
+&lt;p>💡 本次培训，我们从部门和个人两个维度，分别演示多个案例。&lt;/p>&lt;/blockquote>
+&lt;ul>
+&lt;li>项目管理、工单跟踪管理、部门周会日报…&lt;/li>
+&lt;li>待办清单&lt;/li>
+&lt;/ul>
+&lt;h2 id="21-部门常用">2.1 部门常用&lt;/h2>
+&lt;h3 id="211-项目管理">2.1.1 项目管理&lt;/h3>
+&lt;hr>
+&lt;h2 id="21-个人">2.1 个人&lt;/h2>
+&lt;h3 id="211-todo-list">2.1.1 Todo list&lt;/h3>
+&lt;blockquote>
+&lt;p>💡 创建个人向待办清单。可每天创建或每周创建。&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/c76f1e08-6e73-4284-a00a-074ed834c54b/PixPin_2026-01-22_12-38-01.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466YMLCJUOP%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063648Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIBLLU4I%2F1Dexh3eUFdQxXqthWrLyRjoufuGPfrRFTgdaAiEAxOZCc%2F2kf51EE9bb%2Bvlu4lfawNQxolYAjp4ALh9RY58q%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDIbYRKC9mMSDwiQ0lircA9KmvjCiJo6OjSH6ofo2kXfxm1qJ0rMbSG3T92BHPW5pcxhMCpbyMxPkprXdbJHhWVFNV803qjBiOPKAr4GdlaNhhR5kvGtZktpHc26mIk8QKM00hq3ditpuentZlOb5ccuz2ntPw%2BJeDBm7MhB1%2FQOv3iHkvIrmMtmL5k1F3tfexVYwqbbKuSVBiShOUuq6F2MihDN3FKEkp7C%2BUpRXMcDvZQDsGS1Wj8uaseufhTPmZ2pey%2Bd4fdx4QM4Fa8b11NjXFdfVM6JvJGoqd1gP8My4w0dIfWuv0JdTJj0dERhEL5GM2l%2ByO4jItLXX8WMvht%2FqLshcWpEql0F0MmUSqkBj%2Fhep8ELfRR35ZjEDsIPuEZadKsYv5XU2OrERygDwC1Id%2Bed3XJjxew5ec0bqQ%2BRypI2Y9ntd1GVBfuivFIPhfls1J5jG%2FcvZf%2BFLQzn9E3KUE2U7gDORoqXTXTxjpB8zfJHxtJ49CNQ18M0%2BFpVBnM2wtfRxvim%2Fwps%2F5UC1zHPYZxHQmYLYLt8mtea6m8T%2BgzxSm%2FxbKGQIR%2FfoHomqCl5vR4pLXIuAXGYYhTAjlZHZElLMVAG%2FLdkOA8AZlEIZSYYzVlo6HIn25jFPTBa7NNOMDYTkVxGzxZqpMJCvvc4GOqUBeFtx0mLhvPEWzApBrHqqESzh60JRhNs5o20JWxqUr7YX4liiwYHv2kHIQNSc7PKLW91NtxhrdVQi5%2FDor0ijgR1rRTvwAVY8wC2gRBuwihPwZuvnSnPC85Nuli8TSd1XeDG%2BpoFiMCJUnuOs3RZuRGytokCrbYtPFIi%2FlD0%2FH4pxxsNmyvuB2VErcIO4OnT0dgqvErjKSuM2tiKgFT04hTlY9fHF&amp;X-Amz-Signature=d9a671a07f3ba20cf639f0a7fa9daf321efda84f173ce15ecf8a82a03df4a337&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;details>&lt;summary>视频教程&lt;/summary>
+&lt;/details></description></item><item><title>Windows创建bat脚本踩坑</title><link>https://Pan-Binghong.github.io/daily-learning/other/windows%E5%88%9B%E5%BB%BAbat%E8%84%9A%E6%9C%AC%E8%B8%A9%E5%9D%91/</link><pubDate>Fri, 07 Nov 2025 05:54:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/windows%E5%88%9B%E5%BB%BAbat%E8%84%9A%E6%9C%AC%E8%B8%A9%E5%9D%91/</guid><description>&lt;blockquote>
+&lt;p>💡&lt;/p>&lt;/blockquote>
+&lt;h2 id="解决方法">解决方法&lt;/h2>
+&lt;h3 id="在windows记事本中重新创建">在Windows记事本中重新创建&lt;/h3>
+&lt;ol>
+&lt;li>打开记事本（Notepad）&lt;/li>
+&lt;li>复制脚本&lt;/li>
+&lt;li>另存为，修改编码格式和文件后缀&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;blockquote>
+&lt;p>当使用编辑器打开保存后的bat文件，显示乱码是正常的。&lt;/p>&lt;/blockquote></description></item><item><title>Windows设置定时任务</title><link>https://Pan-Binghong.github.io/daily-learning/other/windows%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</link><pubDate>Wed, 05 Nov 2025 04:40:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/windows%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</guid><description>&lt;ol>
+&lt;li>打开cmd, 输入taskschd.msc ，弹出任务计划程序页面&lt;/li>
+&lt;li>创建基本任务&lt;/li>
+&lt;li>依次输入基本任务的参数配置&lt;/li>
+&lt;li>设置任务级别&lt;/li>
+&lt;li>运行测试&lt;/li>
+&lt;li>刷新后查看运行结果是否正常&lt;/li>
+&lt;/ol></description></item><item><title>Linux 挂载 Windows 共享文件夹（SMB/CIFS）完整指南</title><link>https://Pan-Binghong.github.io/daily-learning/other/linux-%E6%8C%82%E8%BD%BD-windows-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9smbcifs%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</link><pubDate>Fri, 31 Oct 2025 10:22:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/linux-%E6%8C%82%E8%BD%BD-windows-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9smbcifs%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</guid><description>&lt;p>在 Linux 中挂载 Windows 的共享文件夹，使用的是 SMB/CIFS 协议。下面是详细的操作步骤：&lt;/p>
+&lt;hr>
+&lt;h2 id="一前提条件">一、前提条件&lt;/h2>
+&lt;ol>
+&lt;li>Windows 端已开启文件夹共享（右键文件夹 → 属性 → 共享）&lt;/li>
+&lt;li>Linux 端需要有 root 或 sudo 权限&lt;/li>
+&lt;li>两台机器之间网络互通（可以互相 ping 通）&lt;/li>
+&lt;li>知道 Windows 共享的用户名和密码 [1]&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="二linux-端安装-cifs-utils">二、Linux 端安装 cifs-utils&lt;/h2>
+&lt;p>cifs-utils 是 Linux 挂载 SMB/CIFS 共享所需的工具包 [5]。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Debian / Ubuntu 系列&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install cifs-utils
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># RHEL / CentOS / Rocky Linux 系列&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo dnf install cifs-utils
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 旧版 CentOS&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo yum install cifs-utils
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h2 id="三临时挂载重启后失效">三、临时挂载（重启后失效）&lt;/h2>
+&lt;h3 id="1-创建挂载点目录">1. 创建挂载点目录&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo mkdir -p /mnt/winshare
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="2-执行挂载命令">2. 执行挂载命令&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo mount -t cifs -o &lt;span class="nv">username&lt;/span>&lt;span class="o">=&lt;/span>Windows用户名,password&lt;span class="o">=&lt;/span>Windows密码 //Windows_IP/共享文件夹名 /mnt/winshare
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>实际示例（假设 Windows IP 为 192.168.1.100，共享文件夹名为 share，用户名 admin，密码 123456）：&lt;/p></description></item><item><title>将Windows的文件夹设置为共享文件夹（设置SMB共享）</title><link>https://Pan-Binghong.github.io/daily-learning/other/%E5%B0%86windows%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E8%AE%BE%E7%BD%AE%E4%B8%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9%E8%AE%BE%E7%BD%AEsmb%E5%85%B1%E4%BA%AB/</link><pubDate>Fri, 31 Oct 2025 10:22:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/%E5%B0%86windows%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E8%AE%BE%E7%BD%AE%E4%B8%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9%E8%AE%BE%E7%BD%AEsmb%E5%85%B1%E4%BA%AB/</guid><description>&lt;h3 id="步骤一">步骤一&lt;/h3>
+&lt;ol>
+&lt;li>打开「控制面板」→「网络和共享中心」→「更改高级共享设置」&lt;/li>
+&lt;li>启用：&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>网络发现&lt;/li>
+&lt;li>文件和打印机共享&lt;/li>
+&lt;/ul>
+&lt;h3 id="步骤二">步骤二&lt;/h3>
+&lt;ol>
+&lt;li>选择需要共享的目录&lt;/li>
+&lt;li>右键 → 属性 → 共享 → 高级共享 → 勾选“共享此文件夹” → 设置共享名&lt;/li>
+&lt;/ol>
+&lt;h3 id="步骤三">步骤三&lt;/h3>
+&lt;p>在ubuntu服务器中运行:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-docker" data-lang="docker">&lt;span class="line">&lt;span class="cl">sudo apt install -y cifs-utils&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="0-打开tmux-切换双终端进行操作">0. 打开tmux, 切换双终端进行操作&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 创建tmux会话&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tmux
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 创建分屏显示&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$ctrl&lt;/span> + b 再按 %
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$ctrl&lt;/span> + b 再按 ⬅️ or 👉
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="1-运行监控脚本">1. 运行监控脚本&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="o">/&lt;/span>&lt;span class="n">home&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">ai&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dev&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">pan&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">myscript&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">myenv&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nb">bin&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">python3&lt;/span>&lt;span class="mf">.12&lt;/span> &lt;span class="n">monitor_mirror_v2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">py&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">~/&lt;/span>&lt;span class="n">pan&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">b&lt;/span> &lt;span class="n">haohong&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">pan&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>-s表示本地目录&lt;/li>
+&lt;li>-b表示bucket桶的位置&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-运行上传命令">2. 运行上传命令&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mc mirror /home/ai-dev/pan myminio/haohong/pan --overwrite --retry --ship--errors
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">&lt;span class="gh"># 批量上传文件到MiniO
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gh">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gu">## 一、将Windows的文件夹设置为共享文件夹（设置SMB共享）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gu">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gu">### 步骤一
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gu">&lt;/span>&lt;span class="k">1.&lt;/span> 打开「控制面板」→「网络和共享中心」→「更改高级共享设置」
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">2.&lt;/span> 启用：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">-&lt;/span> 网络发现
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">-&lt;/span> 文件和打印机共享
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gu">### 步骤二
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gu">&lt;/span>&lt;span class="k">1.&lt;/span> 选择需要共享的目录
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">2.&lt;/span> 右键 → 属性 → 共享 → 高级共享 → 勾选“共享此文件夹” → 设置共享名
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gu">### 步骤三
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gu">&lt;/span>在ubuntu服务器中运行:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">```bash
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y cifs-utils
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gh"># 创建挂载点
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gh">&lt;/span>sudo mkdir -p /mnt/TestWindowsShare
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gh"># 临时手动挂载测试（替换 IP 和路径）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gh">&lt;/span>sudo mount -t cifs \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;//10.36.67.49/qc_data&amp;#34; \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /mnt/TestWindowsShare \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> -o username=Administrator,password=123,dom=WORKGROUP,vers=2.0,iocharset=utf8
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>检查是否挂载成功: &lt;code>ls -la /mnt/TestWindowsShare&lt;/code>&lt;/p></description></item><item><title>Ubuntu挂载Windows的共享文件夹</title><link>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</link><pubDate>Fri, 31 Oct 2025 08:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</guid><description>&lt;ol>
+&lt;li>创建凭据文件，将windows的账号、密码写入配置文件.smbcredentials 中&lt;/li>
+&lt;li>挂载&lt;/li>
+&lt;/ol></description></item><item><title>Git在Windows中出现Line Endings警告提示</title><link>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</link><pubDate>Wed, 29 Oct 2025 03:19:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/git%E5%9C%A8windows%E4%B8%AD%E5%87%BA%E7%8E%B0line-endings%E8%AD%A6%E5%91%8A%E6%8F%90%E7%A4%BA/</guid><description>&lt;p>这个警告的原因是 Git 在 Windows 系统上会自动将 LF（Linux/Mac 风格的换行符）转换为 CRLF（Windows 风格的换行符）。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="o">#&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">禁用自动转换&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="n">git&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">config&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c1">--global core.autocrlf false
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">#&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">删除已暂存的文件&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="n">git&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">rm&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">r&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c1">--cached .
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">#&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">重新添加所有文件&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="n">git&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">add&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>DBeaver连接Mysql8失败</title><link>https://Pan-Binghong.github.io/daily-learning/other/dbeaver%E8%BF%9E%E6%8E%A5mysql8%E5%A4%B1%E8%B4%A5/</link><pubDate>Thu, 09 Oct 2025 02:35:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/dbeaver%E8%BF%9E%E6%8E%A5mysql8%E5%A4%B1%E8%B4%A5/</guid><description>&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/bd9f66ea-b1d1-4a9a-9127-798dff44eb43/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_17599772003331.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466RUURPSQM%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063645Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIASMUXXlZdFtSGFC%2FqoKzJf0%2BXbRf1Z1r1m3AUolewRkAiEA%2BWB6GtRXNshgZOP0k%2B%2Bf1vn6FwvzmjwpPyElPjZARK4q%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDKt0JhocXMGvdmgZ8ircA0pwg3Q7ruvsONoEKQ4idgnzvsjFHN%2Fw3pp1yXmMLJC4cpyznQZwqL6w61ZtlbUTkyC%2Ft9t%2BQlGMdVbSwCYEwBdyuO1TFyF11FgFFq4gmTf5HpvuBGxY0OiVtUMBTycT3wSR5TgZ%2BEWholk4MaUDnIngv%2F5GCPeU8OjdpX%2F71WcKC%2FEnkJNi8HxM5JhRTRCUqtFJF%2FSTuRa7qpLzuDipZmOfEVeHtAOJV%2FDp9AATrE5xE5TXj0f9jDkktERotFEI%2Fa5Ov%2Byr0Guli1TOe49tURea05g8v5uuKrOnqi74nTGBnbYx1P4OOT4QTID8Eyh2X%2FsDZ3mdGgbBIk0by0atlR6TpyRFidvD9opk%2FXH1dx6suvebJmzV26mPZ8gZ1kJZu61s%2FeEzJIsleQwKJrFr0TR9Pd1izzScpAoHMmz8guvlHnZH1EJ511PZSYTvITZxeLyzxj3Qeq9io8rfJ%2FTkkDBj7EJkfZeYSMDptiRzyexKSPO6c%2BqiEC%2FVeVVu8rPW%2B2n5yrt6hErhqVbj7grZJk3QeM8T7c6KT2DHdbgMzA%2Fa0smOTnp7fpO1OLzjAmGTsVf3%2FMsviRvK8otuMbptueBgAUxnwwQqbOP2nPyQwuAhyb%2FzeFucXFgFgR9FMN2uvc4GOqUBF3YVsE41Cc0VZGQi2a5ZRLFWec2E1OEscQhzwpZWjsGpzme96ca3xfxQXe9UdnuCsC4%2FIENY6a3OfRr67B51nP2dxKMTpDujUUKj3e3%2BruKYIZFtvA1Ab%2BKll5i6OvM7SqkPDaE067YhUY0CFsCqqesK3vF02n1tX2or5evYkCKa5gEHURGjGWo6H6ZEo7Pked5IiBn2r2d3zz2eiwYkwR%2FlrP%2FN&amp;X-Amz-Signature=c48aa048c7ac75092d54c835b0129740f87b4ec23204697bbef9c72844eab13b&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/4010ec00-f198-4739-aa20-4dea4e8eceae/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_17599772304812.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466RUURPSQM%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063645Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIASMUXXlZdFtSGFC%2FqoKzJf0%2BXbRf1Z1r1m3AUolewRkAiEA%2BWB6GtRXNshgZOP0k%2B%2Bf1vn6FwvzmjwpPyElPjZARK4q%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDKt0JhocXMGvdmgZ8ircA0pwg3Q7ruvsONoEKQ4idgnzvsjFHN%2Fw3pp1yXmMLJC4cpyznQZwqL6w61ZtlbUTkyC%2Ft9t%2BQlGMdVbSwCYEwBdyuO1TFyF11FgFFq4gmTf5HpvuBGxY0OiVtUMBTycT3wSR5TgZ%2BEWholk4MaUDnIngv%2F5GCPeU8OjdpX%2F71WcKC%2FEnkJNi8HxM5JhRTRCUqtFJF%2FSTuRa7qpLzuDipZmOfEVeHtAOJV%2FDp9AATrE5xE5TXj0f9jDkktERotFEI%2Fa5Ov%2Byr0Guli1TOe49tURea05g8v5uuKrOnqi74nTGBnbYx1P4OOT4QTID8Eyh2X%2FsDZ3mdGgbBIk0by0atlR6TpyRFidvD9opk%2FXH1dx6suvebJmzV26mPZ8gZ1kJZu61s%2FeEzJIsleQwKJrFr0TR9Pd1izzScpAoHMmz8guvlHnZH1EJ511PZSYTvITZxeLyzxj3Qeq9io8rfJ%2FTkkDBj7EJkfZeYSMDptiRzyexKSPO6c%2BqiEC%2FVeVVu8rPW%2B2n5yrt6hErhqVbj7grZJk3QeM8T7c6KT2DHdbgMzA%2Fa0smOTnp7fpO1OLzjAmGTsVf3%2FMsviRvK8otuMbptueBgAUxnwwQqbOP2nPyQwuAhyb%2FzeFucXFgFgR9FMN2uvc4GOqUBF3YVsE41Cc0VZGQi2a5ZRLFWec2E1OEscQhzwpZWjsGpzme96ca3xfxQXe9UdnuCsC4%2FIENY6a3OfRr67B51nP2dxKMTpDujUUKj3e3%2BruKYIZFtvA1Ab%2BKll5i6OvM7SqkPDaE067YhUY0CFsCqqesK3vF02n1tX2or5evYkCKa5gEHURGjGWo6H6ZEo7Pked5IiBn2r2d3zz2eiwYkwR%2FlrP%2FN&amp;X-Amz-Signature=1627f2fca6e9b8d0a51f3a4144ad499dcdb74236f92b02bf204f65ecf49ecd03&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p></description></item><item><title>Nano Banana手办提示词</title><link>https://Pan-Binghong.github.io/daily-learning/other/nano-banana%E6%89%8B%E5%8A%9E%E6%8F%90%E7%A4%BA%E8%AF%8D/</link><pubDate>Fri, 05 Sep 2025 01:21:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/nano-banana%E6%89%8B%E5%8A%9E%E6%8F%90%E7%A4%BA%E8%AF%8D/</guid><description>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">Use the nano-banana model to create a 1/7 scale commercialized figure of thecharacter in the illustration, in a realistic style and environment.Place the figure on a computer desk, using a circular transparent acrylic basewithout any text. On the computer screen, display the ZBrush modeling process of the figure.Next to the computer screen, place a BANDAl-style toy packaging box printedwith the original artwork.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>好用好看的nvidia-smi</title><link>https://Pan-Binghong.github.io/daily-learning/other/%E5%A5%BD%E7%94%A8%E5%A5%BD%E7%9C%8B%E7%9A%84nvidia-smi/</link><pubDate>Mon, 24 Mar 2025 16:02:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/%E5%A5%BD%E7%94%A8%E5%A5%BD%E7%9C%8B%E7%9A%84nvidia-smi/</guid><description>&lt;blockquote>
+&lt;p>💡 找到一个比nvidia-smi展示gpu更加美观的工具。在此记录一下。&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/167921cd-a496-4b4d-8768-9b56d39ca4ed/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466R7K3S7TC%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063645Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDBDtoa%2Fn2szGkbLvvyiZeUDQ4Pv1up8%2FBR13QYAWJCiwIgdEyzQv0%2FiKbvA8qhPZPKJM71NTwMeHBe1I48MlktCeAq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDD%2F95bF1WexyF3B2KCrcA%2FJx3aypRRo5H3lCZLEZkyTXhj9D6HXDx8Cy817h4%2BAH1dhRgyyC6ERB%2FUqJZxgoWvEGQWKLOWB5Uv2ncTgEe9ADV1%2BQxe%2BJ70KykWk72ZJj4z0YZPejE6q0Eh0Au72BGpVgEwaDsJrwtLFn4vB0mIfXKPJuzrC9UoHQEIrAVp1tNma7whEcZewxRfMk4EO1NE86eyPkVUvX9luQYwIko1f%2BBvTC%2BeaKZt75AvBvEd0UOLgRHK8DY50JMngdm01ig2aBIVypS0UwgQnEuFHxjCEBwwsCxioFo9Ptldi9DykJbyQAXQ5VaV1NNlgmNsmFCccMpbVjlLdLtGvZDZdAAKfYVy3j3J9CrA1sMknGu5VtvAHyKvqzMTdz41MAQj5EbuGz54FS8eOuaQsCOBtEUyHl2PVbLJU0F1Pr6p4eHsSaczqhS2Gf0X8eAsPUcU5%2FdVJt%2FAXoVC3we6eQf5hnOh3ut7QMZbgkKeG77flKFAstcTu%2FPE8QKRoSIizOEZF2EXCMFxWyfAZY3aqKEBovl1OYp43w0K%2BUWVx0i1CArkqQyfym4Gv6USF0xObD6Cm7cpiKW71KWfHZ2RJbM6qpP0dF929iOlVm7Ba8NNa4iCWUiYJsxPqTJVK16wmkMI6svc4GOqUBiklqtX0GOUBCZxDRrTXTL36UkxidsETg%2FPfMaafPyRi2KhxDrTOap5f%2BZYNak0pzx7GFP9C60GD%2B3bdgrQhiSB9Gl61KGikfMsnCsnSlVhwLDn26VibnWpAZ0p8Q%2FdQ36KZpmhPb9WR4kyv1KADhqQDRpgOF32H40StLyYCf9O9PN6lAGwIlweR1Yvqo%2B37urut3Ox55tT%2FzrJ4Hi39xdRU3DKB9&amp;X-Amz-Signature=e38d79aa4669b381f9d0502aebbb00aae8f7292c108447568d715646611410ef&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">pip&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">nvitop&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h2 id="查看gpu状态">查看gpu状态&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">nvitop&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>查看更加详细的gpu内容&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">nvitop&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">m&lt;/span> &lt;span class="n">full&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/38595db5-5c7e-4dcb-ab27-48bf45fecafc/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466R7K3S7TC%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063645Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDBDtoa%2Fn2szGkbLvvyiZeUDQ4Pv1up8%2FBR13QYAWJCiwIgdEyzQv0%2FiKbvA8qhPZPKJM71NTwMeHBe1I48MlktCeAq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDD%2F95bF1WexyF3B2KCrcA%2FJx3aypRRo5H3lCZLEZkyTXhj9D6HXDx8Cy817h4%2BAH1dhRgyyC6ERB%2FUqJZxgoWvEGQWKLOWB5Uv2ncTgEe9ADV1%2BQxe%2BJ70KykWk72ZJj4z0YZPejE6q0Eh0Au72BGpVgEwaDsJrwtLFn4vB0mIfXKPJuzrC9UoHQEIrAVp1tNma7whEcZewxRfMk4EO1NE86eyPkVUvX9luQYwIko1f%2BBvTC%2BeaKZt75AvBvEd0UOLgRHK8DY50JMngdm01ig2aBIVypS0UwgQnEuFHxjCEBwwsCxioFo9Ptldi9DykJbyQAXQ5VaV1NNlgmNsmFCccMpbVjlLdLtGvZDZdAAKfYVy3j3J9CrA1sMknGu5VtvAHyKvqzMTdz41MAQj5EbuGz54FS8eOuaQsCOBtEUyHl2PVbLJU0F1Pr6p4eHsSaczqhS2Gf0X8eAsPUcU5%2FdVJt%2FAXoVC3we6eQf5hnOh3ut7QMZbgkKeG77flKFAstcTu%2FPE8QKRoSIizOEZF2EXCMFxWyfAZY3aqKEBovl1OYp43w0K%2BUWVx0i1CArkqQyfym4Gv6USF0xObD6Cm7cpiKW71KWfHZ2RJbM6qpP0dF929iOlVm7Ba8NNa4iCWUiYJsxPqTJVK16wmkMI6svc4GOqUBiklqtX0GOUBCZxDRrTXTL36UkxidsETg%2FPfMaafPyRi2KhxDrTOap5f%2BZYNak0pzx7GFP9C60GD%2B3bdgrQhiSB9Gl61KGikfMsnCsnSlVhwLDn26VibnWpAZ0p8Q%2FdQ36KZpmhPb9WR4kyv1KADhqQDRpgOF32H40StLyYCf9O9PN6lAGwIlweR1Yvqo%2B37urut3Ox55tT%2FzrJ4Hi39xdRU3DKB9&amp;X-Amz-Signature=e8417c077e767263262b0d454c0d8bcd0935b873de4c452aaed5f29bd765a05b&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p></description></item><item><title>Win11安装WSL2</title><link>https://Pan-Binghong.github.io/daily-learning/other/win11%E5%AE%89%E8%A3%85wsl2/</link><pubDate>Sat, 30 Nov 2024 07:00:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/win11%E5%AE%89%E8%A3%85wsl2/</guid><description>&lt;blockquote>
+&lt;p>💡 VMware实在是太占内存了，然后Linux系统打算用WSL2来弄。这里记录一下安装WSL2的全流程。更详细的过程可以参考引用的帖子，这个大佬写的很详细，方法也很多。&lt;/p>&lt;/blockquote>
+&lt;h2 id="启动windows子系统以及虚拟化">启动Windows子系统以及虚拟化&lt;/h2>
+&lt;ul>
+&lt;li>打开PowerShell（使用管理员方式）&lt;/li>
+&lt;li>依次输入以下命令：&lt;/li>
+&lt;/ul>
+&lt;h2 id="安装系统">安装系统&lt;/h2>
+&lt;ul>
+&lt;li>打开PowerShell（使用管理员方式）&lt;/li>
+&lt;li>依次输入以下命令：&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="额外补充">额外补充&lt;/h2>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>Apache2.0开源软件许可协议</title><link>https://Pan-Binghong.github.io/daily-learning/other/apache2.0%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE/</link><pubDate>Fri, 29 Nov 2024 11:23:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/apache2.0%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE/</guid><description>&lt;blockquote>
+&lt;p>💡 Apache License（Apache许可证），是Apache软件基金会发布的一个自由软件许可证。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;p>Apache Licence是著名的非盈利开源组织Apache采用的协议。该协议和BSD类似，同样鼓励代码共享和最终原作者的著作权，同样允许源代码修改和再发布。但是也需要遵循以下条件：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>需要给代码的用户一份Apache Licence。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>如果修改了代码，需要再被修改的文件中说明。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>在衍生的代码中（修改和有源代码衍生的代码中）需要带有原来代码中的协议，商标，专利声明和其他原来作者规定需要包含的说明。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有Apache Licence。你可以再Notice中增加自己的许可，但是不可以表现为对Apache Licence构成更改。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Apache Licence也是对商业应用友好的许可。使用者也可以再需要的时候修改代码来满足并作为开源或商业产品发布/销售。
+使用这个协议的好处是:&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>永久权利 一旦被授权，永久拥有。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>全球范围的权利 在一个国家获得授权，适用于所有国家。假如你在美国，许可是从印度授权的，也没有问题。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>授权免费 无版税， 前期、后期均无任何费用。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>授权无排他性 任何人都可以获得授权&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>授权不可撤消 一旦获得授权，没有任何人可以取消。比如，你基于该产品代码开发了衍生产品，你不用担心会在某一天被禁止使用该代码&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="apache20-license-官方文本">Apache2.0 License 官方文本&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;span class="lnt">136
+&lt;/span>&lt;span class="lnt">137
+&lt;/span>&lt;span class="lnt">138
+&lt;/span>&lt;span class="lnt">139
+&lt;/span>&lt;span class="lnt">140
+&lt;/span>&lt;span class="lnt">141
+&lt;/span>&lt;span class="lnt">142
+&lt;/span>&lt;span class="lnt">143
+&lt;/span>&lt;span class="lnt">144
+&lt;/span>&lt;span class="lnt">145
+&lt;/span>&lt;span class="lnt">146
+&lt;/span>&lt;span class="lnt">147
+&lt;/span>&lt;span class="lnt">148
+&lt;/span>&lt;span class="lnt">149
+&lt;/span>&lt;span class="lnt">150
+&lt;/span>&lt;span class="lnt">151
+&lt;/span>&lt;span class="lnt">152
+&lt;/span>&lt;span class="lnt">153
+&lt;/span>&lt;span class="lnt">154
+&lt;/span>&lt;span class="lnt">155
+&lt;/span>&lt;span class="lnt">156
+&lt;/span>&lt;span class="lnt">157
+&lt;/span>&lt;span class="lnt">158
+&lt;/span>&lt;span class="lnt">159
+&lt;/span>&lt;span class="lnt">160
+&lt;/span>&lt;span class="lnt">161
+&lt;/span>&lt;span class="lnt">162
+&lt;/span>&lt;span class="lnt">163
+&lt;/span>&lt;span class="lnt">164
+&lt;/span>&lt;span class="lnt">165
+&lt;/span>&lt;span class="lnt">166
+&lt;/span>&lt;span class="lnt">167
+&lt;/span>&lt;span class="lnt">168
+&lt;/span>&lt;span class="lnt">169
+&lt;/span>&lt;span class="lnt">170
+&lt;/span>&lt;span class="lnt">171
+&lt;/span>&lt;span class="lnt">172
+&lt;/span>&lt;span class="lnt">173
+&lt;/span>&lt;span class="lnt">174
+&lt;/span>&lt;span class="lnt">175
+&lt;/span>&lt;span class="lnt">176
+&lt;/span>&lt;span class="lnt">177
+&lt;/span>&lt;span class="lnt">178
+&lt;/span>&lt;span class="lnt">179
+&lt;/span>&lt;span class="lnt">180
+&lt;/span>&lt;span class="lnt">181
+&lt;/span>&lt;span class="lnt">182
+&lt;/span>&lt;span class="lnt">183
+&lt;/span>&lt;span class="lnt">184
+&lt;/span>&lt;span class="lnt">185
+&lt;/span>&lt;span class="lnt">186
+&lt;/span>&lt;span class="lnt">187
+&lt;/span>&lt;span class="lnt">188
+&lt;/span>&lt;span class="lnt">189
+&lt;/span>&lt;span class="lnt">190
+&lt;/span>&lt;span class="lnt">191
+&lt;/span>&lt;span class="lnt">192
+&lt;/span>&lt;span class="lnt">193
+&lt;/span>&lt;span class="lnt">194
+&lt;/span>&lt;span class="lnt">195
+&lt;/span>&lt;span class="lnt">196
+&lt;/span>&lt;span class="lnt">197
+&lt;/span>&lt;span class="lnt">198
+&lt;/span>&lt;span class="lnt">199
+&lt;/span>&lt;span class="lnt">200
+&lt;/span>&lt;span class="lnt">201
+&lt;/span>&lt;span class="lnt">202
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Apache License
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Version 2.0, January &lt;span class="m">2004&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> http://www.apache.org/licenses/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 1. Definitions.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;License&amp;#34;&lt;/span> shall mean the terms and conditions &lt;span class="k">for&lt;/span> use, reproduction,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> and distribution as defined by Sections &lt;span class="m">1&lt;/span> through &lt;span class="m">9&lt;/span> of this document.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Licensor&amp;#34;&lt;/span> shall mean the copyright owner or entity authorized by
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the copyright owner that is granting the License.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Legal Entity&amp;#34;&lt;/span> shall mean the union of the acting entity and all
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> other entities that control, are controlled by, or are under common
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> control with that entity. For the purposes of this definition,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;control&amp;#34;&lt;/span> means &lt;span class="o">(&lt;/span>i&lt;span class="o">)&lt;/span> the power, direct or indirect, to cause the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> direction or management of such entity, whether by contract or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> otherwise, or &lt;span class="o">(&lt;/span>ii&lt;span class="o">)&lt;/span> ownership of fifty percent &lt;span class="o">(&lt;/span>50%&lt;span class="o">)&lt;/span> or more of the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> outstanding shares, or &lt;span class="o">(&lt;/span>iii&lt;span class="o">)&lt;/span> beneficial ownership of such entity.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;You&amp;#34;&lt;/span> &lt;span class="o">(&lt;/span>or &lt;span class="s2">&amp;#34;Your&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span> shall mean an individual or Legal Entity
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> exercising permissions granted by this License.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Source&amp;#34;&lt;/span> form shall mean the preferred form &lt;span class="k">for&lt;/span> making modifications,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> including but not limited to software &lt;span class="nb">source&lt;/span> code, documentation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> source, and configuration files.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Object&amp;#34;&lt;/span> form shall mean any form resulting from mechanical
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> transformation or translation of a Source form, including but
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> not limited to compiled object code, generated documentation,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> and conversions to other media types.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Work&amp;#34;&lt;/span> shall mean the work of authorship, whether in Source or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Object form, made available under the License, as indicated by a
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> copyright notice that is included in or attached to the work
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>an example is provided in the Appendix below&lt;span class="o">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Derivative Works&amp;#34;&lt;/span> shall mean any work, whether in Source or Object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> form, that is based on &lt;span class="o">(&lt;/span>or derived from&lt;span class="o">)&lt;/span> the Work and &lt;span class="k">for&lt;/span> which the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> editorial revisions, annotations, elaborations, or other modifications
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> represent, as a whole, an original work of authorship. For the purposes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> of this License, Derivative Works shall not include works that remain
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> separable from, or merely link &lt;span class="o">(&lt;/span>or &lt;span class="nb">bind&lt;/span> by name&lt;span class="o">)&lt;/span> to the interfaces of,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the Work and Derivative Works thereof.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Contribution&amp;#34;&lt;/span> shall mean any work of authorship, including
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the original version of the Work and any modifications or additions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> to that Work or Derivative Works thereof, that is intentionally
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> submitted to Licensor &lt;span class="k">for&lt;/span> inclusion in the Work by the copyright owner
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> or by an individual or Legal Entity authorized to submit on behalf of
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the copyright owner. For the purposes of this definition, &lt;span class="s2">&amp;#34;submitted&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> means any form of electronic, verbal, or written communication sent
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> to the Licensor or its representatives, including but not limited to
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> communication on electronic mailing lists, &lt;span class="nb">source&lt;/span> code control systems,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> and issue tracking systems that are managed by, or on behalf of, the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Licensor &lt;span class="k">for&lt;/span> the purpose of discussing and improving the Work, but
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> excluding communication that is conspicuously marked or otherwise
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> designated in writing by the copyright owner as &lt;span class="s2">&amp;#34;Not a Contribution.&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Contributor&amp;#34;&lt;/span> shall mean Licensor and any individual or Legal Entity
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> on behalf of whom a Contribution has been received by Licensor and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> subsequently incorporated within the Work.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2. Grant of Copyright License. Subject to the terms and conditions of
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this License, each Contributor hereby grants to You a perpetual,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> copyright license to reproduce, prepare Derivative Works of,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> publicly display, publicly perform, sublicense, and distribute the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Work and such Derivative Works in Source or Object form.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 3. Grant of Patent License. Subject to the terms and conditions of
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this License, each Contributor hereby grants to You a perpetual,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>except as stated in this section&lt;span class="o">)&lt;/span> patent license to make, have made,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> use, offer to sell, sell, import, and otherwise transfer the Work,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> where such license applies only to those patent claims licensable
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> by such Contributor that are necessarily infringed by their
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Contribution&lt;span class="o">(&lt;/span>s&lt;span class="o">)&lt;/span> alone or by combination of their Contribution&lt;span class="o">(&lt;/span>s&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with the Work to which such Contribution&lt;span class="o">(&lt;/span>s&lt;span class="o">)&lt;/span> was submitted. If You
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> institute patent litigation against any entity &lt;span class="o">(&lt;/span>including a
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cross-claim or counterclaim in a lawsuit&lt;span class="o">)&lt;/span> alleging that the Work
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> or a Contribution incorporated within the Work constitutes direct
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> or contributory patent infringement, &lt;span class="k">then&lt;/span> any patent licenses
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> granted to You under this License &lt;span class="k">for&lt;/span> that Work shall terminate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> as of the date such litigation is filed.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 4. Redistribution. You may reproduce and distribute copies of the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Work or Derivative Works thereof in any medium, with or without
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> modifications, and in Source or Object form, provided that You
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> meet the following conditions:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>a&lt;span class="o">)&lt;/span> You must give any other recipients of the Work or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Derivative Works a copy of this License&lt;span class="p">;&lt;/span> and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>b&lt;span class="o">)&lt;/span> You must cause any modified files to carry prominent notices
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> stating that You changed the files&lt;span class="p">;&lt;/span> and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>c&lt;span class="o">)&lt;/span> You must retain, in the Source form of any Derivative Works
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> that You distribute, all copyright, patent, trademark, and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> attribution notices from the Source form of the Work,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> excluding those notices that &lt;span class="k">do&lt;/span> not pertain to any part of
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the Derivative Works&lt;span class="p">;&lt;/span> and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>d&lt;span class="o">)&lt;/span> If the Work includes a &lt;span class="s2">&amp;#34;NOTICE&amp;#34;&lt;/span> text file as part of its
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> distribution, &lt;span class="k">then&lt;/span> any Derivative Works that You distribute must
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> include a readable copy of the attribution notices contained
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> within such NOTICE file, excluding those notices that &lt;span class="k">do&lt;/span> not
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pertain to any part of the Derivative Works, in at least one
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> of the following places: within a NOTICE text file distributed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> as part of the Derivative Works&lt;span class="p">;&lt;/span> within the Source form or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> documentation, &lt;span class="k">if&lt;/span> provided along with the Derivative Works&lt;span class="p">;&lt;/span> or,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> within a display generated by the Derivative Works, &lt;span class="k">if&lt;/span> and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> wherever such third-party notices normally appear. The contents
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> of the NOTICE file are &lt;span class="k">for&lt;/span> informational purposes only and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">do&lt;/span> not modify the License. You may add Your own attribution
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> notices within Derivative Works that You distribute, alongside
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> or as an addendum to the NOTICE text from the Work, provided
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> that such additional attribution notices cannot be construed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> as modifying the License.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> You may add Your own copyright statement to Your modifications and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> may provide additional or different license terms and conditions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> use, reproduction, or distribution of Your modifications, or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> any such Derivative Works as a whole, provided Your use,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> reproduction, and distribution of the Work otherwise complies with
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the conditions stated in this License.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 5. Submission of Contributions. Unless You explicitly state otherwise,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> any Contribution intentionally submitted &lt;span class="k">for&lt;/span> inclusion in the Work
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> by You to the Licensor shall be under the terms and conditions of
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this License, without any additional terms or conditions.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Notwithstanding the above, nothing herein shall supersede or modify
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the terms of any separate license agreement you may have executed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with Licensor regarding such Contributions.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 6. Trademarks. This License does not grant permission to use the trade
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> names, trademarks, service marks, or product names of the Licensor,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> except as required &lt;span class="k">for&lt;/span> reasonable and customary use in describing the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> origin of the Work and reproducing the content of the NOTICE file.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 7. Disclaimer of Warranty. Unless required by applicable law or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> agreed to in writing, Licensor provides the Work &lt;span class="o">(&lt;/span>and each
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Contributor provides its Contributions&lt;span class="o">)&lt;/span> on an &lt;span class="s2">&amp;#34;AS IS&amp;#34;&lt;/span> BASIS,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> implied, including, without limitation, any warranties or conditions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> PARTICULAR PURPOSE. You are solely responsible &lt;span class="k">for&lt;/span> determining the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> appropriateness of using or redistributing the Work and assume any
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> risks associated with Your exercise of permissions under this License.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 8. Limitation of Liability. In no event and under no legal theory,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> whether in tort &lt;span class="o">(&lt;/span>including negligence&lt;span class="o">)&lt;/span>, contract, or otherwise,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> unless required by applicable law &lt;span class="o">(&lt;/span>such as deliberate and grossly
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> negligent acts&lt;span class="o">)&lt;/span> or agreed to in writing, shall any Contributor be
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> liable to You &lt;span class="k">for&lt;/span> damages, including any direct, indirect, special,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> incidental, or consequential damages of any character arising as a
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> result of this License or out of the use or inability to use the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Work &lt;span class="o">(&lt;/span>including but not limited to damages &lt;span class="k">for&lt;/span> loss of goodwill,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> work stoppage, computer failure or malfunction, or any and all
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> other commercial damages or losses&lt;span class="o">)&lt;/span>, even &lt;span class="k">if&lt;/span> such Contributor
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> has been advised of the possibility of such damages.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 9. Accepting Warranty or Additional Liability. While redistributing
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the Work or Derivative Works thereof, You may choose to offer,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> and charge a fee &lt;span class="k">for&lt;/span>, acceptance of support, warranty, indemnity,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> or other liability obligations and/or rights consistent with this
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> License. However, in accepting such obligations, You may act only
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> on Your own behalf and on Your sole responsibility, not on behalf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> of any other Contributor, and only &lt;span class="k">if&lt;/span> You agree to indemnify,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> defend, and hold each Contributor harmless &lt;span class="k">for&lt;/span> any liability
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> incurred by, or claims asserted against, such Contributor by reason
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> of your accepting any such warranty or additional liability.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> END OF TERMS AND CONDITIONS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> APPENDIX: How to apply the Apache License to your work.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> To apply the Apache License to your work, attach the following
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> boilerplate notice, with the fields enclosed by brackets &lt;span class="s2">&amp;#34;[]&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> replaced with your own identifying information. &lt;span class="o">(&lt;/span>Don&lt;span class="err">&amp;#39;&lt;/span>t include
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the brackets!&lt;span class="o">)&lt;/span> The text should be enclosed in the appropriate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> comment syntax &lt;span class="k">for&lt;/span> the file format. We also recommend that a
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> file or class name and description of purpose be included on the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> same &lt;span class="s2">&amp;#34;printed page&amp;#34;&lt;/span> as the copyright notice &lt;span class="k">for&lt;/span> easier
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> identification within third-party archives.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Copyright &lt;span class="o">[&lt;/span>yyyy&lt;span class="o">]&lt;/span> &lt;span class="o">[&lt;/span>name of copyright owner&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Licensed under the Apache License, Version 2.0 &lt;span class="o">(&lt;/span>the &lt;span class="s2">&amp;#34;License&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> you may not use this file except in compliance with the License.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> You may obtain a copy of the License at
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> http://www.apache.org/licenses/LICENSE-2.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Unless required by applicable law or agreed to in writing, software
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> distributed under the License is distributed on an &lt;span class="s2">&amp;#34;AS IS&amp;#34;&lt;/span> BASIS,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> See the License &lt;span class="k">for&lt;/span> the specific language governing permissions and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> limitations under the License.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;blockquote>
+&lt;p>Reference&lt;/p></description></item><item><title>17岁高中生的Thinking Claude</title><link>https://Pan-Binghong.github.io/daily-learning/other/17%E5%B2%81%E9%AB%98%E4%B8%AD%E7%94%9F%E7%9A%84thinking-claude/</link><pubDate>Thu, 28 Nov 2024 05:24:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/17%E5%B2%81%E9%AB%98%E4%B8%AD%E7%94%9F%E7%9A%84thinking-claude/</guid><description>&lt;blockquote>
+&lt;p>💡 保存一下这个牛逼的提示词_Thinking Claude。&lt;/p>&lt;/blockquote>
+&lt;h2 id="完整的内容">完整的内容&lt;/h2>
+&lt;hr>
+&lt;blockquote>
+&lt;p>Reference&lt;/p>&lt;/blockquote></description></item><item><title>C盘深度清理</title><link>https://Pan-Binghong.github.io/daily-learning/other/c%E7%9B%98%E6%B7%B1%E5%BA%A6%E6%B8%85%E7%90%86/</link><pubDate>Thu, 28 Nov 2024 02:59:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/c%E7%9B%98%E6%B7%B1%E5%BA%A6%E6%B8%85%E7%90%86/</guid><description>&lt;blockquote>
+&lt;p>💡 在知乎上看见一个帖子，想试一下。在此记录。Emm…本人用的第三方清理工具。hhhh&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="操作步骤">操作步骤&lt;/h2>
+&lt;ol>
+&lt;li>设置显示隐藏的文件&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>VMware配置共享文件夹</title><link>https://Pan-Binghong.github.io/daily-learning/other/vmware%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</link><pubDate>Wed, 27 Nov 2024 14:24:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/vmware%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</guid><description>&lt;blockquote>
+&lt;p>💡 VMware 设置共享文件夹，改过一次然后文件夹消失了。很奇怪…&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2690c9e4-a7e2-46b6-ae6e-556b52a86dd0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667FA44IXJ%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063643Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCbDdJUx%2F0QJU4%2Be3z087oD4JusKpUTzIF4hL3%2Fi4AuJQIhALt4owCIlxeAdIivtDS%2BGvTU7mVqK2UgASe3BapQRj7rKv8DCH8QABoMNjM3NDIzMTgzODA1IgwdXIKgHcBthMtbymwq3AOMcAYj6xdVx32jnFujqRUd7CMSIZbfezjAjDAZOksLfuKa5Je9swCMkA%2Bm5dUtZdyOgL%2BOgs2efPo77nWaYcF6ZsJRWf%2BfZy8abknxwMyWxLA%2B0kwm103yNyCwSeouMcUh9zHCf2E985yLKYgQPXumO6RAVYuhssMvhOIamPQ6OIXnb5wFAhe%2B0SB8vWphbYds%2BRLxhFh5%2BRqig082NBREBi1QBKqyrnHB9simVBt233tKIvgQPhUTSykEFiwE8lQwsCQajXRSB%2F2gd73frOnTo3Qtq7IezEqSYt0nIS5hD5yn1e6wnBuufN5o568zbvY4O19m9XMc5803hSP7sQsjHfiNZcJ3eWEhw5ByyIokyIuiUHgwIq7mTVrXXlne1TWjIdgEaoFirMyWz0FZQ%2Fbx1NCutITgLtKL8gNQDXUpFOla38HZS2wXYlo1PdsTH6glulpJ8wNQPTG8b2cUCwrno9PST0GNVkMJuxwgSaOkLHqzLK%2FaEsGcw5zF5Q%2BoH4fJhVuReGmuBs5uVPAxSdYvIGZQLuzJCcBfg6sXjys1FAvhAQZcZq4C8quElekQ9p3HV87HZK7k%2BLtdPcXi5EVrEQWGvF%2F2vV7Hb05StBdInQlbr4GelGafC6LlXzDJrr3OBjqkAZjZff2mbJ979BDLSyuWHoZ0sgzLHyDoNHQMHmWPHtcrvokpjDhJ6%2F8KTkcZOJnCp5U5rIuurt3qUnSwK%2F4WqBueqJMWTtkYzcgKUZ0%2BE0QJ82kWZ2yQdVzFwYTnSFaHsudofx1DnjCN%2Fksp98FfjdicBC3ZI%2Bk6KC07Z2hMi%2BMqLtksa83tdo9jtbyFzZVJ9eMUGwyStpz%2F9VBUbB4ZpFO4Xtgm&amp;X-Amz-Signature=bb1a2ab6cf8e9d6335250e24cb7c77be412ffe018289a59e5918964fe2ea68fc&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h3 id="安装-vmware-tools">安装 VMware Tools&lt;/h3>
+&lt;ul>
+&lt;li>找到虚拟机 - 重新安装 VMware Tools | 如果是灰色就执行下一步&lt;/li>
+&lt;li>重启虚拟机&lt;/li>
+&lt;li>重启的过程中，不停的查看重新安装 VMware Tools&lt;/li>
+&lt;li>当能点击时，点击安装即可&lt;/li>
+&lt;/ul>
+&lt;h3 id="配置共享文件夹">配置共享文件夹&lt;/h3>
+&lt;ul>
+&lt;li>点击虚拟机设置&lt;/li>
+&lt;li>找到选项&lt;/li>
+&lt;li>选中共享文件夹，按照上图进行配置&lt;/li>
+&lt;/ul>
+&lt;h3 id="查看共享文件夹">查看共享文件夹&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /mnt/hgfs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ls
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="坑">坑&lt;/h2>
+&lt;p>当执行完后，如果没有看见自己的共享文件夹，执行以下命令&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 如果输出文件夹的名称, 快执行下一步, 如果这个啥都没输出, 我没治了.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vmhgfs-fuse /mnt/hgfs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo mount -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>基于Notion发布的网站绑定自己的域名</title><link>https://Pan-Binghong.github.io/daily-learning/other/%E5%9F%BA%E4%BA%8Enotion%E5%8F%91%E5%B8%83%E7%9A%84%E7%BD%91%E7%AB%99%E7%BB%91%E5%AE%9A%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9F%9F%E5%90%8D/</link><pubDate>Wed, 27 Nov 2024 07:10:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/%E5%9F%BA%E4%BA%8Enotion%E5%8F%91%E5%B8%83%E7%9A%84%E7%BD%91%E7%AB%99%E7%BB%91%E5%AE%9A%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9F%9F%E5%90%8D/</guid><description>&lt;blockquote>
+&lt;p>💡 最近在投简历，想把博客网址也进去。结果发现Notion自带的，太不优雅了（https://panbinghong.notion.site/Pan-Space-12f57052b490803c9422d85f5a763433）。索性买了1年的域名，打算绑定一下。在此记录整个过程。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;p>整个过程，坑很多。一共分为 买域名，代理域名，创建Woker，复制代码，配置Woker域和路由。5个大步骤。我用折叠标题来写吧。&lt;/p>
+&lt;h2 id="如何购买域名">如何购买域名&lt;/h2>
+&lt;hr>
+&lt;h2 id="添加域名配置cloudflare的dns服务器">添加域名+配置CloudFlare的DNS服务器&lt;/h2>
+&lt;hr>
+&lt;h2 id="创建woker">创建Woker&lt;/h2>
+&lt;hr>
+&lt;h2 id="复制代码">复制代码&lt;/h2>
+&lt;hr>
+&lt;h2 id="配置woker域和路由">配置Woker域和路由&lt;/h2>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>Notion安装小组件</title><link>https://Pan-Binghong.github.io/daily-learning/other/notion%E5%AE%89%E8%A3%85%E5%B0%8F%E7%BB%84%E4%BB%B6/</link><pubDate>Wed, 27 Nov 2024 06:49:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/notion%E5%AE%89%E8%A3%85%E5%B0%8F%E7%BB%84%E4%BB%B6/</guid><description>&lt;blockquote>
+&lt;p>💡 每天都打开Notion，就想着美化美化。欸呦喂，还真别说，有美化插件，不过很多都要钱。我这边记录一下，我找的不要钱的那种。&lt;/p>&lt;/blockquote>
+&lt;h2 id="插件网站">插件网站&lt;/h2>
+&lt;blockquote>
+&lt;p>自备梯子哈，这个不多叭叭。&lt;/p>&lt;/blockquote>
+&lt;ul>
+&lt;li>网站&lt;/li>
+&lt;li>网站页面截图&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="案例演示">案例演示&lt;/h2>
+&lt;p>现在，我在这里增加一个倒计时的小插件。然后把流程截图放在下面。&lt;/p>
+&lt;hr>
+&lt;hr>
+&lt;ol>
+&lt;li>在Web内打开Countdown模块，&lt;/li>
+&lt;li>配置组件外观&lt;/li>
+&lt;li>复制组件链接&lt;/li>
+&lt;li>回到Notion，输入”/&amp;quot;，然后输入”embed ”&lt;/li>
+&lt;li>粘贴到嵌入的模块内，没了&lt;/li>
+&lt;/ol></description></item><item><title>MIT开源软件许可协议</title><link>https://Pan-Binghong.github.io/daily-learning/other/mit%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE/</link><pubDate>Thu, 21 Nov 2024 03:13:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/mit%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE/</guid><description>&lt;blockquote>
+&lt;p>💡 MIT License 是一种非常宽松、简单、流行的开源软件许可协议，允许用户自由地使用、复制、修改、合并、发布、分发和销售软件，只需满足以下条件：保留原始版权声明和许可声明。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="mit-license-官方文本">MIT License 官方文本&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">The MIT License &lt;span class="o">(&lt;/span>MIT&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Copyright © &lt;span class="m">2024&lt;/span> &amp;lt;copyright holders&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files &lt;span class="o">(&lt;/span>the “Software”&lt;span class="o">)&lt;/span>, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to &lt;span class="k">do&lt;/span> so, subject to the following conditions:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;blockquote>
+&lt;p>Reference&lt;/p></description></item><item><title>Suno体验心得|风格收藏</title><link>https://Pan-Binghong.github.io/daily-learning/other/suno%E4%BD%93%E9%AA%8C%E5%BF%83%E5%BE%97%E9%A3%8E%E6%A0%BC%E6%94%B6%E8%97%8F/</link><pubDate>Mon, 18 Nov 2024 08:59:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/suno%E4%BD%93%E9%AA%8C%E5%BF%83%E5%BE%97%E9%A3%8E%E6%A0%BC%E6%94%B6%E8%97%8F/</guid><description>&lt;details>&lt;summary>在这里藏一个音频数据库&lt;/summary>
+&lt;/details></description></item><item><title>Word批量删除换行</title><link>https://Pan-Binghong.github.io/daily-learning/other/word%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%8D%A2%E8%A1%8C/</link><pubDate>Thu, 07 Nov 2024 06:53:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/word%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%8D%A2%E8%A1%8C/</guid><description>&lt;blockquote>
+&lt;p>💡 申请软著的过程中，经历 “需要将源码复制到Word内的要求” 累死我喽， 之后在@小葵同学的帮助下，最终找到解决方案。在此记录操作过程。&lt;/p>&lt;/blockquote>
+&lt;h2 id="问题展示">问题展示&lt;/h2>
+&lt;ul>
+&lt;li>word内有3行空行，需要全部删除多余的空行。&lt;/li>
+&lt;/ul>
+&lt;h2 id="操作流程">操作流程&lt;/h2>
+&lt;ol>
+&lt;li>操作打开查找和替换(Ctrl + H)。&lt;/li>
+&lt;li>点击&lt;code>查找内容&lt;/code> ，填入&lt;code>特殊格式&lt;/code>中的&lt;code>段落标记&lt;/code> 。&lt;/li>
+&lt;li>点击&lt;code>替换为&lt;/code> ，填入&lt;code>特殊格式&lt;/code>中的&lt;code>段落标记&lt;/code> 。&lt;/li>
+&lt;li>点&lt;code>全部替换&lt;/code>。&lt;/li>
+&lt;/ol></description></item></channel></rss>

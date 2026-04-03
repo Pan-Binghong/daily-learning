@@ -1,29 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Embedding on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/embedding/</link><description>Recent content in Embedding on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Fri, 29 Nov 2024 03:26:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/embedding/index.xml" rel="self" type="application/rss+xml"/><item><title>微调Embedding模型</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%BE%AE%E8%B0%83embedding%E6%A8%A1%E5%9E%8B/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%BE%AE%E8%B0%83embedding%E6%A8%A1%E5%9E%8B/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 这里写背景。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="标题1"&gt;标题1&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/FlagOpen/FlagEmbedding/blob/master/README_zh.md"&gt;https://github.com/FlagOpen/FlagEmbedding/blob/master/README_zh.md&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;小标题1&lt;/li&gt;
-&lt;li&gt;小标题2&lt;/li&gt;
-&lt;li&gt;小标题3&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="标题2"&gt;标题2&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;小标题1&lt;/li&gt;
-&lt;li&gt;小标题2&lt;/li&gt;
-&lt;li&gt;小标题3&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="标题3"&gt;标题3&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;小标题1&lt;/li&gt;
-&lt;li&gt;小标题2&lt;/li&gt;
-&lt;li&gt;小标题3&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id="references"&gt;References&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;这里放引用的链接。&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Embedding on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/embedding/</link><description>Recent content in Embedding on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 29 Nov 2024 03:26:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/embedding/index.xml" rel="self" type="application/rss+xml"/><item><title>微调Embedding模型</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%BE%AE%E8%B0%83embedding%E6%A8%A1%E5%9E%8B/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%BE%AE%E8%B0%83embedding%E6%A8%A1%E5%9E%8B/</guid><description>&lt;blockquote>
+&lt;p>💡 这里写背景。&lt;/p>&lt;/blockquote>
+&lt;h2 id="标题1">标题1&lt;/h2>
+&lt;p>&lt;a href="https://github.com/FlagOpen/FlagEmbedding/blob/master/README_zh.md">https://github.com/FlagOpen/FlagEmbedding/blob/master/README_zh.md&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>小标题1&lt;/li>
+&lt;li>小标题2&lt;/li>
+&lt;li>小标题3&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="标题2">标题2&lt;/h2>
+&lt;ul>
+&lt;li>小标题1&lt;/li>
+&lt;li>小标题2&lt;/li>
+&lt;li>小标题3&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="标题3">标题3&lt;/h2>
+&lt;ul>
+&lt;li>小标题1&lt;/li>
+&lt;li>小标题2&lt;/li>
+&lt;li>小标题3&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="references">References&lt;/h3>
+&lt;blockquote>
+&lt;p>这里放引用的链接。&lt;/p>&lt;/blockquote></description></item></channel></rss>

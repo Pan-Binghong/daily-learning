@@ -1,145 +1,141 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ubuntu on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/ubuntu/</link><description>Recent content in Ubuntu on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Mon, 03 Nov 2025 06:08:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/ubuntu/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu挂载Windows的共享文件夹</title><link>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</link><pubDate>Fri, 31 Oct 2025 08:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</guid><description>&lt;ol&gt;
-&lt;li&gt;创建凭据文件，将windows的账号、密码写入配置文件.smbcredentials 中&lt;/li&gt;
-&lt;li&gt;挂载&lt;/li&gt;
-&lt;/ol&gt;</description></item><item><title>MiniO安装 &amp; MiniO Console常用命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 30 Oct 2025 01:44:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 MinIO Client (mc) 是一个强大的命令行工具，用于访问 MinIO 服务器以及其他兼容 S3 API 的存储系统。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="一minio社区版docker安装"&gt;一、MiniO社区版Docker安装&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;拉取源码&lt;/li&gt;
-&lt;li&gt;启动容器&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="二minio-client安装"&gt;二、MiniO Client安装&lt;/h2&gt;
-&lt;h3 id="21-linux安装"&gt;2.1 Linux安装&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wget https://dl.min.io/client/mc/release/linux-amd64/mc&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;chmod +x mc&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cp mc /usr/local/bin/&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="22-windows安装"&gt;2.2 Windows安装&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -o %USERPROFILE%&lt;span class="se"&gt;\b&lt;/span&gt;in&lt;span class="se"&gt;\m&lt;/span&gt;c.exe https://dl.min.io/client/mc/release/windows-amd64/mc.exe&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 添加到系统环境变量中&lt;/span&gt;&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# C:\Users\Administrator\mc.exe&lt;/span&gt;&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="23-验证"&gt;2.3 验证&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-docker" data-lang="docker"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mc --version&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h2 id="三minio-console常用命令"&gt;三、MiniO Console常用命令&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;添加MiniO服务器&lt;/li&gt;
-&lt;li&gt;列出bucket内容&lt;/li&gt;
-&lt;li&gt;查找文件并批量下载&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Ubuntu安装监控系统可视化模块</title><link>https://Pan-Binghong.github.io/daily-learning/devops/ubuntu%E5%AE%89%E8%A3%85%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%9D%97/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/ubuntu%E5%AE%89%E8%A3%85%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%9D%97/</guid><description>&lt;p&gt;Prometheus是一个开放性的监控解决方案，用户可以非常方便的安装和使用Prometheus并且能够非常方便的对其进行扩展。为了能够更加直观的了解Prometheus Server，接下来我们将在本地部署并运行一个Prometheus Server实例，通过Node Exporter采集当前主机的系统资源使用情况。 并通过Grafana创建一个简单的可视化仪表盘。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/daebfb90-2a3b-47c1-95ce-3e1e8b208b83/%E7%9B%91%E6%8E%A7-1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4666D3Q4SK5%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034904Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQC43vKaOZyJdMSOH5QHT7%2BFn%2B32R4791q%2Fm1%2BcyJ8fUigIhAOX7uL4jppUukcKxg7pGPV6Z2bYHnbCc82LPOqUaFdcjKv8DCHwQABoMNjM3NDIzMTgzODA1IgxxZyp8%2BWTP5mP54ckq3AN4EjQdxHsjObdXmky9tR5PXatdFO3RW5ttI1%2BCxVOCA7MsMWjzVyeLNoV4wwtATrIDzNEhcLxxtdhMy8Sl9U7HpdQWMPfAGlRkbkCfzqnS%2BafA2QSK125DGc3gz7oji7sccp2duJyTbEkNOdOEIJeTQ8Idy%2Fq4snXQbZEh2MIdVj2e9jhwdMzE9tpy6c2VT8LVnGCWfkawgWw9bttactcm3%2BA0vAq9eI7Gv%2BrHZc1GScapSk5d45nV6ex7XCiLie0%2Fm%2Bw3u%2BfCx%2FjfIeEIzG%2Bbgy2kJ1qmHQcCaPl1RWC%2B7TJbP7lg7lKp9rnlEN%2BXfqsFuRgtkvp%2FOykCHzMTZqjchMZfyomc8lAJpbI5uIZs09W2WY1L5xIq1EQCL95dT3kR6NfP0gJLpxp9jDrMgYIhdJ6zsJ5N6SwzLyeKOT7WSlk1tm8A34ANDlth5sNnqe%2FHZLxSTFUwVl%2BtKvuPOP6xpeMkn9l%2BCshBq4wNshtizFz6Deu%2FjJIkrfYiv3le66caMpOaBl7cBu0SbAlH3jyqGX76baqC504CMPURc%2BwvhU7Jrm1NYgRR6IKD1xJ09IvylDS46nM80%2BhBdvzdupJRme4C4eNmsM3w3dcUVd9%2BXvXw8Q2wDxH5S0TxFDCP5bzOBjqkAVXG3VsS27469P67nAHSvewpqc%2FSJCcjkH7F%2F43QjM5Ej4wpHr9mKHjoQ9KzxALdhCCL6IY0ZqgMLVEDRsIKD0tkuF8YJVa6XqdeYIni308Vj55KgxMUeh94i8eApQ8nSCaHNTQ7enCRGsaSvcuwvopRhwvXgFNakilp7izOR9dhfVGRQgPiJIO7161bN5dRmd6XdNu9fswEXqjHaLyoAqqA%2FFsm&amp;X-Amz-Signature=30f39e63dacc25d63a9d0c26c694d79f87d0570868915af2d2ea4ac75c008a71&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Prometheus是什么？&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="下载prometheus"&gt;下载Prometheus&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;下载链接&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="安装prometheus"&gt;安装Prometheus&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;解压&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="修改prometheus配置"&gt;修改Prometheus配置&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;进入文件目标, 并修改配置&lt;/li&gt;
-&lt;li&gt;将以下内容放置在配置文件内&lt;/li&gt;
-&lt;li&gt;启动服务&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="在web浏览器查看"&gt;在web浏览器查看&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;localhost:9090&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Monitoring Linux host metrics with the Node Exporter&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="下载node-exporter"&gt;下载Node Exporter&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;下载地址&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="安装--run"&gt;安装 &amp;amp; RUN&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tar xvfz node_exporter-*.*-amd64.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; node_exporter-*.*-amd64
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./node_exporter
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="在web浏览器查看-1"&gt;在web浏览器查看&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;http://localhost:9100/&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;What is Grafana&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="安装grafana"&gt;安装Grafana&lt;/h3&gt;
-&lt;h3 id="ubuntu安装流程"&gt;Ubuntu安装流程&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 更新apt-getsudo apt-get install -y adduser libfontconfig1 musl&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 下载软件wget https://dl.grafana.com/enterprise/release/grafana-enterprise_10.0.0_amd64.deb&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安装sudo dpkg -i grafana-enterprise_10.0.0_amd64.deb&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;操作系统不是Ubuntu则查看上面的链接, 根据自身系统进行安装&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="run-grafana"&gt;RUN Grafana&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;运行Grafana可视化服务&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo /bin/systemctl start grafana-server
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="在web浏览器查看-2"&gt;在web浏览器查看&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;http://localhost:3000/&lt;/li&gt;
-&lt;li&gt;设置流程如下:
-step-1&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/19c196f7-552f-4d8d-b491-6ceeee1bb2a7/%E7%9B%91%E6%8E%A7-2.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4666D3Q4SK5%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034904Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQC43vKaOZyJdMSOH5QHT7%2BFn%2B32R4791q%2Fm1%2BcyJ8fUigIhAOX7uL4jppUukcKxg7pGPV6Z2bYHnbCc82LPOqUaFdcjKv8DCHwQABoMNjM3NDIzMTgzODA1IgxxZyp8%2BWTP5mP54ckq3AN4EjQdxHsjObdXmky9tR5PXatdFO3RW5ttI1%2BCxVOCA7MsMWjzVyeLNoV4wwtATrIDzNEhcLxxtdhMy8Sl9U7HpdQWMPfAGlRkbkCfzqnS%2BafA2QSK125DGc3gz7oji7sccp2duJyTbEkNOdOEIJeTQ8Idy%2Fq4snXQbZEh2MIdVj2e9jhwdMzE9tpy6c2VT8LVnGCWfkawgWw9bttactcm3%2BA0vAq9eI7Gv%2BrHZc1GScapSk5d45nV6ex7XCiLie0%2Fm%2Bw3u%2BfCx%2FjfIeEIzG%2Bbgy2kJ1qmHQcCaPl1RWC%2B7TJbP7lg7lKp9rnlEN%2BXfqsFuRgtkvp%2FOykCHzMTZqjchMZfyomc8lAJpbI5uIZs09W2WY1L5xIq1EQCL95dT3kR6NfP0gJLpxp9jDrMgYIhdJ6zsJ5N6SwzLyeKOT7WSlk1tm8A34ANDlth5sNnqe%2FHZLxSTFUwVl%2BtKvuPOP6xpeMkn9l%2BCshBq4wNshtizFz6Deu%2FjJIkrfYiv3le66caMpOaBl7cBu0SbAlH3jyqGX76baqC504CMPURc%2BwvhU7Jrm1NYgRR6IKD1xJ09IvylDS46nM80%2BhBdvzdupJRme4C4eNmsM3w3dcUVd9%2BXvXw8Q2wDxH5S0TxFDCP5bzOBjqkAVXG3VsS27469P67nAHSvewpqc%2FSJCcjkH7F%2F43QjM5Ej4wpHr9mKHjoQ9KzxALdhCCL6IY0ZqgMLVEDRsIKD0tkuF8YJVa6XqdeYIni308Vj55KgxMUeh94i8eApQ8nSCaHNTQ7enCRGsaSvcuwvopRhwvXgFNakilp7izOR9dhfVGRQgPiJIO7161bN5dRmd6XdNu9fswEXqjHaLyoAqqA%2FFsm&amp;X-Amz-Signature=92b4ba726cd8616087b45814129bdf95ffe2272e53429c91c26f807af1644651&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ubuntu on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/ubuntu/</link><description>Recent content in Ubuntu on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Mon, 03 Nov 2025 06:08:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/ubuntu/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu挂载Windows的共享文件夹</title><link>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</link><pubDate>Fri, 31 Oct 2025 08:28:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/other/ubuntu%E6%8C%82%E8%BD%BDwindows%E7%9A%84%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</guid><description>&lt;ol>
+&lt;li>创建凭据文件，将windows的账号、密码写入配置文件.smbcredentials 中&lt;/li>
+&lt;li>挂载&lt;/li>
+&lt;/ol></description></item><item><title>MiniO安装 &amp; MiniO Console常用命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 30 Oct 2025 01:44:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/minio%E5%AE%89%E8%A3%85--minio-console%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote>
+&lt;p>💡 MinIO Client (mc) 是一个强大的命令行工具，用于访问 MinIO 服务器以及其他兼容 S3 API 的存储系统。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="一minio社区版docker安装">一、MiniO社区版Docker安装&lt;/h2>
+&lt;ul>
+&lt;li>拉取源码&lt;/li>
+&lt;li>启动容器&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="二minio-client安装">二、MiniO Client安装&lt;/h2>
+&lt;h3 id="21-linux安装">2.1 Linux安装&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-docker" data-lang="docker">&lt;span class="line">&lt;span class="cl">wget https://dl.min.io/client/mc/release/linux-amd64/mc&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>chmod +x mc&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>cp mc /usr/local/bin/&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="22-windows安装">2.2 Windows安装&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-docker" data-lang="docker">&lt;span class="line">&lt;span class="cl">curl -o %USERPROFILE%&lt;span class="se">\b&lt;/span>in&lt;span class="se">\m&lt;/span>c.exe https://dl.min.io/client/mc/release/windows-amd64/mc.exe&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># 添加到系统环境变量中&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="c"># C:\Users\Administrator\mc.exe&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="23-验证">2.3 验证&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-docker" data-lang="docker">&lt;span class="line">&lt;span class="cl">mc --version&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h2 id="三minio-console常用命令">三、MiniO Console常用命令&lt;/h2>
+&lt;ul>
+&lt;li>添加MiniO服务器&lt;/li>
+&lt;li>列出bucket内容&lt;/li>
+&lt;li>查找文件并批量下载&lt;/li>
+&lt;/ul></description></item><item><title>Ubuntu安装监控系统可视化模块</title><link>https://Pan-Binghong.github.io/daily-learning/devops/ubuntu%E5%AE%89%E8%A3%85%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%9D%97/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/ubuntu%E5%AE%89%E8%A3%85%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%9D%97/</guid><description>&lt;p>Prometheus是一个开放性的监控解决方案，用户可以非常方便的安装和使用Prometheus并且能够非常方便的对其进行扩展。为了能够更加直观的了解Prometheus Server，接下来我们将在本地部署并运行一个Prometheus Server实例，通过Node Exporter采集当前主机的系统资源使用情况。 并通过Grafana创建一个简单的可视化仪表盘。&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/daebfb90-2a3b-47c1-95ce-3e1e8b208b83/%E7%9B%91%E6%8E%A7-1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667LV3GAZE%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063604Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDDf8UOs6a%2B%2B%2FAZBzBjoIaSnrlNjHhzkO0fc1zB71%2FLRQIhAKNBHgcilub8OV9toa2DxNE%2BYoFlexSq5ii7BbLNPfSgKv8DCH8QABoMNjM3NDIzMTgzODA1IgyOcfyyLd1t4sE9w3cq3AN6l8nFETUmnOgIpp6si39AYrYUJCa8RpEW2E%2BTrRO%2FWdpfaD3C8Mnwr2eBUI7Vi8OSWBlKkCOxhfqzNl6DkQKSn9ZmGHviecWCv18XfHh8bfccZMxT0502Zzlk%2FBKNpBPpanaa4JYpa8%2FpWEEH2TG2bOo2QB7Ul9qEPeHp8TFZjf0VLuqO5opjXtLV2o9iNWlMWnakgAIZD%2FdH8cUG%2ByW91hWEZGB9fbcBfCYXZjPRya8NUbKhnrAMiMLMtv21c13JGenr9g3iGKPsfn4oczsn8DI1CxCq1hKaGbZOtgrruwRtDwymioIrwOpWpMX5CvMHMSXLJp3lmNkEAo2vshIB0QxiL3l1uGpKWzQWWH6yQTLd83fRJpS3cAcA9vFFo3NDMu7rJ4tvd4jI6Fu%2Fn5PpIM5q%2F1Eh3ma8BFhWiLGnHawnrVG8Wi9V%2FFqi%2Bgc9NNz0O4BOHp2vK6FHQFftLTg8uWJXbmQPYuJ7sBTtW8gjIrmNmjfhF60S2OpFhJHVi28T%2FUlIhEdQv4gHHerO9fgZ3O4D6nEgAyCYf40jS36nh9ymd8innVNU92kxOVCKt6UwITEvHEPeb6HH2EJmUN3GyrHdcCdyAOglMcwkAcGNSMUsv1%2FbebKwvHBvMDDdrr3OBjqkARwZCYn2xAnquKtY8tBeh4KoY9%2BAZbfa0WbX4qEuW%2FTg1IltsvLgOFXkeV54k%2F1OVN26QYA2q8yqueTKY5SwZinwJtq6Agx0H%2B123ZaaP5ejsAb4N%2B61%2B8WOTnMmKhPINTeFBNjkIQRxFvHq7LDuFZ4uMsleuQto8i9xCvJjielDy1NtTUCFTXhQcUCXrhPOlybGV5dq0DtE%2FYxg5FVxqb02YKbL&amp;X-Amz-Signature=8b9fd1de45d4c806292c1c7671b46a5d580510df29368eb296c9fa0f12e36850&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;blockquote>
+&lt;p>Prometheus是什么？&lt;/p>&lt;/blockquote>
+&lt;h3 id="下载prometheus">下载Prometheus&lt;/h3>
+&lt;ul>
+&lt;li>下载链接&lt;/li>
+&lt;/ul>
+&lt;h3 id="安装prometheus">安装Prometheus&lt;/h3>
+&lt;ul>
+&lt;li>解压&lt;/li>
+&lt;/ul>
+&lt;h3 id="修改prometheus配置">修改Prometheus配置&lt;/h3>
+&lt;ul>
+&lt;li>进入文件目标, 并修改配置&lt;/li>
+&lt;li>将以下内容放置在配置文件内&lt;/li>
+&lt;li>启动服务&lt;/li>
+&lt;/ul>
+&lt;h3 id="在web浏览器查看">在web浏览器查看&lt;/h3>
+&lt;ul>
+&lt;li>localhost:9090&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;blockquote>
+&lt;p>Monitoring Linux host metrics with the Node Exporter&lt;/p>&lt;/blockquote>
+&lt;h3 id="下载node-exporter">下载Node Exporter&lt;/h3>
+&lt;ul>
+&lt;li>下载地址&lt;/li>
+&lt;/ul>
+&lt;h3 id="安装--run">安装 &amp;amp; RUN&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">tar xvfz node_exporter-*.*-amd64.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> node_exporter-*.*-amd64
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./node_exporter
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="在web浏览器查看-1">在web浏览器查看&lt;/h3>
+&lt;ul>
+&lt;li>http://localhost:9100/&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;blockquote>
+&lt;p>What is Grafana&lt;/p>&lt;/blockquote>
+&lt;h3 id="安装grafana">安装Grafana&lt;/h3>
+&lt;h3 id="ubuntu安装流程">Ubuntu安装流程&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 更新apt-getsudo apt-get install -y adduser libfontconfig1 musl&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 下载软件wget https://dl.grafana.com/enterprise/release/grafana-enterprise_10.0.0_amd64.deb&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 安装sudo dpkg -i grafana-enterprise_10.0.0_amd64.deb&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>操作系统不是Ubuntu则查看上面的链接, 根据自身系统进行安装&lt;/li>
+&lt;/ul>
+&lt;h3 id="run-grafana">RUN Grafana&lt;/h3>
+&lt;ul>
+&lt;li>运行Grafana可视化服务&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo /bin/systemctl start grafana-server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="在web浏览器查看-2">在web浏览器查看&lt;/h3>
+&lt;ul>
+&lt;li>http://localhost:3000/&lt;/li>
+&lt;li>设置流程如下:
+step-1&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/19c196f7-552f-4d8d-b491-6ceeee1bb2a7/%E7%9B%91%E6%8E%A7-2.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667LV3GAZE%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063604Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDDf8UOs6a%2B%2B%2FAZBzBjoIaSnrlNjHhzkO0fc1zB71%2FLRQIhAKNBHgcilub8OV9toa2DxNE%2BYoFlexSq5ii7BbLNPfSgKv8DCH8QABoMNjM3NDIzMTgzODA1IgyOcfyyLd1t4sE9w3cq3AN6l8nFETUmnOgIpp6si39AYrYUJCa8RpEW2E%2BTrRO%2FWdpfaD3C8Mnwr2eBUI7Vi8OSWBlKkCOxhfqzNl6DkQKSn9ZmGHviecWCv18XfHh8bfccZMxT0502Zzlk%2FBKNpBPpanaa4JYpa8%2FpWEEH2TG2bOo2QB7Ul9qEPeHp8TFZjf0VLuqO5opjXtLV2o9iNWlMWnakgAIZD%2FdH8cUG%2ByW91hWEZGB9fbcBfCYXZjPRya8NUbKhnrAMiMLMtv21c13JGenr9g3iGKPsfn4oczsn8DI1CxCq1hKaGbZOtgrruwRtDwymioIrwOpWpMX5CvMHMSXLJp3lmNkEAo2vshIB0QxiL3l1uGpKWzQWWH6yQTLd83fRJpS3cAcA9vFFo3NDMu7rJ4tvd4jI6Fu%2Fn5PpIM5q%2F1Eh3ma8BFhWiLGnHawnrVG8Wi9V%2FFqi%2Bgc9NNz0O4BOHp2vK6FHQFftLTg8uWJXbmQPYuJ7sBTtW8gjIrmNmjfhF60S2OpFhJHVi28T%2FUlIhEdQv4gHHerO9fgZ3O4D6nEgAyCYf40jS36nh9ymd8innVNU92kxOVCKt6UwITEvHEPeb6HH2EJmUN3GyrHdcCdyAOglMcwkAcGNSMUsv1%2FbebKwvHBvMDDdrr3OBjqkARwZCYn2xAnquKtY8tBeh4KoY9%2BAZbfa0WbX4qEuW%2FTg1IltsvLgOFXkeV54k%2F1OVN26QYA2q8yqueTKY5SwZinwJtq6Agx0H%2B123ZaaP5ejsAb4N%2B61%2B8WOTnMmKhPINTeFBNjkIQRxFvHq7LDuFZ4uMsleuQto8i9xCvJjielDy1NtTUCFTXhQcUCXrhPOlybGV5dq0DtE%2FYxg5FVxqb02YKbL&amp;X-Amz-Signature=ad9e34374dda350139719c988f0f7fd10aa37a0f649c871345ed1b711669e8b8&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p></description></item></channel></rss>

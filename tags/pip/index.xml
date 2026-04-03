@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Pip on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/pip/</link><description>Recent content in Pip on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2026 03:50:06 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/pip/index.xml" rel="self" type="application/rss+xml"/><item><title>Pip Common Commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/pip-common-commands/</link><pubDate>Sun, 24 Nov 2024 15:32:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/pip-common-commands/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡
-Pip是 Python 的包管理工具，全称为 &amp;ldquo;Pip Installs Packages&amp;rdquo;，也可以理解为 &amp;ldquo;Pip Installs Python&amp;rdquo;。它用于安装和管理 Python 的第三方库和模块，类似于其他语言中的包管理工具，比如 JavaScript 的 npm 或 Ruby 的 gem。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/8bc065e1-68e7-4cf9-a457-d7594617e98d/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WVU5CX3I%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034912Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDBFTC6qq5npCUM0zZ0cLHrGYiwmBBgLzmeavsaEv%2BfKQIgSdR1yC26Gn8w%2FrGfBrwFAsIolwi9c8j5E%2BwBKkQsJRYq%2FwMIfRAAGgw2Mzc0MjMxODM4MDUiDJ7j7O8k83a5GCuYDircA%2FtPpUe3eI6%2FewF6fR3NX38t66hWOEzbnkxMrmBqfFfbnSu%2B3KzGtNe4dNMOWf90HAAfsxlqr1xNs5Bn3yABybdyZyMCYG8500x6S2OLQMR%2FGFwjcpFNPPBmAATLnFHw9J6%2Fdw6mN3ciYXawgLrp3tTjl60dYoeFnS0acEj6xC6WmUtJW%2FcLVQLw7FCTUQjscuwnUcslyHTwhBVnFbP50jlU7N4Z90LFAUuGxYSkeawh8Lc23pa2%2BNtabfQfkdk9%2BKtGbN%2F0VIanbdvGTudL2AS4O88nzuMq%2FCL8ge2Ohk8oVMYML%2BlnQvkieFJr%2BR8oiGnAByaLZc0JZDVubBaqO8yxKh%2FqWQm8xBkn%2FdPeX54Q6itNKiStr8oVRru20SNAuyDwUZ%2BQ0phZYZh1abTWipurxbC92Ztp1qBYXzzG4khQY2dSFs4C9lo%2Fqxi%2Bd8CTq4594hHxoeTHSKXllOiI8lBwFbiLT8HyQcJ5kmgnSl3YQL3UdECoMY2m9beZzN7i51kdEFpDw2oP490GsgTitRcr28%2FlxYlnnJmGQn2xjf4YTapL1ZCnIGPpvgneZaPQcUMRjSsVtOkRlyZlTEt%2FvDX0Pl%2Fy579fgaSkFe1Io2PspArGLZGNiTaI22vDMObovM4GOqUBmm7nczClTf3jMD3YZiSLvwcdSmJlfBvrLZS462edFa9WOJpC0zSxenebtlOpy5pip1MD0iday0CODInPSLUWXkbF8SLpAS1FpGBch8l53RzC2cUGz4VrLP6Of5HVX33u5Pn8a2FC%2BkAwX%2Bjz52YTNp2dSZMqbJB%2FUOWBcPbeGIgoBEuKWeioGdlERAcTk1S%2BYROlGDdDB99%2FvBOWZNsn1VFMQqYD&amp;X-Amz-Signature=9fb5d57800ac26e0489b05512f1448f11db204b6389b87f97590a4b4c938283f&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="最常用"&gt;最常用&lt;/h2&gt;
-&lt;hr&gt;
-&lt;h2 id="偶尔会用"&gt;偶尔会用&lt;/h2&gt;
-&lt;h2 id="帮我解决过问题"&gt;帮我解决过问题&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;缓存空间不足或者节约缓存可以使用&lt;/li&gt;
-&lt;li&gt;清理Pip缓存空间&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Pip on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/pip/</link><description>Recent content in Pip on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2026 06:36:52 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/pip/index.xml" rel="self" type="application/rss+xml"/><item><title>Pip Common Commands</title><link>https://Pan-Binghong.github.io/daily-learning/devops/pip-common-commands/</link><pubDate>Sun, 24 Nov 2024 15:32:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/pip-common-commands/</guid><description>&lt;blockquote>
+&lt;p>💡
+Pip是 Python 的包管理工具，全称为 &amp;ldquo;Pip Installs Packages&amp;rdquo;，也可以理解为 &amp;ldquo;Pip Installs Python&amp;rdquo;。它用于安装和管理 Python 的第三方库和模块，类似于其他语言中的包管理工具，比如 JavaScript 的 npm 或 Ruby 的 gem。&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/8bc065e1-68e7-4cf9-a457-d7594617e98d/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466TIJAF4FX%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063612Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIDBNDdb0r%2BJ7Rcv%2BND8I0SS8fjq2gn5nGG9OuD2IE%2FL%2BAiEAv%2BPynITOWOHZmd6yvltIMH%2F2eJKyqEgz5EaWpXif%2B%2Fsq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDOJcckA1WXoDj1nV9CrcA7PfA2PQXUfgiY7xyqh4rvcph5B2b5yNQprdY41mpO8Qp5j2af2nW504K%2FPIyZLd3CRNU1FEWoPaB3awCefndhdGUpnEsy1v%2FgTBzR6xzT%2BcQhpnodUtzj9XZq2vK8nQ6Uel8ySXrGuhsb6a9IBB9T3I9FNpXItEPOwjhAO8Lm0CevOgbU2hXeGPNmxW%2FmAjyes8MR846FOgNyYXHf10OYQ%2BUrcMjSq5xePf2CbEPXJ3OpsguiqA6tWi%2FViTYmtGBU5%2FlvEUqv3cl%2Fjsqve%2BnEvpcbBOdJJh2QAunGyIFsRh0HAInjKWhbky7ErbbGaneB0OnlSHON2se9txqJgVuc%2BCCc9AR8YgwZnztq8T5JDci9jGcYMyN2cH%2FzAA6FGR4JeHCTxz7x8srYmpnKUdJuP2t8thWLX4LJe4rPR0A6wP%2B2jtk11pM4RUM9Mec4ydT0OceIZyN9SN4PmEhv1qT6C3bLAwbZCaF%2FeNZSfcuZ5XDlPkFjrUAjvtcnbRxnMyWHkuicmDuNS2mWKzqHNL%2BhhahP%2BlG2tvKH%2FPDtUx2X6qnwwYzhPZasFrv2dxjPcZPgGlT4RMP%2FolyNq5wVNuUVAGhYUksZxkeSMy09Z6%2B%2BACrXw9D6pcszGhsgwYMKOsvc4GOqUB%2FV2Rf7DkeKAfV2Z8eHF2mEuK8DwdraFQI39WCRA%2FofkHlPXsXWEe5fBi1eCSn3oOZLBvDvz7qO5gir6sYlgizLr8NPrBZNfwGo0ggrqnkx3YOq7gjxbXEp9oQ9pjChd5sAcnYKeCzyjdyVzBOT3xD%2FMXlz50JdvVWiOX7jzYhaEaEJW7958WXhy548%2BE7kGq8IwYR7HYOrBlwteojMKXsYb2a76m&amp;X-Amz-Signature=e1a3f5755f3359ab8f90fcbeb31afc9ebf7c603fc4b3fb711aedb87551d35e26&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="最常用">最常用&lt;/h2>
+&lt;hr>
+&lt;h2 id="偶尔会用">偶尔会用&lt;/h2>
+&lt;h2 id="帮我解决过问题">帮我解决过问题&lt;/h2>
+&lt;ul>
+&lt;li>缓存空间不足或者节约缓存可以使用&lt;/li>
+&lt;li>清理Pip缓存空间&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item></channel></rss>

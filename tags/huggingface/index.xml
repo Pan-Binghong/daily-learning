@@ -1,27 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>HuggingFace on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/huggingface/</link><description>Recent content in HuggingFace on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Thu, 20 Mar 2025 00:51:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/huggingface/index.xml" rel="self" type="application/rss+xml"/><item><title>基于Huggingface镜像网站下载大模型及数据集</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Ehuggingface%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%8A%E6%95%B0%E6%8D%AE%E9%9B%86/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Ehuggingface%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%8A%E6%95%B0%E6%8D%AE%E9%9B%86/</guid><description>&lt;p&gt;使用镜像网站下载大模型及数据集, 以及配置下载参数(本地路径等)&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/dc82f140-d63c-44e4-bc53-0bc220caf11f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SHB6WM6X%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034648Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEK7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCwi%2BfM1hmoETRU4pL%2F3WGIvZwnBont6cfguD7iHes2SQIhAJw3o4a46romWHqSrrhSXztINPZL%2FLv4HAIosJbLLULOKv8DCHcQABoMNjM3NDIzMTgzODA1IgwLZFUZo6bxQsyvlZgq3AMDwzABTZunpjQ6TMUYAgS8x3cCV5RX6qHrcl79k6hQ8QJGvjXnbfLll%2B4eYwSSrv6WxBan9%2FSEOEiucC5XUP%2BMum9M1DwpLGzZUqbAKQZDrr1%2FlZgPVfrO7kZqmwIqCWbxiDlxiaMVXt8URIyKy9%2BzkEH9i1wKeNjKLwVTzbsxegdHt1pbS8z005YTBu8Psf2uYwvC9RVYOMKwPOk8rEw7N2JldfzCMbJ0z81TWp2OJh7qP3N49ZlbYRhLuqGXlR%2FodJ99XBSDkX%2BPUIMoQT8YU0Got7yvLkQOaXupK7yk69WtXz6vF1ZB4GrHj%2BCPia368sPvBtU4VkYY9JZJ3vInMSXaXKFGCFxfyLhwQdBaG0bfDcEwrmfS3eoQQEeIV%2B9x6qsTnBKdcZlTWZTFQfvQP%2FNBZ3fFlhgpuYHE625xsDMBIsEWf%2B4L3ekHj5TwvtJz7GBl1ZMK8%2BE4OOgAhq9QqNcYNjGwRUEzBWrRHrBPvQkh8EYfEFtE3lAB6Lb3ESrqskde2tjFe2ddi76TNmT049dfh4yRx%2BZohPoz3Zn5bOxiaWl771n%2BbtXIi%2Fdt2NLgQvqkPxHyitOhojvWeHI2frkoWZLY7brHKLUYr7BsL5W51yvUwb7%2BwH%2BYpzC1z7vOBjqkAdVbZuGP0AFQ2cnWoU7IleGkDLRUtfZYrmcncuAspWMalrFejs5IysYsdUpdcTE2tgRW0lk%2Bz2r5ufvHkTnK%2FNv03HccusEEM78wtJrJryUM%2BbvTGuuY6mikhQZLnWgFzpiTNdn9FrhXfNgqBtGJXcfhM%2BPfbVS9XDUIPXlckWRNCsBHVCpneEOXprbIKMxLANQB6ii5t40ZitPinpRzgD4MvNJP&amp;X-Amz-Signature=381b552df4511e5fc6b0ab5b82037385c3fe112aa8fb4039345de5d8700a78bd&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;h3 id="基于hf镜像网站下载大模型数据集"&gt;基于HF镜像网站下载大模型&amp;amp;数据集&lt;/h3&gt;
-&lt;h3 id="命令行下载"&gt;命令行下载&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;安装Huggingface依赖库&lt;/li&gt;
-&lt;li&gt;下载大模型命令&lt;/li&gt;
-&lt;li&gt;下载数据集命令&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id="代码下载"&gt;代码下载&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;首先获取Huggingface的Access Tokens
-&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/22b8dae9-3302-4380-a23f-5402b524f0a9/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SHB6WM6X%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034648Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEK7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCwi%2BfM1hmoETRU4pL%2F3WGIvZwnBont6cfguD7iHes2SQIhAJw3o4a46romWHqSrrhSXztINPZL%2FLv4HAIosJbLLULOKv8DCHcQABoMNjM3NDIzMTgzODA1IgwLZFUZo6bxQsyvlZgq3AMDwzABTZunpjQ6TMUYAgS8x3cCV5RX6qHrcl79k6hQ8QJGvjXnbfLll%2B4eYwSSrv6WxBan9%2FSEOEiucC5XUP%2BMum9M1DwpLGzZUqbAKQZDrr1%2FlZgPVfrO7kZqmwIqCWbxiDlxiaMVXt8URIyKy9%2BzkEH9i1wKeNjKLwVTzbsxegdHt1pbS8z005YTBu8Psf2uYwvC9RVYOMKwPOk8rEw7N2JldfzCMbJ0z81TWp2OJh7qP3N49ZlbYRhLuqGXlR%2FodJ99XBSDkX%2BPUIMoQT8YU0Got7yvLkQOaXupK7yk69WtXz6vF1ZB4GrHj%2BCPia368sPvBtU4VkYY9JZJ3vInMSXaXKFGCFxfyLhwQdBaG0bfDcEwrmfS3eoQQEeIV%2B9x6qsTnBKdcZlTWZTFQfvQP%2FNBZ3fFlhgpuYHE625xsDMBIsEWf%2B4L3ekHj5TwvtJz7GBl1ZMK8%2BE4OOgAhq9QqNcYNjGwRUEzBWrRHrBPvQkh8EYfEFtE3lAB6Lb3ESrqskde2tjFe2ddi76TNmT049dfh4yRx%2BZohPoz3Zn5bOxiaWl771n%2BbtXIi%2Fdt2NLgQvqkPxHyitOhojvWeHI2frkoWZLY7brHKLUYr7BsL5W51yvUwb7%2BwH%2BYpzC1z7vOBjqkAdVbZuGP0AFQ2cnWoU7IleGkDLRUtfZYrmcncuAspWMalrFejs5IysYsdUpdcTE2tgRW0lk%2Bz2r5ufvHkTnK%2FNv03HccusEEM78wtJrJryUM%2BbvTGuuY6mikhQZLnWgFzpiTNdn9FrhXfNgqBtGJXcfhM%2BPfbVS9XDUIPXlckWRNCsBHVCpneEOXprbIKMxLANQB6ii5t40ZitPinpRzgD4MvNJP&amp;X-Amz-Signature=0da578cbf2032767b747bd29b7d5c7cb18a3ba0d29cc9c5a0fa386e2e5883ab9&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;下载代码如下:&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;下载数据集代码&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>HuggingFace on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/huggingface/</link><description>Recent content in HuggingFace on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Thu, 20 Mar 2025 00:51:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/huggingface/index.xml" rel="self" type="application/rss+xml"/><item><title>基于Huggingface镜像网站下载大模型及数据集</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Ehuggingface%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%8A%E6%95%B0%E6%8D%AE%E9%9B%86/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%9F%BA%E4%BA%8Ehuggingface%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E4%B8%8B%E8%BD%BD%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%8A%E6%95%B0%E6%8D%AE%E9%9B%86/</guid><description>&lt;p>使用镜像网站下载大模型及数据集, 以及配置下载参数(本地路径等)&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/dc82f140-d63c-44e4-bc53-0bc220caf11f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663L2GR3CA%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063431Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCpvPJe6CriH%2F6tZYVQJHc09EU2FSB8dFWHM2JV6v%2B%2F5gIhANmROmGmeZe2rQFMAxXS1h%2B8njaJ620nvtXiAdL9VhSAKv8DCH8QABoMNjM3NDIzMTgzODA1IgxiiD0gKtGMUQBkX2oq3ANQWwVJ5UkhgcRtk7%2B85k6eEwGyKCs6UXEVfAjrqVQddb7EFSl36GzNihlubKUQfGT4ZeN1OI1f6v4ABuBOV3pvX8el4AwnieOx8O9ZBnMpo5gaKDHOM3%2BouUjqy4P7ctMfSz33qGyH8eggKWE0dJKifY3ECgdZbQiWCjKwxX%2B8vpBkRhs3sNWlhnUJlhbtjm5ysVvikeamqbu4K%2FzSKahyEhknaBrH3yw8%2FA1Ct0Hvsc9tn%2FFIXGK1LJS9C2qLfplEr5TTKy58XXFwIFc8jhkDJrOGU6sKmGBcVICfCMyuUl2YO0ps0k%2BHPgUHHfXBh6UvqP5SXCjy%2FF4puSJEkgFHXFZ0WLk29UgXPdCLitI%2BTndYAOVKnAlPbqUbRlAkWnQW1nICoABnGW2p2GkqwAb8BafjZFLlrQlSgBJKX4Ewz2uD7UHjlbS8Q9hKqz3Lo9Ul29X%2BDzx1I2mqdf9ccwzIUlhJ2IGSobiRuugyRcaNB0HZbO6yKD%2BUpTi%2FUHc0xXl8lRmYw1LR4e3wxG7TYYZGZxtWoL9jh%2FNuBOqbs6jbPH91s%2BJ%2FFlxVGRJYWQjgFOOpQLv%2FdlQyJJqrbfMAR6H4Oifzx3zgOn3wu3rDIa%2BrCDO0yxP6JrYgbIC3RDD3q73OBjqkAf1wUf41uf1Pz9cUVg09mipdljhMqJ7WgQfAdsaRZCNWy31LlvvYxWcACRdrle9B0la35o%2FiQ3hFxotLaRom7vNmTMso0etpPOKJgjPfv0YwiUEYaBIZGOzJRV%2Bi7SfSjUxcaxEkI32nFhZ6cjlCij5HKB0zeDXc0f8fQ%2FUcf3ShnhaxnI%2BbstcbYYIIYydctKd1jK39rxFdY8tTfda9eBZAieus&amp;X-Amz-Signature=714dc306b70e52ec7308afdb2853b80a89e75cafd5a52a9094e253b50422d2ce&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;h3 id="基于hf镜像网站下载大模型数据集">基于HF镜像网站下载大模型&amp;amp;数据集&lt;/h3>
+&lt;h3 id="命令行下载">命令行下载&lt;/h3>
+&lt;ul>
+&lt;li>安装Huggingface依赖库&lt;/li>
+&lt;li>下载大模型命令&lt;/li>
+&lt;li>下载数据集命令&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="代码下载">代码下载&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>首先获取Huggingface的Access Tokens
+&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/22b8dae9-3302-4380-a23f-5402b524f0a9/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663L2GR3CA%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063431Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCpvPJe6CriH%2F6tZYVQJHc09EU2FSB8dFWHM2JV6v%2B%2F5gIhANmROmGmeZe2rQFMAxXS1h%2B8njaJ620nvtXiAdL9VhSAKv8DCH8QABoMNjM3NDIzMTgzODA1IgxiiD0gKtGMUQBkX2oq3ANQWwVJ5UkhgcRtk7%2B85k6eEwGyKCs6UXEVfAjrqVQddb7EFSl36GzNihlubKUQfGT4ZeN1OI1f6v4ABuBOV3pvX8el4AwnieOx8O9ZBnMpo5gaKDHOM3%2BouUjqy4P7ctMfSz33qGyH8eggKWE0dJKifY3ECgdZbQiWCjKwxX%2B8vpBkRhs3sNWlhnUJlhbtjm5ysVvikeamqbu4K%2FzSKahyEhknaBrH3yw8%2FA1Ct0Hvsc9tn%2FFIXGK1LJS9C2qLfplEr5TTKy58XXFwIFc8jhkDJrOGU6sKmGBcVICfCMyuUl2YO0ps0k%2BHPgUHHfXBh6UvqP5SXCjy%2FF4puSJEkgFHXFZ0WLk29UgXPdCLitI%2BTndYAOVKnAlPbqUbRlAkWnQW1nICoABnGW2p2GkqwAb8BafjZFLlrQlSgBJKX4Ewz2uD7UHjlbS8Q9hKqz3Lo9Ul29X%2BDzx1I2mqdf9ccwzIUlhJ2IGSobiRuugyRcaNB0HZbO6yKD%2BUpTi%2FUHc0xXl8lRmYw1LR4e3wxG7TYYZGZxtWoL9jh%2FNuBOqbs6jbPH91s%2BJ%2FFlxVGRJYWQjgFOOpQLv%2FdlQyJJqrbfMAR6H4Oifzx3zgOn3wu3rDIa%2BrCDO0yxP6JrYgbIC3RDD3q73OBjqkAf1wUf41uf1Pz9cUVg09mipdljhMqJ7WgQfAdsaRZCNWy31LlvvYxWcACRdrle9B0la35o%2FiQ3hFxotLaRom7vNmTMso0etpPOKJgjPfv0YwiUEYaBIZGOzJRV%2Bi7SfSjUxcaxEkI32nFhZ6cjlCij5HKB0zeDXc0f8fQ%2FUcf3ShnhaxnI%2BbstcbYYIIYydctKd1jK39rxFdY8tTfda9eBZAieus&amp;X-Amz-Signature=e21bd669e629a4f9e1b2e10f0e7d0e8ec92bcdb2dddb3693b467c09f9dfdd08a&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>下载代码如下:&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>下载数据集代码&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item></channel></rss>

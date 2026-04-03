@@ -1,32 +1,30 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>MPLUG-Owl on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/mplug-owl/</link><description>Recent content in MPLUG-Owl on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Fri, 29 Nov 2024 12:33:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/mplug-owl/index.xml" rel="self" type="application/rss+xml"/><item><title>多模态大模型_mPLUG-Owl_部署</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B_mplug-owl_%E9%83%A8%E7%BD%B2/</link><pubDate>Fri, 22 Nov 2024 01:44:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B_mplug-owl_%E9%83%A8%E7%BD%B2/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 支持视频以及图片推理的多模态大模型mPLUG-Owl。 记录安装，推理的所有操作过程。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/cd01d11c-96a2-4d07-82d2-51ad7aca879f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UGRHUI5I%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034656Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCt0CpGUzlEvWm4ZIow%2FTFjW01TcmmvfV2E%2F501P9efEwIhAMtKBHcOkFGv7%2BO6at8qncK7A2wHIguzIevExuRHhIrVKv8DCHwQABoMNjM3NDIzMTgzODA1IgztxTmIyOzUzE8yIQAq3AMOWYJNgHcdvW38nq2u%2FbwQypYCZhJu8jHv7jtS7YDMrZgDfLDOvfp3m9B6Zy2%2BlsCjtU6YwT0mXPMcgWNN7SMc9WSwMt2Sny%2FtBMbg4KhglW9YOhElPlrGYTJplRJWNpCCCymJlBuTiGy0U8Y6KAJ9UIMKv7tN6SAmWaPXFkyj%2FwRPcvgt3kT%2FENPO0%2BedZWMxGlzn7CwIyGM5ih%2Fn8gxI4CVHR%2Bn3MVv9FmV6UeUltUFdmsEdGzagR1lx93OD%2BzuKq9PaEDglmPWhMHZSAxFev9DYFM6l9j47gzR3PRvRCmxkbJtl3XvhpqEBYGxk%2FWgzlMlQkA2aHEfj2nKZnTH0GgPHnboP3x4z79w95VijrbhuHu%2F5Lb3PqZOsBUc%2BMg271Lwsrd43utxfY44aeNO7rtJhGpCzltp7kFjEQDwwuGlFWQrv23bxAxTC8%2BqGnP3%2FLmGx2UKVPppwg1dAqroaduU5yv7Szlna3Muwvy93SykpTXLHBZZALilTlf6199ZbDOFp14jSwjeJ8rVmZ0zKHIdt2z7%2FMoy8YmilZExDytnYwSVSJa0VGVQ3aM%2FaSiQsPX6NvAl5uN7s71%2BbSzKNj6niuU8%2FnGcm8pvWqAjwF4Wq8IG9B4BCcuuacjCH47zOBjqkAcuyiw0ui9%2Fcd3GXbngslPOKS2%2BIObt0JtiW27lviXHYFiHi%2FcMf5G%2F%2FVuWegHZURLsisr%2FFYKeNURiCz3qAknc943o6aR1ltYPPTR5kGdecpBnRDjW6F0dtrA8t1dIpSUAkNU88wA51NdRSOlWkOzr1ggxMBHkhWI%2FJkEGaWCk3ygNRQwO3FX3U5xHbW%2BBQ0lNZzQixKhlJpyukyIprQDnjAB%2Fr&amp;X-Amz-Signature=36ab80fa5255d75811abe9adc4610c01f29221a4499c4ecb6fa3c8f09daddfd8&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="环境配置"&gt;环境配置&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Anaconda安装&lt;/li&gt;
-&lt;li&gt;创建新环境&lt;/li&gt;
-&lt;li&gt;下载代码仓库&lt;/li&gt;
-&lt;li&gt;安装依赖包&lt;/li&gt;
-&lt;li&gt;额外安装&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="模型下载"&gt;模型下载&lt;/h2&gt;
-&lt;p&gt;mPLUG-Owl3有2个版本（2B、7B），为了更快的体验，本次实验选用2B参数版本的模型。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/6bb075b3-ef32-477c-a6b1-f0cc80c6f8b3/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UGRHUI5I%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034656Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCt0CpGUzlEvWm4ZIow%2FTFjW01TcmmvfV2E%2F501P9efEwIhAMtKBHcOkFGv7%2BO6at8qncK7A2wHIguzIevExuRHhIrVKv8DCHwQABoMNjM3NDIzMTgzODA1IgztxTmIyOzUzE8yIQAq3AMOWYJNgHcdvW38nq2u%2FbwQypYCZhJu8jHv7jtS7YDMrZgDfLDOvfp3m9B6Zy2%2BlsCjtU6YwT0mXPMcgWNN7SMc9WSwMt2Sny%2FtBMbg4KhglW9YOhElPlrGYTJplRJWNpCCCymJlBuTiGy0U8Y6KAJ9UIMKv7tN6SAmWaPXFkyj%2FwRPcvgt3kT%2FENPO0%2BedZWMxGlzn7CwIyGM5ih%2Fn8gxI4CVHR%2Bn3MVv9FmV6UeUltUFdmsEdGzagR1lx93OD%2BzuKq9PaEDglmPWhMHZSAxFev9DYFM6l9j47gzR3PRvRCmxkbJtl3XvhpqEBYGxk%2FWgzlMlQkA2aHEfj2nKZnTH0GgPHnboP3x4z79w95VijrbhuHu%2F5Lb3PqZOsBUc%2BMg271Lwsrd43utxfY44aeNO7rtJhGpCzltp7kFjEQDwwuGlFWQrv23bxAxTC8%2BqGnP3%2FLmGx2UKVPppwg1dAqroaduU5yv7Szlna3Muwvy93SykpTXLHBZZALilTlf6199ZbDOFp14jSwjeJ8rVmZ0zKHIdt2z7%2FMoy8YmilZExDytnYwSVSJa0VGVQ3aM%2FaSiQsPX6NvAl5uN7s71%2BbSzKNj6niuU8%2FnGcm8pvWqAjwF4Wq8IG9B4BCcuuacjCH47zOBjqkAcuyiw0ui9%2Fcd3GXbngslPOKS2%2BIObt0JtiW27lviXHYFiHi%2FcMf5G%2F%2FVuWegHZURLsisr%2FFYKeNURiCz3qAknc943o6aR1ltYPPTR5kGdecpBnRDjW6F0dtrA8t1dIpSUAkNU88wA51NdRSOlWkOzr1ggxMBHkhWI%2FJkEGaWCk3ygNRQwO3FX3U5xHbW%2BBQ0lNZzQixKhlJpyukyIprQDnjAB%2Fr&amp;X-Amz-Signature=0ca62462b61b5093a688bc24c13b5c4704be1eb510bb41bbaef5aed319936b5a&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;魔塔社区找到模型仓库地址&lt;/li&gt;
-&lt;li&gt;下载命令&lt;/li&gt;
-&lt;li&gt;查看&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="模型推理"&gt;模型推理&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;参考官方README文档，创建推理demo.py&lt;/li&gt;
-&lt;li&gt;py文件内写入推理代码&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>MPLUG-Owl on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/mplug-owl/</link><description>Recent content in MPLUG-Owl on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 29 Nov 2024 12:33:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/mplug-owl/index.xml" rel="self" type="application/rss+xml"/><item><title>多模态大模型_mPLUG-Owl_部署</title><link>https://Pan-Binghong.github.io/daily-learning/ai/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B_mplug-owl_%E9%83%A8%E7%BD%B2/</link><pubDate>Fri, 22 Nov 2024 01:44:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B_mplug-owl_%E9%83%A8%E7%BD%B2/</guid><description>&lt;blockquote>
+&lt;p>💡 支持视频以及图片推理的多模态大模型mPLUG-Owl。 记录安装，推理的所有操作过程。&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/cd01d11c-96a2-4d07-82d2-51ad7aca879f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4664R7HC5YP%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063439Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCICnRmzMJ6kYtnT7qZe4cy2ZeStXCOm3s1%2FDY973VNVmWAiEAhfJ56AU4vVX69C0%2FW5nAIkC%2BF1d259eKcSWjIrOXAzQq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDIwNvGMDoGPX888%2FeyrcA%2FKFuoJhLFg6AUgd4UbizNKogaNJ0z4ODLvJxqQaA99pgYUiZhfKtYRQdhrg8d5F6AyX2J9CYM5miRgcBD4riZ%2Bt0IIlIphap6DgkbMczRL%2BGfpKiIWSa7e0BL%2BkbmtivTt5nqTXpcu%2Bpf8BjzaFHL9wE8VLEY5mE6MeTijXTST0K2WaNY0SEbPn8JIVX2cwMdX3znG8FGzMpmBuDt7U6SjSqY3ttOE%2FS24YP6NJ2aWSJpEpFXMT5SaxNA3Lhh57uv7aNXBGzKEjerGbeWGrMXRWOGZfOFYOOeIzEUwB65jLEGK%2B3R5v%2F0g2R2sN7fvSTzzfVJo0dg82zbonkvrCsbQ%2Fg3fMIuwEzCK3xDF%2BZJAhhxOmy3ia%2FDfUzTisBSjFzb71wEZ9WQOrMpBYRd5vmSwm9%2BcIMrtfpVTloGTp4waiBsC%2FKEzv2iaLLa66ylvzuXLvkdE5aNoVvXqvYB%2BW1f9GUrF5qDupfFIPcjiGEtqqwIxgC8oll3DUGO5nqcT7bAg%2FxDWhbLXTztDPMTjWjvP2nY%2BbQa7rBil1xIXcmKA9Tu0C2eH%2BJhiSkTBNP1uHVW9kZA%2FHqa2HJ9MZj8N1akrROkEy%2BipItnfuZQ5%2B7UDdQKur03Ta9JFBnR2cMI%2Bvvc4GOqUBEru8zEutE5WGW6oofhCBwUh2PuY5QS8Y4ek%2FwwX%2BRu%2FGXoPRCB%2FRDIqQY6tRKYPHLeC%2FjJJQBCCdcGmxgU88t979P7f3E7I32GQ5XDaLJizkFDLPDz6sDGrAmxTRVUsoRWuR1mq%2FHccnhfHqYSO8Z%2F7Kvo%2Bm1JrZieZnA920gTGMKnfN%2BgP%2FabNvhlSOh928NLnQGp6wi5lrBfFVaRSOijIXMTvq&amp;X-Amz-Signature=4602acc66fa33d1e5af0a437f565e6fcc0edd14f1e0b5e6a3b0ec6873f95d76b&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="环境配置">环境配置&lt;/h2>
+&lt;ul>
+&lt;li>Anaconda安装&lt;/li>
+&lt;li>创建新环境&lt;/li>
+&lt;li>下载代码仓库&lt;/li>
+&lt;li>安装依赖包&lt;/li>
+&lt;li>额外安装&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="模型下载">模型下载&lt;/h2>
+&lt;p>mPLUG-Owl3有2个版本（2B、7B），为了更快的体验，本次实验选用2B参数版本的模型。&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/6bb075b3-ef32-477c-a6b1-f0cc80c6f8b3/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4664R7HC5YP%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063439Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCICnRmzMJ6kYtnT7qZe4cy2ZeStXCOm3s1%2FDY973VNVmWAiEAhfJ56AU4vVX69C0%2FW5nAIkC%2BF1d259eKcSWjIrOXAzQq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDIwNvGMDoGPX888%2FeyrcA%2FKFuoJhLFg6AUgd4UbizNKogaNJ0z4ODLvJxqQaA99pgYUiZhfKtYRQdhrg8d5F6AyX2J9CYM5miRgcBD4riZ%2Bt0IIlIphap6DgkbMczRL%2BGfpKiIWSa7e0BL%2BkbmtivTt5nqTXpcu%2Bpf8BjzaFHL9wE8VLEY5mE6MeTijXTST0K2WaNY0SEbPn8JIVX2cwMdX3znG8FGzMpmBuDt7U6SjSqY3ttOE%2FS24YP6NJ2aWSJpEpFXMT5SaxNA3Lhh57uv7aNXBGzKEjerGbeWGrMXRWOGZfOFYOOeIzEUwB65jLEGK%2B3R5v%2F0g2R2sN7fvSTzzfVJo0dg82zbonkvrCsbQ%2Fg3fMIuwEzCK3xDF%2BZJAhhxOmy3ia%2FDfUzTisBSjFzb71wEZ9WQOrMpBYRd5vmSwm9%2BcIMrtfpVTloGTp4waiBsC%2FKEzv2iaLLa66ylvzuXLvkdE5aNoVvXqvYB%2BW1f9GUrF5qDupfFIPcjiGEtqqwIxgC8oll3DUGO5nqcT7bAg%2FxDWhbLXTztDPMTjWjvP2nY%2BbQa7rBil1xIXcmKA9Tu0C2eH%2BJhiSkTBNP1uHVW9kZA%2FHqa2HJ9MZj8N1akrROkEy%2BipItnfuZQ5%2B7UDdQKur03Ta9JFBnR2cMI%2Bvvc4GOqUBEru8zEutE5WGW6oofhCBwUh2PuY5QS8Y4ek%2FwwX%2BRu%2FGXoPRCB%2FRDIqQY6tRKYPHLeC%2FjJJQBCCdcGmxgU88t979P7f3E7I32GQ5XDaLJizkFDLPDz6sDGrAmxTRVUsoRWuR1mq%2FHccnhfHqYSO8Z%2F7Kvo%2Bm1JrZieZnA920gTGMKnfN%2BgP%2FabNvhlSOh928NLnQGp6wi5lrBfFVaRSOijIXMTvq&amp;X-Amz-Signature=9762e0b89e69d266edc5986b5b1dbaedf401008c0f37337199e69ce2f5046ee9&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;ul>
+&lt;li>魔塔社区找到模型仓库地址&lt;/li>
+&lt;li>下载命令&lt;/li>
+&lt;li>查看&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="模型推理">模型推理&lt;/h2>
+&lt;ul>
+&lt;li>参考官方README文档，创建推理demo.py&lt;/li>
+&lt;li>py文件内写入推理代码&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item></channel></rss>

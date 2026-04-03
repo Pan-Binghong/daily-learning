@@ -1,43 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ngrok on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/ngrok/</link><description>Recent content in Ngrok on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Fri, 29 Nov 2024 12:21:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/ngrok/index.xml" rel="self" type="application/rss+xml"/><item><title>Ngrok安装 | 运行方法</title><link>https://Pan-Binghong.github.io/daily-learning/devops/ngrok%E5%AE%89%E8%A3%85-%E8%BF%90%E8%A1%8C%E6%96%B9%E6%B3%95/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/ngrok%E5%AE%89%E8%A3%85-%E8%BF%90%E8%A1%8C%E6%96%B9%E6%B3%95/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 前几天帮人微调模型的时候，使用的LlamaFactory的WebUI，由于服务部署到他的内网环境内，做了内网穿透使得可以让多人访问。刚好想着了解一下，在此背景下，撰写了本文章。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="内网穿透"&gt;内网穿透&lt;/h2&gt;
-&lt;h3 id="原理"&gt;原理&lt;/h3&gt;
-&lt;p&gt;又称为NAT穿透。NAT穿透技术是让NAT背后的设备，先访问指定的外网服务器，由指定的外网服务器搭建桥梁，打通内、外网设备的访问通道，最终实现外网设备访问到内网设备。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2c26f5ed-10b0-42bb-a8d5-ab7b8cebba88/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WSODEDFQ%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034908Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIDQQKjraLXbqW9qepmANKtt8tpsTMmTGTUbPGAWOfyU%2BAiEA1WaAzOye2vGkvJvJUVDizQVESCq8ErN75tTkpx596mYq%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDNMZoR9XyWT2Ns1M8ircAwF6ATX6TzyjEai4kqaZgxuBdV8%2FQFYKlYMcvAdHJrlCYddcFbGQAjOkHj6LU62xxd%2FA1pC6mDx4LqNy47hC%2FnmOUWRp50xJuJoCkp3pD3%2FHifpFTRTGAY8rfk6Zgb%2BfDeQcx9TS8RjjrtQ%2Bzraqa6AenuC%2BUnGjtauAjrfb2oRdR2nuJPJuUKZIVi7520iPQ3ZbKwIigwhCBJ6mBd7tpKd4RwA6O4%2BlBTe94eqMTXGA7B5%2BPqa8t2Xqrskz4V8yNRaksscYr3hzg9RHWoB3krlwcjH4ZtGTvAZDkcRysD21riTkUXHSTjijw7IgJff93YsKGz08Yi3VlseXZ7W7jJL1OrbWJmEBKlFDactuOWzL9COMdA6rhIP0uTNTFMjBJHkRC1dml2sm4wevgQF6lY9mhrTHqmiels6cOLr168jSmsulHn1lHzCoE12aJqyyaD06pXvjF1r2ddKH2HcIp7I9osTxvlFaTKnCKaARjximvbPUBUOzPC35PIMs%2FNPrFP8rqQDJdmOl%2F2lTNgpJHSITu3bb0m%2F1glvnlhdDBhDAfluKRJTHXKRihJgGNuxMBVmFAul2RDc0pxUAgNBdMGzII5wKlCaMdm6OG%2Bg3dYS4FKfUTbKEUX7LvRWNMK%2FlvM4GOqUBoQ5YGzWz3h0LzoPFauMhYO%2FW6bhV74UwcLHh1NOfX7lUY4w24fUecMEItAlUeCaSUGA1EiXOMqIkzzEc4SrmOE5eR2bkmku5bYeeikBJsfv8r01CgfXXqNGoFd9%2BiY5rmXc5qITglHZo4E1WYr6Fx5uaw737KC58NBsFBqOs91oJsisKzE66JDj2VMXL7qTgWIQvMLPERJU3flSNE1KEaFBu6PsW&amp;X-Amz-Signature=d5b1ef5eb8c88b0b820792a17275fe490f8415dfab29972cc1a491c7d3ab9509&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;h3 id="常用工具"&gt;常用工具&lt;/h3&gt;
-&lt;p&gt;参考各大论坛关于内网穿透工具的评论区。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Ngrok&lt;/li&gt;
-&lt;li&gt;frp&lt;/li&gt;
-&lt;li&gt;花生壳&lt;/li&gt;
-&lt;li&gt;ZEROTIER&lt;/li&gt;
-&lt;li&gt;樱花FRP&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="ngrok"&gt;Ngrok&lt;/h2&gt;
-&lt;p&gt;ngrok的极其简单，官网写的很清楚，下面是官方的安装教程。为了加深记忆，我就复制一下吧。&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://dashboard.ngrok.com/get-started/setup/windows"&gt;https://dashboard.ngrok.com/get-started/setup/windows&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id="安装"&gt;安装&lt;/h3&gt;
-&lt;p&gt;安装前需要在该网站进行账号的注册，用于登陆。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;根据自身情况，选择合适的安装方式。&lt;/li&gt;
-&lt;li&gt;假设选择是在Windows内安装，打开终端，输入：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="使用"&gt;使用&lt;/h3&gt;
-&lt;p&gt;在终端输入：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;ngrok&lt;/span&gt; &lt;span class="err"&gt;http&lt;/span&gt; &lt;span class="err"&gt;http:&lt;/span&gt;&lt;span class="c1"&gt;//localhost:80
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;表示将本地的80端口映射到ngrok的服务器内。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Reference&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ngrok on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/ngrok/</link><description>Recent content in Ngrok on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 29 Nov 2024 12:21:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/ngrok/index.xml" rel="self" type="application/rss+xml"/><item><title>Ngrok安装 | 运行方法</title><link>https://Pan-Binghong.github.io/daily-learning/devops/ngrok%E5%AE%89%E8%A3%85-%E8%BF%90%E8%A1%8C%E6%96%B9%E6%B3%95/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/ngrok%E5%AE%89%E8%A3%85-%E8%BF%90%E8%A1%8C%E6%96%B9%E6%B3%95/</guid><description>&lt;blockquote>
+&lt;p>💡 前几天帮人微调模型的时候，使用的LlamaFactory的WebUI，由于服务部署到他的内网环境内，做了内网穿透使得可以让多人访问。刚好想着了解一下，在此背景下，撰写了本文章。&lt;/p>&lt;/blockquote>
+&lt;h2 id="内网穿透">内网穿透&lt;/h2>
+&lt;h3 id="原理">原理&lt;/h3>
+&lt;p>又称为NAT穿透。NAT穿透技术是让NAT背后的设备，先访问指定的外网服务器，由指定的外网服务器搭建桥梁，打通内、外网设备的访问通道，最终实现外网设备访问到内网设备。&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2c26f5ed-10b0-42bb-a8d5-ab7b8cebba88/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4665H76EJXW%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063608Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIBqMz2B9XzqnEPLKeQTg3NI6tryBAqducGEYlM44%2BtPDAiEA8Sa7hsUaKQaaup%2FL%2BQkGtTPmWRlGKfxLokk9qUqad6Mq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDJL4sD7Tqm1MGK4N8CrcA%2BsdAq2%2F8p55P44jC7Bl0kh2WzAIS1BHl490M1koKEQCOt8mv0PHEFuCKssZpvtGPKQC2dioSTUxaIPeQDLt%2FoWS3tM9UzYZ%2FtFG%2Bxbh5Z8lyobdB0xm6P8V6W1%2BSoTfbHknNBFjhwN2Mpz37V9JfCb%2FBn%2ByCoxdw4GtfGqO17pBJ5v9jfMvdpKqIAUz%2FeWi9yzKlnUUFUoDjEMjJSINVw7BxL3eG2UhyZcJuVp6%2FyptXkNhtcPFIBYn8eUocwrNHWL3o6j%2FDfhTcG57%2Fle7CKrfaLC6NOec%2FDmwL6%2F6OlWmr%2Bt9e2z34T9eJgRe7BvA5nkWTyINPwfX4FKQsOatNPOcil7D%2FySnxPOK%2F8PG9NpwxNVfltUSB7h5TfE9JupX5pC%2Byj40U8Uz6ZczLjXghgcEq4%2B6Qjg7vwQTaEgKWfC1eYOg8eo9fN6xGilRtk9EZgZqecJIHIQtzLLmUTCDTqILGXrZ07nemKfqdc9iPZpecl9HNcRMLv7cYJTlqvNrploVnooQZOeCZIZU%2F9J62vMZqYwfSsl7Kng9Rj1B1CcuQD%2BvPqmHdcYy77Ny4K%2BrdrUh9UUCvTKw65NvlCJavEkhCYFqlBpC29FBw%2Bk1B5rjbLEVx%2Ba%2B0qfR1grkMI%2Bsvc4GOqUBBYL2gRGce9uzU3QU3jzWdVxhzP2985E3VOkRDehYAa8uCQ3clsOCn4vqLU%2FtmNNa7iAmqOWSJ1ITCoP0Di2l5BHzDngDnslxNfMW88ol24pdFIjdTHBDV%2BiHM2g0%2FSkNaocjJO6kZsvO%2BkUOzuosE7jBn66IVO39YtcV8txuZYV6hK5e6joY4S2Gq%2BAGSvf0LGoVnDvu8fC7r1bi%2FnIpHUMVwWRC&amp;X-Amz-Signature=c0e2ebf788b84cae4145cbf3b88b68c066e8ed8985b27bd767aba93734ec35c4&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;h3 id="常用工具">常用工具&lt;/h3>
+&lt;p>参考各大论坛关于内网穿透工具的评论区。&lt;/p>
+&lt;ul>
+&lt;li>Ngrok&lt;/li>
+&lt;li>frp&lt;/li>
+&lt;li>花生壳&lt;/li>
+&lt;li>ZEROTIER&lt;/li>
+&lt;li>樱花FRP&lt;/li>
+&lt;/ul>
+&lt;h2 id="ngrok">Ngrok&lt;/h2>
+&lt;p>ngrok的极其简单，官网写的很清楚，下面是官方的安装教程。为了加深记忆，我就复制一下吧。&lt;/p>
+&lt;p>&lt;a href="https://dashboard.ngrok.com/get-started/setup/windows">https://dashboard.ngrok.com/get-started/setup/windows&lt;/a>&lt;/p>
+&lt;h3 id="安装">安装&lt;/h3>
+&lt;p>安装前需要在该网站进行账号的注册，用于登陆。&lt;/p>
+&lt;ol>
+&lt;li>根据自身情况，选择合适的安装方式。&lt;/li>
+&lt;li>假设选择是在Windows内安装，打开终端，输入：&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="使用">使用&lt;/h3>
+&lt;p>在终端输入：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="err">ngrok&lt;/span> &lt;span class="err">http&lt;/span> &lt;span class="err">http:&lt;/span>&lt;span class="c1">//localhost:80
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>表示将本地的80端口映射到ngrok的服务器内。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;blockquote>
+&lt;p>Reference&lt;/p>&lt;/blockquote></description></item></channel></rss>

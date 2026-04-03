@@ -1,273 +1,269 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>RAG on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/rag/</link><description>Recent content in RAG on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Mon, 02 Dec 2024 01:20:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/rag/index.xml" rel="self" type="application/rss+xml"/><item><title>论文精读_寻找RAG最优策略</title><link>https://Pan-Binghong.github.io/daily-learning/knowledge/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB_%E5%AF%BB%E6%89%BErag%E6%9C%80%E4%BC%98%E7%AD%96%E7%95%A5/</link><pubDate>Thu, 28 Nov 2024 07:08:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/knowledge/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB_%E5%AF%BB%E6%89%BErag%E6%9C%80%E4%BC%98%E7%AD%96%E7%95%A5/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 这篇真的全是干货…论文的实验部分，我就不写了。看看就行。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/78127f49-5326-457b-85b3-9e146b9c399f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WZBHFHPE%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034810Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQC6jVsCp98wBDIahBVeriKgidW94ALmBC0BNNPOX8meLwIhAIFtoWQ6kO5wxeFhTa6jmQrhp1fOK8vsbpW9SPp8M7rRKv8DCH0QABoMNjM3NDIzMTgzODA1IgwbG%2F4UXk%2Bb54JeBN0q3APPPiw4efIm688ncfpWp5c6bLYelZ6T5HNz0OtIzRIjc0BG%2FSGFR%2FIzfEj%2BOJhExIdXHBfwGB5zGQ1Q4%2BS4XW%2F18HMapWOkWcZCEJdtI2qb8dl14lvX9DWE6UbZsFXK2it2R%2BXLxLTnqg%2BquX%2BrsrJLKB36HNk%2B1SpmmOtrDhuZMUB8a%2BBz9tmpzhoRjIW4fyCmf3xwtvKQ3GYbhwM1sn%2B4FtV4IbgrVUAIgpZULPviC6cV2DOtbQGY8wYgn%2BxiLqyLKRZfNRrzNJseQOEwT52n5llFIt9goegLEm9cT1a90i6KfBAPyGG%2FWO%2FAWjzl5xNqIYV2%2FpOR%2B3wstQACSxi66v%2FB4J42qlHXDi%2BBlOx%2FXYDCXlLM0vlpOl7RJ9yB2X8G1dIMwtf7OZ4%2FaDfU%2BduWR0yufIWFKbFihWjMmEUp4N210PG84DVvvaPvvuyU4LLwoe3gbyCakMiJmvRnsls9WQWIWLahMtJV0fmXi9Ld1wH0r%2BpGCOv0UWlC3nXPYvGQ0gO1spj6MhzNDQ8b04j66K7llhqmwzOlB2rP1KHOSAhMjp8vd8bI9JmVGNDD3TVPhAtwBBcRNI%2FcKzjWGuKwouNQMr%2FaMr3R40AufBVAFQYqFZbjgY9iMiLU6zDh67zOBjqkAR6sowCMEAlybclj4CQ4hbuQ7wox3M2SLarAtNO8POe4bUcCkqM0awktDrBNa9UnwgL5bVzSBUPuimWFaz3JkrlFC8Gh2GFQk2eyBb5NYwatyHEITu8uPp3cHCJXzPv8oT1VBFkOe%2FCGCj1Q2tLiFC5MvklyYY42ep8mAQ8JVdV7ttGWDuGZwxG7Tul%2BZMV7oiEXOIf3sgFHFFYsvVC4vZOv9o0c&amp;X-Amz-Signature=84297dab1b49947f84fd01db095f983aadf91f98df4129274b3b7d049cdb83ba&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="相关工作查询检索层面"&gt;相关工作|查询检索层面&lt;/h2&gt;
-&lt;p&gt;确保大型语言模型（LLMs）如ChatGPT和LLaMA生成的回应准确性至关重要。然而，简单地增加模型大小并不能从根本上解决“幻觉”问题，这在知识密集型任务和专业领域尤为明显。检索增强生成（RAG）通过从外部知识库检索相关文档，为LLMs提供准确、实时、领域特定的上下文，以解决这些挑战。先前的工作通过查询和检索转换优化了RAG流程，提高了检索器的性能，并对检索器和生成器进行了微调。这些优化改善了输入查询、检索机制与生成过程之间的互动，确保了回应的准确性和相关性。&lt;/p&gt;
-&lt;h2 id="rag工作流"&gt;RAG工作流&lt;/h2&gt;
-&lt;p&gt;在本节中，我们将详细介绍RAG工作流程的各个组件。针对每个模块，我们回顾常用的方法，并为我们的最终流程选择了默认和备选方法。&lt;/p&gt;
-&lt;h3 id="查询分类"&gt;查询分类&lt;/h3&gt;
-&lt;p&gt;并非所有的查询都需要通过检索增强，因为大型语言模型（LLMs）本身就具备一定的处理能力。尽管检索增强生成（RAG）可以提高信息的准确性并减少虚构内容，但频繁的检索可能会增加响应时间。因此，我们首先通过对查询进行分类来确定是否需要检索。需要检索的查询会经过RAG模块处理；其他则直接由LLMs处理。通常，在需要超出模型参数范围的知识时推荐使用检索。然而，检索的必要性根据任务的不同而有所变化。例如，一个训练至2023年的LLM可以处理“Sora是由OpenAI开发的”这一翻译请求而无需检索。相反，对于同一主题的介绍请求则需要检索来提供相关信息。&lt;/p&gt;
-&lt;p&gt;因此，我们建议按类型对任务进行分类，以确定查询是否需要检索。对于完全基于用户提供信息的任务，我们标记为“充分”，不需要检索；否则，我们标记为“不足”，可能需要检索。我们训练了一个分类器来自动化这一决策过程。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="chunking"&gt;Chunking&lt;/h3&gt;
-&lt;p&gt;将文档分块成更小的段落对于提高检索的准确性和避免在大型语言模型（LLMs）中出现长度问题至关重要。这个过程可以在不同的粒度级别上应用，比如令牌（token）、句子和语义级别。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;令牌级别的分块很直接，但可能会分割句子，影响检索质量。&lt;/li&gt;
-&lt;li&gt;语义级别的分块利用大型语言模型来确定分割点，能保持上下文不变，但是耗时。&lt;/li&gt;
-&lt;li&gt;句子级别的分块在保留文本语义的同时，平衡了简单性和效率。
-在这项研究中，我们使用句子级别的分块，平衡了简单性和语义保留。我们从四个维度考察了分块方法。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;向量数据库存储着带有元数据的嵌入向量，通过各种索引和近似最近邻（ANN）方法，能够高效地检索与查询相关的文档。为了为我们的研究选择一个合适的向量数据库，我们基于四个关键标准对几个选项进行了评估：多种索引类型、支持十亿级别的向量、混合搜索以及云原生能力。这些标准因其对于灵活性、可扩展性以及在现代云基础设施中部署的便捷性的影响而被选中。多种索引类型提供了基于不同数据特性和用例优化搜索的灵活性。十亿级别的向量支持对于处理LLM应用中的大型数据集至关重要。混合搜索将向量搜索与传统关键词搜索结合起来，提高了检索准确性。最后，云原生能力确保了在云环境中的无缝集成、可扩展性和管理。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2c4ac03c-4cd8-4e84-aa5e-b0d35bd8c0fa/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WZBHFHPE%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034810Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQC6jVsCp98wBDIahBVeriKgidW94ALmBC0BNNPOX8meLwIhAIFtoWQ6kO5wxeFhTa6jmQrhp1fOK8vsbpW9SPp8M7rRKv8DCH0QABoMNjM3NDIzMTgzODA1IgwbG%2F4UXk%2Bb54JeBN0q3APPPiw4efIm688ncfpWp5c6bLYelZ6T5HNz0OtIzRIjc0BG%2FSGFR%2FIzfEj%2BOJhExIdXHBfwGB5zGQ1Q4%2BS4XW%2F18HMapWOkWcZCEJdtI2qb8dl14lvX9DWE6UbZsFXK2it2R%2BXLxLTnqg%2BquX%2BrsrJLKB36HNk%2B1SpmmOtrDhuZMUB8a%2BBz9tmpzhoRjIW4fyCmf3xwtvKQ3GYbhwM1sn%2B4FtV4IbgrVUAIgpZULPviC6cV2DOtbQGY8wYgn%2BxiLqyLKRZfNRrzNJseQOEwT52n5llFIt9goegLEm9cT1a90i6KfBAPyGG%2FWO%2FAWjzl5xNqIYV2%2FpOR%2B3wstQACSxi66v%2FB4J42qlHXDi%2BBlOx%2FXYDCXlLM0vlpOl7RJ9yB2X8G1dIMwtf7OZ4%2FaDfU%2BduWR0yufIWFKbFihWjMmEUp4N210PG84DVvvaPvvuyU4LLwoe3gbyCakMiJmvRnsls9WQWIWLahMtJV0fmXi9Ld1wH0r%2BpGCOv0UWlC3nXPYvGQ0gO1spj6MhzNDQ8b04j66K7llhqmwzOlB2rP1KHOSAhMjp8vd8bI9JmVGNDD3TVPhAtwBBcRNI%2FcKzjWGuKwouNQMr%2FaMr3R40AufBVAFQYqFZbjgY9iMiLU6zDh67zOBjqkAR6sowCMEAlybclj4CQ4hbuQ7wox3M2SLarAtNO8POe4bUcCkqM0awktDrBNa9UnwgL5bVzSBUPuimWFaz3JkrlFC8Gh2GFQk2eyBb5NYwatyHEITu8uPp3cHCJXzPv8oT1VBFkOe%2FCGCj1Q2tLiFC5MvklyYY42ep8mAQ8JVdV7ttGWDuGZwxG7Tul%2BZMV7oiEXOIf3sgFHFFYsvVC4vZOv9o0c&amp;X-Amz-Signature=b98680213d40a9ba7c24d53ccafdc3dd2bf28d1db4b16ef2504645044d4d2434&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="retrieval方式"&gt;Retrieval方式&lt;/h3&gt;
-&lt;p&gt;针对用户查询，检索模块从预建的语料库中选择与查询和文档的相似度最高的前k个相关文档。然后，生成模型使用这些文档来制定针对查询的适当响应。然而，原始查询由于表达不佳和缺乏语义信息，通常会表现不佳，这对检索过程产生了负面影响。为了解决这些问题，我们评估了三种查询转换方法，使用推荐的LLM-Embedder作为查询和文档编码器：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;查询改写：查询改写通过改进查询来更好地匹配相关文档。受到Rewrite-Retrieve-Read框架的启发，我们促使一个LLM重写查询以提升性能。&lt;/li&gt;
-&lt;li&gt;查询分解：这种方法涉及到基于从原始查询中派生的子问题来检索文档，这比理解和处理更复杂的查询要困难。&lt;/li&gt;
-&lt;li&gt;伪文档生成：这种方法基于用户查询生成一个假想的文档，并使用假想答案的嵌入来检索相似文档。一个值得注意的实现是HyDE。
-最近的研究表明结合基于词汇的搜索与向量搜索可以显著提高性能。在本研究中，我们使用BM25进行稀疏检索和Contriever，一个无监督对比编码器，进行密集检索。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id="reranking"&gt;Reranking&lt;/h3&gt;
-&lt;p&gt;在最初的检索之后，将采用重排序阶段来提高检索到的文档的相关性，确保最相关的信息出现在列表的顶部。这一阶段采用更精确、耗时更长的方法有效地重新排序文档，增加查询与排名最高的文档之间的相似度。&lt;/p&gt;
-&lt;p&gt;在我们的重排序模块中，我们考虑了两种方法：DLM重排序和TILDE重排序。DLM重排序采用分类方法，而TILDE重排序则侧重于查询可能性。这些方法分别优先考虑性能和效率。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;DLM重排方法：这种方法利用深度语言模型（DLMs）进行重排。这些模型被微调用以将文档与查询的相关性分类为“真”或“假”。在微调过程中，模型通过将查询和文档输入连接起来，并根据相关性进行标记来进行训练。在推理时，文档根据“真”标记的概率进行排名。&lt;/li&gt;
-&lt;li&gt;TILDE重排：TILDE通过预测模型词汇表中的各个词项的概率来独立计算每个查询词项的可能性。通过对查询词项的预计算对数概率求和，为文档打分，从而在推理时快速重排。TILDEv2通过仅索引文档中存在的词项，使用NCE损失，并扩展文档，从而提高效率并减小索引大小。
-我们的实验是在MS MARCO Passage排名数据集上进行的，这是一个大规模的机器阅读理解数据集。我们遵循并对PyGaggle和TILDE提供的实现进行了修改，使用了模型monoT5、monoBERT、RankLLaMA和TILDEv2。重排结果显示在表中。我们推荐monoT5作为一种综合性的方法，平衡了性能和效率。RankLLaMA适合于实现最佳性能，而TILDEv2是在固定集合上获得最快体验的理想选择。实验设置和结果的详细信息在附录中呈现。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/100cf766-c92f-4387-8745-20b0e94296e4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466WZBHFHPE%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034811Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQC6jVsCp98wBDIahBVeriKgidW94ALmBC0BNNPOX8meLwIhAIFtoWQ6kO5wxeFhTa6jmQrhp1fOK8vsbpW9SPp8M7rRKv8DCH0QABoMNjM3NDIzMTgzODA1IgwbG%2F4UXk%2Bb54JeBN0q3APPPiw4efIm688ncfpWp5c6bLYelZ6T5HNz0OtIzRIjc0BG%2FSGFR%2FIzfEj%2BOJhExIdXHBfwGB5zGQ1Q4%2BS4XW%2F18HMapWOkWcZCEJdtI2qb8dl14lvX9DWE6UbZsFXK2it2R%2BXLxLTnqg%2BquX%2BrsrJLKB36HNk%2B1SpmmOtrDhuZMUB8a%2BBz9tmpzhoRjIW4fyCmf3xwtvKQ3GYbhwM1sn%2B4FtV4IbgrVUAIgpZULPviC6cV2DOtbQGY8wYgn%2BxiLqyLKRZfNRrzNJseQOEwT52n5llFIt9goegLEm9cT1a90i6KfBAPyGG%2FWO%2FAWjzl5xNqIYV2%2FpOR%2B3wstQACSxi66v%2FB4J42qlHXDi%2BBlOx%2FXYDCXlLM0vlpOl7RJ9yB2X8G1dIMwtf7OZ4%2FaDfU%2BduWR0yufIWFKbFihWjMmEUp4N210PG84DVvvaPvvuyU4LLwoe3gbyCakMiJmvRnsls9WQWIWLahMtJV0fmXi9Ld1wH0r%2BpGCOv0UWlC3nXPYvGQ0gO1spj6MhzNDQ8b04j66K7llhqmwzOlB2rP1KHOSAhMjp8vd8bI9JmVGNDD3TVPhAtwBBcRNI%2FcKzjWGuKwouNQMr%2FaMr3R40AufBVAFQYqFZbjgY9iMiLU6zDh67zOBjqkAR6sowCMEAlybclj4CQ4hbuQ7wox3M2SLarAtNO8POe4bUcCkqM0awktDrBNa9UnwgL5bVzSBUPuimWFaz3JkrlFC8Gh2GFQk2eyBb5NYwatyHEITu8uPp3cHCJXzPv8oT1VBFkOe%2FCGCj1Q2tLiFC5MvklyYY42ep8mAQ8JVdV7ttGWDuGZwxG7Tul%2BZMV7oiEXOIf3sgFHFFYsvVC4vZOv9o0c&amp;X-Amz-Signature=9fc1369d58daff866d70d185659015154747a4ba0e319a602deb2b04f3078a70&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;h3 id="文档重组"&gt;文档重组&lt;/h3&gt;
-&lt;p&gt;文档重组后续过程的表现，比如LLM响应生成，可能会受到提供文档的顺序影响。为了解决这个问题，在重新排名之后的工作流程中，我们加入了一个紧凑的重组模块，包含三种重组方法：“前向”、“反向”和“两侧”。“前向”方法通过降序重新排名阶段的相关性得分来重组文档，而“反向”则按升序排列它们。对于LLM，当相关信息放在输入的头部或尾部时，可以达到最佳性能，我们也加入了“两侧”选项。&lt;/p&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Reference&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>LlamaIndex接入千帆RAG</title><link>https://Pan-Binghong.github.io/daily-learning/ai/llamaindex%E6%8E%A5%E5%85%A5%E5%8D%83%E5%B8%86rag/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/llamaindex%E6%8E%A5%E5%85%A5%E5%8D%83%E5%B8%86rag/</guid><description>&lt;p&gt;记录从使用Llama-index框架, 基于在线文心千帆大模型ERNIE-4.0, 构建实现本地知识检索.&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/1f73f1b2-0e9d-4fdf-9a59-00189860a2f9/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SRT2PCN4%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034651Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCf%2Fq%2FexiBw4FWYLB4u%2Bm2LzZIZ2AqolkKU1UwOdGWm1gIgGOWQCkcteKBc72JNsdyQ8M4REBiecrHoMx%2BjeZpkd28q%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDK9gTn46zTRWOTCHmyrcAx61Tf2V6rcRNF%2B3nyCrmoF4y2WorgT1UyLikT8eFxz4tCDhMeQ5ucH8FlOQB7KIC7XNcwyo2CbS4%2FiwA%2BdDoh6D5xHyH4ukWp%2BLglOhOy37F2FY74q3yayqhvo1DiJ6eCibBuOwhqHSpVfNknz0lzc42hb%2BaRk9gpBEpUuq6iCUuwc5vW1Ykj7krQBiMHtEvRYYiB91mUCSCDsJ2mMLmDUoxrvReePQu8wtKe4inPfQY5Ndiw%2F233oVU8FkJTk4zHOJKAAxMJpOIZrGkgeVxQ7JSixP%2BfIhpp%2F%2BAxgkPX36e11oDd3zm3M9e0dMQ2HpBDzXhAq9cjRthIFALpMTKWKope5HGNguk3gY3g46B1vI0DTRtCrAjcHvhVRHFRt3tv5NtIHlxzE1GJbvwUcuZzFTzwUXmbdPD8VUA1KI96qZMlJvsTOpJa1cnhufBAEZ8rZAFomZ98BeVxhey%2B7ufjwTprqcIpdEd6LFyAULgSN5JLjDn9RtsTN6eMw4Kq%2FzJGeQllFoPUpHge34griJWzy1IQcfx1qLNGKQsHI6Y9rXta0BuUnLXFGOoJ7jiyHWgsb3Vrm2%2BQutaXqD9IzATuSUZzGhKYPme%2FcpRuojw4W8Ru%2BBGTznHEsKD8KlMKvlvM4GOqUBa1OpAgFo1KfICl8gfPkYPOLsORXFVsxEJf5a9vuejNZsKz93ATSEsRCDdIZ%2Fj4WbbkAk1xMhy0BUaSntPfMwbHsmBvzWGFyRndu1cFcgWCQcZzBfKpiEf7XZUz47pl8XssoqIVKLEFeL2KN5GIDjbkUh9o4eyFqgnFOcRfLyAdHOixNmzy7svQQgyiyqNxWeR6gf4P7NMZ8jMun5KWIgSeV1EHbL&amp;X-Amz-Signature=111bd49e9fcdaa3b50e6d68d0125d3ffdc6bbb4d76f9c3a0328ed3962e239405&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;h3 id="导入大模型"&gt;导入大模型&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;llama_index.llms.qianfan&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Qianfan&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;access_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class="n"&gt;secret_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class="n"&gt;model_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;ERNIE-4.0-8K-Latest&amp;#34;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro&amp;#34;&lt;/span&gt;&lt;span class="n"&gt;llm&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Qianfan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;access_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;secret_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;model_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context_window&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8192&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;model_name可在千帆平台查看, 如下图:&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/ec53fa42-9c7c-4b3b-b334-810c76b293ae/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466SRT2PCN4%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034651Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCf%2Fq%2FexiBw4FWYLB4u%2Bm2LzZIZ2AqolkKU1UwOdGWm1gIgGOWQCkcteKBc72JNsdyQ8M4REBiecrHoMx%2BjeZpkd28q%2FwMIfBAAGgw2Mzc0MjMxODM4MDUiDK9gTn46zTRWOTCHmyrcAx61Tf2V6rcRNF%2B3nyCrmoF4y2WorgT1UyLikT8eFxz4tCDhMeQ5ucH8FlOQB7KIC7XNcwyo2CbS4%2FiwA%2BdDoh6D5xHyH4ukWp%2BLglOhOy37F2FY74q3yayqhvo1DiJ6eCibBuOwhqHSpVfNknz0lzc42hb%2BaRk9gpBEpUuq6iCUuwc5vW1Ykj7krQBiMHtEvRYYiB91mUCSCDsJ2mMLmDUoxrvReePQu8wtKe4inPfQY5Ndiw%2F233oVU8FkJTk4zHOJKAAxMJpOIZrGkgeVxQ7JSixP%2BfIhpp%2F%2BAxgkPX36e11oDd3zm3M9e0dMQ2HpBDzXhAq9cjRthIFALpMTKWKope5HGNguk3gY3g46B1vI0DTRtCrAjcHvhVRHFRt3tv5NtIHlxzE1GJbvwUcuZzFTzwUXmbdPD8VUA1KI96qZMlJvsTOpJa1cnhufBAEZ8rZAFomZ98BeVxhey%2B7ufjwTprqcIpdEd6LFyAULgSN5JLjDn9RtsTN6eMw4Kq%2FzJGeQllFoPUpHge34griJWzy1IQcfx1qLNGKQsHI6Y9rXta0BuUnLXFGOoJ7jiyHWgsb3Vrm2%2BQutaXqD9IzATuSUZzGhKYPme%2FcpRuojw4W8Ru%2BBGTznHEsKD8KlMKvlvM4GOqUBa1OpAgFo1KfICl8gfPkYPOLsORXFVsxEJf5a9vuejNZsKz93ATSEsRCDdIZ%2Fj4WbbkAk1xMhy0BUaSntPfMwbHsmBvzWGFyRndu1cFcgWCQcZzBfKpiEf7XZUz47pl8XssoqIVKLEFeL2KN5GIDjbkUh9o4eyFqgnFOcRfLyAdHOixNmzy7svQQgyiyqNxWeR6gf4P7NMZ8jMun5KWIgSeV1EHbL&amp;X-Amz-Signature=727e3750429a99f69d3ef7e379043997cc837ed7482d0e923b9d71a22c0b1efb&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="导入本地embedding"&gt;导入本地Embedding&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;下载Embedding模型&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;modelscope&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;snapshot_download&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;model_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;snapshot_download&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Xorbits/bge-m3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cache_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/data/LLMs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;加载本地Embedding模型&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;llama_index.embeddings.huggingface&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HuggingFaceEmbedding&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;cache_folder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;embed_model/m3e-large&amp;#34;&lt;/span&gt;&lt;span class="n"&gt;embed_model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;HuggingFaceEmbedding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cache_folder&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;cache_folder&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h3 id="构建本地知识库"&gt;构建本地知识库&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;llama_index.core&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SimpleDirectoryReader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;VectorStoreIndex&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;directory&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/data/documents&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;#文档路径vector_index = VectorStoreIndex.from_documents(documents)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h3 id="构建查询引擎"&gt;构建查询引擎&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;query_engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vector_index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;as_query_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;similarity_top_k&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;llm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;llm&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;similarity_top_k可根据经验自行调整, 推荐设置3, 5.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h3 id="构建rag-agent"&gt;构建RAG Agent&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;构建工具&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
-&lt;/span&gt;&lt;span class="lnt"&gt;14
-&lt;/span&gt;&lt;span class="lnt"&gt;15
-&lt;/span&gt;&lt;span class="lnt"&gt;16
-&lt;/span&gt;&lt;span class="lnt"&gt;17
-&lt;/span&gt;&lt;span class="lnt"&gt;18
-&lt;/span&gt;&lt;span class="lnt"&gt;19
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_tool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;full_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;documents&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exists&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;./data/&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# build vector index vector_index = VectorStoreIndex.from_documents(documents)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;vector_index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;storage_context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;persist&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;persist_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;./data/&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;vector_index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load_index_from_storage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;StorageContext&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;from_defaults&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;persist_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;./data/&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;query_engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vector_index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;as_query_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;similarity_top_k&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;llm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;llm&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;query_engine_tool&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;QueryEngineTool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;query_engine&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;query_engine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;metadata&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ToolMetadata&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;Provides information about Uber quarterly financials ending&amp;#34;&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34; &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;full_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;),&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;),&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;query_engine_tool&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;设置Agent&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;llama_index.core.agent&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;AgentRunner&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ReActAgent&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;agent&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ReActAgent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;from_tools&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;query_engine_tools&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;llm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;agent_llm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;verbose&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iterations&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;运行&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;agent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;chat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;您的问题&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="整体代码"&gt;整体代码&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
-&lt;/span&gt;&lt;span class="lnt"&gt; 2
-&lt;/span&gt;&lt;span class="lnt"&gt; 3
-&lt;/span&gt;&lt;span class="lnt"&gt; 4
-&lt;/span&gt;&lt;span class="lnt"&gt; 5
-&lt;/span&gt;&lt;span class="lnt"&gt; 6
-&lt;/span&gt;&lt;span class="lnt"&gt; 7
-&lt;/span&gt;&lt;span class="lnt"&gt; 8
-&lt;/span&gt;&lt;span class="lnt"&gt; 9
-&lt;/span&gt;&lt;span class="lnt"&gt;10
-&lt;/span&gt;&lt;span class="lnt"&gt;11
-&lt;/span&gt;&lt;span class="lnt"&gt;12
-&lt;/span&gt;&lt;span class="lnt"&gt;13
-&lt;/span&gt;&lt;span class="lnt"&gt;14
-&lt;/span&gt;&lt;span class="lnt"&gt;15
-&lt;/span&gt;&lt;span class="lnt"&gt;16
-&lt;/span&gt;&lt;span class="lnt"&gt;17
-&lt;/span&gt;&lt;span class="lnt"&gt;18
-&lt;/span&gt;&lt;span class="lnt"&gt;19
-&lt;/span&gt;&lt;span class="lnt"&gt;20
-&lt;/span&gt;&lt;span class="lnt"&gt;21
-&lt;/span&gt;&lt;span class="lnt"&gt;22
-&lt;/span&gt;&lt;span class="lnt"&gt;23
-&lt;/span&gt;&lt;span class="lnt"&gt;24
-&lt;/span&gt;&lt;span class="lnt"&gt;25
-&lt;/span&gt;&lt;span class="lnt"&gt;26
-&lt;/span&gt;&lt;span class="lnt"&gt;27
-&lt;/span&gt;&lt;span class="lnt"&gt;28
-&lt;/span&gt;&lt;span class="lnt"&gt;29
-&lt;/span&gt;&lt;span class="lnt"&gt;30
-&lt;/span&gt;&lt;span class="lnt"&gt;31
-&lt;/span&gt;&lt;span class="lnt"&gt;32
-&lt;/span&gt;&lt;span class="lnt"&gt;33
-&lt;/span&gt;&lt;span class="lnt"&gt;34
-&lt;/span&gt;&lt;span class="lnt"&gt;35
-&lt;/span&gt;&lt;span class="lnt"&gt;36
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;llama_index.core&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Settings&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;llama_index.core&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SimpleDirectoryReader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;VectorStoreIndex&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;llama_index.llms.qianfan&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Qianfan&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;llama_index.core.tools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;QueryEngineTool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ToolMetadata&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;llama_index.embeddings.huggingface&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HuggingFaceEmbedding&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 初始化Qianfan模型class Rag:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;access_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;secret_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;ERNIE-4.0-8K-Latest&amp;#34;&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro&amp;#34;&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;llm&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Qianfan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;access_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;secret_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context_window&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8192&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cache_folder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;embed_model/m3e-large&amp;#34;&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;directory&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;/data/documents&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# 数据目录路径 def get_tool(self, name, full_name, documents=None):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;embed_model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;HuggingFaceEmbedding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cache_folder&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cache_folder&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;embed_model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;embed_model&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;vector_index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VectorStoreIndex&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;from_documents&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;documents&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;persist_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;directory&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exists&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;persist_path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;vector_index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;storage_context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;persist&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;persist_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;persist_path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;query_engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vector_index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;as_query_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;similarity_top_k&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;llm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;llm&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;query_engine_tool&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;QueryEngineTool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query_engine&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;query_engine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;metadata&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ToolMetadata&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Provides information from document &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;full_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;query_engine_tool&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_args&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;query_engine_tools&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;directory&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;.txt&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;filepath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;directory&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;documents&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SimpleDirectoryReader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_files&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;filepath&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load_data&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;tool_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# 去除&amp;#39;.txt&amp;#39;得到工具名称 tool = self.get_tool(tool_name, tool_name, documents=documents)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;query_engine_tools&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tool&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;query_engine_tools&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;query_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;llama_index.core.agent&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ReActAgent&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;tools&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse_args&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;agent&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ReActAgent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;from_tools&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;llm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;llm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;verbose&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iterations&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;agent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;chat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建 Rag 实例并执行查询if __name__ == &amp;#34;__main__&amp;#34;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;rag&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Rag&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rag&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;问题&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;参考链接&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>RAG on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/rag/</link><description>Recent content in RAG on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Mon, 02 Dec 2024 01:20:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/rag/index.xml" rel="self" type="application/rss+xml"/><item><title>论文精读_寻找RAG最优策略</title><link>https://Pan-Binghong.github.io/daily-learning/knowledge/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB_%E5%AF%BB%E6%89%BErag%E6%9C%80%E4%BC%98%E7%AD%96%E7%95%A5/</link><pubDate>Thu, 28 Nov 2024 07:08:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/knowledge/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB_%E5%AF%BB%E6%89%BErag%E6%9C%80%E4%BC%98%E7%AD%96%E7%95%A5/</guid><description>&lt;blockquote>
+&lt;p>💡 这篇真的全是干货…论文的实验部分，我就不写了。看看就行。&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/78127f49-5326-457b-85b3-9e146b9c399f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X36KLAS4%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063526Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCICfFcdXh0AtpoQwrgkvldOfFE5PuyVUlVA7BQuyJErUnAiEAwAiylb%2Fcmgtwy0LAvnN1g6wLaZj0a2r7o0nYaChlDaMq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDAhC7fI2Pc3MQAUIJircA4MPMPtzHcoaRc037yIbu9MxCVd2AuBbk5R32emg4WOk7%2Fv9XchwTGdD7rdI2gGqkusrt%2F1QNmgIvv9kesOAhhaoD7EutJ9WoSvwMartCVPvSiZeBdCZQr6TKsXkf0%2Fd6SACSAnWsqhwJhe%2FcVhJWz2gBdOshnK7kbBhgL6nnVckuCEdog%2BQLWmZ5mi%2B5OcAlzqf6IT1GCe86AcLH0EGHzN68NZj44IpiwoiHj0ev0w6%2FHhl0cVdR7kn%2FSjx3nddbNjPMI0fIQMnALdvIalM1zifcsi2qx58F9AzpIm2K279EnyDF5yPWbdfWZPsrlQEABX1ELoAmHi9aVRAGoMIEumveDPFETQIHA%2Fwf7k8Wuyu2iitsRL4pBjaVeyf2kd26vE4HPSZ2IiJNITWlkXynI8%2F0T4R2AmkymFqEnAC%2F5i4CbvK%2FcnMh6ZPt%2BIHXaxPCdJzfRq%2BAiNdrvi5GoTPDOGsEdppe42OMftaulIL%2BzoKtMgJgs3im01cbqwV7nNMOkxKXSymUjolDJob%2FxbtmX1ucd2VD9KRGECmDgZnYq8ggFRfxcQMpy0dhJ7NoTuNhoRnF5%2Bx4syNZUAcxuHvs00hX1nixlz3CTRtuqawj%2FEu5fWe4BD8flF%2FUy7nMKivvc4GOqUB18SIkCzIC0YbqSiEKqMmCocnvRUmMFzaPdTZTGcPPVyOm6hT%2BmOC%2BMVxpMQOF7d7GfYG9gKPHIKXUTW2EBjQLV4tfaFOh0hI%2BjP9UTZ69OxwQGBy98zWOtMMf4Ta2sgHsehFa37lWWb5ole%2B2DIHmWIxA6Iy4dxCyOYN0bWB1%2BCXSbDNGHhtGyZmmStGHnWvsOguXnDnQwc9776tiWcxSY015AKO&amp;X-Amz-Signature=8a3ce5068ba0e884542b10bccf2210a0778faa96a186779ce42b18ff54271ec3&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h2 id="相关工作查询检索层面">相关工作|查询检索层面&lt;/h2>
+&lt;p>确保大型语言模型（LLMs）如ChatGPT和LLaMA生成的回应准确性至关重要。然而，简单地增加模型大小并不能从根本上解决“幻觉”问题，这在知识密集型任务和专业领域尤为明显。检索增强生成（RAG）通过从外部知识库检索相关文档，为LLMs提供准确、实时、领域特定的上下文，以解决这些挑战。先前的工作通过查询和检索转换优化了RAG流程，提高了检索器的性能，并对检索器和生成器进行了微调。这些优化改善了输入查询、检索机制与生成过程之间的互动，确保了回应的准确性和相关性。&lt;/p>
+&lt;h2 id="rag工作流">RAG工作流&lt;/h2>
+&lt;p>在本节中，我们将详细介绍RAG工作流程的各个组件。针对每个模块，我们回顾常用的方法，并为我们的最终流程选择了默认和备选方法。&lt;/p>
+&lt;h3 id="查询分类">查询分类&lt;/h3>
+&lt;p>并非所有的查询都需要通过检索增强，因为大型语言模型（LLMs）本身就具备一定的处理能力。尽管检索增强生成（RAG）可以提高信息的准确性并减少虚构内容，但频繁的检索可能会增加响应时间。因此，我们首先通过对查询进行分类来确定是否需要检索。需要检索的查询会经过RAG模块处理；其他则直接由LLMs处理。通常，在需要超出模型参数范围的知识时推荐使用检索。然而，检索的必要性根据任务的不同而有所变化。例如，一个训练至2023年的LLM可以处理“Sora是由OpenAI开发的”这一翻译请求而无需检索。相反，对于同一主题的介绍请求则需要检索来提供相关信息。&lt;/p>
+&lt;p>因此，我们建议按类型对任务进行分类，以确定查询是否需要检索。对于完全基于用户提供信息的任务，我们标记为“充分”，不需要检索；否则，我们标记为“不足”，可能需要检索。我们训练了一个分类器来自动化这一决策过程。&lt;/p>
+&lt;hr>
+&lt;h3 id="chunking">Chunking&lt;/h3>
+&lt;p>将文档分块成更小的段落对于提高检索的准确性和避免在大型语言模型（LLMs）中出现长度问题至关重要。这个过程可以在不同的粒度级别上应用，比如令牌（token）、句子和语义级别。&lt;/p>
+&lt;ul>
+&lt;li>令牌级别的分块很直接，但可能会分割句子，影响检索质量。&lt;/li>
+&lt;li>语义级别的分块利用大型语言模型来确定分割点，能保持上下文不变，但是耗时。&lt;/li>
+&lt;li>句子级别的分块在保留文本语义的同时，平衡了简单性和效率。
+在这项研究中，我们使用句子级别的分块，平衡了简单性和语义保留。我们从四个维度考察了分块方法。&lt;/li>
+&lt;/ul>
+&lt;p>向量数据库存储着带有元数据的嵌入向量，通过各种索引和近似最近邻（ANN）方法，能够高效地检索与查询相关的文档。为了为我们的研究选择一个合适的向量数据库，我们基于四个关键标准对几个选项进行了评估：多种索引类型、支持十亿级别的向量、混合搜索以及云原生能力。这些标准因其对于灵活性、可扩展性以及在现代云基础设施中部署的便捷性的影响而被选中。多种索引类型提供了基于不同数据特性和用例优化搜索的灵活性。十亿级别的向量支持对于处理LLM应用中的大型数据集至关重要。混合搜索将向量搜索与传统关键词搜索结合起来，提高了检索准确性。最后，云原生能力确保了在云环境中的无缝集成、可扩展性和管理。&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2c4ac03c-4cd8-4e84-aa5e-b0d35bd8c0fa/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X36KLAS4%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063526Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCICfFcdXh0AtpoQwrgkvldOfFE5PuyVUlVA7BQuyJErUnAiEAwAiylb%2Fcmgtwy0LAvnN1g6wLaZj0a2r7o0nYaChlDaMq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDAhC7fI2Pc3MQAUIJircA4MPMPtzHcoaRc037yIbu9MxCVd2AuBbk5R32emg4WOk7%2Fv9XchwTGdD7rdI2gGqkusrt%2F1QNmgIvv9kesOAhhaoD7EutJ9WoSvwMartCVPvSiZeBdCZQr6TKsXkf0%2Fd6SACSAnWsqhwJhe%2FcVhJWz2gBdOshnK7kbBhgL6nnVckuCEdog%2BQLWmZ5mi%2B5OcAlzqf6IT1GCe86AcLH0EGHzN68NZj44IpiwoiHj0ev0w6%2FHhl0cVdR7kn%2FSjx3nddbNjPMI0fIQMnALdvIalM1zifcsi2qx58F9AzpIm2K279EnyDF5yPWbdfWZPsrlQEABX1ELoAmHi9aVRAGoMIEumveDPFETQIHA%2Fwf7k8Wuyu2iitsRL4pBjaVeyf2kd26vE4HPSZ2IiJNITWlkXynI8%2F0T4R2AmkymFqEnAC%2F5i4CbvK%2FcnMh6ZPt%2BIHXaxPCdJzfRq%2BAiNdrvi5GoTPDOGsEdppe42OMftaulIL%2BzoKtMgJgs3im01cbqwV7nNMOkxKXSymUjolDJob%2FxbtmX1ucd2VD9KRGECmDgZnYq8ggFRfxcQMpy0dhJ7NoTuNhoRnF5%2Bx4syNZUAcxuHvs00hX1nixlz3CTRtuqawj%2FEu5fWe4BD8flF%2FUy7nMKivvc4GOqUB18SIkCzIC0YbqSiEKqMmCocnvRUmMFzaPdTZTGcPPVyOm6hT%2BmOC%2BMVxpMQOF7d7GfYG9gKPHIKXUTW2EBjQLV4tfaFOh0hI%2BjP9UTZ69OxwQGBy98zWOtMMf4Ta2sgHsehFa37lWWb5ole%2B2DIHmWIxA6Iy4dxCyOYN0bWB1%2BCXSbDNGHhtGyZmmStGHnWvsOguXnDnQwc9776tiWcxSY015AKO&amp;X-Amz-Signature=5ab485297c436289d7cda8633f45afc7304c826a0195bfe5a959debbc7243558&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h3 id="retrieval方式">Retrieval方式&lt;/h3>
+&lt;p>针对用户查询，检索模块从预建的语料库中选择与查询和文档的相似度最高的前k个相关文档。然后，生成模型使用这些文档来制定针对查询的适当响应。然而，原始查询由于表达不佳和缺乏语义信息，通常会表现不佳，这对检索过程产生了负面影响。为了解决这些问题，我们评估了三种查询转换方法，使用推荐的LLM-Embedder作为查询和文档编码器：&lt;/p>
+&lt;ul>
+&lt;li>查询改写：查询改写通过改进查询来更好地匹配相关文档。受到Rewrite-Retrieve-Read框架的启发，我们促使一个LLM重写查询以提升性能。&lt;/li>
+&lt;li>查询分解：这种方法涉及到基于从原始查询中派生的子问题来检索文档，这比理解和处理更复杂的查询要困难。&lt;/li>
+&lt;li>伪文档生成：这种方法基于用户查询生成一个假想的文档，并使用假想答案的嵌入来检索相似文档。一个值得注意的实现是HyDE。
+最近的研究表明结合基于词汇的搜索与向量搜索可以显著提高性能。在本研究中，我们使用BM25进行稀疏检索和Contriever，一个无监督对比编码器，进行密集检索。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="reranking">Reranking&lt;/h3>
+&lt;p>在最初的检索之后，将采用重排序阶段来提高检索到的文档的相关性，确保最相关的信息出现在列表的顶部。这一阶段采用更精确、耗时更长的方法有效地重新排序文档，增加查询与排名最高的文档之间的相似度。&lt;/p>
+&lt;p>在我们的重排序模块中，我们考虑了两种方法：DLM重排序和TILDE重排序。DLM重排序采用分类方法，而TILDE重排序则侧重于查询可能性。这些方法分别优先考虑性能和效率。&lt;/p>
+&lt;ul>
+&lt;li>DLM重排方法：这种方法利用深度语言模型（DLMs）进行重排。这些模型被微调用以将文档与查询的相关性分类为“真”或“假”。在微调过程中，模型通过将查询和文档输入连接起来，并根据相关性进行标记来进行训练。在推理时，文档根据“真”标记的概率进行排名。&lt;/li>
+&lt;li>TILDE重排：TILDE通过预测模型词汇表中的各个词项的概率来独立计算每个查询词项的可能性。通过对查询词项的预计算对数概率求和，为文档打分，从而在推理时快速重排。TILDEv2通过仅索引文档中存在的词项，使用NCE损失，并扩展文档，从而提高效率并减小索引大小。
+我们的实验是在MS MARCO Passage排名数据集上进行的，这是一个大规模的机器阅读理解数据集。我们遵循并对PyGaggle和TILDE提供的实现进行了修改，使用了模型monoT5、monoBERT、RankLLaMA和TILDEv2。重排结果显示在表中。我们推荐monoT5作为一种综合性的方法，平衡了性能和效率。RankLLaMA适合于实现最佳性能，而TILDEv2是在固定集合上获得最快体验的理想选择。实验设置和结果的详细信息在附录中呈现。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/100cf766-c92f-4387-8745-20b0e94296e4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X36KLAS4%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063526Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCICfFcdXh0AtpoQwrgkvldOfFE5PuyVUlVA7BQuyJErUnAiEAwAiylb%2Fcmgtwy0LAvnN1g6wLaZj0a2r7o0nYaChlDaMq%2FwMIfxAAGgw2Mzc0MjMxODM4MDUiDAhC7fI2Pc3MQAUIJircA4MPMPtzHcoaRc037yIbu9MxCVd2AuBbk5R32emg4WOk7%2Fv9XchwTGdD7rdI2gGqkusrt%2F1QNmgIvv9kesOAhhaoD7EutJ9WoSvwMartCVPvSiZeBdCZQr6TKsXkf0%2Fd6SACSAnWsqhwJhe%2FcVhJWz2gBdOshnK7kbBhgL6nnVckuCEdog%2BQLWmZ5mi%2B5OcAlzqf6IT1GCe86AcLH0EGHzN68NZj44IpiwoiHj0ev0w6%2FHhl0cVdR7kn%2FSjx3nddbNjPMI0fIQMnALdvIalM1zifcsi2qx58F9AzpIm2K279EnyDF5yPWbdfWZPsrlQEABX1ELoAmHi9aVRAGoMIEumveDPFETQIHA%2Fwf7k8Wuyu2iitsRL4pBjaVeyf2kd26vE4HPSZ2IiJNITWlkXynI8%2F0T4R2AmkymFqEnAC%2F5i4CbvK%2FcnMh6ZPt%2BIHXaxPCdJzfRq%2BAiNdrvi5GoTPDOGsEdppe42OMftaulIL%2BzoKtMgJgs3im01cbqwV7nNMOkxKXSymUjolDJob%2FxbtmX1ucd2VD9KRGECmDgZnYq8ggFRfxcQMpy0dhJ7NoTuNhoRnF5%2Bx4syNZUAcxuHvs00hX1nixlz3CTRtuqawj%2FEu5fWe4BD8flF%2FUy7nMKivvc4GOqUB18SIkCzIC0YbqSiEKqMmCocnvRUmMFzaPdTZTGcPPVyOm6hT%2BmOC%2BMVxpMQOF7d7GfYG9gKPHIKXUTW2EBjQLV4tfaFOh0hI%2BjP9UTZ69OxwQGBy98zWOtMMf4Ta2sgHsehFa37lWWb5ole%2B2DIHmWIxA6Iy4dxCyOYN0bWB1%2BCXSbDNGHhtGyZmmStGHnWvsOguXnDnQwc9776tiWcxSY015AKO&amp;X-Amz-Signature=c1ae4d163304e0a1cef53adca6a7e5c9729721e83f3247fd81943b2cbf6a06f3&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;h3 id="文档重组">文档重组&lt;/h3>
+&lt;p>文档重组后续过程的表现，比如LLM响应生成，可能会受到提供文档的顺序影响。为了解决这个问题，在重新排名之后的工作流程中，我们加入了一个紧凑的重组模块，包含三种重组方法：“前向”、“反向”和“两侧”。“前向”方法通过降序重新排名阶段的相关性得分来重组文档，而“反向”则按升序排列它们。对于LLM，当相关信息放在输入的头部或尾部时，可以达到最佳性能，我们也加入了“两侧”选项。&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>Reference&lt;/p>&lt;/blockquote></description></item><item><title>LlamaIndex接入千帆RAG</title><link>https://Pan-Binghong.github.io/daily-learning/ai/llamaindex%E6%8E%A5%E5%85%A5%E5%8D%83%E5%B8%86rag/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/llamaindex%E6%8E%A5%E5%85%A5%E5%8D%83%E5%B8%86rag/</guid><description>&lt;p>记录从使用Llama-index框架, 基于在线文心千帆大模型ERNIE-4.0, 构建实现本地知识检索.&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/1f73f1b2-0e9d-4fdf-9a59-00189860a2f9/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466YVROQKLE%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063435Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQC33zRaPeF4GouQ0XyqJQn5orJRhbVc00oVDpmt48y9FwIhAJIjhpA6q9G%2FDCMDn%2BcotG5oPUayR2euRSpr3CKsyuE7Kv8DCH8QABoMNjM3NDIzMTgzODA1Igz1jOhhslreF4vPc%2F4q3AMO%2BEQevEwl80rlD781oUcxkOn5xbi6jupTqeVg85Qa7fENYk9rLL2maVubWl2An%2FFHYGttGcTctWzC2cyW%2B2wxSxQxqpmfh59jzKINOYyTBgbl4shZ2vfipTEKqLRNuP%2B14o1d9MskeCw2IOfFusIAhd46BsF66BAEQ%2FMVcUZZzctQGF6LdjuKYTAnzf7UF9M16NBs0UpXwKAXM0hMee7BMR82TxQdL1AbFIiKUTR8ZMDYP%2FIYwA9UQlKE9a1Sv4dykKNq2bm3%2FCw%2FEZjTESiytES%2B3VNtXaye8nmUSzpzq9T8%2BuEFES5wrfY5TlSEMypGBqv3nzK2q7fdaFqH5ZsXwxP4hNSti5kralOzK%2FePQb6%2BjeizoJOTw5snu2d3uFJm9aTNYwl8RWOwuT62Lp%2FQk6ZvGEmzuVGMIBLzKnxf%2FWovK03mJO4egSjD3h%2BtYGY6E%2Ba77D9Yib%2F3Lp%2FG8drWZpNOM9oqtr6FIet1xLnD4h%2BlKYlMYlOF4T6G1bwAaZjg7DrCagZN9DhIM1iJ9OzYVIPKmkjETSKCz4iiKpRV6CTMjYfDNpvY01fUuoL240ezFtniyUjQMbZuA3C45iU3WSyY2oHwf1PP95xLuaZDMmGJZhTpjvGzNk2VGjDcrr3OBjqkAWyZPsUBliiTJnPk%2F4rSztWh7McwmVGeaqu8a3plzSBumvLQg84Ulg2nFjyaDt38udAu5o51ZlCYUv%2BaR8poxyxYs9067Iiu%2BqlgNEbD2Gz0dD%2FPRxoYiidDc40I0hnmPnUSxxeOOLaisQOLuZPoQ2MZgX3%2FlsyBsfzeTqHPqs6X0nhKUzHIZiGHdInp0HY8uVjOAqMgi%2B7ml4cetOGddIpvoWxY&amp;X-Amz-Signature=6d9b729c5ae2d26edeae42f5bc68fd4fa3a1afbc4ff883ded3e7d7579f1a64c1&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;h3 id="导入大模型">导入大模型&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">llama_index.llms.qianfan&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">Qianfan&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">access_key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="n">secret_key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="n">model_name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;ERNIE-4.0-8K-Latest&amp;#34;&lt;/span>&lt;span class="n">url&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro&amp;#34;&lt;/span>&lt;span class="n">llm&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Qianfan&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">access_key&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">secret_key&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">model_name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">url&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">context_window&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">8192&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>model_name可在千帆平台查看, 如下图:&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/ec53fa42-9c7c-4b3b-b334-810c76b293ae/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466YVROQKLE%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063435Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQC33zRaPeF4GouQ0XyqJQn5orJRhbVc00oVDpmt48y9FwIhAJIjhpA6q9G%2FDCMDn%2BcotG5oPUayR2euRSpr3CKsyuE7Kv8DCH8QABoMNjM3NDIzMTgzODA1Igz1jOhhslreF4vPc%2F4q3AMO%2BEQevEwl80rlD781oUcxkOn5xbi6jupTqeVg85Qa7fENYk9rLL2maVubWl2An%2FFHYGttGcTctWzC2cyW%2B2wxSxQxqpmfh59jzKINOYyTBgbl4shZ2vfipTEKqLRNuP%2B14o1d9MskeCw2IOfFusIAhd46BsF66BAEQ%2FMVcUZZzctQGF6LdjuKYTAnzf7UF9M16NBs0UpXwKAXM0hMee7BMR82TxQdL1AbFIiKUTR8ZMDYP%2FIYwA9UQlKE9a1Sv4dykKNq2bm3%2FCw%2FEZjTESiytES%2B3VNtXaye8nmUSzpzq9T8%2BuEFES5wrfY5TlSEMypGBqv3nzK2q7fdaFqH5ZsXwxP4hNSti5kralOzK%2FePQb6%2BjeizoJOTw5snu2d3uFJm9aTNYwl8RWOwuT62Lp%2FQk6ZvGEmzuVGMIBLzKnxf%2FWovK03mJO4egSjD3h%2BtYGY6E%2Ba77D9Yib%2F3Lp%2FG8drWZpNOM9oqtr6FIet1xLnD4h%2BlKYlMYlOF4T6G1bwAaZjg7DrCagZN9DhIM1iJ9OzYVIPKmkjETSKCz4iiKpRV6CTMjYfDNpvY01fUuoL240ezFtniyUjQMbZuA3C45iU3WSyY2oHwf1PP95xLuaZDMmGJZhTpjvGzNk2VGjDcrr3OBjqkAWyZPsUBliiTJnPk%2F4rSztWh7McwmVGeaqu8a3plzSBumvLQg84Ulg2nFjyaDt38udAu5o51ZlCYUv%2BaR8poxyxYs9067Iiu%2BqlgNEbD2Gz0dD%2FPRxoYiidDc40I0hnmPnUSxxeOOLaisQOLuZPoQ2MZgX3%2FlsyBsfzeTqHPqs6X0nhKUzHIZiGHdInp0HY8uVjOAqMgi%2B7ml4cetOGddIpvoWxY&amp;X-Amz-Signature=0b2c7a5f6420359377d22cbfabddc502af6ce091c41aadb6670b6229451e5976&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;hr>
+&lt;h3 id="导入本地embedding">导入本地Embedding&lt;/h3>
+&lt;ul>
+&lt;li>下载Embedding模型&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">modelscope&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">snapshot_download&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">model_dir&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">snapshot_download&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Xorbits/bge-m3&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cache_dir&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;/data/LLMs&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>加载本地Embedding模型&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">llama_index.embeddings.huggingface&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">HuggingFaceEmbedding&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">cache_folder&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;embed_model/m3e-large&amp;#34;&lt;/span>&lt;span class="n">embed_model&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">HuggingFaceEmbedding&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cache_folder&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">cache_folder&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h3 id="构建本地知识库">构建本地知识库&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">llama_index.core&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">SimpleDirectoryReader&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">VectorStoreIndex&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">directory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;/data/documents&amp;#34;&lt;/span> &lt;span class="c1">#文档路径vector_index = VectorStoreIndex.from_documents(documents)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h3 id="构建查询引擎">构建查询引擎&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">query_engine&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">vector_index&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">as_query_engine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">similarity_top_k&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">llm&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">llm&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>similarity_top_k可根据经验自行调整, 推荐设置3, 5.&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h3 id="构建rag-agent">构建RAG Agent&lt;/h3>
+&lt;ul>
+&lt;li>构建工具&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">os&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">get_tool&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">full_name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">documents&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">None&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exists&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;./data/&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># build vector index vector_index = VectorStoreIndex.from_documents(documents)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector_index&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">storage_context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">persist&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">persist_dir&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;./data/&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector_index&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">load_index_from_storage&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">StorageContext&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">from_defaults&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">persist_dir&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;./data/&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">query_engine&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">vector_index&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">as_query_engine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">similarity_top_k&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">llm&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">llm&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">query_engine_tool&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">QueryEngineTool&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">query_engine&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">query_engine&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">metadata&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">ToolMetadata&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">description&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Provides information about Uber quarterly financials ending&amp;#34;&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34; &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">full_name&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">query_engine_tool&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>设置Agent&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">llama_index.core.agent&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">AgentRunner&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ReActAgent&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">agent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ReActAgent&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">from_tools&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">query_engine_tools&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">llm&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">agent_llm&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">verbose&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">max_iterations&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>运行&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">agent&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">chat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;您的问题&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="整体代码">整体代码&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">llama_index.core&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">Settings&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">os&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">llama_index.core&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">SimpleDirectoryReader&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">VectorStoreIndex&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">llama_index.llms.qianfan&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">Qianfan&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">llama_index.core.tools&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">QueryEngineTool&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ToolMetadata&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">llama_index.embeddings.huggingface&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">HuggingFaceEmbedding&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 初始化Qianfan模型class Rag:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">def&lt;/span> &lt;span class="fm">__init__&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">access_key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">secret_key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">model_name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;ERNIE-4.0-8K-Latest&amp;#34;&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">url&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro&amp;#34;&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">llm&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Qianfan&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">access_key&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">secret_key&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">model_name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">context_window&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">8192&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cache_folder&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;embed_model/m3e-large&amp;#34;&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">directory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;/data/documents&amp;#34;&lt;/span> &lt;span class="c1"># 数据目录路径 def get_tool(self, name, full_name, documents=None):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">embed_model&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">HuggingFaceEmbedding&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cache_folder&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cache_folder&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Settings&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">embed_model&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">embed_model&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector_index&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">VectorStoreIndex&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">from_documents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">documents&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">persist_path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">directory&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">/&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exists&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">persist_path&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector_index&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">storage_context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">persist&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">persist_dir&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">persist_path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">query_engine&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">vector_index&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">as_query_engine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">similarity_top_k&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">llm&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">llm&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">query_engine_tool&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">QueryEngineTool&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">query_engine&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">query_engine&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">metadata&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">ToolMetadata&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">description&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Provides information from document &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">full_name&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">query_engine_tool&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">def&lt;/span> &lt;span class="nf">parse_args&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">query_engine_tools&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">filename&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listdir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">directory&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">filename&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">endswith&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;.txt&amp;#34;&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">filepath&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">directory&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">filename&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">documents&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">SimpleDirectoryReader&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_files&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">filepath&lt;/span>&lt;span class="p">])&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">load_data&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">tool_name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">filename&lt;/span>&lt;span class="p">[:&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="c1"># 去除&amp;#39;.txt&amp;#39;得到工具名称 tool = self.get_tool(tool_name, tool_name, documents=documents)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">query_engine_tools&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tool&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">query_engine_tools&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">def&lt;/span> &lt;span class="nf">query_engine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">query&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">from&lt;/span> &lt;span class="nn">llama_index.core.agent&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">ReActAgent&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">tools&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">parse_args&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">agent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ReActAgent&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">from_tools&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">llm&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">llm&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">verbose&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">max_iterations&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">agent&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">chat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">query&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">response&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 创建 Rag 实例并执行查询if __name__ == &amp;#34;__main__&amp;#34;:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">rag&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Rag&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">rag&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">query_engine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">query&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;问题&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>参考链接&lt;/p></description></item></channel></rss>

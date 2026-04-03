@@ -1,52 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Conda on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/conda/</link><description>Recent content in Conda on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Fri, 29 Nov 2024 11:42:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/conda/index.xml" rel="self" type="application/rss+xml"/><item><title>Anaconda安装 | 基础命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/anaconda%E5%AE%89%E8%A3%85-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/anaconda%E5%AE%89%E8%A3%85-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 记录Anaconda相关操作，主要涉及：下载，操作，配置清华源等。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="安装anconda"&gt;安装Anconda&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;下载安装包&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;wget&lt;/span&gt; &lt;span class="err"&gt;https:&lt;/span&gt;&lt;span class="c1"&gt;//repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ol&gt;
-&lt;li&gt;安装&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;bash&lt;/span&gt; &lt;span class="err"&gt;Anaconda&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="mf"&gt;-2024.10&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="err"&gt;-Linux-x&lt;/span&gt;&lt;span class="mi"&gt;86&lt;/span&gt;&lt;span class="err"&gt;_&lt;/span&gt;&lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="err"&gt;.sh&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ol&gt;
-&lt;li&gt;配置环境变量&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;export&lt;/span&gt; &lt;span class="err"&gt;PATH=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;$HOME/anaconda3/bin:$PATH&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h3 id="常用命令"&gt;常用命令&lt;/h3&gt;
-&lt;hr&gt;
-&lt;h3 id="配置conda清华源"&gt;配置conda清华源&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;查看 conda 配置文件的位置：whereis conda&lt;/li&gt;
-&lt;li&gt;编辑配置文件：vim /root/.condarc&lt;/li&gt;
-&lt;li&gt;将配置文件中的内容替换为：&lt;/li&gt;
-&lt;li&gt;运行 conda clean -i 清除索引缓存&lt;/li&gt;
-&lt;li&gt;创建新环境conda create -n myenv python==3.10验证 conda 源是否配置成功&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Conda on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/conda/</link><description>Recent content in Conda on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 29 Nov 2024 11:42:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/conda/index.xml" rel="self" type="application/rss+xml"/><item><title>Anaconda安装 | 基础命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/anaconda%E5%AE%89%E8%A3%85-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/anaconda%E5%AE%89%E8%A3%85-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote>
+&lt;p>💡 记录Anaconda相关操作，主要涉及：下载，操作，配置清华源等。&lt;/p>&lt;/blockquote>
+&lt;h3 id="安装anconda">安装Anconda&lt;/h3>
+&lt;ol>
+&lt;li>下载安装包&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="err">wget&lt;/span> &lt;span class="err">https:&lt;/span>&lt;span class="c1">//repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol>
+&lt;li>安装&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="err">bash&lt;/span> &lt;span class="err">Anaconda&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="mf">-2024.10&lt;/span>&lt;span class="mi">-1&lt;/span>&lt;span class="err">-Linux-x&lt;/span>&lt;span class="mi">86&lt;/span>&lt;span class="err">_&lt;/span>&lt;span class="mi">64&lt;/span>&lt;span class="err">.sh&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol>
+&lt;li>配置环境变量&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="err">export&lt;/span> &lt;span class="err">PATH=&lt;/span>&lt;span class="s2">&amp;#34;$HOME/anaconda3/bin:$PATH&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h3 id="常用命令">常用命令&lt;/h3>
+&lt;hr>
+&lt;h3 id="配置conda清华源">配置conda清华源&lt;/h3>
+&lt;ol>
+&lt;li>查看 conda 配置文件的位置：whereis conda&lt;/li>
+&lt;li>编辑配置文件：vim /root/.condarc&lt;/li>
+&lt;li>将配置文件中的内容替换为：&lt;/li>
+&lt;li>运行 conda clean -i 清除索引缓存&lt;/li>
+&lt;li>创建新环境conda create -n myenv python==3.10验证 conda 源是否配置成功&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item></channel></rss>

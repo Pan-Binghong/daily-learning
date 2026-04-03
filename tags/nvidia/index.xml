@@ -1,83 +1,77 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Nvidia on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/nvidia/</link><description>Recent content in Nvidia on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Fri, 14 Mar 2025 03:13:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/nvidia/index.xml" rel="self" type="application/rss+xml"/><item><title>Nvidia排查算力卡状态常用命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/nvidia%E6%8E%92%E6%9F%A5%E7%AE%97%E5%8A%9B%E5%8D%A1%E7%8A%B6%E6%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Mon, 06 Jan 2025 01:59:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/nvidia%E6%8E%92%E6%9F%A5%E7%AE%97%E5%8A%9B%E5%8D%A1%E7%8A%B6%E6%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 记录英伟达算力卡相关的常用命令。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h3 id="常用基本命令"&gt;常用基本命令&lt;/h3&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;h3 id="运行深度学习框架测试"&gt;运行深度学习框架测试&lt;/h3&gt;
-&lt;hr&gt;
-&lt;h3 id="导出nvidia驱动的运行日志"&gt;导出NVIDIA驱动的运行日志&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo nvidia-bug-report.sh
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h3 id="运行gpu基准测试"&gt;运行GPU基准测试&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>主机基准测试</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E4%B8%BB%E6%9C%BA%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</link><pubDate>Fri, 29 Nov 2024 01:53:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E4%B8%BB%E6%9C%BA%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡
-本文介绍了在 Linux 环境下进行基准测试的全过程，涵盖了安装 CUDA 和 NCCL 以及执行各类性能测试的详细步骤。包括了 p2pBandwidthLatency 和 all_reduce_perf 测试，帮助用户快速搭建并运行测试环境。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h3 id="所需文件下载链接"&gt;所需文件下载链接&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;CUDA 12.2 点击下载&lt;/li&gt;
-&lt;li&gt;NCCL 2.21.5 点击下载&lt;/li&gt;
-&lt;li&gt;CUDA Sample 源代码 点击访问 GitHub&lt;/li&gt;
-&lt;li&gt;NCCL Test 源代码 点击访问 GitHub&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="cuda-安装步骤"&gt;CUDA 安装步骤&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;下载 CUDA 安装包&lt;/li&gt;
-&lt;li&gt;赋予安装包执行&lt;/li&gt;
-&lt;li&gt;执行安装&lt;/li&gt;
-&lt;li&gt;配置环境变量&lt;/li&gt;
-&lt;li&gt;更新环境变量&lt;/li&gt;
-&lt;li&gt;验证安装是否成功&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="cuda-sample-p2pbandwidthlatency-测试"&gt;CUDA Sample: p2pBandwidthLatency 测试&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;进入 Sample 文件夹&lt;/li&gt;
-&lt;li&gt;编译测试程序&lt;/li&gt;
-&lt;li&gt;执行测试并保存结果&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="nccl-安装"&gt;NCCL 安装&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;添加 NCCL 安装源&lt;/li&gt;
-&lt;li&gt;安装 NCCL 及其依赖&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id="nccl-test-all_reduce_perf-测试nccl-测试all_reduce_perf-测试"&gt;NCCL Test: all_reduce_perf 测试NCCL 测试：all_reduce_perf 测试&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;进入 NCCL 测试文件夹&lt;/li&gt;
-&lt;li&gt;执行编译测试并保存结果&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item><item><title>获取Nvidia驱动日志</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E8%8E%B7%E5%8F%96nvidia%E9%A9%B1%E5%8A%A8%E6%97%A5%E5%BF%97/</link><pubDate>Fri, 29 Nov 2024 01:09:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E8%8E%B7%E5%8F%96nvidia%E9%A9%B1%E5%8A%A8%E6%97%A5%E5%BF%97/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;💡 记录一下，怎么获得Nvidia驱动的日志。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;登录master节点&lt;/li&gt;
-&lt;li&gt;收集有关 NVIDIA 显卡驱动程序问题的诊断信息的脚本&lt;/li&gt;
-&lt;li&gt;运行脚本&lt;/li&gt;
-&lt;li&gt;将刚才生成的日志文件，重命名&lt;/li&gt;
-&lt;li&gt;新建文件夹命名为：日期 - log&lt;/li&gt;
-&lt;li&gt;复制刚才生成的所有文件到文件夹内&lt;/li&gt;
-&lt;li&gt;压缩文件夹&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;References&lt;/p&gt;
-&lt;/blockquote&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Nvidia on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/nvidia/</link><description>Recent content in Nvidia on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Fri, 14 Mar 2025 03:13:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/nvidia/index.xml" rel="self" type="application/rss+xml"/><item><title>Nvidia排查算力卡状态常用命令</title><link>https://Pan-Binghong.github.io/daily-learning/devops/nvidia%E6%8E%92%E6%9F%A5%E7%AE%97%E5%8A%9B%E5%8D%A1%E7%8A%B6%E6%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Mon, 06 Jan 2025 01:59:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/nvidia%E6%8E%92%E6%9F%A5%E7%AE%97%E5%8A%9B%E5%8D%A1%E7%8A%B6%E6%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>&lt;blockquote>
+&lt;p>💡 记录英伟达算力卡相关的常用命令。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h3 id="常用基本命令">常用基本命令&lt;/h3>
+&lt;hr>
+&lt;hr>
+&lt;h3 id="运行深度学习框架测试">运行深度学习框架测试&lt;/h3>
+&lt;hr>
+&lt;h3 id="导出nvidia驱动的运行日志">导出NVIDIA驱动的运行日志&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo nvidia-bug-report.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h3 id="运行gpu基准测试">运行GPU基准测试&lt;/h3>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>主机基准测试</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E4%B8%BB%E6%9C%BA%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</link><pubDate>Fri, 29 Nov 2024 01:53:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E4%B8%BB%E6%9C%BA%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</guid><description>&lt;blockquote>
+&lt;p>💡
+本文介绍了在 Linux 环境下进行基准测试的全过程，涵盖了安装 CUDA 和 NCCL 以及执行各类性能测试的详细步骤。包括了 p2pBandwidthLatency 和 all_reduce_perf 测试，帮助用户快速搭建并运行测试环境。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h3 id="所需文件下载链接">所需文件下载链接&lt;/h3>
+&lt;ol>
+&lt;li>CUDA 12.2 点击下载&lt;/li>
+&lt;li>NCCL 2.21.5 点击下载&lt;/li>
+&lt;li>CUDA Sample 源代码 点击访问 GitHub&lt;/li>
+&lt;li>NCCL Test 源代码 点击访问 GitHub&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="cuda-安装步骤">CUDA 安装步骤&lt;/h3>
+&lt;ol>
+&lt;li>下载 CUDA 安装包&lt;/li>
+&lt;li>赋予安装包执行&lt;/li>
+&lt;li>执行安装&lt;/li>
+&lt;li>配置环境变量&lt;/li>
+&lt;li>更新环境变量&lt;/li>
+&lt;li>验证安装是否成功&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="cuda-sample-p2pbandwidthlatency-测试">CUDA Sample: p2pBandwidthLatency 测试&lt;/h3>
+&lt;ol>
+&lt;li>进入 Sample 文件夹&lt;/li>
+&lt;li>编译测试程序&lt;/li>
+&lt;li>执行测试并保存结果&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="nccl-安装">NCCL 安装&lt;/h3>
+&lt;ol>
+&lt;li>添加 NCCL 安装源&lt;/li>
+&lt;li>安装 NCCL 及其依赖&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="nccl-test-all_reduce_perf-测试nccl-测试all_reduce_perf-测试">NCCL Test: all_reduce_perf 测试NCCL 测试：all_reduce_perf 测试&lt;/h3>
+&lt;ol>
+&lt;li>进入 NCCL 测试文件夹&lt;/li>
+&lt;li>执行编译测试并保存结果&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item><item><title>获取Nvidia驱动日志</title><link>https://Pan-Binghong.github.io/daily-learning/devops/%E8%8E%B7%E5%8F%96nvidia%E9%A9%B1%E5%8A%A8%E6%97%A5%E5%BF%97/</link><pubDate>Fri, 29 Nov 2024 01:09:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/devops/%E8%8E%B7%E5%8F%96nvidia%E9%A9%B1%E5%8A%A8%E6%97%A5%E5%BF%97/</guid><description>&lt;blockquote>
+&lt;p>💡 记录一下，怎么获得Nvidia驱动的日志。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;ul>
+&lt;li>登录master节点&lt;/li>
+&lt;li>收集有关 NVIDIA 显卡驱动程序问题的诊断信息的脚本&lt;/li>
+&lt;li>运行脚本&lt;/li>
+&lt;li>将刚才生成的日志文件，重命名&lt;/li>
+&lt;li>新建文件夹命名为：日期 - log&lt;/li>
+&lt;li>复制刚才生成的所有文件到文件夹内&lt;/li>
+&lt;li>压缩文件夹&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;blockquote>
+&lt;p>References&lt;/p>&lt;/blockquote></description></item></channel></rss>

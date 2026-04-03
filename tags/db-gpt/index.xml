@@ -1,96 +1,95 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>DB-GPT on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/db-gpt/</link><description>Recent content in DB-GPT on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.159.2</generator><language>zh-CN</language><lastBuildDate>Wed, 27 Nov 2024 13:46:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/db-gpt/index.xml" rel="self" type="application/rss+xml"/><item><title>DB-GPT源代码部署</title><link>https://Pan-Binghong.github.io/daily-learning/ai/db-gpt%E6%BA%90%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/db-gpt%E6%BA%90%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2/</guid><description>&lt;p&gt;源代码部署DB-GPT操作流程, 含测试, 部署, 注意事项等。&lt;/p&gt;
-&lt;p&gt;&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/257103ae-75a0-4053-9c33-fdc2fab837d6/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4666JIAMAYM%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T034647Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGocIOJykj%2Bql1Ed%2FU2clyX1wW8hibPPDeHDj657%2Fvl3AiANsJIzua9ct66IWC5Q7OGn5GFk644X3NTXTBLddzC%2BByr%2FAwh9EAAaDDYzNzQyMzE4MzgwNSIMaWYjgqk4Oc335AiZKtwDc8%2FIGqWvGX77IcMmhxlZDxTgJsM02Dj1TZweTiSd8VkxZDTr0F%2FO2CE8Zn1tYx5%2FzM6n3IF6VMEyE8gdYimgtqp%2BpmngAeXPb%2BwuI323k50%2BbffIo%2BNOhOzy16DkRbiOmDVzkLR4NT2XkH%2FwZkXhgT9PC0izXwTFozAiZiUj%2B3dg49UkedzhwNw8RNSb4KnN%2FLUY4eLSNdzC8hY6pm%2FS%2FxFC8Kd9BsIXMOcgx8fp9Tx9UabGDCKXULAedevPIR9xrQF71H61LmxM5Te%2FAvZI05xfdtBYZWmTp3nzkI6R4q2zfOvxEsTyCp4RJrbGITbF62UFw0X7od59SYpvmSlHlKQKZEuzv3%2FUYgFpQK3Md2M7qywVPJL3JWpxWfgpkSG%2BgsVmoPh73vGg%2FPrG2fs5Z94PDR02eZUwpkJfcQoyDIiBxIrh4LTdhXjZWLUwHwn%2FXdZXGLSpodvehDg2IMKTlsAqYSrOWjfkr%2B%2Btm5CI91EnSu5yyFcyhFB1WRzoNYwnnJiwN9ik2dWlfujX6M3xNVV8Ror%2B2PsYq6nf9hkKzDbIK%2Fya4LCra0gC9jS1Fp00nE7hHZviiF5ppHpMYvHAhVdDMj%2F84o7Q4qS6f5%2FobiA3f4ovQ0tnyriCHDMwieq8zgY6pgHZAeapnfPn0qRziPWQGCYjKqqHVNmH3OW8G0e%2Bp54P%2Bqi%2F3fbORAYqjj%2F4ZILLiPFJajMbdD5EAgA53Sqcwm2ndeUDabvTuXwbROSRGc2%2BxZE4e%2F7U6M%2FsS%2BrNbiMXVxlrwqZhBCdhYnjIe%2F8kR2fdzxLMEBNjRX1lh53v6anFFDis%2FHH%2FYioAENNni9xbwXxaJf2jUSy%2FHLCLAVVknQ9eoSOVHVGK&amp;X-Amz-Signature=bf784fbeb5d4f915682b5663fa334d3d1f9487d3e50e9578f28f94bf7d030afb&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject"&gt;&lt;/p&gt;
-&lt;h3 id="1-下载源码"&gt;1. 下载源码&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code class="language-dhall" data-lang="dhall"&gt;git clone https://github.com/eosphoros-ai/DB-GPT.git
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="2-安装minconda运行环境"&gt;2. 安装Minconda(运行环境)&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;span class="lnt"&gt;4
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 新建文件夹mkdir -p ~/miniconda3&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 在线下载minconda安装包wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 运行安装程序bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 删除安装包rm -rf ~/miniconda3/miniconda.sh&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;[!NOTE]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;span class="lnt"&gt;2
-&lt;/span&gt;&lt;span class="lnt"&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;初始化
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~/miniconda3/bin/conda init bash
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~/miniconda3/bin/conda init zsh
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="3-新建代码运行环境"&gt;3. 新建代码运行环境&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 基于minconda新建一个名称为dbgpt_env的基础环境, 且python版本为3.10conda create -n dbgpt_env python=3.10&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;Conda环境常用命令 :&lt;/li&gt;
-&lt;li&gt;清华源地址&lt;/li&gt;
-&lt;li&gt;修改pip下载源的地址&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="4-安装项目所需依赖包库"&gt;4. 安装项目所需依赖包/库&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;DB-GPT下有setup.py, 为作者写的安装依赖脚本&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install -e &lt;span class="s2"&gt;&amp;#34;.[default]&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="5-安装可以远程访问模型的软件"&gt;5. 安装可以远程访问模型的软件&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt-get install git-lfs
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id="6-调用在线qwen接口进行访问"&gt;6. 调用在线Qwen接口进行访问&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;安装qwen接口所需依赖&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="7-下载embedding模型"&gt;7 .下载Embedding模型&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;在DB-GPT项目下, 新建文件夹models| 用于放置Embedding模型&lt;/li&gt;
-&lt;li&gt;在线下载Embedding模型 | 目前好用的有:m3e-large, text2vec-large-chinese等&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="8-配置模型"&gt;8. 配置模型&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;在DB-GPT根目录处, 复制环境cp .env.template .env&lt;/li&gt;
-&lt;li&gt;编辑VIM .env&lt;/li&gt;
-&lt;li&gt;按照文档进行修改&lt;/li&gt;
-&lt;li&gt;具体的模型名称可查看cat /home/ubuntu/DB-GPT/dbgpt/configs/model_config.py文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="9-安装sqlite"&gt;9. 安装SQLite&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;sudo apt install sqlite&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="10-运行服务"&gt;10. 运行服务&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;h1 id="在db-gpt根目录运行-python-dbgptappdbgpt_serverpy"&gt;在DB-GPT根目录运行 python dbgpt/app/dbgpt_server.py&lt;/h1&gt;
-&lt;/li&gt;
-&lt;li&gt;在浏览器输入:http://localhost:5670/可查看web网站&lt;/li&gt;
-&lt;/ul&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>DB-GPT on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/db-gpt/</link><description>Recent content in DB-GPT on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Wed, 27 Nov 2024 13:46:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/db-gpt/index.xml" rel="self" type="application/rss+xml"/><item><title>DB-GPT源代码部署</title><link>https://Pan-Binghong.github.io/daily-learning/ai/db-gpt%E6%BA%90%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2/</link><pubDate>Tue, 29 Oct 2024 01:52:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/db-gpt%E6%BA%90%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2/</guid><description>&lt;p>源代码部署DB-GPT操作流程, 含测试, 部署, 注意事项等。&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/257103ae-75a0-4053-9c33-fdc2fab837d6/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466YJTBVL7V%2F20260403%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260403T063430Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjELb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCGuI%2F6MoqoTgpRa2XwVAiXxtj7Xk4OyIfK%2FAKhVr1ciQIhAJjydiuXL4P169tfk3WyOdkaWhYj08QqGCbNuQGgBZHjKv8DCH8QABoMNjM3NDIzMTgzODA1IgyYorQWH9BczGdndxEq3APNkRa3Jwfz22h9nshq5IB%2BZmtt%2Fn2OzQKlNDSH0icuXuNtRPUcNLPWM%2BB8wHEz3Pa6QsswVwSozgVTdMc5X%2F4CMt86BICbYbmu%2BaEU3purXnHBhJX6SHQfAainrZqnryAbzmse%2BvqYdGNyLvEZ%2FroQw5NL6ToDlCnqh%2BgdEMNKlzo4KF0gXeSpUgAw8GVbuyo%2FeQE1OyS%2FwkILfMczZILn7MBNQ7%2FzoYvzlGG6bpMcgrtg7Wnb8cBYo%2BgJA2qgdQJAYehxjOD8faEmnbna5BOWxVeTkcxsF3kPd6ojOBkg0pD%2FMmYHGP2GFqfQ3%2Be8e3nYmx3ha6MlbnqhHY5AI21Whd9NITY8TLfJGxgAIHfkwKfhajCOCfvq%2FR5KY9%2BzLEvtk2EL2xtOtiQyh3UmG3iRmkk1oeSuqPkFLRkwCvuzNxVneWiA7r7VyDHClS4ttPSp%2FNZiGJDej%2FRfl49mIcIzEgvVSY%2BHrayr56tGiLUavP0KasA%2F6Jv4Goj1a%2FVe2HG1HOXlp5YoDmdnFHGXboMhIi2IgELeaoRKC%2F8ikSaoQVOUxeoeFFLwViM7ZGlEngAccmiDLTT8jRLDDU%2BJIUCdGs599PTVdQikLBFB1QgsEOwP53PM%2BAO7ck56pzDDrL3OBjqkAZzknpqnyMM9FOAlL0ouyvz3V9vWnPKf1eK%2BCunifJa2LgnIfVbOZTFRNtsl9hyAzsUfyj0Rt%2Bo1C1%2F1xksXBr8%2BHwX24XoFYUaLxzLVWgnt5mVbyjEaZGxBlt48HX2kiPaH8pyN3mwzcf8jvYtYVqLjH0PgTDeXPPh1RlNRCh38U6fc2LQ%2FGc2tysTsVU%2BPXM%2FtAakvdGRxgyyTc2OD48o6bOP%2F&amp;X-Amz-Signature=687a20040a4e0fe86fbbec91b48d12afe115657d00e32706b1a57b4e9cf73d65&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject">&lt;/p>
+&lt;h3 id="1-下载源码">1. 下载源码&lt;/h3>
+&lt;pre tabindex="0">&lt;code class="language-dhall" data-lang="dhall">git clone https://github.com/eosphoros-ai/DB-GPT.git
+&lt;/code>&lt;/pre>&lt;h3 id="2-安装minconda运行环境">2. 安装Minconda(运行环境)&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 新建文件夹mkdir -p ~/miniconda3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 在线下载minconda安装包wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 运行安装程序bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除安装包rm -rf ~/miniconda3/miniconda.sh&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>[!NOTE]&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">初始化
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">~/miniconda3/bin/conda init bash
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">~/miniconda3/bin/conda init zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="3-新建代码运行环境">3. 新建代码运行环境&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 基于minconda新建一个名称为dbgpt_env的基础环境, 且python版本为3.10conda create -n dbgpt_env python=3.10&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>Conda环境常用命令 :&lt;/li>
+&lt;li>清华源地址&lt;/li>
+&lt;li>修改pip下载源的地址&lt;/li>
+&lt;/ul>
+&lt;h3 id="4-安装项目所需依赖包库">4. 安装项目所需依赖包/库&lt;/h3>
+&lt;ul>
+&lt;li>DB-GPT下有setup.py, 为作者写的安装依赖脚本&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">pip install -e &lt;span class="s2">&amp;#34;.[default]&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="5-安装可以远程访问模型的软件">5. 安装可以远程访问模型的软件&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">apt-get install git-lfs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="6-调用在线qwen接口进行访问">6. 调用在线Qwen接口进行访问&lt;/h3>
+&lt;ul>
+&lt;li>安装qwen接口所需依赖&lt;/li>
+&lt;/ul>
+&lt;h3 id="7-下载embedding模型">7 .下载Embedding模型&lt;/h3>
+&lt;ul>
+&lt;li>在DB-GPT项目下, 新建文件夹models| 用于放置Embedding模型&lt;/li>
+&lt;li>在线下载Embedding模型 | 目前好用的有:m3e-large, text2vec-large-chinese等&lt;/li>
+&lt;/ul>
+&lt;h3 id="8-配置模型">8. 配置模型&lt;/h3>
+&lt;ul>
+&lt;li>在DB-GPT根目录处, 复制环境cp .env.template .env&lt;/li>
+&lt;li>编辑VIM .env&lt;/li>
+&lt;li>按照文档进行修改&lt;/li>
+&lt;li>具体的模型名称可查看cat /home/ubuntu/DB-GPT/dbgpt/configs/model_config.py文件&lt;/li>
+&lt;/ul>
+&lt;h3 id="9-安装sqlite">9. 安装SQLite&lt;/h3>
+&lt;ul>
+&lt;li>sudo apt install sqlite&lt;/li>
+&lt;/ul>
+&lt;h3 id="10-运行服务">10. 运行服务&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;h1 id="在db-gpt根目录运行-python-dbgptappdbgpt_serverpy">在DB-GPT根目录运行 python dbgpt/app/dbgpt_server.py&lt;/h1>
+&lt;/li>
+&lt;li>在浏览器输入:http://localhost:5670/可查看web网站&lt;/li>
+&lt;/ul></description></item></channel></rss>
