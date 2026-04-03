@@ -1,67 +1,60 @@
-{{- /* 扩展 footer 区域 - 添加额外的功能组件 */ -}}
+{{- /* 扩展 footer —— 交互增强脚本 */ -}}
 
-<!-- 阅读进度条脚本 -->
+<!-- 阅读进度条 -->
 <div class="reading-progress-bar" id="reading-progress"></div>
 
 <script>
-// 阅读进度条
-window.addEventListener('scroll', function() {
-  const progressBar = document.getElementById('reading-progress');
-  if (!progressBar) return;
+(function () {
+  // ── 阅读进度条 ──
+  var bar = document.getElementById('reading-progress');
+  if (bar) {
+    window.addEventListener('scroll', function () {
+      var dh = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = dh > 0 ? (window.scrollY / dh) * 100 : 100;
+      bar.style.width = pct + '%';
+    }, { passive: true });
+  }
 
-  const windowHeight = window.innerHeight;
-  const documentHeight = document.documentElement.scrollHeight - windowHeight;
-  const scrolled = window.scrollY;
-  const progress = (scrolled / documentHeight) * 100;
+  document.addEventListener('DOMContentLoaded', function () {
+    // ── 外部链接新标签打开 ──
+    document.querySelectorAll('a[href^="http"]').forEach(function (link) {
+      if (link.hostname !== window.location.hostname) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
 
-  progressBar.style.width = progress + '%';
-});
+    // ── 代码复制按钮汉化 ──
+    var observer = new MutationObserver(function () {
+      document.querySelectorAll('.copy-code:not([data-localized])').forEach(function (btn) {
+        btn.setAttribute('data-localized', '1');
+        btn.addEventListener('click', function () {
+          var self = this;
+          var orig = self.innerText;
+          self.innerText = '✓ 已复制';
+          setTimeout(function () { self.innerText = orig; }, 2000);
+        });
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
 
-// 代码复制成功提示优化
-document.addEventListener('DOMContentLoaded', function() {
-  const copyButtons = document.querySelectorAll('.copy-text');
-  copyButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      // 添加复制成功动画
-      this.textContent = '✓ 已复制';
-      setTimeout(() => {
-        this.textContent = '复制';
-      }, 2000);
+    // ── 图片点击灯箱（简易版：新标签打开） ──
+    document.querySelectorAll('.post-content img').forEach(function (img) {
+      img.addEventListener('click', function () {
+        window.open(this.src, '_blank', 'noopener');
+      });
     });
   });
-});
-
-// 外部链接在新标签页打开
-document.addEventListener('DOMContentLoaded', function() {
-  const links = document.querySelectorAll('a[href^="http"]');
-  links.forEach(link => {
-    if (link.hostname !== window.location.hostname) {
-      link.setAttribute('target', '_blank');
-      link.setAttribute('rel', 'noopener noreferrer');
-    }
-  });
-});
-
-// 图片点击放大（可选）
-document.addEventListener('DOMContentLoaded', function() {
-  const images = document.querySelectorAll('.post-content img');
-  images.forEach(img => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', function() {
-      window.open(this.src, '_blank');
-    });
-  });
-});
+}());
 </script>
 
-<!-- 返回顶部按钮优化（PaperMod 已内置，这里添加额外样式） -->
 <style>
 #top-link {
   transition: all 0.3s ease;
+  border-radius: 10px;
 }
-
 #top-link:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 </style>
