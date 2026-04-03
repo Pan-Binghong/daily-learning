@@ -175,9 +175,9 @@ ignoreLogs = ['warning-goldmark-raw-html']
   # Giscus 评论系统配置（基于 GitHub Discussions）
   [params.giscus]
     repo = "Pan-Binghong/daily-learning"
-    repoID = "R_kgDONYfgVw"  # 需要从 giscus.app 获取
+    repoID = "R_kgDOQOK4Vw"
     category = "Announcements"
-    categoryID = "DIC_kwDONYfgV84CkvE7"  # 需要从 giscus.app 获取
+    categoryID = "DIC_kwDOQOK4V84CxfA9"
     mapping = "pathname"
     reactionsEnabled = "1"
     emitMetadata = "0"
