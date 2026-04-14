@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>AI Agent on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/ai-agent/</link><description>Recent content in AI Agent on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Mon, 13 Apr 2026 13:50:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/ai-agent/index.xml" rel="self" type="application/rss+xml"/><item><title>OpenClaw vs Hermes Agent：2026 年最火两大开源 AI Agent 架构深度对比</title><link>https://Pan-Binghong.github.io/daily-learning/ai/openclaw-vs-hermes-agent2026-%E5%B9%B4%E6%9C%80%E7%81%AB%E4%B8%A4%E5%A4%A7%E5%BC%80%E6%BA%90-ai-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94/</link><pubDate>Mon, 13 Apr 2026 13:45:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/openclaw-vs-hermes-agent2026-%E5%B9%B4%E6%9C%80%E7%81%AB%E4%B8%A4%E5%A4%A7%E5%BC%80%E6%BA%90-ai-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94/</guid><description>&lt;h1 id="openclaw-vs-hermes-agent2026-年最火两大开源-ai-agent-架构深度对比">OpenClaw vs Hermes Agent：2026 年最火两大开源 AI Agent 架构深度对比&lt;/h1>
+&lt;hr>
+&lt;h2 id="一背景两场不同的革命">一、背景：两场不同的革命&lt;/h2>
+&lt;p>2026 年，开源 AI Agent 领域出现了两颗耀眼的明星：&lt;/p>
+&lt;ul>
+&lt;li>OpenClaw（前身 Clawdbot）：TypeScript + Node.js，GitHub ⭐ 302k，由奥地利开发者 Peter Steinberger 创建，2026 年 2 月爆火，成为 GitHub 历史上增长最快的项目。&lt;/li>
+&lt;li>Hermes Agent：Python，GitHub ⭐ 74k，由 Nous Research 团队打造，2025 年 7 月发布，主打&amp;quot;自我进化&amp;quot;，最新版 v2026.4.8（4 月 8 日）。
+两者都是开源自托管 AI Agent，都支持 Telegram/Discord/WhatsApp 等多平台接入，都可以对接任意 LLM。但它们在架构哲学上走了完全不同的路。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="二技术栈typescript-gateway-vs-python-agent">二、技术栈：TypeScript Gateway vs Python Agent&lt;/h2>
+&lt;blockquote>
+&lt;p>💡 OpenClaw 为什么选 TypeScript？因为它的核心不是 AI 逻辑，而是消息网关基础设施。Node.js 的事件循环天然适合处理 20+ 即时通讯平台的并发 WebSocket 连接。&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>💡 Hermes 为什么选 Python？因为它的核心是机器学习研究管道。Python 生态（PyTorch、Atropos RL、HuggingFace）让 Hermes 可以直接生成训练数据、跑强化学习环境。&lt;/p></description></item></channel></rss>
