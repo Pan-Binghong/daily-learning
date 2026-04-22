@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Excel on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/excel/</link><description>Recent content in Excel on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Tue, 21 Apr 2026 05:08:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/excel/index.xml" rel="self" type="application/rss+xml"/><item><title>Excel VBA 专业水印系统完整解析</title><link>https://Pan-Binghong.github.io/daily-learning/knowledge/excel-vba-%E4%B8%93%E4%B8%9A%E6%B0%B4%E5%8D%B0%E7%B3%BB%E7%BB%9F%E5%AE%8C%E6%95%B4%E8%A7%A3%E6%9E%90/</link><pubDate>Tue, 21 Apr 2026 05:04:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/knowledge/excel-vba-%E4%B8%93%E4%B8%9A%E6%B0%B4%E5%8D%B0%E7%B3%BB%E7%BB%9F%E5%AE%8C%E6%95%B4%E8%A7%A3%E6%9E%90/</guid><description>&lt;h1 id="一概述">一、概述&lt;/h1>
+&lt;p>本模块实现了一套完整的 Excel 工作表水印系统，支持：&lt;/p>
+&lt;ul>
+&lt;li>密码保护的水印添加与移除&lt;/li>
+&lt;li>将多行斜体文字渲染为 PNG 图片作为背景水印&lt;/li>
+&lt;li>同时设置打印页眉水印（PageSetup）&lt;/li>
+&lt;li>通过 ChartObject 导出矢量排版为位图&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>💡 水印文字均已脱敏，原始内容以「机密」代替。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h1 id="二模块结构">二、模块结构&lt;/h1>
+&lt;p>整个系统由 3 个过程 + 1 组配置常量构成：&lt;/p>
+&lt;p>&lt;img loading="lazy" src="https://images.pexels.com/photos/20062955/pexels-photo-20062955.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=627&amp;w=1200">&lt;/p>
+&lt;hr>
+&lt;h1 id="三配置常量">三、配置常量&lt;/h1>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-basic" data-lang="basic">&lt;span class="line">&lt;span class="cl">&lt;span class="vg">Option&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">Explicit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&amp;#39; ============================================================&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&amp;#39; 水印配置常量&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&amp;#39; ============================================================&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="vg">Public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">Const&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">WM_TEXT_L1&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">As&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;机密&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c1">&amp;#39; 第一行（已脱敏）&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="vg">Public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">Const&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">WM_TEXT_L2&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">As&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;机密&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c1">&amp;#39; 第二行（已脱敏）&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="vg">Public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">Const&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">WM_COLOR&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">As&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">Long&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="il">13816530&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c1">&amp;#39; 浅灰紫（BGR: D2/CF/52）&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="vg">Public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">Const&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">WM_FONT_SIZE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">As&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">Integer&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="il">28&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="vg">Public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">g_WM_Password&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">As&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="vg">String&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>💡 颜色说明：13816530（十六进制 0xD2CF52），在 VBA 中颜色为 BGR 顺序，实际显示为低饱和度的金黄偏灰色调，视觉上与白色背景形成柔和对比，不喧宾夺主。&lt;/p></description></item></channel></rss>
