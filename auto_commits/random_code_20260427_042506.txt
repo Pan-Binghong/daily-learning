@@ -1,0 +1,6 @@
+# C++ 代码片段
+# 生成时间: 2026-04-27 04:25:06
+
+def hello_world():
+    print("Hello, World!")
+    return True
