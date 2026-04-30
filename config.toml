@@ -41,18 +41,103 @@ ignoreLogs = ['warning-goldmark-raw-html']
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
-# Stack 主题参数
+# 默认语言
+DefaultContentLanguage = "zh-cn"
+
+[languages]
+  [languages.zh-cn]
+    languageName = "中文"
+    weight = 1
+
+# 菜单配置
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "首页"
+    url = "/"
+    weight = 1
+    [menu.main.params]
+      icon = "home"
+
+  [[menu.main]]
+    identifier = "ai"
+    name = "AI"
+    url = "/ai/"
+    weight = 2
+    [menu.main.params]
+      icon = "cpu"
+
+  [[menu.main]]
+    identifier = "knowledge"
+    name = "知识库"
+    url = "/knowledge/"
+    weight = 3
+    [menu.main.params]
+      icon = "book"
+
+  [[menu.main]]
+    identifier = "backend"
+    name = "后端"
+    url = "/backend/"
+    weight = 4
+    [menu.main.params]
+      icon = "server"
+
+  [[menu.main]]
+    identifier = "devops"
+    name = "DevOps"
+    url = "/devops/"
+    weight = 5
+    [menu.main.params]
+      icon = "tool"
+
+  [[menu.main]]
+    identifier = "other"
+    name = "其他"
+    url = "/other/"
+    weight = 6
+    [menu.main.params]
+      icon = "folder"
+
+  [[menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 7
+    [menu.main.params]
+      icon = "archive"
+
+  [[menu.main]]
+    identifier = "search"
+    name = "搜索"
+    url = "/search/"
+    weight = 8
+    [menu.main.params]
+      icon = "search"
+
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 9
+    [menu.main.params]
+      icon = "user"
+
+# 参数配置
 [params]
-  # 主页配置
+  # 主要文章分类
   mainSections = ["ai", "backend", "devops", "knowledge", "other"]
-  
-  # 文章配置
+
+  # 日期格式
   dateFormat = "2006-01-02"
-  showReadingTime = true
-  showWordCount = true
-  showTableOfContents = true
-  showTaxonomies = true
-  showComments = true
+
+  # 文章展示配置
+  [params.article]
+    showReadingTime = true
+    showWordCount = true
+    showTableOfContents = true
+    showTaxonomies = true
+    showComments = true
 
   # 侧边栏配置
   [params.sidebar]
@@ -64,36 +149,17 @@ ignoreLogs = ['warning-goldmark-raw-html']
       local = false
       src = "https://avatars.githubusercontent.com/Pan-Binghong"
 
-  # 社交链接
-  [[params.sidebar.links]]
-    title = "GitHub"
-    icon = "github"
-    url = "https://github.com/Pan-Binghong"
-    
-  [[params.sidebar.links]]
-    title = "Email"
-    icon = "mail"
-    url = "mailto:19909442097@163.com"
+  # 主页配置
+  [params.home]
+    showRecent = true
+    recentLimit = 10
 
-  # 文章元信息
-  [params.article]
-    showReadingTime = true
-    showWordCount = true
-    showTableOfContents = true
-    showTaxonomies = true
-    showComments = true
+  # 搜索配置
+  [params.search]
+    enable = true
+    type = "fuse"
 
-  # 小部件配置
-  [params.widgets]
-    enabled = ["search", "archives", "categories", "tags"]
-    
-    [params.widgets.archives]
-      limit = 5
-      
-    [params.widgets.tags]
-      enabled = true
-
-  # 评论系统 (Giscus)
+  # 评论配置
   [params.comments]
     enabled = true
     provider = "giscus"
@@ -111,86 +177,28 @@ ignoreLogs = ['warning-goldmark-raw-html']
       lang = "zh-CN"
       loading = "lazy"
 
-  # SEO 配置
-  [params.seo]
-    description = "记录技术成长的每一步 - AI、后端、DevOps 学习笔记"
-    keywords = ["AI", "后端开发", "DevOps", "技术博客", "学习笔记"]
-
-  # 页面配置
-  [params.defaultImage]
-    enabled = false
+  # 分享按钮
+  [params.shareButtons]
+    enabled = ["linkedin", "twitter"]
 
   # 颜色主题
   [params.colorScheme]
     toggle = true
     default = "auto"
 
-# 导航菜单
-[menu]
-  [[menu.main]]
-    name = "首页"
-    url = "/"
-    weight = 1
-    [menu.main.params]
-      icon = "home"
-      
-  [[menu.main]]
-    name = "AI"
-    url = "/ai/"
-    weight = 2
-    [menu.main.params]
-      icon = "cpu"
-      
-  [[menu.main]]
-    name = "知识库"
-    url = "/knowledge/"
-    weight = 3
-    [menu.main.params]
-      icon = "book"
-      
-  [[menu.main]]
-    name = "后端"
-    url = "/backend/"
-    weight = 4
-    [menu.main.params]
-      icon = "server"
-      
-  [[menu.main]]
-    name = "DevOps"
-    url = "/devops/"
-    weight = 5
-    [menu.main.params]
-      icon = "settings"
-      
-  [[menu.main]]
-    name = "其他"
-    url = "/other/"
-    weight = 6
-    [menu.main.params]
-      icon = "folder"
-      
-  [[menu.main]]
-    name = "归档"
-    url = "/archives/"
-    weight = 7
-    [menu.main.params]
-      icon = "archive"
-      
-  [[menu.main]]
-    name = "搜索"
-    url = "/search/"
-    weight = 8
-    [menu.main.params]
-      icon = "search"
+  # 小部件配置
+  [params.widgets]
+    [params.widgets.homepage]
+      type = ["search", "archives", "categories", "tag-cloud"]
+    [params.widgets.page]
+      type = ["toc"]
 
-  [[menu.main]]
-    name = "关于"
-    url = "/about/"
-    weight = 9
-    [menu.main.params]
-      icon = "user"
+# 分类和标签配置
+[taxonomies]
+  tag = "tags"
+  category = "categories"
 
-# 相关文章配置
+# 相关文章
 [related]
   includeNewer = true
   threshold = 60
@@ -202,9 +210,6 @@ ignoreLogs = ['warning-goldmark-raw-html']
   [[related.indices]]
     name = "categories"
     weight = 80
-  [[related.indices]]
-    name = "date"
-    weight = 10
 
 # 隐私设置
 [privacy]
