@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: 好用好看的nvidia-smi
 date: '2025-03-24T16:02:00.000Z'
@@ -45,3 +46,52 @@ nvitop -m full
 
 
 
+=======
+---
+title: 好用好看的nvidia-smi
+date: '2025-03-24T16:02:00.000Z'
+lastmod: '2025-03-25T02:21:00.000Z'
+draft: false
+tags:
+- Linux
+categories:
+- 其他
+---
+
+> 💡 找到一个比nvidia-smi展示gpu更加美观的工具。在此记录一下。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/167921cd-a496-4b4d-8768-9b56d39ca4ed/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XGUSZXID%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084412Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCIEJpk8e0JadxPWkEx5EYaAPKucqF7qTaEN5aM3X%2FX09pAiBsGpYCHfeZ%2B8tut4HpzVwvAuK5rJaVkVf7lFZH2yAWoir%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIMA8b2F7iRwifInMLRKtwD0ysALaI7wQB6wW2rtq6ga3yKwvZF3LFpHme1yYV7JlckZBgL0oo7XC%2FQGz%2BalcH4Mep2a1%2B9J7enaVEspfG7p5cOEUgefc1bHvCP%2BDUX4ePEmsDp9lFH9LeoVd%2F5KSDzpQNiidIte6WKAQygHvz1Y6ffS5AlkwyN39Z3s%2Bii4NNVUdA86aGR8g%2FbcnjolQDWECjHRNpY6OxW9Nen6LycdK%2FE8XCqzOnKKxp%2F7h3IhMz3XbeNVn%2BbMaIfmYLmdAcrGv9DsNX71EHT%2Fnm%2BBj6RhU7FWt7G39S2Ajn038rFZIbTGOzZhoNJis2RNvRmVM7M4KBTlBWsLGGDiQjiGsn5%2F4hNsGliw5fpxUpGjfIknkt3MBlYsNsLh%2BKftwoX2dSmIlX7n4M63lj5YFafGQOC9cmifGDKCWvSBz60OX2z1Yd0ByCjafCoaHLtIGKQmWzac8Ia4FnNoVhdRUwe3i3t35h%2F0izUul1GneeehHODsTUj7BwE3rFJzNKu%2F4RX%2F7nYeuHGUrOiQ%2BZwq23MIiXr3uyzr53wTQ2WRzTKH%2FKG%2BnV9pSNLyBnhnWP0Ls21MV9tON72yDib4fpf4vR8zoNdn0UFjxNFO5wygpgMcPkCGDEaMb2ke3cYua5N%2Fkgw%2BJ3MzwY6pgGGmuUtrTYdORTzj%2FeKcX1qfZn9OA758TVNWKRYfoJlptdaSHhkr%2F18l7%2FU5pckRT3egkghLiblgvbwNOR1DwHf8sNnwQWRaDds2DqPmzLZo9Cz31pELvoInjPKzgpmyhexuswwYiepNvmuDqBaKSL%2FBdIM6Dw6%2BUQvD%2FDoB1FP%2FsQ7hvZu9b3OIDuDnHbHlUFA8eNqv6b8j3rJd8WNwjKLsoVWN6Le&X-Amz-Signature=97a39a584300759b1c64a15995958ab9f25f2a0b5b5f7f2cbb630b84afb399ba&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+---
+
+## 安装
+
+```python
+pip install nvitop
+```
+
+---
+
+## 查看gpu状态
+
+```python
+nvitop
+```
+
+> 查看更加详细的gpu内容
+
+```python
+nvitop -m full
+```
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/38595db5-5c7e-4dcb-ab27-48bf45fecafc/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XGUSZXID%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084412Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCIEJpk8e0JadxPWkEx5EYaAPKucqF7qTaEN5aM3X%2FX09pAiBsGpYCHfeZ%2B8tut4HpzVwvAuK5rJaVkVf7lFZH2yAWoir%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIMA8b2F7iRwifInMLRKtwD0ysALaI7wQB6wW2rtq6ga3yKwvZF3LFpHme1yYV7JlckZBgL0oo7XC%2FQGz%2BalcH4Mep2a1%2B9J7enaVEspfG7p5cOEUgefc1bHvCP%2BDUX4ePEmsDp9lFH9LeoVd%2F5KSDzpQNiidIte6WKAQygHvz1Y6ffS5AlkwyN39Z3s%2Bii4NNVUdA86aGR8g%2FbcnjolQDWECjHRNpY6OxW9Nen6LycdK%2FE8XCqzOnKKxp%2F7h3IhMz3XbeNVn%2BbMaIfmYLmdAcrGv9DsNX71EHT%2Fnm%2BBj6RhU7FWt7G39S2Ajn038rFZIbTGOzZhoNJis2RNvRmVM7M4KBTlBWsLGGDiQjiGsn5%2F4hNsGliw5fpxUpGjfIknkt3MBlYsNsLh%2BKftwoX2dSmIlX7n4M63lj5YFafGQOC9cmifGDKCWvSBz60OX2z1Yd0ByCjafCoaHLtIGKQmWzac8Ia4FnNoVhdRUwe3i3t35h%2F0izUul1GneeehHODsTUj7BwE3rFJzNKu%2F4RX%2F7nYeuHGUrOiQ%2BZwq23MIiXr3uyzr53wTQ2WRzTKH%2FKG%2BnV9pSNLyBnhnWP0Ls21MV9tON72yDib4fpf4vR8zoNdn0UFjxNFO5wygpgMcPkCGDEaMb2ke3cYua5N%2Fkgw%2BJ3MzwY6pgGGmuUtrTYdORTzj%2FeKcX1qfZn9OA758TVNWKRYfoJlptdaSHhkr%2F18l7%2FU5pckRT3egkghLiblgvbwNOR1DwHf8sNnwQWRaDds2DqPmzLZo9Cz31pELvoInjPKzgpmyhexuswwYiepNvmuDqBaKSL%2FBdIM6Dw6%2BUQvD%2FDoB1FP%2FsQ7hvZu9b3OIDuDnHbHlUFA8eNqv6b8j3rJd8WNwjKLsoVWN6Le&X-Amz-Signature=437185ebe296cf720a4d0e082d56afdc278ee3cf650d91bdb281c5fcac362e78&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+
+
+
+
+
+
+
+
+>>>>>>> 67e2e8ba81abbca0065a5254fe8b7b646ead6176

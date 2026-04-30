@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: 多模态大模型_mPLUG-Owl_部署
 date: '2024-11-22T01:44:00.000Z'
@@ -44,3 +45,51 @@ mPLUG-Owl3有2个版本（2B、7B），为了更快的体验，本次实验选�
 
 > References
 
+=======
+---
+title: 多模态大模型_mPLUG-Owl_部署
+date: '2024-11-22T01:44:00.000Z'
+lastmod: '2024-11-29T12:33:00.000Z'
+draft: false
+tags:
+- LLMs
+- mPLUG-Owl
+categories:
+- AI
+---
+
+> 💡 支持视频以及图片推理的多模态大模型mPLUG-Owl。 记录安装，推理的所有操作过程。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/cd01d11c-96a2-4d07-82d2-51ad7aca879f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4665ZIJ64YJ%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084300Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCIDZAceARstTxTZe5uP%2FXLhNt%2FOW5PnG%2BckmISMeQYofoAiBG8StRt9edZZtDeexYQjcoFWyYduZIVLSXRse0u%2BUIZir%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIMHg3IDa7B8RXUd6v7KtwDSmv6hfVOdshhKLCPFkjQB5G4YBvqG0rswNft9KsAANV%2FUGfMmY%2Bt9wc6%2FJJ465iAYKPX1%2BkAwBhBKeru5sx7w%2BQvtYEuOu3KMAgbkQp6um79qNPRVgVAQOdH70hCyFvqmhuzVKrRzODUUX8uF5TUGc%2FFK6f1CDk0PrEP7CFfF4hOhmauvUeiiuBAhQvED1Xc6XNEAFGsCnyi2KbMtoFhO8CDG0A1q6wolNMXTWihMM0ddbcjnOO4OSbAiwBhKGlNGG72P7Hd4JfVgiwvG8cnC%2B2V1ntaOG0VonOcHy8cEF64ar%2BnhWi8wXdpuhPeS4dl7DDSRytelTieNE8xclWXQfrjIxfVEETz8eQWNg5jmCQ226Tx5r892ejeov7fGahSPK1yByBvCQENGAjVY1EZKH6eTOKVIWDBo9MAYcbgbCGKCnEvBgfdg7iZLyuu8aGzqA8mpIyeB%2BZ63wubHLMG2Fn5r5QfUs%2FvhI9v%2BUd81NPLkGGZnOf1yQl25aGQzrq8ZkRN90xjWojMUuswNMKLuPEkwBCoUNXw0hE5ktILLHmV4uWwAGdhCZ78kNfOkyKczbqIaFZKbQnD84I3bvS%2FmsUq5WmfJMaIdAIUpfhUBEznEtucUDuEtpBoTEcwlp3MzwY6pgHz4TxKcc3bVIL9Vh6zQRPmSfbCmMTlGNIdL22y4kmi9OcMWIUPEENuMjt3YYLuC85jFKJ33XLlENlD8Z0Fr%2BSfFYC3PWbDycXTnWtLytYsM3ozOxyCKacaQwF%2BEEfJgYBakmPFx%2BTjUr5TLmCvtatqBhoaoJY86SFBR6XGyg1o3Kes%2BnYl7LEtaiOdJH6U9dcDqfRg%2BZI1%2F9g8zTrkdubcEGfRi8hE&X-Amz-Signature=f197c0d8f9dc8fba70fb0f969503c99b101f9c51ee34b24715c29a9b23a90668&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+---
+
+## 环境配置
+
+- Anaconda安装
+- 创建新环境
+- 下载代码仓库
+- 安装依赖包
+- 额外安装
+---
+
+## 模型下载
+
+mPLUG-Owl3有2个版本（2B、7B），为了更快的体验，本次实验选用2B参数版本的模型。
+
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/6bb075b3-ef32-477c-a6b1-f0cc80c6f8b3/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4665ZIJ64YJ%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084300Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCIDZAceARstTxTZe5uP%2FXLhNt%2FOW5PnG%2BckmISMeQYofoAiBG8StRt9edZZtDeexYQjcoFWyYduZIVLSXRse0u%2BUIZir%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIMHg3IDa7B8RXUd6v7KtwDSmv6hfVOdshhKLCPFkjQB5G4YBvqG0rswNft9KsAANV%2FUGfMmY%2Bt9wc6%2FJJ465iAYKPX1%2BkAwBhBKeru5sx7w%2BQvtYEuOu3KMAgbkQp6um79qNPRVgVAQOdH70hCyFvqmhuzVKrRzODUUX8uF5TUGc%2FFK6f1CDk0PrEP7CFfF4hOhmauvUeiiuBAhQvED1Xc6XNEAFGsCnyi2KbMtoFhO8CDG0A1q6wolNMXTWihMM0ddbcjnOO4OSbAiwBhKGlNGG72P7Hd4JfVgiwvG8cnC%2B2V1ntaOG0VonOcHy8cEF64ar%2BnhWi8wXdpuhPeS4dl7DDSRytelTieNE8xclWXQfrjIxfVEETz8eQWNg5jmCQ226Tx5r892ejeov7fGahSPK1yByBvCQENGAjVY1EZKH6eTOKVIWDBo9MAYcbgbCGKCnEvBgfdg7iZLyuu8aGzqA8mpIyeB%2BZ63wubHLMG2Fn5r5QfUs%2FvhI9v%2BUd81NPLkGGZnOf1yQl25aGQzrq8ZkRN90xjWojMUuswNMKLuPEkwBCoUNXw0hE5ktILLHmV4uWwAGdhCZ78kNfOkyKczbqIaFZKbQnD84I3bvS%2FmsUq5WmfJMaIdAIUpfhUBEznEtucUDuEtpBoTEcwlp3MzwY6pgHz4TxKcc3bVIL9Vh6zQRPmSfbCmMTlGNIdL22y4kmi9OcMWIUPEENuMjt3YYLuC85jFKJ33XLlENlD8Z0Fr%2BSfFYC3PWbDycXTnWtLytYsM3ozOxyCKacaQwF%2BEEfJgYBakmPFx%2BTjUr5TLmCvtatqBhoaoJY86SFBR6XGyg1o3Kes%2BnYl7LEtaiOdJH6U9dcDqfRg%2BZI1%2F9g8zTrkdubcEGfRi8hE&X-Amz-Signature=e3bd3abfa32b05172cdbac6b2fe8b025b04e7bbb2da6ee873b27ab0ef8c4e687&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+- 魔塔社区找到模型仓库地址
+- 下载命令
+- 查看
+---
+
+## 模型推理
+
+- 参考官方README文档，创建推理demo.py
+- py文件内写入推理代码
+---
+
+> References
+
+>>>>>>> 67e2e8ba81abbca0065a5254fe8b7b646ead6176
