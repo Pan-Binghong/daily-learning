@@ -113,6 +113,17 @@ class NotionToHugo:
             return ""
         return "".join([text.get('plain_text', '') for text in rich_text])
 
+    def clean_url(self, url: str) -> str:
+        """清理 URL 中的 AWS 签名参数，防止密钥泄露"""
+        if not url:
+            return url
+        # 移除 AWS 签名相关的查询参数
+        # 匹配 ?X-Amz-Algorithm=... 或 &X-Amz-... 开头的参数
+        url = re.sub(r'[?&]X-Amz-[^&\s\)\"\'\]]*', '', url)
+        # 移除残留的 ? 或 & 在 URL 结尾
+        url = re.sub(r'[?&]$', '', url)
+        return url
+
     def get_property_value(self, property_data: Dict) -> Any:
         """获取属性值"""
         prop_type = property_data.get('type')
@@ -201,6 +212,8 @@ class NotionToHugo:
                 url = image['file'].get('url', '')
             else:
                 url = ''
+            # 清理 URL 中的 AWS 签名参数，防止密钥泄露
+            url = self.clean_url(url)
             caption = self.extract_text(image.get('caption', []))
             return f"![{caption}]({url})\n\n"
 
