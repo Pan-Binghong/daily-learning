@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: 论文精读_寻找RAG最优策略
 date: '2024-11-28T07:08:00.000Z'
@@ -13,7 +12,7 @@ categories:
 
 > 💡  这篇真的全是干货…论文的实验部分，我就不写了。看看就行。
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/78127f49-5326-457b-85b3-9e146b9c399f/image.png)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/78127f49-5326-457b-85b3-9e146b9c399f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QQ6RT3UG%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084852Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCID8OJITWwUCc0VFXj%2Fc4fPWWbl02zeVsvG8q6rvFsDunAiA5I8qS6E6mTBIIjij8G9Q0JxxLw0Zp%2BvhmKz2CBimp0Cr%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIM%2F4pTY345Oi6eua4TKtwD3jfKFSGyCVhQ6qK5YFdSpVtmZ48ED5ECXWM%2F4loyqNnWGOZKDQUvrgirUg%2BWCf3yLX0IibwH1M79KSkFwVDNrumVAMxNpTpW05KmSALyYGHAki0kQND9KpxHksUwS%2Bbh24VP%2BY4Lfa3plLFOsgrl9WX8YUmW6%2FaltXj1PMz6AlS6M4xj%2BoUIa%2FVyidMK0WdS%2Bg%2Bx1IYQUT3Elwe7nsomYFYIMKq%2BAD5PTLPfAnjkqo%2BENXUxLelhomJqNtZf%2BiI3Pp3ElDV9WPzFcXH8FSeuLrDcyYFGWSARN8jR4mOWBg3ffnbjYmv88PeAvmMhCD4ZfgcYKlyp8uhOCypISZFGZNQDCaOk%2F0%2BgB5dFlsvTjvgR3cImrScctzV4hddmfWoEVtMNEjZWHsxJDDkRmoVwcTH4DsSu%2FWBwIwPJ85XXmVBMyUPIbtJKDMn2Q8jwPEexiF37C80kKYvElLYKZUPzSF93zzzvpz9H179D9TlB7T7%2FrVqy8NnTeGaVKk%2B3xh441EA4ib%2B%2BcQwYMQf1zH7hJRA66DWW8v%2Bo1w10aI2q88HoURq62HkfsaERS%2B5lKd%2Fhk0DuEhD99Cc9d8P8jUZRHoFxWFuYZcYZcImlGSmQqFXcb49hZFrMhVHIhxQw6ZzMzwY6pgF4wbAt4ZtI8lDGFr6EvW5SxmSL0gPuizLrlFMPgzv3lPH%2FZeW2SCOpKlxPKgGkjb47ReaVmxG5dJB6dmdZ8pcDhuUqxWuKvHzLUkycBMfQ702CQ%2Fc7Pb1LBL8mE1kAIMNDa5M1KVfZOJUQl1Cbh7XMghtl4Bo02xaump5u7lJS5TMwu2IDGxJbR9fe5a4sGHTeq%2F%2B8yeXPBZG2bWehA33HRQs4ZbSH&X-Amz-Signature=41d92cb89362dead6557938bd84af246eaf829239c6bdb6484a99f4a0d67f098&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 
 ---
 
@@ -46,7 +45,7 @@ categories:
 
 向量数据库存储着带有元数据的嵌入向量，通过各种索引和近似最近邻（ANN）方法，能够高效地检索与查询相关的文档。为了为我们的研究选择一个合适的向量数据库，我们基于四个关键标准对几个选项进行了评估：多种索引类型、支持十亿级别的向量、混合搜索以及云原生能力。这些标准因其对于灵活性、可扩展性以及在现代云基础设施中部署的便捷性的影响而被选中。多种索引类型提供了基于不同数据特性和用例优化搜索的灵活性。十亿级别的向量支持对于处理LLM应用中的大型数据集至关重要。混合搜索将向量搜索与传统关键词搜索结合起来，提高了检索准确性。最后，云原生能力确保了在云环境中的无缝集成、可扩展性和管理。
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2c4ac03c-4cd8-4e84-aa5e-b0d35bd8c0fa/image.png)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2c4ac03c-4cd8-4e84-aa5e-b0d35bd8c0fa/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QQ6RT3UG%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084852Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCID8OJITWwUCc0VFXj%2Fc4fPWWbl02zeVsvG8q6rvFsDunAiA5I8qS6E6mTBIIjij8G9Q0JxxLw0Zp%2BvhmKz2CBimp0Cr%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIM%2F4pTY345Oi6eua4TKtwD3jfKFSGyCVhQ6qK5YFdSpVtmZ48ED5ECXWM%2F4loyqNnWGOZKDQUvrgirUg%2BWCf3yLX0IibwH1M79KSkFwVDNrumVAMxNpTpW05KmSALyYGHAki0kQND9KpxHksUwS%2Bbh24VP%2BY4Lfa3plLFOsgrl9WX8YUmW6%2FaltXj1PMz6AlS6M4xj%2BoUIa%2FVyidMK0WdS%2Bg%2Bx1IYQUT3Elwe7nsomYFYIMKq%2BAD5PTLPfAnjkqo%2BENXUxLelhomJqNtZf%2BiI3Pp3ElDV9WPzFcXH8FSeuLrDcyYFGWSARN8jR4mOWBg3ffnbjYmv88PeAvmMhCD4ZfgcYKlyp8uhOCypISZFGZNQDCaOk%2F0%2BgB5dFlsvTjvgR3cImrScctzV4hddmfWoEVtMNEjZWHsxJDDkRmoVwcTH4DsSu%2FWBwIwPJ85XXmVBMyUPIbtJKDMn2Q8jwPEexiF37C80kKYvElLYKZUPzSF93zzzvpz9H179D9TlB7T7%2FrVqy8NnTeGaVKk%2B3xh441EA4ib%2B%2BcQwYMQf1zH7hJRA66DWW8v%2Bo1w10aI2q88HoURq62HkfsaERS%2B5lKd%2Fhk0DuEhD99Cc9d8P8jUZRHoFxWFuYZcYZcImlGSmQqFXcb49hZFrMhVHIhxQw6ZzMzwY6pgF4wbAt4ZtI8lDGFr6EvW5SxmSL0gPuizLrlFMPgzv3lPH%2FZeW2SCOpKlxPKgGkjb47ReaVmxG5dJB6dmdZ8pcDhuUqxWuKvHzLUkycBMfQ702CQ%2Fc7Pb1LBL8mE1kAIMNDa5M1KVfZOJUQl1Cbh7XMghtl4Bo02xaump5u7lJS5TMwu2IDGxJbR9fe5a4sGHTeq%2F%2B8yeXPBZG2bWehA33HRQs4ZbSH&X-Amz-Signature=e734e89f14d7ba60ec96881112889c74b3c81a66f6dc810562585650c9a4e036&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 
 ---
 
@@ -71,7 +70,7 @@ categories:
 - TILDE重排：TILDE通过预测模型词汇表中的各个词项的概率来独立计算每个查询词项的可能性。通过对查询词项的预计算对数概率求和，为文档打分，从而在推理时快速重排。TILDEv2通过仅索引文档中存在的词项，使用NCE损失，并扩展文档，从而提高效率并减小索引大小。
 我们的实验是在MS MARCO Passage排名数据集上进行的，这是一个大规模的机器阅读理解数据集。我们遵循并对PyGaggle和TILDE提供的实现进行了修改，使用了模型monoT5、monoBERT、RankLLaMA和TILDEv2。重排结果显示在表中。我们推荐monoT5作为一种综合性的方法，平衡了性能和效率。RankLLaMA适合于实现最佳性能，而TILDEv2是在固定集合上获得最快体验的理想选择。实验设置和结果的详细信息在附录中呈现。
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/100cf766-c92f-4387-8745-20b0e94296e4/image.png)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/100cf766-c92f-4387-8745-20b0e94296e4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QQ6RT3UG%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084852Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCID8OJITWwUCc0VFXj%2Fc4fPWWbl02zeVsvG8q6rvFsDunAiA5I8qS6E6mTBIIjij8G9Q0JxxLw0Zp%2BvhmKz2CBimp0Cr%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIM%2F4pTY345Oi6eua4TKtwD3jfKFSGyCVhQ6qK5YFdSpVtmZ48ED5ECXWM%2F4loyqNnWGOZKDQUvrgirUg%2BWCf3yLX0IibwH1M79KSkFwVDNrumVAMxNpTpW05KmSALyYGHAki0kQND9KpxHksUwS%2Bbh24VP%2BY4Lfa3plLFOsgrl9WX8YUmW6%2FaltXj1PMz6AlS6M4xj%2BoUIa%2FVyidMK0WdS%2Bg%2Bx1IYQUT3Elwe7nsomYFYIMKq%2BAD5PTLPfAnjkqo%2BENXUxLelhomJqNtZf%2BiI3Pp3ElDV9WPzFcXH8FSeuLrDcyYFGWSARN8jR4mOWBg3ffnbjYmv88PeAvmMhCD4ZfgcYKlyp8uhOCypISZFGZNQDCaOk%2F0%2BgB5dFlsvTjvgR3cImrScctzV4hddmfWoEVtMNEjZWHsxJDDkRmoVwcTH4DsSu%2FWBwIwPJ85XXmVBMyUPIbtJKDMn2Q8jwPEexiF37C80kKYvElLYKZUPzSF93zzzvpz9H179D9TlB7T7%2FrVqy8NnTeGaVKk%2B3xh441EA4ib%2B%2BcQwYMQf1zH7hJRA66DWW8v%2Bo1w10aI2q88HoURq62HkfsaERS%2B5lKd%2Fhk0DuEhD99Cc9d8P8jUZRHoFxWFuYZcYZcImlGSmQqFXcb49hZFrMhVHIhxQw6ZzMzwY6pgF4wbAt4ZtI8lDGFr6EvW5SxmSL0gPuizLrlFMPgzv3lPH%2FZeW2SCOpKlxPKgGkjb47ReaVmxG5dJB6dmdZ8pcDhuUqxWuKvHzLUkycBMfQ702CQ%2Fc7Pb1LBL8mE1kAIMNDa5M1KVfZOJUQl1Cbh7XMghtl4Bo02xaump5u7lJS5TMwu2IDGxJbR9fe5a4sGHTeq%2F%2B8yeXPBZG2bWehA33HRQs4ZbSH&X-Amz-Signature=b19a0eba47d7f482f091b0c58d097b318c1687710d913a348ac5959f2d8999f0&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 
 ### 文档重组
 
@@ -83,89 +82,3 @@ categories:
 
 
 
-=======
----
-title: 论文精读_寻找RAG最优策略
-date: '2024-11-28T07:08:00.000Z'
-lastmod: '2024-12-02T01:20:00.000Z'
-draft: false
-tags:
-- Knowledge
-- RAG
-categories:
-- 知识
----
-
-> 💡  这篇真的全是干货…论文的实验部分，我就不写了。看看就行。
-
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/78127f49-5326-457b-85b3-9e146b9c399f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466U25PV6U5%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084329Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJHMEUCIQCOe1cbHiRRQ0ymJGIOsc5lWLCFS9Vg8msgooefc9GZxQIgdl9Fa%2Bgt%2BhIcLddLeSC1q3CGPKONpZncBxCQTQ%2FMBMwq%2FwMICRAAGgw2Mzc0MjMxODM4MDUiDEB8TsVXEvWsnG3VpyrcA1S1kemIUUOotmoT0Dr1H7L6VMcAOjW0Cfm9bSKh9QTMN2fjB5Ps1US086VWzRwG6JvMePCfULVPCVW%2FayapelQuCxhae9hkUwfYAj3SWVDWdnKRZrkcNLU7GwgsKScsjgn1zDMHD6bs07Sd6KJwZ3je%2FliYLtr4M0zUXOvay3l1M7nzxYQ12%2BeBTqc5oNRKKsLcFzKd9s%2Bi%2FqhhEeYvcdnA25QJnbixz7R2c7LGttkP8Ig8aOL7wcMqfnCFQ%2BKhPxUADo%2BKobXBWo2txleEuLgtUP2Gl43pev0Qy27fvewdJ3ksL4BotqorabbFVXwq2D7fODgeiM79UOVwlPghiTWr9Ny%2F0qqOF8moxAUtYYDN1rU0J4cgkoQtwZvCC9wBXKH5u3bjRAU%2BaWQ32L1VCqRxeKGCxa3Q99L6HYBlAKkDu1V0ualYBLVg9yRe46vwMJyDN6HrYr2PxfYA8O1QDSSeFEblsgRQKAux7x31oI9XJawR3q3jkjXPMUH0H0El9LF%2F9oHd74KAFNdbhtJLnL6zcqcbplYXLoL2tzL1SkEdlDluS9D0ZV7sK1JZQzIcSBtGUIzrkZc%2FMYJM8tIIJIqxdenKK4tZQd0zgD9wtdKglAwh0sXfGxWhzxbAMI%2BfzM8GOqUBZpVma4%2Fl4Vzm7t5gznmfYVvairy7eD8NMtQDJfmWmn4HcEXQKF9uzTuh42ccDQuda5nvwWl8QXzc3Ws08ojYfY%2B9OmiV88s8huaIl5QjVNwyx%2FnkSz0ujZVYD2fh%2BONVCmty5nHSYhEAZ%2BILQBYQeJJw28OtT4Vpo3k%2FGeqSaB8zKCEMG1%2F3E3CsDC6gY1R%2Bsa%2F%2B5XtjD9dn%2BaG5%2Fc1lN3NrCDiW&X-Amz-Signature=10351e2506c86fc3eea7e8e1e4846698fb82e1d90128bd36e3d57592921606ea&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
-
----
-
-## 相关工作|查询检索层面
-
-确保大型语言模型（LLMs）如ChatGPT和LLaMA生成的回应准确性至关重要。然而，简单地增加模型大小并不能从根本上解决“幻觉”问题，这在知识密集型任务和专业领域尤为明显。检索增强生成（RAG）通过从外部知识库检索相关文档，为LLMs提供准确、实时、领域特定的上下文，以解决这些挑战。先前的工作通过查询和检索转换优化了RAG流程，提高了检索器的性能，并对检索器和生成器进行了微调。这些优化改善了输入查询、检索机制与生成过程之间的互动，确保了回应的准确性和相关性。
-
-## RAG工作流
-
-在本节中，我们将详细介绍RAG工作流程的各个组件。针对每个模块，我们回顾常用的方法，并为我们的最终流程选择了默认和备选方法。
-
-### 查询分类
-
-并非所有的查询都需要通过检索增强，因为大型语言模型（LLMs）本身就具备一定的处理能力。尽管检索增强生成（RAG）可以提高信息的准确性并减少虚构内容，但频繁的检索可能会增加响应时间。因此，我们首先通过对查询进行分类来确定是否需要检索。需要检索的查询会经过RAG模块处理；其他则直接由LLMs处理。通常，在需要超出模型参数范围的知识时推荐使用检索。然而，检索的必要性根据任务的不同而有所变化。例如，一个训练至2023年的LLM可以处理“Sora是由OpenAI开发的”这一翻译请求而无需检索。相反，对于同一主题的介绍请求则需要检索来提供相关信息。
-
-
-
-因此，我们建议按类型对任务进行分类，以确定查询是否需要检索。对于完全基于用户提供信息的任务，我们标记为“充分”，不需要检索；否则，我们标记为“不足”，可能需要检索。我们训练了一个分类器来自动化这一决策过程。
-
----
-
-### Chunking
-
-将文档分块成更小的段落对于提高检索的准确性和避免在大型语言模型（LLMs）中出现长度问题至关重要。这个过程可以在不同的粒度级别上应用，比如令牌（token）、句子和语义级别。
-
-- 令牌级别的分块很直接，但可能会分割句子，影响检索质量。
-- 语义级别的分块利用大型语言模型来确定分割点，能保持上下文不变，但是耗时。
-- 句子级别的分块在保留文本语义的同时，平衡了简单性和效率。
-在这项研究中，我们使用句子级别的分块，平衡了简单性和语义保留。我们从四个维度考察了分块方法。
-
-向量数据库存储着带有元数据的嵌入向量，通过各种索引和近似最近邻（ANN）方法，能够高效地检索与查询相关的文档。为了为我们的研究选择一个合适的向量数据库，我们基于四个关键标准对几个选项进行了评估：多种索引类型、支持十亿级别的向量、混合搜索以及云原生能力。这些标准因其对于灵活性、可扩展性以及在现代云基础设施中部署的便捷性的影响而被选中。多种索引类型提供了基于不同数据特性和用例优化搜索的灵活性。十亿级别的向量支持对于处理LLM应用中的大型数据集至关重要。混合搜索将向量搜索与传统关键词搜索结合起来，提高了检索准确性。最后，云原生能力确保了在云环境中的无缝集成、可扩展性和管理。
-
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/2c4ac03c-4cd8-4e84-aa5e-b0d35bd8c0fa/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466U25PV6U5%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084329Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJHMEUCIQCOe1cbHiRRQ0ymJGIOsc5lWLCFS9Vg8msgooefc9GZxQIgdl9Fa%2Bgt%2BhIcLddLeSC1q3CGPKONpZncBxCQTQ%2FMBMwq%2FwMICRAAGgw2Mzc0MjMxODM4MDUiDEB8TsVXEvWsnG3VpyrcA1S1kemIUUOotmoT0Dr1H7L6VMcAOjW0Cfm9bSKh9QTMN2fjB5Ps1US086VWzRwG6JvMePCfULVPCVW%2FayapelQuCxhae9hkUwfYAj3SWVDWdnKRZrkcNLU7GwgsKScsjgn1zDMHD6bs07Sd6KJwZ3je%2FliYLtr4M0zUXOvay3l1M7nzxYQ12%2BeBTqc5oNRKKsLcFzKd9s%2Bi%2FqhhEeYvcdnA25QJnbixz7R2c7LGttkP8Ig8aOL7wcMqfnCFQ%2BKhPxUADo%2BKobXBWo2txleEuLgtUP2Gl43pev0Qy27fvewdJ3ksL4BotqorabbFVXwq2D7fODgeiM79UOVwlPghiTWr9Ny%2F0qqOF8moxAUtYYDN1rU0J4cgkoQtwZvCC9wBXKH5u3bjRAU%2BaWQ32L1VCqRxeKGCxa3Q99L6HYBlAKkDu1V0ualYBLVg9yRe46vwMJyDN6HrYr2PxfYA8O1QDSSeFEblsgRQKAux7x31oI9XJawR3q3jkjXPMUH0H0El9LF%2F9oHd74KAFNdbhtJLnL6zcqcbplYXLoL2tzL1SkEdlDluS9D0ZV7sK1JZQzIcSBtGUIzrkZc%2FMYJM8tIIJIqxdenKK4tZQd0zgD9wtdKglAwh0sXfGxWhzxbAMI%2BfzM8GOqUBZpVma4%2Fl4Vzm7t5gznmfYVvairy7eD8NMtQDJfmWmn4HcEXQKF9uzTuh42ccDQuda5nvwWl8QXzc3Ws08ojYfY%2B9OmiV88s8huaIl5QjVNwyx%2FnkSz0ujZVYD2fh%2BONVCmty5nHSYhEAZ%2BILQBYQeJJw28OtT4Vpo3k%2FGeqSaB8zKCEMG1%2F3E3CsDC6gY1R%2Bsa%2F%2B5XtjD9dn%2BaG5%2Fc1lN3NrCDiW&X-Amz-Signature=4169756c51960d7a415b0bbe907efb4184e3d49830a8f4147c1ebdcb0ca493bf&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
-
----
-
-### Retrieval方式
-
-针对用户查询，检索模块从预建的语料库中选择与查询和文档的相似度最高的前k个相关文档。然后，生成模型使用这些文档来制定针对查询的适当响应。然而，原始查询由于表达不佳和缺乏语义信息，通常会表现不佳，这对检索过程产生了负面影响。为了解决这些问题，我们评估了三种查询转换方法，使用推荐的LLM-Embedder作为查询和文档编码器：
-
-- 查询改写：查询改写通过改进查询来更好地匹配相关文档。受到Rewrite-Retrieve-Read框架的启发，我们促使一个LLM重写查询以提升性能。
-- 查询分解：这种方法涉及到基于从原始查询中派生的子问题来检索文档，这比理解和处理更复杂的查询要困难。
-- 伪文档生成：这种方法基于用户查询生成一个假想的文档，并使用假想答案的嵌入来检索相似文档。一个值得注意的实现是HyDE。
-最近的研究表明结合基于词汇的搜索与向量搜索可以显著提高性能。在本研究中，我们使用BM25进行稀疏检索和Contriever，一个无监督对比编码器，进行密集检索。
-
----
-
-### Reranking
-
-在最初的检索之后，将采用重排序阶段来提高检索到的文档的相关性，确保最相关的信息出现在列表的顶部。这一阶段采用更精确、耗时更长的方法有效地重新排序文档，增加查询与排名最高的文档之间的相似度。
-
-在我们的重排序模块中，我们考虑了两种方法：DLM重排序和TILDE重排序。DLM重排序采用分类方法，而TILDE重排序则侧重于查询可能性。这些方法分别优先考虑性能和效率。
-
-- DLM重排方法：这种方法利用深度语言模型（DLMs）进行重排。这些模型被微调用以将文档与查询的相关性分类为“真”或“假”。在微调过程中，模型通过将查询和文档输入连接起来，并根据相关性进行标记来进行训练。在推理时，文档根据“真”标记的概率进行排名。
-- TILDE重排：TILDE通过预测模型词汇表中的各个词项的概率来独立计算每个查询词项的可能性。通过对查询词项的预计算对数概率求和，为文档打分，从而在推理时快速重排。TILDEv2通过仅索引文档中存在的词项，使用NCE损失，并扩展文档，从而提高效率并减小索引大小。
-我们的实验是在MS MARCO Passage排名数据集上进行的，这是一个大规模的机器阅读理解数据集。我们遵循并对PyGaggle和TILDE提供的实现进行了修改，使用了模型monoT5、monoBERT、RankLLaMA和TILDEv2。重排结果显示在表中。我们推荐monoT5作为一种综合性的方法，平衡了性能和效率。RankLLaMA适合于实现最佳性能，而TILDEv2是在固定集合上获得最快体验的理想选择。实验设置和结果的详细信息在附录中呈现。
-
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/100cf766-c92f-4387-8745-20b0e94296e4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466U25PV6U5%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084329Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJHMEUCIQCOe1cbHiRRQ0ymJGIOsc5lWLCFS9Vg8msgooefc9GZxQIgdl9Fa%2Bgt%2BhIcLddLeSC1q3CGPKONpZncBxCQTQ%2FMBMwq%2FwMICRAAGgw2Mzc0MjMxODM4MDUiDEB8TsVXEvWsnG3VpyrcA1S1kemIUUOotmoT0Dr1H7L6VMcAOjW0Cfm9bSKh9QTMN2fjB5Ps1US086VWzRwG6JvMePCfULVPCVW%2FayapelQuCxhae9hkUwfYAj3SWVDWdnKRZrkcNLU7GwgsKScsjgn1zDMHD6bs07Sd6KJwZ3je%2FliYLtr4M0zUXOvay3l1M7nzxYQ12%2BeBTqc5oNRKKsLcFzKd9s%2Bi%2FqhhEeYvcdnA25QJnbixz7R2c7LGttkP8Ig8aOL7wcMqfnCFQ%2BKhPxUADo%2BKobXBWo2txleEuLgtUP2Gl43pev0Qy27fvewdJ3ksL4BotqorabbFVXwq2D7fODgeiM79UOVwlPghiTWr9Ny%2F0qqOF8moxAUtYYDN1rU0J4cgkoQtwZvCC9wBXKH5u3bjRAU%2BaWQ32L1VCqRxeKGCxa3Q99L6HYBlAKkDu1V0ualYBLVg9yRe46vwMJyDN6HrYr2PxfYA8O1QDSSeFEblsgRQKAux7x31oI9XJawR3q3jkjXPMUH0H0El9LF%2F9oHd74KAFNdbhtJLnL6zcqcbplYXLoL2tzL1SkEdlDluS9D0ZV7sK1JZQzIcSBtGUIzrkZc%2FMYJM8tIIJIqxdenKK4tZQd0zgD9wtdKglAwh0sXfGxWhzxbAMI%2BfzM8GOqUBZpVma4%2Fl4Vzm7t5gznmfYVvairy7eD8NMtQDJfmWmn4HcEXQKF9uzTuh42ccDQuda5nvwWl8QXzc3Ws08ojYfY%2B9OmiV88s8huaIl5QjVNwyx%2FnkSz0ujZVYD2fh%2BONVCmty5nHSYhEAZ%2BILQBYQeJJw28OtT4Vpo3k%2FGeqSaB8zKCEMG1%2F3E3CsDC6gY1R%2Bsa%2F%2B5XtjD9dn%2BaG5%2Fc1lN3NrCDiW&X-Amz-Signature=af4495827959cc414b6af545279803bf06c438dc20ca8b6fa0c52cfa21450a9d&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
-
-### 文档重组
-
-文档重组后续过程的表现，比如LLM响应生成，可能会受到提供文档的顺序影响。为了解决这个问题，在重新排名之后的工作流程中，我们加入了一个紧凑的重组模块，包含三种重组方法：“前向”、“反向”和“两侧”。“前向”方法通过降序重新排名阶段的相关性得分来重组文档，而“反向”则按升序排列它们。对于LLM，当相关信息放在输入的头部或尾部时，可以达到最佳性能，我们也加入了“两侧”选项。
-
----
-
-> Reference
-
-
-
->>>>>>> 67e2e8ba81abbca0065a5254fe8b7b646ead6176

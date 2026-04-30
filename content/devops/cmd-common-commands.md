@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: CMD Common commands
 date: '2024-10-29T01:52:00.000Z'
@@ -12,30 +11,9 @@ categories:
 
 > 💡 在Windows操作系统内，使用终端进行的常用操作命令。
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/574982fa-f0a8-4734-99fc-4bcec0b9d96c/image.png)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/574982fa-f0a8-4734-99fc-4bcec0b9d96c/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QHET2NE4%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084905Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJIMEYCIQDI5qlBmf24A8J6jWzdQ3QNXRT9ulf7LXumHuZKvCNM9AIhALtyZr87triSo0Q03o7HhKD9XlGuWA%2F9FcxL2J%2F9wvPZKv8DCAkQABoMNjM3NDIzMTgzODA1IgydMzTgQfSFl42RIuIq3AOAU4p7Qtunw99iJskNoZjEkocqieaDvvnsfj794R8CxG1Y1gScUBSTDnHwveUo2Q2utF4xnURtZv21GPtkX%2Fs29eARmjdeeESgy0bcMtDZhbUw9KcPl4cJsobsGoloFwRo6lVwlAjvda7Rp0f%2FBQgGuRFQrhy2wnjw1IK9n1X9H6Gi2bEc%2F4QDlUxvR1Fh%2FzCHjBJGQg684I3IVunFCjY%2F7WS7nmNzyi%2BmOjMx4bujx2F0ZpLLMYAsKnZIjxaavkS0Qfn8Ju%2BXG54AOqz6AP9GC7%2Fb%2BkFdvCGhPbeGDIO5VeKZmergxSHRp0tzE%2FbYsQui8GM3bhdB2SGgmWoNzTIm6JjatM9m9MLOzoWmek1W8vKOy6gdO5DR09hrD8htFTCDejOikxWaAUuohkZaDMaXArGwE5SqMPY7slw%2F9pazaVhfZmSTX0bQRPaF9IlkysXdIWC%2BZZazduuew5NJ0LBCZ%2BjfWzHwu7Ui0vd2m5CxumU4mLImSGKX19Q0fh25ZE8fv%2BeIvSBJvyKTeGLmOqarDCMF%2BlcXnPkDLvEV5r2F6q5P1DjptBNhIQUYGhgVuHa1yClWBKluU0cSF7Rx4gzXZLg351xyAAj%2Fr%2BR9OtHeEo1fJ2u3hF0lL2SYFTDCm8zPBjqkATphQcY4kUKIohVNoCSLIvW0FEEjfvcxg9n5GuPLwAwtm51YbdvY5dyreSm6arO246ZTOZOk8Xp3P6a9pOEQfT0nvnoTi3JR91EzQOQ9BdzRBfNPmJ4tHYRCybOaFAXcQXArjoTIEtY2GBPpkKA8H%2FtVV%2FFj3VmUSptqtSlQrcYp6lN3Y4u0bEJ4y6MLYD7JFmXKrA975H%2FBD5Mo%2Fdq%2Fj66OZIjQ&X-Amz-Signature=94f916e684f4c9f65b2cc489df92d954f25fcf267d8e596690703e5c836ef1c6&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 
 ## 系统信息与管理
 
 
 
-=======
----
-title: CMD Common commands
-date: '2024-10-29T01:52:00.000Z'
-lastmod: '2025-04-03T07:42:00.000Z'
-draft: false
-tags:
-- Windows
-categories:
-- DevOps
----
-
-> 💡 在Windows操作系统内，使用终端进行的常用操作命令。
-
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/574982fa-f0a8-4734-99fc-4bcec0b9d96c/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4663ETN6DRA%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084345Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCIGRHZae5u0CCBdrE2a90urFZoEmfhgG230aEYu5G7ZApAiALQabQSeGB0e50kBCZFanJD25vO5xc4If6LS8ezkX2QSr%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIMpKjulAH6wMkuO4cxKtwDY3vpoEMMEWCcZkE3ixsI91tGO00c%2BwdawCksyr%2BncFac2qCd2N%2B2I3zao6IkAHbjOAv1ScZxou8huUpJy48FycKqZrzP8wsDKLLhjv6BPHnfhM8ODJd31lDvEwr%2FlQfWfXxdjBq0eLqQeUHJTWcJ%2F7y9qgep%2B1IhBZhhlv%2BJfZsork0v79KkXtsXFYfLun9rGqxhidg2MLdJCkL0dQNN90mMDtuZg08IgDyek9RK3vcIjiWnj7yqiDxHr9GUSFt7Ds389zz%2Fy713eqniJsKqQcEXgQcNoYEW6CF%2FGi1%2BYQOwjFKswV8zjpaXISpULmG9zjVgeHnhKByPd7YZriA8FVEIsm0LsmVWlPu1R0%2Bsm%2F9NgKRwXx5Weqg%2FtfcQzVr37GGtdGIEplAoRbW7V73Fiomg%2FHQNfffeg8XZHnWJTRSIRMU1Ap9IWMpXDbLjZF1pulsBADhPPsOzUEz5tTUFbIPJUGSlMns9HjaiNjwsLGvpbiLikqoFJmHDEL795VPCDnRfLpbh3HdZFXXtsjJ8JYp3mG2NLi1wBeXZdNRb3y8srsY42qj%2B5SY4p8hX%2FVZFrZfLirC4yCFemDIyRVt787gl48kF5%2FoXQbtUkIVXIDIfy0aU5AOKsCrQ2Mswk5zMzwY6pgEAawCbaE6s4yz9f%2FWhWRo3y43hFfHRffyqOjIUCCiCMirEJ3v1SEUPD7r%2BikQIK18QFx7l4kWimd7BVd8ALrY1Jab3csoyqQnEorteYgs4nm%2FS5uFemIB2qmeZ0CJyhVzxKtanuvs1ILds5gH5Qz%2FmTa%2FnhHKipKxODpj53JgxFhtRwetuuojDinOb5JDR%2Fn8xSIHIPwdjGwboYX1eY5NjHBfh55RN&X-Amz-Signature=5d4885f4f92e10ae7e0205f4fb08d7221a851c543927336331978d6d2fb0bbc1&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
-
-## 系统信息与管理
-
-
-
->>>>>>> 67e2e8ba81abbca0065a5254fe8b7b646ead6176

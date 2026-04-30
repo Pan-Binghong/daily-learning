@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: 好用好看的nvidia-smi
 date: '2025-03-24T16:02:00.000Z'
@@ -12,7 +11,7 @@ categories:
 
 > 💡 找到一个比nvidia-smi展示gpu更加美观的工具。在此记录一下。
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/167921cd-a496-4b4d-8768-9b56d39ca4ed/image.png)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/167921cd-a496-4b4d-8768-9b56d39ca4ed/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466RL4PSH2G%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084933Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCIDrPed4DyKY0nrd7UornpqLqqd7o67LpLyVMcR40t7FlAiBqBtQALOg2wr9XLGyCmgdu5hD7oMohjxcCbGsr00kuLCr%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIMwKZwlHKKHydIzVupKtwDKZCkPoN8xggn%2FDuUdsuQQpGy%2Fks1rpC%2B56ls03egU1Qh3johzocEGdIXZa%2B9s8amnU6RNj%2FZJTRzvf3Wwo7IXwfOBVcmxFFlZe9X08xsQoq0vhkBZKeZqCgJEW4zktn4%2BIcdmRr475CuoxaWOrgCj28R2X8FmWa9jogoHU9pizAI4feL2Irmc2iM9KWLN2lhiwW13vpyTOk6SWFURNCDebBy23SVCiyZs%2FL28F1vcC0fs2iGxmWv247937Mu5jZCOwO4ioyL60OvlyZ0pU1RN7szfRzF%2BiDXq5Fl82gDd2e5YQigbC%2BkFKZoZkuHSbVoAon16vr7aasX6W81h%2BFY0naumk0K4TOXqvwoxxFLJxYovlWCaEdZ19W73639c3caMmwjyK%2BHpO6pWieOOcR97kzEIVgyRmM9I0rxRSPGyl8cRmJJW1miwj8buXxQ7b3nzEM45Emx9fT0EZG5hT0RWNHppD3WEmFKvRpA6k%2F9GNN947bQXAyz6UgnFUEZkrz3aNs7sxOggQjNYNO8KYDRbCyNpfb3sI5D3P914wCUVCu3V5ybrPau6B9mz0KqkV%2F%2BIPzXGOsTJ8zbrCmHEBl8OZz9kUOOVnoKLGuj6%2BlJH%2Bzze%2F8xUjKO%2Fol21Ukw%2BZ3MzwY6pgEER33LR%2BAw%2BJBe5l1KuICebz5PGOfkhGZzQlWPRYxwzCEC4j0ML%2BATU36EAJOSZ4c5TZNVuD8bcYHrRH5wdaZcfl85Oaze62uQjgLAC%2BTmYrEszpQ2ZviK0yuG2wcjzQQAfJvmFZ9f9uX3mTEFrPM2Un0W7JyxsS0XG0%2BqNyErbIibhX8HlsoDTTALSRM%2BSBwj6hfPFQSz5sIb0Nx9uOuHu7ieXMM9&X-Amz-Signature=fae6d46c28d63c24fcdf263d2ffd98bef2f97c811b207df60b2cc13d34e4230e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 
 ---
 
@@ -36,7 +35,7 @@ nvitop
 nvitop -m full
 ```
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/38595db5-5c7e-4dcb-ab27-48bf45fecafc/image.png)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/38595db5-5c7e-4dcb-ab27-48bf45fecafc/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466RL4PSH2G%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084933Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCIDrPed4DyKY0nrd7UornpqLqqd7o67LpLyVMcR40t7FlAiBqBtQALOg2wr9XLGyCmgdu5hD7oMohjxcCbGsr00kuLCr%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIMwKZwlHKKHydIzVupKtwDKZCkPoN8xggn%2FDuUdsuQQpGy%2Fks1rpC%2B56ls03egU1Qh3johzocEGdIXZa%2B9s8amnU6RNj%2FZJTRzvf3Wwo7IXwfOBVcmxFFlZe9X08xsQoq0vhkBZKeZqCgJEW4zktn4%2BIcdmRr475CuoxaWOrgCj28R2X8FmWa9jogoHU9pizAI4feL2Irmc2iM9KWLN2lhiwW13vpyTOk6SWFURNCDebBy23SVCiyZs%2FL28F1vcC0fs2iGxmWv247937Mu5jZCOwO4ioyL60OvlyZ0pU1RN7szfRzF%2BiDXq5Fl82gDd2e5YQigbC%2BkFKZoZkuHSbVoAon16vr7aasX6W81h%2BFY0naumk0K4TOXqvwoxxFLJxYovlWCaEdZ19W73639c3caMmwjyK%2BHpO6pWieOOcR97kzEIVgyRmM9I0rxRSPGyl8cRmJJW1miwj8buXxQ7b3nzEM45Emx9fT0EZG5hT0RWNHppD3WEmFKvRpA6k%2F9GNN947bQXAyz6UgnFUEZkrz3aNs7sxOggQjNYNO8KYDRbCyNpfb3sI5D3P914wCUVCu3V5ybrPau6B9mz0KqkV%2F%2BIPzXGOsTJ8zbrCmHEBl8OZz9kUOOVnoKLGuj6%2BlJH%2Bzze%2F8xUjKO%2Fol21Ukw%2BZ3MzwY6pgEER33LR%2BAw%2BJBe5l1KuICebz5PGOfkhGZzQlWPRYxwzCEC4j0ML%2BATU36EAJOSZ4c5TZNVuD8bcYHrRH5wdaZcfl85Oaze62uQjgLAC%2BTmYrEszpQ2ZviK0yuG2wcjzQQAfJvmFZ9f9uX3mTEFrPM2Un0W7JyxsS0XG0%2BqNyErbIibhX8HlsoDTTALSRM%2BSBwj6hfPFQSz5sIb0Nx9uOuHu7ieXMM9&X-Amz-Signature=c9e090785a138ebfa8586061812918ef5d30385537c6bb003e669465caae6873&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 
 
 
@@ -46,52 +45,3 @@ nvitop -m full
 
 
 
-=======
----
-title: 好用好看的nvidia-smi
-date: '2025-03-24T16:02:00.000Z'
-lastmod: '2025-03-25T02:21:00.000Z'
-draft: false
-tags:
-- Linux
-categories:
-- 其他
----
-
-> 💡 找到一个比nvidia-smi展示gpu更加美观的工具。在此记录一下。
-
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/167921cd-a496-4b4d-8768-9b56d39ca4ed/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XGUSZXID%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084412Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCIEJpk8e0JadxPWkEx5EYaAPKucqF7qTaEN5aM3X%2FX09pAiBsGpYCHfeZ%2B8tut4HpzVwvAuK5rJaVkVf7lFZH2yAWoir%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIMA8b2F7iRwifInMLRKtwD0ysALaI7wQB6wW2rtq6ga3yKwvZF3LFpHme1yYV7JlckZBgL0oo7XC%2FQGz%2BalcH4Mep2a1%2B9J7enaVEspfG7p5cOEUgefc1bHvCP%2BDUX4ePEmsDp9lFH9LeoVd%2F5KSDzpQNiidIte6WKAQygHvz1Y6ffS5AlkwyN39Z3s%2Bii4NNVUdA86aGR8g%2FbcnjolQDWECjHRNpY6OxW9Nen6LycdK%2FE8XCqzOnKKxp%2F7h3IhMz3XbeNVn%2BbMaIfmYLmdAcrGv9DsNX71EHT%2Fnm%2BBj6RhU7FWt7G39S2Ajn038rFZIbTGOzZhoNJis2RNvRmVM7M4KBTlBWsLGGDiQjiGsn5%2F4hNsGliw5fpxUpGjfIknkt3MBlYsNsLh%2BKftwoX2dSmIlX7n4M63lj5YFafGQOC9cmifGDKCWvSBz60OX2z1Yd0ByCjafCoaHLtIGKQmWzac8Ia4FnNoVhdRUwe3i3t35h%2F0izUul1GneeehHODsTUj7BwE3rFJzNKu%2F4RX%2F7nYeuHGUrOiQ%2BZwq23MIiXr3uyzr53wTQ2WRzTKH%2FKG%2BnV9pSNLyBnhnWP0Ls21MV9tON72yDib4fpf4vR8zoNdn0UFjxNFO5wygpgMcPkCGDEaMb2ke3cYua5N%2Fkgw%2BJ3MzwY6pgGGmuUtrTYdORTzj%2FeKcX1qfZn9OA758TVNWKRYfoJlptdaSHhkr%2F18l7%2FU5pckRT3egkghLiblgvbwNOR1DwHf8sNnwQWRaDds2DqPmzLZo9Cz31pELvoInjPKzgpmyhexuswwYiepNvmuDqBaKSL%2FBdIM6Dw6%2BUQvD%2FDoB1FP%2FsQ7hvZu9b3OIDuDnHbHlUFA8eNqv6b8j3rJd8WNwjKLsoVWN6Le&X-Amz-Signature=97a39a584300759b1c64a15995958ab9f25f2a0b5b5f7f2cbb630b84afb399ba&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
-
----
-
-## 安装
-
-```python
-pip install nvitop
-```
-
----
-
-## 查看gpu状态
-
-```python
-nvitop
-```
-
-> 查看更加详细的gpu内容
-
-```python
-nvitop -m full
-```
-
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/38595db5-5c7e-4dcb-ab27-48bf45fecafc/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XGUSZXID%2F20260430%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260430T084412Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJGMEQCIEJpk8e0JadxPWkEx5EYaAPKucqF7qTaEN5aM3X%2FX09pAiBsGpYCHfeZ%2B8tut4HpzVwvAuK5rJaVkVf7lFZH2yAWoir%2FAwgJEAAaDDYzNzQyMzE4MzgwNSIMA8b2F7iRwifInMLRKtwD0ysALaI7wQB6wW2rtq6ga3yKwvZF3LFpHme1yYV7JlckZBgL0oo7XC%2FQGz%2BalcH4Mep2a1%2B9J7enaVEspfG7p5cOEUgefc1bHvCP%2BDUX4ePEmsDp9lFH9LeoVd%2F5KSDzpQNiidIte6WKAQygHvz1Y6ffS5AlkwyN39Z3s%2Bii4NNVUdA86aGR8g%2FbcnjolQDWECjHRNpY6OxW9Nen6LycdK%2FE8XCqzOnKKxp%2F7h3IhMz3XbeNVn%2BbMaIfmYLmdAcrGv9DsNX71EHT%2Fnm%2BBj6RhU7FWt7G39S2Ajn038rFZIbTGOzZhoNJis2RNvRmVM7M4KBTlBWsLGGDiQjiGsn5%2F4hNsGliw5fpxUpGjfIknkt3MBlYsNsLh%2BKftwoX2dSmIlX7n4M63lj5YFafGQOC9cmifGDKCWvSBz60OX2z1Yd0ByCjafCoaHLtIGKQmWzac8Ia4FnNoVhdRUwe3i3t35h%2F0izUul1GneeehHODsTUj7BwE3rFJzNKu%2F4RX%2F7nYeuHGUrOiQ%2BZwq23MIiXr3uyzr53wTQ2WRzTKH%2FKG%2BnV9pSNLyBnhnWP0Ls21MV9tON72yDib4fpf4vR8zoNdn0UFjxNFO5wygpgMcPkCGDEaMb2ke3cYua5N%2Fkgw%2BJ3MzwY6pgGGmuUtrTYdORTzj%2FeKcX1qfZn9OA758TVNWKRYfoJlptdaSHhkr%2F18l7%2FU5pckRT3egkghLiblgvbwNOR1DwHf8sNnwQWRaDds2DqPmzLZo9Cz31pELvoInjPKzgpmyhexuswwYiepNvmuDqBaKSL%2FBdIM6Dw6%2BUQvD%2FDoB1FP%2FsQ7hvZu9b3OIDuDnHbHlUFA8eNqv6b8j3rJd8WNwjKLsoVWN6Le&X-Amz-Signature=437185ebe296cf720a4d0e082d56afdc278ee3cf650d91bdb281c5fcac362e78&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
-
-
-
-
-
-
-
-
-
->>>>>>> 67e2e8ba81abbca0065a5254fe8b7b646ead6176
