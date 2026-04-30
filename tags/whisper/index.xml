@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Whisper on Pan Binghong's Tech Blog</title><link>https://Pan-Binghong.github.io/daily-learning/tags/whisper/</link><description>Recent content in Whisper on Pan Binghong's Tech Blog</description><generator>Hugo -- 0.147.0</generator><language>zh-CN</language><lastBuildDate>Wed, 29 Apr 2026 11:37:00 +0000</lastBuildDate><atom:link href="https://Pan-Binghong.github.io/daily-learning/tags/whisper/index.xml" rel="self" type="application/rss+xml"/><item><title>faster-whisper: Whisper 推理加速原理详解</title><link>https://Pan-Binghong.github.io/daily-learning/ai/faster-whisper-whisper-%E6%8E%A8%E7%90%86%E5%8A%A0%E9%80%9F%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/</link><pubDate>Wed, 29 Apr 2026 11:36:00 +0000</pubDate><guid>https://Pan-Binghong.github.io/daily-learning/ai/faster-whisper-whisper-%E6%8E%A8%E7%90%86%E5%8A%A0%E9%80%9F%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/</guid><description>&lt;p>最近部署了 Whisper large-v3 模型，使用 transformers 库调用时，一个 2-3 秒的音频文件转写需要约 20 秒。换成 faster-whisper 后，时间骤降到 0.9 秒，提速超过 20 倍！本文解析背后的技术原理。&lt;/p>
+&lt;h2 id="1-faster-whisper-是什么">1. faster-whisper 是什么？&lt;/h2>
+&lt;p>faster-whisper 是 OpenAI Whisper 的高性能推理实现，核心引擎是 CTranslate2。它不是简单优化注意力机制，而是从底层重写了整个推理流程。&lt;/p>
+&lt;blockquote>
+&lt;p>💡 CTranslate2 是专为 Transformer 模型设计的 C++ 推理引擎，支持 CPU 和 GPU，主打高效内存管理和算子融合。&lt;/p>&lt;/blockquote>
+&lt;h2 id="2-核心加速技术">2. 核心加速技术&lt;/h2>
+&lt;h3 id="21-算子融合-operator-fusion">2.1 算子融合 (Operator Fusion)&lt;/h3>
+&lt;p>传统 PyTorch 执行时，每个算子都是独立的 GPU kernel 调用。比如 LayerNorm、Linear、Activation 分别执行，中间结果要写回显存再读出来。&lt;/p>
+&lt;p>CTranslate2 把多个算子融合成一个 kernel，数据留在 GPU 寄存器或共享内存里，避免了反复的显存读写。&lt;/p>
+&lt;h3 id="22-int8-量化">2.2 INT8 量化&lt;/h3>
+&lt;p>模型权重和激活值从 FP32/FP16 量化到 INT8，内存占用减半，显存带宽需求也大幅降低。对 Whisper 这种 encoder-decoder 架构尤其有效。&lt;/p>
+&lt;h3 id="23-kv-cache-优化">2.3 KV Cache 优化&lt;/h3>
+&lt;p>解码阶段复用 encoder 输出，避免重复计算。配合缓存策略，长音频转写效率显著提升。&lt;/p></description></item></channel></rss>
