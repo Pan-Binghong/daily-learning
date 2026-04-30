@@ -78,7 +78,7 @@ jobs:
       - name: 🏗️ 安装 Hugo Extended
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.147.0'   # 固定版本，满足 PaperMod >= 0.146.0 要求
+          hugo-version: '0.157.0'   # Stack 主题需要 >= 0.157.0
           extended: true
 
       - name: 🔨 构建 Hugo 站点

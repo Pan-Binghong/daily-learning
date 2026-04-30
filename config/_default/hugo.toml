@@ -11,3 +11,8 @@ pagerSize = 10
 [permalinks]
 post = "/:slug/"
 page = "/:slug/"
+
+# 禁用 Google Analytics 以避免模板错误
+[services]
+[services.googleAnalytics]
+ID = ''

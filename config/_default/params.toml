@@ -47,6 +47,10 @@ enabled = false
 local = false
 src = ""
 
+# Google Analytics（禁用以避免模板错误）
+[analytics]
+enabled = false
+
 [colorScheme]
 toggle = true
 default = "auto"
