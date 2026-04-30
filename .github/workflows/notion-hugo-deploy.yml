@@ -23,6 +23,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    # 启用 Node.js 24 支持（GitHub Actions 要求）
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     permissions:
       contents: write
       pages: write
@@ -68,7 +72,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: resources/_gen
-          key: ${{ runner.os }}-hugo-gen-${{ hashFiles('config.toml', 'assets/**') }}
+          key: ${{ runner.os }}-hugo-gen-${{ hashFiles('config/**', 'assets/**') }}
           restore-keys: ${{ runner.os }}-hugo-gen-
 
       - name: 🏗️ 安装 Hugo Extended
