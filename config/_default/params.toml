@@ -1,0 +1,58 @@
+mainSections = ["ai", "knowledge", "backend", "devops", "other"]
+dateFormat = "2006-01-02"
+
+[sidebar]
+emoji = "🚀"
+subtitle = "全栈开发者 | AI 爱好者 | 终身学习者"
+
+[sidebar.avatar]
+enabled = true
+local = false
+src = "https://avatars.githubusercontent.com/Pan-Binghong"
+
+[article]
+showReadingTime = true
+showWordCount = true
+showTableOfContents = true
+showTaxonomies = true
+showComments = true
+
+[comments]
+enabled = true
+provider = "giscus"
+
+[comments.giscus]
+repo = "Pan-Binghong/daily-learning"
+repoID = "R_kgDOQOK4Vw"
+category = "Announcements"
+categoryID = "DIC_kwDOQOK4V84CxfA9"
+mapping = "title"
+reactionsEnabled = "1"
+emitMetadata = "0"
+inputPosition = "bottom"
+theme = "preferred_color_scheme"
+lang = "zh-CN"
+loading = "lazy"
+
+[widgets]
+homepage = ["search", "archives", "categories", "tag-cloud"]
+page = ["toc"]
+
+[opengraph.twitter]
+site = ""
+card = "summary_large_image"
+
+[defaultImage.opengraph]
+enabled = false
+local = false
+src = ""
+
+[colorScheme]
+toggle = true
+default = "auto"
+
+[imageProcessing.cover]
+enabled = true
+
+[imageProcessing.content]
+enabled = true

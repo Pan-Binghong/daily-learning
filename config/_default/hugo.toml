@@ -1,0 +1,13 @@
+baseURL = "https://Pan-Binghong.github.io/daily-learning/"
+defaultContentLanguage = "zh-cn"
+languageCode = "zh-CN"
+title = "Pan Binghong's Tech Blog"
+theme = "stack"
+hasCJKLanguage = true
+
+[pagination]
+pagerSize = 10
+
+[permalinks]
+post = "/:slug/"
+page = "/:slug/"

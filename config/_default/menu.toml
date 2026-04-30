@@ -1,0 +1,97 @@
+[[social]]
+identifier = "github"
+name = "GitHub"
+url = "https://github.com/Pan-Binghong"
+
+[social.params]
+icon = "brand-github"
+
+[[social]]
+identifier = "email"
+name = "Email"
+url = "mailto:binghongpan0222@gmail.com"
+
+[social.params]
+icon = "mail"
+
+[[main]]
+identifier = "home"
+name = "首页"
+url = "/"
+weight = -100
+
+[main.params]
+icon = "home"
+newTab = false
+
+[[main]]
+identifier = "ai"
+name = "AI"
+url = "/ai/"
+weight = -90
+
+[main.params]
+icon = "cpu"
+
+[[main]]
+identifier = "knowledge"
+name = "知识库"
+url = "/knowledge/"
+weight = -80
+
+[main.params]
+icon = "book"
+
+[[main]]
+identifier = "backend"
+name = "后端"
+url = "/backend/"
+weight = -70
+
+[main.params]
+icon = "server"
+
+[[main]]
+identifier = "devops"
+name = "DevOps"
+url = "/devops/"
+weight = -60
+
+[main.params]
+icon = "tool"
+
+[[main]]
+identifier = "other"
+name = "其他"
+url = "/other/"
+weight = -50
+
+[main.params]
+icon = "folder"
+
+[[main]]
+identifier = "archives"
+name = "归档"
+url = "/archives/"
+weight = -40
+
+[main.params]
+icon = "archives"
+
+[[main]]
+identifier = "search"
+name = "搜索"
+url = "/search/"
+weight = -30
+
+[main.params]
+icon = "search"
+
+[[main]]
+identifier = "about"
+name = "关于"
+url = "/about/"
+weight = -20
+
+[main.params]
+icon = "user"
