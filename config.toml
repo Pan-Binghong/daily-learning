@@ -1,9 +1,9 @@
-# Hugo 配置文件
+# Hugo 配置文件 - Stack 主题
 
 baseURL = "https://Pan-Binghong.github.io/daily-learning/"
 languageCode = "zh-CN"
 title = "Pan Binghong's Tech Blog"
-theme = "PaperMod"
+theme = "stack"
 
 # 内容目录
 contentDir = "content"
@@ -15,7 +15,7 @@ enableEmoji = true
 # 启用 Git 信息
 enableGitInfo = true
 
-# 分页配置（Hugo v0.128.0+ 新语法）
+# 分页配置
 [pagination]
   pagerSize = 10
 
@@ -26,7 +26,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
-      unsafe = true  # 允许渲染原始 HTML
+      unsafe = true
   [markup.highlight]
     style = "monokai"
     lineNos = true
@@ -41,160 +41,170 @@ ignoreLogs = ['warning-goldmark-raw-html']
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
+# Stack 主题参数
+[params]
+  # 主页配置
+  mainSections = ["ai", "backend", "devops", "knowledge", "other"]
+  
+  # 文章配置
+  dateFormat = "2006-01-02"
+  showReadingTime = true
+  showWordCount = true
+  showTableOfContents = true
+  showTaxonomies = true
+  showComments = true
+
+  # 侧边栏配置
+  [params.sidebar]
+    emoji = "🚀"
+    subtitle = "全栈开发者 | AI 爱好者 | 终身学习者"
+    
+    [params.sidebar.avatar]
+      enabled = true
+      local = false
+      src = "https://avatars.githubusercontent.com/Pan-Binghong"
+
+  # 社交链接
+  [[params.sidebar.links]]
+    title = "GitHub"
+    icon = "github"
+    url = "https://github.com/Pan-Binghong"
+    
+  [[params.sidebar.links]]
+    title = "Email"
+    icon = "mail"
+    url = "mailto:19909442097@163.com"
+
+  # 文章元信息
+  [params.article]
+    showReadingTime = true
+    showWordCount = true
+    showTableOfContents = true
+    showTaxonomies = true
+    showComments = true
+
+  # 小部件配置
+  [params.widgets]
+    enabled = ["search", "archives", "categories", "tags"]
+    
+    [params.widgets.archives]
+      limit = 5
+      
+    [params.widgets.tags]
+      enabled = true
+
+  # 评论系统 (Giscus)
+  [params.comments]
+    enabled = true
+    provider = "giscus"
+    
+    [params.comments.giscus]
+      repo = "Pan-Binghong/daily-learning"
+      repoID = "R_kgDOQOK4Vw"
+      category = "Announcements"
+      categoryID = "DIC_kwDOQOK4V84CxfA9"
+      mapping = "title"
+      reactionsEnabled = "1"
+      emitMetadata = "0"
+      inputPosition = "bottom"
+      theme = "preferred_color_scheme"
+      lang = "zh-CN"
+      loading = "lazy"
+
+  # SEO 配置
+  [params.seo]
+    description = "记录技术成长的每一步 - AI、后端、DevOps 学习笔记"
+    keywords = ["AI", "后端开发", "DevOps", "技术博客", "学习笔记"]
+
+  # 页面配置
+  [params.defaultImage]
+    enabled = false
+
+  # 颜色主题
+  [params.colorScheme]
+    toggle = true
+    default = "auto"
+
 # 导航菜单
 [menu]
   [[menu.main]]
-    name = "🏠 首页"
+    name = "首页"
     url = "/"
     weight = 1
-
+    [menu.main.params]
+      icon = "home"
+      
   [[menu.main]]
-    name = "🤖 AI"
+    name = "AI"
     url = "/ai/"
     weight = 2
-
+    [menu.main.params]
+      icon = "cpu"
+      
   [[menu.main]]
-    name = "📚 知识库"
+    name = "知识库"
     url = "/knowledge/"
     weight = 3
-
+    [menu.main.params]
+      icon = "book"
+      
   [[menu.main]]
-    name = "⚙️ 后端"
+    name = "后端"
     url = "/backend/"
     weight = 4
-
+    [menu.main.params]
+      icon = "server"
+      
   [[menu.main]]
-    name = "🔧 DevOps"
+    name = "DevOps"
     url = "/devops/"
     weight = 5
-
+    [menu.main.params]
+      icon = "settings"
+      
   [[menu.main]]
-    name = "📝 其他"
+    name = "其他"
     url = "/other/"
     weight = 6
-
+    [menu.main.params]
+      icon = "folder"
+      
   [[menu.main]]
-    name = "🔍 搜索"
-    url = "/search/"
-    weight = 7
-
-  [[menu.main]]
-    name = "🏷️ 标签"
-    url = "/tags/"
-    weight = 8
-
-  [[menu.main]]
-    name = "📂 归档"
+    name = "归档"
     url = "/archives/"
-    weight = 9
+    weight = 7
+    [menu.main.params]
+      icon = "archive"
+      
+  [[menu.main]]
+    name = "搜索"
+    url = "/search/"
+    weight = 8
+    [menu.main.params]
+      icon = "search"
 
   [[menu.main]]
-    name = "👤 关于"
+    name = "关于"
     url = "/about/"
+    weight = 9
+    [menu.main.params]
+      icon = "user"
+
+# 相关文章配置
+[related]
+  includeNewer = true
+  threshold = 60
+  toLower = true
+  
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+  [[related.indices]]
+    name = "categories"
+    weight = 80
+  [[related.indices]]
+    name = "date"
     weight = 10
-
-# PaperMod 主题参数
-[params]
-  env = "production"
-  description = "记录技术成长的每一步 - AI、后端、DevOps 学习笔记"
-  author = "Pan Binghong"
-
-  # 主页模式 - 使用 profile 模式展示个人信息
-  mainSections = ["ai", "backend", "devops", "knowledge", "other"]
-
-  # 默认主题（light/dark/auto）
-  defaultTheme = "auto"
-
-  # 显示阅读时间
-  ShowReadingTime = true
-
-  # 显示文章字数
-  ShowWordCount = true
-
-  # 显示分享按钮
-  ShowShareButtons = true
-
-  # 显示文章导航（上一篇/下一篇）
-  ShowPostNavLinks = true
-
-  # 显示面包屑导航
-  ShowBreadCrumbs = true
-
-  # 显示代码复制按钮
-  ShowCodeCopyButtons = true
-
-  # 显示目录
-  ShowToc = true
-  TocOpen = false
-
-  # 显示编辑建议按钮
-  ShowRssButtonInSectionTermList = true
-
-  # 启用 Giscus 评论系统（基于 GitHub Discussions）
-  comments = true
-
-  # Profile 模式配置（专业首页）
-  [params.profileMode]
-    enabled = true
-    title = "Pan Binghong"
-    subtitle = "全栈开发者 | AI 爱好者 | 终身学习者"
-    imageUrl = "https://avatars.githubusercontent.com/Pan-Binghong"
-    imageWidth = 150
-    imageHeight = 150
-    imageTitle = "Pan Binghong"
-
-    [[params.profileMode.buttons]]
-      name = "📚 浏览文章"
-      url = "/archives/"
-
-    [[params.profileMode.buttons]]
-      name = "🏷️ 查看标签"
-      url = "/tags/"
-
-    [[params.profileMode.buttons]]
-      name = "⭐ GitHub"
-      url = "https://github.com/Pan-Binghong"
-
-    [[params.profileMode.buttons]]
-      name = "💬 留言讨论"
-      url = "https://github.com/Pan-Binghong/daily-learning/discussions"
-
-  # 社交链接图标
-  [[params.socialIcons]]
-    name = "github"
-    url = "https://github.com/Pan-Binghong"
-
-  [[params.socialIcons]]
-    name = "email"
-    url = "mailto:19909442097@163.com"
-
-  [[params.socialIcons]]
-    name = "rss"
-    url = "/index.xml"
-
-  # Giscus 评论系统配置（基于 GitHub Discussions）
-  [params.giscus]
-    repo = "Pan-Binghong/daily-learning"
-    repoID = "R_kgDOQOK4Vw"
-    category = "Announcements"
-    categoryID = "DIC_kwDOQOK4V84CxfA9"
-    mapping = "og:title"
-    reactionsEnabled = "1"
-    emitMetadata = "0"
-    inputPosition = "bottom"
-    theme = "preferred_color_scheme"
-    lang = "zh-CN"
-    loading = "lazy"
-
-  # 搜索配置
-  [params.fuseOpts]
-    isCaseSensitive = false
-    shouldSort = true
-    location = 0
-    distance = 1000
-    threshold = 0.4
-    minMatchCharLength = 0
-    keys = ["title", "permalink", "summary", "content"]
 
 # 隐私设置
 [privacy]
@@ -202,7 +212,3 @@ ignoreLogs = ['warning-goldmark-raw-html']
     anonymizeIP = true
     disable = false
     respectDoNotTrack = true
-  [privacy.x]
-    enableDNT = true
-  [privacy.youtube]
-    privacyEnhanced = true
