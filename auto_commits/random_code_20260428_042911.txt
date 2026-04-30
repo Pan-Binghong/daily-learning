@@ -1,6 +1,0 @@
-# Go 代码片段
-# 生成时间: 2026-04-28 04:29:11
-
-def hello_world():
-    print("Hello, World!")
-    return True

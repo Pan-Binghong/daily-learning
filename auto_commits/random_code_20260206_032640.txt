@@ -1,8 +1,0 @@
-# Java 代码片段
-# 生成时间: 2026-02-06 03:26:40
-
-#include <iostream>
-int main() {
-    std::cout << "Hello World" << std::endl;
-    return 0;
-}

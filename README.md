@@ -8,7 +8,7 @@
 - 支持多个 Notion 数据库，每个对应不同类型的笔记
 - 使用 Hugo 构建静态博客
 - 自动部署到 GitHub Pages
-- 每天自动同步一次
+- 每天自动同步一次（北京时间 9:00）
 - 支持手动触发同步
 
 ## 系统架构
@@ -177,21 +177,20 @@ git push
 .
 ├── .github/
 │   └── workflows/
-│       ├── notion-hugo-deploy.yml  # Notion 同步 + Hugo 部署
-│       ├── scheduled-task.yml      # 基础定时任务（示例）
-│       └── auto-commit.yml         # 自动提交（示例）
+│       └── notion-hugo-deploy.yml  # Notion 同步 + Hugo 部署
 ├── content/                        # Hugo 内容目录
-│   ├── posts/                      # 技术博客
-│   ├── notes/                      # 学习笔记
-│   ├── reading/                    # 读书笔记
-│   ├── projects/                   # 项目记录
-│   └── essays/                     # 随笔
+│   ├── ai/                         # AI 相关笔记
+│   ├── knowledge/                  # 知识库
+│   ├── backend/                    # 后端开发
+│   ├── devops/                     # DevOps 运维
+│   └── other/                      # 其他笔记
+├── layouts/                        # Hugo 模板
+├── themes/                         # Hugo 主题
+├── assets/                         # 静态资源
 ├── notion-sync.py                  # Notion 同步脚本
 ├── notion-config.yml               # Notion 数据库配置
 ├── config.toml                     # Hugo 配置文件
 ├── requirements.txt                # Python 依赖
-├── script.py                       # 定时任务示例脚本
-├── auto-commit.py                  # 自动提交示例脚本
 └── README.md                       # 本文件
 ```
 
@@ -289,18 +288,6 @@ schedule:
 - Disqus
 - Giscus
 - Utterances
-
-## 其他示例功能
-
-本仓库还包含其他 GitHub Actions 示例：
-
-### 基础定时任务 (`scheduled-task.yml`)
-- 每天 UTC 00:00 执行
-- 运行 `script.py` 脚本
-
-### 自动提交代码 (`auto-commit.yml`)
-- 每天 UTC 01:00 执行
-- 自动生成随机代码并提交
 
 ## 贡献
 
