@@ -217,3 +217,8 @@ DefaultContentLanguage = "zh-cn"
     anonymizeIP = true
     disable = false
     respectDoNotTrack = true
+
+# 自定义页脚（覆盖主题默认）
+[params.footer]
+  since = 2026
+  customText = "使用 Hugo & Stack 主题构建"
