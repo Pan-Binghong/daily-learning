@@ -1,7 +1,7 @@
 ---
 title: Linux 挂载 Windows 共享文件夹（SMB/CIFS）完整指南
 date: '2025-10-31T10:22:00.000Z'
-lastmod: '2026-03-02T07:11:00.000Z'
+lastmod: '2026-05-08T05:13:00.000Z'
 draft: false
 categories:
 - 其他
@@ -172,3 +172,59 @@ sudo mount -a
 
 按照以上步骤操作，你就可以在 Linux 上像访问本地目录一样访问 Windows 共享文件夹了！如果有具体的报错信息，可以贴出来帮你进一步排查。
 
+## Linux 主机共享目录挂载到 Windows（Samba）
+
+### 环境信息
+
+- Linux 主机 IP：10.13.30.114（Ubuntu）
+- Windows 主机 IP：10.36.67.49
+- 仅在同一 WiFi 下可用
+### Step 1：安装 Samba
+
+```bash
+sudo apt-get install -y samba
+```
+
+### Step 2：创建共享目录
+
+```bash
+mkdir -p ~/shared
+chmod 755 ~/shared
+```
+
+### Step 3：配置 /etc/samba/smb.conf
+
+在文件末尾追加：
+
+```plain text
+[shared]
+   comment = Shared Folder
+   path = /home/pan/shared
+   browseable = yes
+   read only = no
+   writable = yes
+   valid users = pan
+   create mask = 0664
+   directory mask = 0775
+   hosts allow = 10.13.30. 10.36.67. 127.0.0.1
+```
+
+### Step 4：设置 Samba 用户密码
+
+```bash
+sudo smbpasswd -a pan
+```
+
+### Step 5：启动服务
+
+```bash
+sudo systemctl restart smbd
+sudo systemctl enable smbd
+```
+
+### Step 6：Windows 端映射网络驱动器
+
+1. 打开文件资源管理器 → 右键“此电脑” → 映射网络驱动器
+1. 路径填写：\\\\10.13.30.114\\shared
+1. 勾选“使用其他凭据连接”
+1. 用户名：pan，密码：Samba 密码
