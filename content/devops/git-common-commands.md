@@ -1,7 +1,7 @@
 ---
 title: Git Common commands
 date: '2024-11-20T01:22:00.000Z'
-lastmod: '2025-04-03T07:41:00.000Z'
+lastmod: '2026-06-26T04:09:00.000Z'
 draft: false
 tags:
 - Git
@@ -10,6 +10,8 @@ categories:
 ---
 
 > 💡 Git代码管理规范说明，以及常用命令。
+
+## 手写笔记
 
 ![](https://prod-files-secure.s3.us-west-2.amazonaws.com/fc187c04-cf34-444f-b5f2-bdcdfad76660/957b9d02-7d7c-45ab-bcf8-38731684567f/image.png&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 
